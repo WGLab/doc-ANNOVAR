@@ -141,28 +141,14 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | esp6500si_ea | same as above | file and index updated 2013Jan22 |
 | hg18 | esp6500si_all | alternative allele frequency in all subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls | file and index updated 2013Jan22 |
 | hg19 | esp6500si_all | same as above | file and index updated 2013Jan22 |
-| hg18 | esp6500siv2_ea |
-| alternative allele frequency in European American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. |
-|  |
-| All files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as ESP do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. |
-|  |
-| file and index updated 20141222 |
+| hg18 | esp6500siv2_ea | alternative allele frequency in European American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. | All files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as ESP do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. | file and index updated 20141222 |
 | hg19 | esp6500siv2_ea | same as above | file and index updated 20141222 |
 | hg38 | esp6500siv2_ea | same as above, lifted over from hg19 by myself | file and index updated 20141222 |
-| hg18 | esp6500siv2_aa |
-| alternative allele frequency in African American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. |
-|  |
-| All files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as ESP do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. |
-|  |
-| file and index updated 20141222 |
+| hg18 | esp6500siv2_aa | alternative allele frequency in African American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. | All files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as ESP do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. | file and index updated 20141222 |
 | hg19 | esp6500siv2_aa | same as above | file and index updated 20141222 |
 | hg38 | esp6500siv2_aa | same as above, lifted over from hg19 by myself | file and index updated 20141222 |
 | hg18 | esp6500siv2_all |
-| alternative allele frequency in All subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. |
-|  |
-| All files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as ESP do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. |
-|  |
-| file and index updated 20141222 |
+| alternative allele frequency in All subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. | All files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as ESP do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. | file and index updated 20141222 |
 | hg19 | esp6500siv2_all | same as above | file and index updated 20141222 |
 | hg38 | esp6500siv2_all | same as above, lifted over from hg19 by myself | file and index updated 20141222 |
 | hg19 | exac01 | ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). | file and index updated 20141101 |
@@ -180,11 +166,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | 1000g2014aug (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201408 collection v4 (based on 201305 alignment) | file and index udpated 20140915 |
 | hg19 | 1000g2014sep (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) | file and index udpated 20140925 |
 | hg19 | 1000g2014oct (6 data sets) |
-| alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) but including chrX and chrY data finally! |
-|  |
-| on 20141216, files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as 1000G do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. |
-|  |
-| file and index updated 20141216 |
+| alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) but including chrX and chrY data finally! | on 20141216, files were updated to address concerns on indel mismatch. All database files were manually left-normalized and split by myself (as 1000G do not use this practice themselves); so users should left-normalize and allele-split your own VCF files, before annotation, to ensure the most comprehensive matching of indels. | file and index updated 20141216 |
 | hg18 | snp128 | dbSNP with ANNOVAR index files | index updated 2012Feb22 |
 | hg18 | snp129 | same as above | index updated 2012Feb22 |
 | hg19 | snp129 | liftover from hg18_snp129.txt. This is the last pristine dbSNP to be used in benchmarking studies, etc | file and index updated 2012Aug09 |
