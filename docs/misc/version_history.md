@@ -1,5 +1,3 @@
-## Version history
-
 - Idea was conceived in 2009, motivated by several whole-genome sequencing paper and whole-exome sequencing paper.
 
 - On 2010Feb15, first public release of ANNOVAR.
