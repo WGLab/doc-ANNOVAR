@@ -15,7 +15,7 @@ use_absolute_urls: true
 use_directory_urls: false
 
 pages:
-# User guide:
+# User guide (for strange reasons I can only put 7 items below for building to pass):
 - ['index.md', 'ANNOVAR']
 - ['startup.md', 'Quick Start Up Guide']
 - ['download.md', 'Download ANNOVAR']
@@ -23,8 +23,6 @@ pages:
 - ['gene.md', 'Gene-based Annotation']
 - ['region.md', 'Region-based Annotation']
 - ['filter.md', 'Filter-based annotation']
-#- ['filter.md', 'Filter-based annotation']
-#- ['accessory.md', 'Using Accessary Programs']
 
 #- ['misc/whatsnew.md', 'Misc', 'What's New']
 #- ['misc/faq.md', 'Misc', 'FAQ']
