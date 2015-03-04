@@ -1,8 +1,6 @@
 site_name: ANNOVAR Documentation
 site_url: http://docs.openbioinformatics.org/projects/annovar/
 site_description: Documentation for ANNOVAR.
-site_favicon: img/favicon.png
-
 repo_url: https://github.com/wanggenomicslab/doc-ANNOVAR/
 
 docs_dir: sources
@@ -11,19 +9,13 @@ include_search: true
 
 use_absolute_urls: true
 
+# the line below is absolutely necessary (see https://github.com/rtfd/readthedocs.org/issues/1101 for explanation)
 use_directory_urls: false
-
-# theme: docker
-theme_dir: ./theme/mkdocs/
-theme_center_lead: false
-
-copyright: Copyright &copy; 2014-2015, Docker, Inc.
-google_analytics: ['UA-6096819-11', 'docker.io']
 
 pages:
 
 # Introduction:
-- ['index.md', 'About', 'Docker']
+- ['index.md', 'About', 'ANNOVAR']
 - ['release-notes.md', 'About', 'Release Notes']
 - ['introduction/index.md', '**HIDDEN**']
 - ['introduction/understanding-docker.md', 'About', 'Understanding Docker']
@@ -34,7 +26,6 @@ pages:
 - ['installation/ubuntulinux.md', 'Installation', 'Ubuntu']
 - ['installation/rhel.md', 'Installation', 'Red Hat Enterprise Linux']
 - ['installation/oracle.md', 'Installation', 'Oracle Linux']
-
 
 # User Guide:
 - ['userguide/index.md', 'User Guide', 'The Docker User Guide' ]
