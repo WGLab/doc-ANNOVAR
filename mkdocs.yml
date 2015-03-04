@@ -12,23 +12,27 @@ docs_dir: docs
 include_search: true
 use_absolute_urls: true
 # the line below is absolutely necessary (see https://github.com/rtfd/readthedocs.org/issues/1101 for explanation)
-use_directory_urls: false
+#use_directory_urls: false
 
 pages:
-# User guide (for strange reasons I can only put 7 items below for building to pass):
+# for strange reasons I can only put max of 7 items below for building to pass
 - ['index.md', 'ANNOVAR']
-- ['user-guide/startup.md', 'User Guide', 'Quick Start Up Guide']
+
+# User Guide
 - ['user-guide/download.md', 'User Guide', 'Download ANNOVAR']
-#- ['input.md', 'Prepare Input Files']
-#- ['gene.md', 'Gene-based Annotation']
-#- ['region.md', 'Region-based Annotation']
-#- ['filter.md', 'Filter-based annotation']
+- ['user-guide/startup.md', 'User Guide', 'Quick Start-Up Guide']
+- ['user-guide/input.md', 'User Guide', 'Prepare Input Files']
+- ['user-guide/gene.md', 'User Guide', 'Gene-based Annotation']
+- ['user-guide/region.md', 'User Guide', 'Region-based Annotation']
+- ['user-guide/filter.md', 'User Guide', 'Filter-based annotation']
 
 # Misc
-- ['misc/whatsnew.md', 'Misc', 'What is New']
+- ['misc/accessory.md', 'Misc', 'Accessoary Programs']
 - ['misc/faq.md', 'Misc', 'FAQ']
-- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
-- ['misc/accessory.md', 'Misc', 'Using Accessoary Programs']
+- ['misc/whatsnew.md', 'Misc', 'What is New']
+- ['misc/version_history.md', 'Misc', 'Version History']
+- ['misc/credit.md', 'Misc', 'Credit']
+- ['misc/contributing.md', 'Misc', 'How to contribute']
 
 
 # Articles

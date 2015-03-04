@@ -1,6 +1,4 @@
-# Quick Start-up Guide
-
-# annotate_variation
+## annotate_variation
 
 For impatient users, here is a quick start-up guide to show what ANNOVAR can do. One set of basic examples and one set of advanced examples are provided below. Assuming that a Linux computer is used and that the computer is connected to Internet, go to the ANNOVAR directory, then run the following commands one by one. (Note that if you already added ANNOVAR path into your system executable path, then typing "annotate_variation.pl" would be okay instead of typing "perl annotate_variation.pl"). Internet connection is required for those commands involving the -downdb operation.
 
@@ -28,7 +26,7 @@ Next, the program downloads 1000 Genome Projects allele frequency annotations (u
 
 The commands above represent a set of basic examples on how ANNOVAR can help researchers annoate genetic variants generated from high-throughput sequencing data.
 
-# table_annovar
+## table_annovar
 
 Below is an example on using the TABLE_ANNOVAR program, which takes an input variant file and generate an output annotation file with many columns, each representing one set of annotations. First, we need to download appropriate database files, and next we will run the table_annovar.pl program to annotate the variants in the `example/ex1_hg19.human` file.
 
@@ -67,22 +65,3 @@ You can download the output file here: myanno.hg19_multianno.vcf. You can downlo
 Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 
 Of course ANNOVAR can do much more than what's shown in the example above, so if you are interested, click the banner to the left to learn the input formats and see what additional things ANNOVAR can do for your research...
-
-
-------
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'annovar';
-    
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-------
