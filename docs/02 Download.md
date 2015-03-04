@@ -12,6 +12,13 @@ Most of the databases that ANNOVAR uses can be directly retrieved from UCSC Geno
 
 Several very commonly used annotation databases for human genomes are additionally provided by me as described below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these files.
 
+| Tables   |      Are      |  Cool |
+|----------|:-------------:|------:|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
+
+
 
 |Genome Build	|	Table Name	|	Explanation	|	Additional Comments|
 |---|---|---|
