@@ -18,6 +18,12 @@ Several very commonly used annotation databases for human genomes are additional
 | col 2 is |    centered   |   $12 |
 | col 3 is | right-aligned |    $1 |
 
+| Genome Build   |      Table Name      |  Explanation | Additional Comments |
+|----------|:-------------:|------:|-----|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
+
 
 
 | Genome Build | Table Name | Explanation | Additional Comments |
