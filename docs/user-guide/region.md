@@ -1,4 +1,4 @@
-# Region-based annotation
+## Overview
 
 Besides gene-based annotations, ANNOVAR has several other utilities, such as region-based annotation. This function is issued by the --regionanno argument (by default, --geneanno is ON)
 
