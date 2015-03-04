@@ -23,6 +23,7 @@ pages:
 - ['gene.md', 'Gene-based Annotation']
 - ['region.md', 'Region-based Annotation']
 - ['filter.md', 'Filter-based annotation']
+- ['accessory.md', 'Using Accessoary Programs']
 #- ['filter.md', 'Filter-based annotation']
 #- ['accessory.md', 'Using Accessary Programs']
 
