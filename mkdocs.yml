@@ -17,7 +17,6 @@ use_directory_urls: false
 pages:
 # User guide:
 - ['index.md', 'ANNOVAR']
-- ['index.md', 'Home']
 - ['startup.md', 'User Guide', 'Quick Start up Guide']
 - ['download.md', 'User Guide', 'Download ANNOVAR']
 - ['input.md', 'User Guide', 'Prepare Input Files']
