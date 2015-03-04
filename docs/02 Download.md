@@ -19,7 +19,7 @@ Several very commonly used annotation databases for human genomes are additional
 | col 3 is | right-aligned |    $1 |
 
 | Genome Build   |      Table Name      |  Explanation | Additional Comments |
-|---|---|---|
+|----------|:-------------:|------:|-----|
 | hg18 |  avsift | $whole-exome SIFT scores for non-synonymous variants (obselete and should not be uesd any more) | file updated 2011Mar01, index updated 2012Feb22 |
 | col 2 is |    centered   |   $12 |
 | col 3 is | right-aligned |    $1 |
@@ -27,7 +27,7 @@ Several very commonly used annotation databases for human genomes are additional
 
 
 | Genome Build | Table Name | Explanation | Additional Comments |
-|---|---|---|
+|---|---|---|---|
 | hg18 | avsift | whole-exome SIFT scores for non-synonymous variants (obselete and should not be uesd any more) | file updated 2011Mar01, index updated 2012Feb22 |
 
 
