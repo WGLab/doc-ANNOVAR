@@ -1,54 +1,30 @@
 site_name: ANNOVAR Documentation
-site_url: http://docs.openbioinformatics.org/projects/annovar/
-site_description: Documentation for ANNOVAR.
-repo_url: https://github.com/wanggenomicslab/doc-ANNOVAR/
+site_url: http://annovar.openbioinformatics.org/
+repo_url: http://github/com/WangGenomicsLab/doc-ANNOVAR/
+repo_name: GitHub
+site_description: Documentation for ANNOVAR software
+site_author: Kai Wang
+site_favicon: favicon.ico
+copyright: 2010-2015 ANNOVAR
+google_analytics: ['UA-36723568-3', 'mkdocs.org']
 
-docs_dir: sources
 
+docs_dir: docs
 include_search: true
-
 use_absolute_urls: true
-
 # the line below is absolutely necessary (see https://github.com/rtfd/readthedocs.org/issues/1101 for explanation)
 use_directory_urls: false
 
 pages:
-
 # Introduction:
 - ['index.md', 'About', 'ANNOVAR']
-- ['release-notes.md', 'About', 'Release Notes']
-- ['introduction/index.md', '**HIDDEN**']
-- ['introduction/understanding-docker.md', 'About', 'Understanding Docker']
+- ['01_Quick_Start.md', 'About', 'Release Notes']
+- ['02_Download.md', 'About', 'Understanding Docker']
+- ['03_Prepare_Input_File.md', 'About', 'Understanding Docker']
 
-# Installation:
-- ['installation/index.md', '**HIDDEN**']
-- ['installation/mac.md', 'Installation', 'Mac OS X']
-- ['installation/ubuntulinux.md', 'Installation', 'Ubuntu']
-- ['installation/rhel.md', 'Installation', 'Red Hat Enterprise Linux']
-- ['installation/oracle.md', 'Installation', 'Oracle Linux']
-
-# User Guide:
-- ['userguide/index.md', 'User Guide', 'The Docker User Guide' ]
-- ['userguide/dockerhub.md', 'User Guide', 'Getting Started with Docker Hub' ]
-- ['userguide/dockerizing.md', 'User Guide', 'Dockerizing Applications' ]
-- ['userguide/level1.md', '**HIDDEN**' ]
-- ['userguide/level2.md', '**HIDDEN**' ]
-
-# Docker Hub docs:
-- ['docker-hub/index.md', 'Docker Hub', 'Docker Hub' ]
-- ['docker-hub/accounts.md', 'Docker Hub', 'Accounts']
-- ['docker-hub/repos.md', 'Docker Hub', 'Repositories']
-- ['docker-hub/builds.md', 'Docker Hub', 'Automated Builds']
-- ['docker-hub/official_repos.md', 'Docker Hub', 'Official Repo Guidelines']
 
 # Articles
 - ['articles/index.md', '**HIDDEN**']
-- ['articles/basics.md', 'Articles', 'ANNOVAR basics']
-- ['articles/networking.md', 'Articles', 'Advanced networking']
-- ['articles/security.md', 'Articles', 'Security']
+- ['articles/VCF.md', 'Articles', 'VCF processing']
+- ['articles/dbSNP.md', 'Articles', 'dbSNP processing']
 
-# Contribute:
-- ['contributing/index.md', '**HIDDEN**']
-- ['contributing/contributing.md', 'Contribute', 'Contributing']
-- ['contributing/devenvironment.md', 'Contribute', 'Development environment']
-- ['contributing/docs_style-guide.md', 'Contribute', 'Documentation style guide']
