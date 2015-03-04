@@ -1,8 +1,6 @@
-# Accessary programs
-
 The ANNOVAR package contains several accessary programs to help users convert file formats or perform additional functions. These accessary programs are described below.
 
-1. Variants_Reduction: prioritizing causal variants
+## Variants_Reduction: prioritizing causal variants
 
 In October 2012, a new program, variants_reduction.pl, was added into the ANNOVAR package to replace the old auto_annovar.pl. The new program is more flexible to allow users choose customized filtering procedure, and hopefully will be more useful than the old program to help identify causal variants from next-generation sequencing data.
 
@@ -34,7 +32,7 @@ The program is not mature enough and will undergo additional changes in future v
 
  
 
-2. Table_Annovar: Conversion of whole-genome data into an Excel file
+## Table_Annovar: Conversion of whole-genome data into an Excel file
 
 Previous version of ANNOVAR before May 2013 included the summarize_annovar program. It takes an input file and generates tab-delimited annotation file, where each column represents one type of annotation. This program has been popular among ANNOVAR users, because it allows easy viewing of the results in Excel or other tools. However, summarize_annovar fixed the number and type of annotation, which severely limits user's ability to perform custom annotations.
 
@@ -137,11 +135,15 @@ In the quick start-up guide, we have encountered the following example. The inpu
 
 Now let's examine the output file in detail. The input line in the VCF file ex4.vcf
 
+```
 16 50745926 rs2066844 C T 80 PASS NS=3;DP=14;AF=0.5;DB;H2 GT:GQ:DP:HQ 0|0:48:1:51,51 1|0:48:8:51,51 1/1:43:5:.,.
+```
 
 becomes
 
+```
 16 50745926 rs2066844 C T 80 PASS NS=3;DP=14;AF=0.5;DB;H2;ANNOVAR_DATE=2014-05-26;Func.refGene=exonic;Gene.refGene=NOD2;GeneDetail.refGene=.;ExonicFunc.refGene=nonsynonymous SNV;AAChange.refGene=NOD2:NM_001293557:exon3:c.C2023T:p.R675W,NOD2:NM_022162:exon4:c.C2104T:p.R702W;cytoBand=16q12.1;genomicSuperDups=.;esp6500si_all=0.031558;1000g2012apr_all=0.02;snp138=rs2066844;LJB23_SIFT_score=0.01;LJB23_SIFT_score_converted=0.99;LJB23_SIFT_pred=D;LJB23_Polyphen2_HDIV_score=0.999;LJB23_Polyphen2_HDIV_pred=D;LJB23_Polyphen2_HVAR_score=0.901;LJB23_Polyphen2_HVAR_pred=P;LJB23_LRT_score=0.993;LJB23_LRT_score_converted=0.503;LJB23_LRT_pred=N;LJB23_MutationTaster_score=1.000;LJB23_MutationTaster_score_converted=0.000;LJB23_MutationTaster_pred=N;LJB23_MutationAssessor_score=2.32;LJB23_MutationAssessor_score_converted=0.683;LJB23_MutationAssessor_pred=M;LJB23_FATHMM_score=-0.62;LJB23_FATHMM_score_converted=0.421;LJB23_FATHMM_pred=T;LJB23_RadialSVM_score=-0.855;LJB23_RadialSVM_score_converted=0.287;LJB23_RadialSVM_pred=T;LJB23_LR_score=0.138;LJB23_LR_pred=T;LJB23_GERP++=3.66;LJB23_PhyloP=1.421;LJB23_SiPhy=6.914;ALLELE_END GT:GQ:DP:HQ 0|0:48:1:51,51 1|0:48:8:51,51 1/1:43:5:.,.
+```
 
 in the output file myanno.hg19_multianno.vcf. The ANNOVAR_DATE marks the start of ANNOVAR annotation, whereas ALLELE_END marks the end of ANNOVAR annotation for this variant.
 
@@ -149,31 +151,38 @@ in the output file myanno.hg19_multianno.vcf. The ANNOVAR_DATE marks the start o
 
 Let's take a look at another input line with two alternative alleles. The line
 
+```
 20 1110696 rs6040355 A G,T 67 PASS NS=2;DP=10;AF=0.333,0.667;AA=T;DB GT:GQ:DP:HQ 1|2:21:6:23,27 2|1:2:0:18,2 2/2:35:4
+```
 
 becomes
 
+```
 20 1110696 rs6040355 A G,T 67 PASS NS=2;DP=10;AF=0.333,0.667;AA=T;DB;ANNOVAR_DATE=2014-05-26;Func.refGene=intronic;Gene.refGene=PSMF1;GeneDetail.refGene=.;ExonicFunc.refGene=.;AAChange.refGene=.;cytoBand=20p13;genomicSuperDups=.;esp6500si_all=.;1000g2012apr_all=.;snp138=.;LJB23_SIFT_score=.;LJB23_SIFT_score_converted=.;LJB23_SIFT_pred=.;LJB23_Polyphen2_HDIV_score=.;LJB23_Polyphen2_HDIV_pred=.;LJB23_Polyphen2_HVAR_score=.;LJB23_Polyphen2_HVAR_pred=.;LJB23_LRT_score=.;LJB23_LRT_score_converted=.;LJB23_LRT_pred=.;LJB23_MutationTaster_score=.;LJB23_MutationTaster_score_converted=.;LJB23_MutationTaster_pred=.;LJB23_MutationAssessor_score=.;LJB23_MutationAssessor_score_converted=.;LJB23_MutationAssessor_pred=.;LJB23_FATHMM_score=.;LJB23_FATHMM_score_converted=.;LJB23_FATHMM_pred=.;LJB23_RadialSVM_score=.;LJB23_RadialSVM_score_converted=.;LJB23_RadialSVM_pred=.;LJB23_LR_score=.;LJB23_LR_pred=.;LJB23_GERP++=.;LJB23_PhyloP=.;LJB23_SiPhy=.;ALLELE_END;ANNOVAR_DATE=2014-05-26;Func.refGene=intronic;Gene.refGene=PSMF1;GeneDetail.refGene=.;ExonicFunc.refGene=.;AAChange.refGene=.;cytoBand=20p13;genomicSuperDups=.;esp6500si_all=.;1000g2012apr_all=.;snp138=.;LJB23_SIFT_score=.;LJB23_SIFT_score_converted=.;LJB23_SIFT_pred=.;LJB23_Polyphen2_HDIV_score=.;LJB23_Polyphen2_HDIV_pred=.;LJB23_Polyphen2_HVAR_score=.;LJB23_Polyphen2_HVAR_pred=.;LJB23_LRT_score=.;LJB23_LRT_score_converted=.;LJB23_LRT_pred=.;LJB23_MutationTaster_score=.;LJB23_MutationTaster_score_converted=.;LJB23_MutationTaster_pred=.;LJB23_MutationAssessor_score=.;LJB23_MutationAssessor_score_converted=.;LJB23_MutationAssessor_pred=.;LJB23_FATHMM_score=.;LJB23_FATHMM_score_converted=.;LJB23_FATHMM_pred=.;LJB23_RadialSVM_score=.;LJB23_RadialSVM_score_converted=.;LJB23_RadialSVM_pred=.;LJB23_LR_score=.;LJB23_LR_pred=.;LJB23_GERP++=.;LJB23_PhyloP=.;LJB23_SiPhy=.;ALLELE_END GT:GQ:DP:HQ 1|2:21:6:23,27 2|1:2:0:18,2 2/2:35:4
+```
 
 in the output file. Note that two ANNOVAR_DATE and two ALLELE_END are present in the line, corresponding to the two alleles, respectively. This way a user can easily identify the annotations for a specific allele.
 
  
 
-3. Conversion of input file format
+## Conversion of input file format
 
-The convert2annovar.pl program can be uesd to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the "ANNOVAR Input Files" section.
+The convert2annovar.pl program can be uesd to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the [Input](/user-guide/input.md) section.
 
  
 
-4. Retrieval of nucleotide and protein sequences from a particular genomic region
+## Retrieval of nucleotide and protein sequences from a particular genomic region
 
 The retrieve_seq_from_fasta.pl program can be used to retrieve genomic nucleotide sequences or cDNA sequences, or translated amino acid sequences (this functionality is currently being developed and will be released in future ANNOVAR version) from many user-specified genomic regions. It can take several different types of region files, hereafter referred to as "simple", "tab", "refGene", "ensGene", "knownGene".
 
-A few examples are given below to illustrate the use of this program. Before running the example, first download the genomic sequences for whole human genome. They will be saved in the humandb/hg18seq/ directory.
+A few examples are given below to illustrate the use of this program. Before running the example, first download the genomic sequences for whole human genome. They will be saved in the `humandb/hg18seq/` directory.
 
+```
 [kai@biocluster ~/]$ annotate_variation.pl -downdb seq humandb/hg18seq/
+```
 
 1. simple input files
+
 The file list simple regions in the first column of each line (other columns can be present but will not be used). For example,
 
 ```
@@ -240,5 +249,5 @@ The handling of this type of input files is very similar to the refGene input fi
 
 6. Others (such as Gencode) input files
 
-Use the genericGene as the -format argument.
+Use the genericGene as the `-format` argument.
 
