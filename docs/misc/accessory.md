@@ -167,7 +167,7 @@ in the output file. Note that two ANNOVAR_DATE and two ALLELE_END are present in
 
 ## Conversion of input file format
 
-The convert2annovar.pl program can be uesd to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the [Input](user-guide/input.md) section.
+The convert2annovar.pl program can be uesd to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the [Input](../user-guide/input.md) section.
 
  
 
