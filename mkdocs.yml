@@ -23,13 +23,13 @@ pages:
 - ['gene.md', 'Gene-based Annotation']
 - ['region.md', 'Region-based Annotation']
 - ['filter.md', 'Filter-based annotation']
-- ['accessory.md', 'Using Accessoary Programs']
 #- ['filter.md', 'Filter-based annotation']
 #- ['accessory.md', 'Using Accessary Programs']
 
 #- ['misc/whatsnew.md', 'Misc', 'What's New']
 #- ['misc/faq.md', 'Misc', 'FAQ']
 #- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
+#- ['accessory.md', 'Using Accessoary Programs']
 
 
 # Articles
