@@ -19,10 +19,10 @@ pages:
 - ['index.md', 'ANNOVAR']
 - ['user-guide/startup.md', 'User Guide', 'Quick Start Up Guide']
 - ['user-guide/download.md', 'User Guide', 'Download ANNOVAR']
-#- ['input.md', 'Prepare Input Files']
-#- ['gene.md', 'Gene-based Annotation']
-#- ['region.md', 'Region-based Annotation']
-#- ['filter.md', 'Filter-based annotation']
+- ['input.md', 'User Guide', 'Prepare Input Files']
+- ['gene.md', 'User Guide', 'Gene-based Annotation']
+- ['region.md', 'User Guide', 'Region-based Annotation']
+- ['filter.md', 'User Guide', 'Filter-based annotation']
 
 # Misc
 - ['misc/whatsnew.md', 'Misc', 'What is New']
