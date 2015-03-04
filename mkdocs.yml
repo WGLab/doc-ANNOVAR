@@ -17,8 +17,8 @@ use_directory_urls: false
 pages:
 # User guide (for strange reasons I can only put 7 items below for building to pass):
 - ['index.md', 'ANNOVAR']
-- ['user-guide/download.md', 'Download ANNOVAR']
-- ['user-guide/startup.md', 'User Guide', 'Quick Start Up Guide']
+- ['user-guide/download.md', 'User Guide', 'Download ANNOVAR']
+- ['user-guide/startup.md', 'User Guide', 'Quick Start-Up Guide']
 - ['user-guide/input.md', 'User Guide', 'Prepare Input Files']
 - ['user-guide/gene.md', 'User Guide', 'Gene-based Annotation']
 - ['user-guide/region.md', 'User Guide', 'Region-based Annotation']
