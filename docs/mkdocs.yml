@@ -1,0 +1,63 @@
+site_name: ANNOVAR Documentation
+site_url: http://docs.openbioinformatics.org/projects/annovar/
+site_description: Documentation for ANNOVAR.
+site_favicon: img/favicon.png
+
+repo_url: https://github.com/wanggenomicslab/doc-ANNOVAR/
+
+docs_dir: sources
+
+include_search: true
+
+use_absolute_urls: true
+
+use_directory_urls: false
+
+# theme: docker
+theme_dir: ./theme/mkdocs/
+theme_center_lead: false
+
+copyright: Copyright &copy; 2014-2015, Docker, Inc.
+google_analytics: ['UA-6096819-11', 'docker.io']
+
+pages:
+
+# Introduction:
+- ['index.md', 'About', 'Docker']
+- ['release-notes.md', 'About', 'Release Notes']
+- ['introduction/index.md', '**HIDDEN**']
+- ['introduction/understanding-docker.md', 'About', 'Understanding Docker']
+
+# Installation:
+- ['installation/index.md', '**HIDDEN**']
+- ['installation/mac.md', 'Installation', 'Mac OS X']
+- ['installation/ubuntulinux.md', 'Installation', 'Ubuntu']
+- ['installation/rhel.md', 'Installation', 'Red Hat Enterprise Linux']
+- ['installation/oracle.md', 'Installation', 'Oracle Linux']
+
+
+# User Guide:
+- ['userguide/index.md', 'User Guide', 'The Docker User Guide' ]
+- ['userguide/dockerhub.md', 'User Guide', 'Getting Started with Docker Hub' ]
+- ['userguide/dockerizing.md', 'User Guide', 'Dockerizing Applications' ]
+- ['userguide/level1.md', '**HIDDEN**' ]
+- ['userguide/level2.md', '**HIDDEN**' ]
+
+# Docker Hub docs:
+- ['docker-hub/index.md', 'Docker Hub', 'Docker Hub' ]
+- ['docker-hub/accounts.md', 'Docker Hub', 'Accounts']
+- ['docker-hub/repos.md', 'Docker Hub', 'Repositories']
+- ['docker-hub/builds.md', 'Docker Hub', 'Automated Builds']
+- ['docker-hub/official_repos.md', 'Docker Hub', 'Official Repo Guidelines']
+
+# Articles
+- ['articles/index.md', '**HIDDEN**']
+- ['articles/basics.md', 'Articles', 'ANNOVAR basics']
+- ['articles/networking.md', 'Articles', 'Advanced networking']
+- ['articles/security.md', 'Articles', 'Security']
+
+# Contribute:
+- ['contributing/index.md', '**HIDDEN**']
+- ['contributing/contributing.md', 'Contribute', 'Contributing']
+- ['contributing/devenvironment.md', 'Contribute', 'Development environment']
+- ['contributing/docs_style-guide.md', 'Contribute', 'Documentation style guide']
