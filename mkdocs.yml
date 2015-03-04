@@ -1,6 +1,6 @@
 site_name: ANNOVAR Documentation
 site_url: http://annovar.openbioinformatics.org/
-repo_url: http://github/com/WangGenomicsLab/doc-ANNOVAR/
+repo_url: http://github.com/WangGenomicsLab/doc-ANNOVAR/
 repo_name: GitHub
 site_description: Documentation for ANNOVAR software
 site_author: Kai Wang
@@ -17,10 +17,10 @@ use_directory_urls: false
 
 pages:
 # Introduction:
-- ['index.md', 'About', 'ANNOVAR']
-- ['01_Quick_Start.md', 'About', 'Release Notes']
-- ['02_Download.md', 'About', 'Understanding Docker']
-- ['03_Prepare_Input_File.md', 'About', 'Understanding Docker']
+- ['index.md', 'ANNOVAR']
+- ['01_Quick_Start.md', 'Release Notes']
+- ['02_Download.md', 'Download ANNOVAR']
+- ['03_Prepare_Input_File.md', 'Prepare Input Files']
 
 
 # Articles
