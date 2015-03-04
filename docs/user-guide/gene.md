@@ -413,7 +413,7 @@ TSSK2
 
  
 
-Switching to GFF3-based gene annotations
+## Switching to GFF3-based gene annotations
 
 Things become a little bit more compilcated when handling GFF3-based gene annotations, and the GFF3 file itself may or may not contain sequences for transcripts. Currently users can perform region-based annotation on GFF3-based annotation databases, but not gene-based annotation directly. To perform gene annotation, you need to convert it to UCSC compatile format first (try the http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/gff3ToGenePred tool).
 
