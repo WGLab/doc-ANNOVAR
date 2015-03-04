@@ -18,17 +18,18 @@ use_directory_urls: false
 pages:
 # User guide:
 - ['index.md', 'ANNOVAR']
-- ['startup.md', 'Quick Start up Guide']
-- ['download.md', 'Download ANNOVAR']
-- ['input.md', 'Prepare Input Files']
-- ['gene.md', 'Gene-based Annotation']
-- ['region.md', 'Region-based Annotation']
-- ['filter.md', 'Filter-based annotation']
-- ['accessory.md', 'Using Accessary Programs']
-- ['faq.md', 'FAQ']
-- ['contributing.md', 'Contribute to doc-ANNOVAR']
+- ['index.md', 'Home']
+- ['startup.md', 'User Guide', 'Quick Start up Guide']
+- ['download.md', 'User Guide', 'Download ANNOVAR']
+- ['input.md', 'User Guide', 'Prepare Input Files']
+- ['gene.md', 'User Guide', 'Gene-based Annotation']
+- ['region.md', 'User Guide', 'Region-based Annotation']
+- ['filter.md', 'User Guide', 'Filter-based annotation']
+- ['accessory.md', 'User Guide', 'Using Accessary Programs']
 
-
+- ['whatsnew.md', 'Misc', 'What's New']
+- ['faq.md', 'Misc', 'FAQ']
+- ['contributing.md', 'Misc', 'Contribute to ANNOVAR']
 
 
 # Articles
