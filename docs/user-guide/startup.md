@@ -1,6 +1,6 @@
 # Quick Start-up Guide
 
-- annotate_variation
+# annotate_variation
 
 For impatient users, here is a quick start-up guide to show what ANNOVAR can do. One set of basic examples and one set of advanced examples are provided below. Assuming that a Linux computer is used and that the computer is connected to Internet, go to the ANNOVAR directory, then run the following commands one by one. (Note that if you already added ANNOVAR path into your system executable path, then typing "annotate_variation.pl" would be okay instead of typing "perl annotate_variation.pl"). Internet connection is required for those commands involving the -downdb operation.
 
@@ -24,12 +24,11 @@ Next, the program downloads cytogenetic band annotation databases from the UCSC 
 
 Next, the program downloads 1000 Genome Projects allele frequency annotations (users need to be patient again, as the file is large), and then identify a subset of variants in ex1.human that are not observed in 1000G version 2012April populations (saved in ex1.avinput.hg1g_ALL.sites.2012_04_filtered) and those that are observed with allele frequencies (saved in ex1.avinput.hg19_ALL.sites.2012_04_dropped file).
 
-.. note::
-Note: By default, ANNOVAR annotates variant on hg18 (human genome NCBI build 36) coordinate. Since the input file is in hg19 coordinate, we added "-buildver hg19" in every command above. Similarly, if you generated variant calls from human GRCh38 coordinate, add -buildver hg38' in every command, if your variant file is from fly, add "-buildver dm3" in every command that you use; if your variant file is from mouse, add "-buildver mm9" in every command that you use ......
+>>>Note: By default, ANNOVAR annotates variant on hg18 (human genome NCBI build 36) coordinate. Since the input file is in hg19 coordinate, we added "-buildver hg19" in every command above. Similarly, if you generated variant calls from human GRCh38 coordinate, add -buildver hg38' in every command, if your variant file is from fly, add "-buildver dm3" in every command that you use; if your variant file is from mouse, add "-buildver mm9" in every command that you use ......
 
 The commands above represent a set of basic examples on how ANNOVAR can help researchers annoate genetic variants generated from high-throughput sequencing data.
 
-- table_annovar
+# table_annovar
 
 Below is an example on using the TABLE_ANNOVAR program, which takes an input variant file and generate an output annotation file with many columns, each representing one set of annotations. First, we need to download appropriate database files, and next we will run the table_annovar.pl program to annotate the variants in the `example/ex1_hg19.human` file.
 
