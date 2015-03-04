@@ -25,7 +25,7 @@ pages:
 - ['filter.md', 'Filter-based annotation']
 
 # Misc
-- ['misc/whatsnew.md', 'Misc', 'What's New']
+- ['misc/whatsnew.md', 'Misc', 'What is New']
 - ['misc/faq.md', 'Misc', 'FAQ']
 - ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
 #- ['accessory.md', 'Using Accessoary Programs']
