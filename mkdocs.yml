@@ -27,10 +27,12 @@ pages:
 - ['user-guide/filter.md', 'User Guide', 'Filter-based annotation']
 
 # Misc
-- ['misc/whatsnew.md', 'Misc', 'What is New']
-- ['misc/faq.md', 'Misc', 'FAQ']
-- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
 - ['misc/accessory.md', 'Misc', 'Using Accessoary Programs']
+- ['misc/faq.md', 'Misc', 'FAQ']
+- ['misc/whatsnew.md', 'Misc', 'What is New']
+- ['misc/version_history.md', 'Misc', 'Version History']
+- ['misc/credit.md', 'Mic', 'Credit']
+- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
 
 
 # Articles
