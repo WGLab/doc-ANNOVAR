@@ -6,7 +6,7 @@ Introduction to VCF file and some of its complications
 
 When ANNOVAR was originally developed, almost all variant callers (SamTools, SOAPSNP, SOLiD BioScope, Illumina CASAVA, CG ASM-var, CG ASM-masterVAR, etc) use a different file format for output files, so ANNOVAR decides to take an extremely simple format (chr, start, end, ref, alt, plus optional fields) as input. Let's call it avinput file for now. Then I provide the convert2annovar.pl program in the ANNOVAR package to faciliate format conversion.
 
-Later on, VCF (Variant Call Format) becomes the main stream format for describing variants. It was originally developed and used by the 1000 Genomes Project, but its specification and extension is currently handled by the Global Alliance for Genomics and Health Data Working group. See http://www.1000genomes.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-41 for details on its format specification.
+Later on, VCF (Variant Call Format) becomes the main stream format for describing variants. It was originally developed and used by the 1000 Genomes Project, but its specification and extension is currently handled by the Global Alliance for Genomics and Health Data Working group. See [here]( http://www.1000genomes.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-41) for details on its format specification.
 
 Nowadays, almost everybody who do variant calling uses VCF or MAF formats, which greatly faciliate the exchange and communication between researchers. ANNOVAR does provide functionality for format conversion from VCF/MAF to avinput format, so that users can annotate their VCF files.
 
@@ -18,11 +18,7 @@ Some basic facts to keep in mind:
 
 2. Because VCF is a locus descriptor, there are several consequences. First, there is no line-to-line correspondence with variants. Since multiple variants can be in the same locus, one line in VCF file can in principle describe multiple variants (including wildtype non-variant allele), and multiple types of genotype calls when genotype information is available. For example, take a look at an example VCF line below. It has eight tab-delimited columns. In the ALT column, there are sevearl comma-delimited alternative alleles. So in one single line, several insertions and deletions and a single-nucleotide variant (SNV) are all present.
 
- 
-```
-#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
-1	112240038	.	CTTT	CTTTT,CTTTTT,CTTA,CTT,CT,C	.	PASS	AC=986,3,1249,3,127,3;AF=0.196885,0.000599042,0.249401,0.000599042,0.0253594,0.000599042
-```
+    1	112240038	.	CTTT	CTTTT,CTTTTT,CTTA,CTT,CT,C	.	PASS	AC=986,3,1249,3,127,3;AF=0.196885,0.000599042,0.249401,0.000599042,0.0253594,0.000599042
 
     A lot of users like to include variant annotation information in VCF files (via the INFO field). So in this situation above, we need to add annotations to all six alleles in the INFO field in the same line, and make sure that users knows which annotation corresponds to which allele. ANNOVAR does handle this correctly via table_annovar.pl.
 
@@ -42,10 +38,9 @@ Some basic facts to keep in mind:
 
     For example, suppose the input is ex1.vcf.gz (make sure that it is processed by bgzip and then by tabix), this is what you would do:
 
-```
-bcftools norm -m-both -o ex1.step1.vcf ex1.vcf.gz 
-bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf
-```
+    `bcftools norm -m-both -o ex1.step1.vcf ex1.vcf.gz`
+
+    `bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf`
 
     The first command split multi-allelic variants calls into separate lines, yet the second command perform the actual left-normalization. The FASTA file is needed in the second command.
 
