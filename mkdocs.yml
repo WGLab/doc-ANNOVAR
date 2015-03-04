@@ -22,7 +22,7 @@ pages:
 - ['input.md', 'Prepare Input Files']
 - ['gene.md', 'Gene-based Annotation']
 - ['region.md', 'Region-based Annotation']
-#- ['filter.md', 'Filter-based annotation']
+- ['filter.md', 'Filter-based annotation']
 #- ['accessory.md', 'Using Accessary Programs']
 
 #- ['misc/whatsnew.md', 'Misc', 'What's New']
