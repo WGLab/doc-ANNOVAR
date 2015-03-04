@@ -24,9 +24,10 @@ pages:
 - ['region.md', 'Region-based Annotation']
 - ['filter.md', 'Filter-based annotation']
 
-#- ['misc/whatsnew.md', 'Misc', 'What's New']
-#- ['misc/faq.md', 'Misc', 'FAQ']
-#- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
+# Misc
+- ['misc/whatsnew.md', 'Misc', 'What's New']
+- ['misc/faq.md', 'Misc', 'FAQ']
+- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
 #- ['accessory.md', 'Using Accessoary Programs']
 
 
