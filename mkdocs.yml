@@ -18,7 +18,7 @@ pages:
 # User guide:
 - ['index.md', 'ANNOVAR']
 - ['startup.md', 'Quick Start Up Guide']
-- ['download.md', 'Download ANNOVAR']
+- ['download.md', 'User Guide', 'Download ANNOVAR']
 
 #- ['startup1.md', 'User Guide', 'Quick Start up Guide']
 #- ['download.md', 'User Guide', 'Download ANNOVAR']
