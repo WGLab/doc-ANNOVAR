@@ -31,8 +31,8 @@ pages:
 - ['misc/faq.md', 'Misc', 'FAQ']
 - ['misc/whatsnew.md', 'Misc', 'What is New']
 - ['misc/version_history.md', 'Misc', 'Version History']
-- ['misc/credit.md', 'Mic', 'Credit']
-- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
+- ['misc/credit.md', 'Misc', 'Credit']
+- ['misc/contributing.md', 'Misc', 'How to contribute']
 
 
 # Articles
