@@ -19,3 +19,20 @@ Note that he ANNOVAR package already contains a humandb/ directory with RefSeq l
 
 Next, the program downloads cytogenetic band annotation databases from the UCSC Genome Browser and saves it to the humandb/ directory as hg19_cytoBand.txt file, then annotates variants in ex1.avinput file and idenifies the cytogenetic band for these variants. The annotation procedure should take a few seconds. Examine the output file ex1.avinput.hg19_cytoBand to see what it contains. The first column shows "cytoBand", the second column shows the annotation results, and the other columns are reproduced from input file.
 
+
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'annovar';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
