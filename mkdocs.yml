@@ -19,15 +19,15 @@ pages:
 - ['index.md', 'ANNOVAR']
 - ['startup.md', 'Quick Start Up Guide']
 - ['download.md', 'Download ANNOVAR']
-- ['input.md', 'Prepare Input Files']
-- ['gene.md', 'Gene-based Annotation']
-- ['region.md', 'Region-based Annotation']
-- ['filter.md', 'Filter-based annotation']
-- ['accessory.md', 'Using Accessary Programs']
+#- ['input.md', 'Prepare Input Files']
+#- ['gene.md', 'Gene-based Annotation']
+#- ['region.md', 'Region-based Annotation']
+#- ['filter.md', 'Filter-based annotation']
+#- ['accessory.md', 'Using Accessary Programs']
 
-- ['misc/whatsnew.md', 'Misc', 'What's New']
-- ['misc/faq.md', 'Misc', 'FAQ']
-- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
+#- ['misc/whatsnew.md', 'Misc', 'What's New']
+#- ['misc/faq.md', 'Misc', 'FAQ']
+#- ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
 
 
 # Articles
