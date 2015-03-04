@@ -28,7 +28,7 @@ pages:
 - ['misc/whatsnew.md', 'Misc', 'What is New']
 - ['misc/faq.md', 'Misc', 'FAQ']
 - ['misc/contributing.md', 'Misc', 'Contribute to ANNOVAR']
-- ['misc/accessory.md', 'Using Accessoary Programs']
+- ['misc/accessory.md', 'Misc', 'Using Accessoary Programs']
 
 
 # Articles
