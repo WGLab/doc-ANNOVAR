@@ -6,7 +6,7 @@ site_description: Documentation for ANNOVAR software
 site_author: Kai Wang
 site_favicon: favicon.ico
 copyright: 2010-2015 ANNOVAR
-google_analytics: ['UA-36723568-3', 'mkdocs.org']
+google_analytics: ['UA-48623707-1', 'http://annovar.openbioinformatics.org/']
 
 
 docs_dir: docs
