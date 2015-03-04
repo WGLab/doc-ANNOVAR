@@ -1,16 +1,14 @@
-# Download ANNOVAR and related data sets
-
 ## ANNOVAR main package
 
 The latest version of ANNOVAR can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php).
 
-ANNOVAR is written in pure Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
+ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
 ## Additional databases
 
-Most of the databases that ANNOVAR uses can be directly retrieved from UCSC Genome Browser Annotation Database. In general, users can use "-downdb" in ANNOVAR to download these files. As of Feb2012, there are 6418 databases for hg19, 6443 databases for hg18, 1841 databases for mm9, etc.
+Many of the databases that ANNOVAR uses can be directly retrieved from UCSC Genome Browser Annotation Database by `-downdb` argument.
 
-Several very commonly used annotation databases for human genomes are additionally provided by me as described below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these files.
+Several very commonly used annotation databases for human genomes are additionally provided below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these databases.
 
 
 | Genome Build | Table Name | Explanation | Additional Comments |
