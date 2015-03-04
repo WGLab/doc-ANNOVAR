@@ -1,6 +1,6 @@
-One of the functionalities of ANNOVAR is to generate gene-based annotation. For example, from a whole-genome sequencing experiment on a human subject, given a list of 4 million SNVs (single nucleotide variants) and 0.5 million indels (insertions or deletions), it is of interest to identify the genes that are disrupted. For intergenic variants, we are interested in knowing what are the two flanking genes, and what are the distances between the variants and the flanking genes. For exonic variants, we are interested in knowing the amino acid changes.
-
 ## Command overview
+
+One of the functionalities of ANNOVAR is to generate gene-based annotation. For example, from a whole-genome sequencing experiment on a human subject, given a list of 4 million SNVs (single nucleotide variants) and 0.5 million indels (insertions or deletions), it is of interest to identify the genes that are disrupted. For intergenic variants, we are interested in knowing what are the two flanking genes, and what are the distances between the variants and the flanking genes. For exonic variants, we are interested in knowing the amino acid changes.
 
 Before working on gene-based annotation, a gene definition file and associated FASTA file must be downloaded into a directory if they are not already downloaded. Let's call this directory as "humandb/".
 
