@@ -9,5 +9,5 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 
 TABLE_ANNOVAR is a script within the ANNOVAR package that is very popular among users. Given a list of variants from whole-exome or whole-genome sequencing, it will generate an Excel-compatible file with gene annotation, amino acid change annotation, SIFT scores, PolyPhen scores, LRT scores, MutationTaster scores, PhyloP conservation scores, GERP++ conservation scores, dbSNP identifiers, 1000 Genomes Project allele frequencies, NHLBI-ESP 6500 exome project allele frequencies and other information.
 
-Please click the menu items to navigate through this website. If you have questions, comments, feature requests, or bug reports, please email the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
+Please click the menu items to navigate through this website. If you have questions, comments, feature requests, or bug reports, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
 
