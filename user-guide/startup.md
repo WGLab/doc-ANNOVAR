@@ -60,7 +60,7 @@ As of July 2014, per user requests, TABLE_ANNOVAR can directly support input and
 
 You can download the output file here: myanno.hg19_multianno.vcf. You can download the output file here. You can open the file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you desired, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
 
-![table_vcf](img/table_vcf.PNG)
+![table_vcf](/img/table_vcf.PNG)
 
 Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 
