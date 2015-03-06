@@ -46,7 +46,7 @@ Below is an example on using the TABLE_ANNOVAR program, which takes an input var
 
 Run the above commands one by one. The first a few commands download appropriate databases into the humandb/ directory. The final command run TABLE_ANNOVAR, using dbSNP version 138, 1000 Genomes Project 2012 April version, NHLBI 6500 exome database (referred to as esp6400si), dbNFSP (referred to as ljb23) databases and remove all temporary files, and generates the output file: myanno.hg19_multianno.txt. Fields that does not have any annotation will be filled by "." string. Open the output file in Excel and see what it contains. The expected output file that I generated can be downloaded here: myanno.hg19_multianno.csv. A screen shot of the first a few columns is shown below:
 
-![table_annovar](img/table_annovar.PNG)
+![table_annovar](../img/table_annovar.PNG)
 
 The output file contains multiple columns. The first a few columns are your input column. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. For example, esp6500si_all means allele frequency in the ESP6500 database. The snp138 means the SNP identifier in the dbSNP version 138. The LJB23* columns contains prediction scores for non-synonymous variants using several widely used tools, including SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores. The "-operation" argument tells ANNOVAR which operations to use for each of the protocols: g means gene-based, r means region-based and f means filter-based. You will find details on what are gene/region/filter-based annotations in the other web pages.
 
@@ -60,7 +60,7 @@ As of July 2014, per user requests, TABLE_ANNOVAR can directly support input and
 
 You can download the output file here: myanno.hg19_multianno.vcf. You can download the output file here. You can open the file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you desired, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
 
-![table_vcf](img/table_vcf.PNG)
+![table_vcf](../img/table_vcf.PNG)
 
 Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 
