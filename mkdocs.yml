@@ -8,7 +8,7 @@ site_favicon: favicon.ico
 copyright: 2010-2015 ANNOVAR
 google_analytics: ['UA-48623707-1', 'www.openbioinformatics.org/annovar']
 
-docs_dir: docs
+docs_dir: .
 include_search: true
 #use_absolute_urls: true
 # the line below is absolutely necessary (see https://github.com/rtfd/readthedocs.org/issues/1101 for explanation)
