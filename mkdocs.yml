@@ -39,3 +39,6 @@ pages:
 - ['articles/VCF.md', 'Articles', 'VCF processing guide']
 - ['articles/dbSNP.md', 'Articles', 'Assigning dbSNP identifiers']
 
+# wANNOVAR
+- ['web-annovar/tutorial.md', 'wANNOVAR', 'tutorial']
+

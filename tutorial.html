@@ -1,0 +1,211 @@
+<div class="container bs-docs-container">
+	
+
+    
+        <div class="col-md-9 wannovar-content" role="main">
+          <div class="bs-docs-section">
+    <h3 id="basic-info" class="page-header text-primary">Basic Information</h3>
+     <h4  id="email">Email</h4>
+     <p>What should be noticed is, as the program usually takes more than
+    5 minutes, thus a valid email is required here, in case you forgot the link. If the program runs very well, we will send you an email later.
+     </p>
+     <br>
+      <h4  id="identifier">Identifier</h4>
+      <p>Identifier is just the name of your program. You can give a name as to your own preference, like 'Jim's awesome run', 
+      'My first run', '1122233', so on. When you click the 'Monitor Progress' button, you can recognize your program by your 
+      specific identifier.</p>
+
+      <img src="/images/identifier.png"></img>
+
+      <br><br>
+      <h4  id="variant-call">Input file or paste variant</h4>
+      <p>
+      This is the place where you should submit your variant calls, either by a file or through paste.
+      <br>
+      Five different types of formats could be accepted here, separately, vcf, tsv, annovar, gff3 and masterVar.
+      The details of these formats could be seen through the Zoom In icon in the Parameter Setting section.
+      <br>
+      
+      
+      <br>
+      </p>
+     <h3 id="phenolyzer" class="page-header text-primary">Phenotype/Disease Specific Prioritization (Call Phenolyzer)</h3>
+
+      <h4  id="overview">Overview</h4>
+      <p>Phenolyzer stands for Phenotype Based Gene Analyzer, a new software developed by us, which can prioritize genes based on specific diseases or phenotypes.
+   Call Phenolyzer is a pipeline connecting wANNOVAR with Phenolyzer, discovering genes directly from wANNOVAR output.
+   It is extremely helpful if the user provides some short disease/phenotype terms together with the variant file,
+   then robust ontology searching and machine learning method is used to discover the candidate genes. 
+   <br><br>
+   To see more Phenolyzer examples, please click this <a href="http://phenolyzer.usc.edu/example.php">link</a>
+   <br><br>
+   To see the FAQ of Phenolyzer, please click this <a href="http://phenolyzer.usc.edu/FAQ.php">link</a></p>
+   <br>
+   <h4  id="enter-phenotype">Enter Phenotypes</h4>
+   <p> Enter Phenotypes or Diseases here. Please enter some terms here if you already have an idea about which disease/phenotype you 
+   are interested in or already observed. Several kinds of terms are accepted here, including:
+   <br> 1) disease names: like alzheimer, parkinson, chron, and so on;
+   <br> 2) phenotype names: like fatigure, Blood pressure. Any HPO (Human Phenotype Ontology) term is also accepted.
+   <br> 3) OMIM IDs: like 114480 for'breast cancer'.
+   <br><br>
+   Please use Enter or ';' as separators, some other non-word characters are also acepted like '|'.
+   <br><br>Please try to use short terms instead a very long term. As the first step of Phenolyzer is to do word match between your
+   word and the names in our database. Thus super long names might not have any results. 
+   <br>For example, <b>'X-linked intellectual deficiency'</b> is better to be separated into 
+   <b>'X-linked'</b> and <b>'intellectual deficiency'</b>.</p>
+   <br>
+    <h4  id="understand-result">Understand Results</h4>
+    <p>If any Phenotype/Disease terms are entered, there will be an addtional section in the result, named 'Phenotype/disease Prioritization Result'.
+     <br><br>
+
+     <img src="/images/phenolyzer_result.png"></img>
+
+     <br><br>
+     The first row 'Input Gene List' is the gene list extracted from the ANNOVAR output variant calling list. 
+     <br><br><span class='text-danger'> Tip: After your first run of wANNOVAR, you can run Phenotype/Disease specific prioritization with some other terms without the need to run wANNOVAR, which is 
+     more time and computation efficient as Phenolyzer could finish in one minute and wANNOVAR usuually takes more than 5 minutes. What you need to do is just
+     take the <b>Input Gene List</b> here, go to Phenolyzer website and submit it and your new phenotypes there! </span> 
+     <br><br>
+     'Result Gene List' is the output from Phenolyzer, with the information of ranks, gene names, NCBI IDs, and scores. 
+     <br><br>
+     'Show' will lead you to the Phenolyzer's network visualization. You could do interactive research there, like finding all
+     the genes and diseases interacting with one gene by <b class="text-danger">double click</b> the gene. You can also see the details about how one gene is discovered
+     through the prioritization algorithm.  
+      </p>
+     <h3 id="parameter-setting" class="page-header text-primary">Parameter Setting</h3>
+      <p>
+          This part is mainly for advanced settings of wANNOVAR. You can change the genome build, input format, gene definition, and disease filter here.
+          <br><br> The details of them could be found by clicking the 'Zoom in' button following each input element.
+          <br><br><span class="text-primary">NOTICE: If you use the custom filtering option, please at least choose a filter step in
+          the section below, or use a control file. </span>
+          <br><br> </p>
+
+         <h4 id="ref_genome">Reference Genome</h4>
+          <ul>
+         <li><strong>hg18:</strong>The Homo Sapiens hg18 genome assembly<a href="https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18">https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18</a>
+          <li><strong>hg19:</strong>The Homo Sapiens hg19 genome assembly<a href="https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19">https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19</a>
+         </li>
+         </ul>
+         <br>
+         <h4 id="input_format">Input Format</h4>
+         <ul>
+         <li><em><strong><a name="tip3">VCF genotype calling format:</a></strong></em> This is the most widely used format for exchanging variant calls. Details can be found on the 1000 Genomes web site:<br><a href="http://www.1000genomes.org/node/101" target="_blank">http://www.1000genomes.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-41</a>.		
+		<li><em><strong><a name="tip2">ANNOVAR input format:</a></strong></em> This is the standard file format used by the <a href="http://www.openbioinformatics.org/annovar/">ANNOVAR</a> software. Details can be found on at:<br><a href="http://www.openbioinformatics.org/annovar/annovar_input.html" target="_blank"> http://www.openbioinformatics.org/annovar/annovar_input.html</a>.
+		<li><em><strong><a name="tip31" >Complete Genomics format:</a></strong></em> the var-ASM.TSV file generated by Complete Genomics standard pipeline. Future versions of wANNOVAR will also support the masterVarBeta-ASM.TSV format. More details can be found at: <a href="http://media.completegenomics.com/documents/DataFileFormats+Standard+Pipeline+2.0.pdf" target="_blank"> http://media.completegenomics.com/documents/DataFileFormats+Standard+Pipeline+2.0.pdf</a>.
+		<li><em><strong><a name="tip32" >GFF3-SOLiD input format:</a></strong></em> The GFF file generated from SOLiD sequencer is a text based repository and contains data and analysis results; colorspace calls, quality values (QV) and variant annotations. See details at <a href="http://www3.appliedbiosystems.com/cms/groups/mcb_marketing/documents/generaldocuments/cms_058718.pdf" target="_blank">http://www3.appliedbiosystems.com/cms/groups/mcb_marketing/documents/generaldocuments/cms_058718.pdf</a>.
+		<li><em><strong><a name="tip33" >Complete Genomics masterVar format:</a></strong></em> This is the file format (masterVarBeta-ASM.TSV format) used by Complete Genomics for all kinds of variation data and can be used to analyze and visualize the variant calls made by Complete Genomics.
+		</ul>
+		<br>
+		<h4 id="gene_ref">Gene Definition</h4>
+         <ul>
+		<li><em><strong><a name="tip41">RefSeq Gene:</a></strong></em> Gene annotation released by The Reference Sequence (RefSeq) database, which is an open access, annotated and curated collection of publicly available nucleotide sequences (DNA, RNA) and their protein products. This database is built by National Center for Biotechnology Information (NCBI), and, unlike GenBank, provides only single record for each natural biological molecule(i.e. DNA, RNA or protein) for major organisms ranging from viruses to bacteria to eukaryotes.		
+		<li><em><strong><a name="tip42">UCSC Known Gene:</a></strong></em> Gene annotation released by The University of California Santa Cruz (UCSC) Known Genes dataset, which is constructed by a fully automated process, based on protein data from Swiss-Prot/TrEMBL (UniProt) and the associated mRNA data from Genbank.
+		<li><em><strong><a name="tip43" >Ensembl Genes:</a></strong></em> In the Ensembl project, sequence data is fed into a software "pipeline" to creates a set of predicted gene locations. 
+		<li><em><strong><a name="tip44" >GENCODE Genes:</a></strong></em> The GENCODE genes are compiled by a combination of initial manual annotation and experimental validation by the GENCODE consortium, as well as a refinement of the annotation based on these experimental results.<br>
+		</ul>
+		
+		<br>
+		<h4 id="disease_model">Disease Model</h4>
+        <ul>
+		<li><strong><a>rare recessive Mendelian disease:</a></strong> More than two deleterious alleles (compound heterozygote or homozygote or hemizygote in chrX in males) are found in the same gene. wANNOVAR will identify splicing variants and exonic variants that change protein coding, remove variants observed in 1000 Genomes Project, NHLBI-ESP 5400 exomes and dbSNP, and identify a list of candidate genes.
+		<li><strong><a>rare dominant Mendelian disease:</a></strong> More than one deleterious allele is found in the gene. wANNOVAR will identify splicing variants and exonic variants that change protein coding, remove variants observed in 1000 Genomes Project, NHLBI-ESP 5400 exomes and dbSNP, and identify a list of candidate genes.
+		<li><strong><a>X-linked recessive (Male):</a></strong> The same as rare dominant, variants should be in X chr of a male.<br>
+		<li><strong><a>X-linked recessive (Female):</a></strong> The same as rare recessive, variants should be in X chr of a female.<br>
+		<li><strong><a>X-linked dominant:</a></strong> The same as rare dominant, variants should be in X chr.<br>
+		<li><strong><a>custom filtering:</a></strong> Users specify customized variants reduction criteria in "advanced options".<br>
+		
+		
+		</ul>
+		
+		<h4 id="custom_filtering">Custom Filtering</h4>
+        <ul>
+		<li><strong><a name="tip81">Depth threshold (VCF only):</a></strong> Specify read depth threshold.
+		<li><strong><a name="tip82">Quality threshold (VCF only):</a></strong> Specify quality score threshold.
+		<li><strong><a name="tip83">MAF in variants filtering:</a></strong> Specify Minor allele frequency threshold.
+		<li><strong><a name="tip84">dbSNP version:</a></strong> Specify dbSNP version for filtering.
+		<li><strong><a name="tip85">disease type:</a></strong> Activated When "custom filtering" option is selected. Identify candidate genes with more than two deleterious alleles (compound heterozygote or homozygote or hemizygote in chrX in males) are found in the same gene for "recessive". Identify candidate genes with more than one deleterious allele is found in the gene for "dominant". 
+		<li><strong><a name="tip86">Variants filtering:</a></strong> Activated When &quot;custom filtering&quot; option is selected. Specify the optimized filtering step according to users' samples.
+		<li><strong><a name="tip87">Variant file on controls:</a></strong> A variants list file is required when "not in controls" step is selected in "Variants filtering pipeline". wANNOVAR will remove the candidate variants which are also occured in controls. 
+        <li><strong><a name="tip88">Paste variants on controls:</a></strong> Paste the variants list on controls directly. 
+		</ul>
+     <br>
+     
+     
+     	<P>Table below lists the some columns of variants annotation from wANNOVAR. For other details, please see ANNOVAR website: 
+     	<a href="http://www.openbioinformatics.org/annovar/annovar_region.html">region based annotation</a> and 
+     	<a href="http://www.openbioinformatics.org/annovar/annovar_filter.html">filter based annotation</a>.</P>
+     	
+		<table border="1" bgcolor="#FFFFFF">
+          <tr>
+            <th width="113" scope="col">Column Name </th>
+            <th width="359" scope="col">Explanation</th>
+          </tr>
+          <tr>
+            <td><a name="Func">Func</a></td>
+            <td>Variant function (exonic, intronic, intergenic, UTR,  etc)</td>
+          </tr>
+          <tr>
+            <td><a name="Gene">Gene</a></td>
+            <td>Gene Name. By default, RefSeq gene definition is used, but users can choose from other gene definition systems.</td>
+          </tr>
+          <tr>
+            <td><a name="ExonicFunc">ExonicFunc</a></td>
+            <td>Exonic variant function (non-synonymous, synonymous, etc)</td>
+          </tr>
+          <tr>
+            <td><a name="AAChange">AAChange</a></td>
+            <td>Amino acid changes </td>
+          </tr>
+          <tr>
+            <td><a name="Conserved">Conserved</a></td>
+            <td>Region-level phastCons LOD scores</td>
+          </tr>
+          
+        </table>
+        
+     
+    
+    </div></div>
+	  
+	
+	  <div id="affix-container" class="col-md-3">
+	 <div  id="my-affix" data-spy="affix"  data-offset-top="240" data-offset-bottom="0">
+	
+     <ul class="nav">
+              
+  <li>
+  <a href="#basic-info">Basic Information</a>
+  <ul class="nav nav-2">
+    <li><a href="#email">Email</a></li>
+    <li><a href="#identifier">Identifier</a></li>
+     <li><a href="#variant-call">Variant Call</a></li>
+  </ul>
+</li>
+ <li>
+  <a href="#phenolyzer">Call Phenolyzer</a>
+  <ul class="nav nav-2">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#enter-phenotype">Enter Phenotypes</a></li>
+    <li><a href="#understand-result">Understand Results</a></li>
+  </ul>
+</li>
+<li>
+  <a href="#parameter-setting">Parameter Setting</a>   
+  <ul class="nav nav-2">
+    <li><a href="#ref_genome">Reference Genome </a></li>
+    <li><a href="#input_format">Input Format </a></li>
+    <li><a href="#gene_def">Gene Definition</a></li>
+     <li><a href="#disease_model">Disease Model</a></li>
+      <li><a href="#custom_filtering">Custom Filtering</a></li>
+  </ul>
+</li>
+
+</ul>
+</div>
+   </div>
+   
+   
+	 
+	  
+       
+    </div><!-- /.container -->
