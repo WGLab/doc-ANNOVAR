@@ -11,7 +11,7 @@ Identifier is just the name of your program. You can give a name as to your own 
       'My first run', '1122233', so on. When you click the 'Monitor Progress' button, you can recognize your program by your 
       specific identifier.
 
-      ![](/images/identifier.png)</img>
+![](/img/identifier.png)
 
 #### Input file or paste variant
 
@@ -56,7 +56,7 @@ For example, **'X-linked intellectual deficiency'** is better to be separated in
 
 If any Phenotype/Disease terms are entered, there will be an addtional section in the result, named 'Phenotype/disease Prioritization Result'.
 
-     ![](/images/phenolyzer_result.png)</img>
+![](/img/phenolyzer_result.png)
 
      The first row 'Input Gene List' is the gene list extracted from the ANNOVAR output variant calling list. 
 
@@ -76,7 +76,7 @@ If any Phenotype/Disease terms are entered, there will be an addtional section i
 
  The details of them could be found by clicking the 'Zoom in' button following each input element.
 
-<span class="text-primary">NOTICE: If you use the custom filtering option, please at least choose a filter step in
+          NOTICE: If you use the custom filtering option, please at least choose a filter step in
           the section below, or use a control file. </span>
 
 #### Reference Genome
@@ -96,7 +96,7 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
      	[region based annotation](http://www.openbioinformatics.org/annovar/annovar_region.html) and 
      	[filter based annotation](http://www.openbioinformatics.org/annovar/annovar_filter.html).
 
-    |Column Name|Explanation|
+|Column Name|Explanation|
     | ------------- |------------------------------------------------|
     |Func|Variant function (exonic, intronic, intergenic, UTR,  etc)|
     |Gene|Gene Name. By default, RefSeq gene definition is used, but users can choose from other gene definition systems.|
