@@ -96,13 +96,13 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
      	[region based annotation](http://www.openbioinformatics.org/annovar/annovar_region.html) and 
      	[filter based annotation](http://www.openbioinformatics.org/annovar/annovar_filter.html).
 
-|Column Name|Explanation|
-    | ------------- | ------------------------------------------------ |
-    |Func|Variant function (exonic, intronic, intergenic, UTR,  etc)|
-    |Gene|Gene Name. By default, RefSeq gene definition is used, but users can choose from other gene definition systems.|
-    |ExonicFunc|Exonic variant function (non-synonymous, synonymous, etc)|
-    |AAChange|Amino acid changes|
-    |Conserved|Region-level phastCons LOD scores|
+| Column Name | Explanation |
+| ------------- | ------------------------------------------------ |
+| Func | Variant function (exonic, intronic, intergenic, UTR,  etc) |
+| Gene | Gene Name. By default, RefSeq gene definition is used, but users can choose from other gene definition systems. |
+| ExonicFunc | Exonic variant function (non-synonymous, synonymous, etc) |
+| AAChange | Amino acid changes |
+| Conserved | Region-level phastCons LOD scores |
 
 
 
