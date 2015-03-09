@@ -97,7 +97,7 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
      	[filter based annotation](http://www.openbioinformatics.org/annovar/annovar_filter.html).
 
 |Column Name|Explanation|
-    | ------------- |------------------------------------------------|
+    | ------------- | ------------------------------------------------ |
     |Func|Variant function (exonic, intronic, intergenic, UTR,  etc)|
     |Gene|Gene Name. By default, RefSeq gene definition is used, but users can choose from other gene definition systems.|
     |ExonicFunc|Exonic variant function (non-synonymous, synonymous, etc)|
@@ -105,23 +105,4 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
     |Conserved|Region-level phastCons LOD scores|
 
 
-*   [Basic Information](#basic-info)
-
-        *   [Email](#email)
-    *   [Identifier](#identifier)
-    *   [Variant Call](#variant-call)
-
-*   [Call Phenolyzer](#phenolyzer)
-
-        *   [Overview](#overview)
-    *   [Enter Phenotypes](#enter-phenotype)
-    *   [Understand Results](#understand-result)
-
-*   [Parameter Setting](#parameter-setting)
-
-        *   [Reference Genome ](#ref_genome)
-    *   [Input Format ](#input_format)
-    *   [Gene Definition](#gene_def)
-    *   [Disease Model](#disease_model)
-    *   [Custom Filtering](#custom_filtering)
 
