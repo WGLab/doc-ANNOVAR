@@ -81,8 +81,8 @@ If any Phenotype/Disease terms are entered, there will be an addtional section i
 
 #### Reference Genome
 
-*   **hg18:**The Homo Sapiens hg18 genome assembly[https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18)
-          <li>**hg19:**The Homo Sapiens hg19 genome assembly[https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19)
+*   **hg18:**The Homo Sapiens hg18 genome assembly [https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18)
+          <li>**hg19:**The Homo Sapiens hg19 genome assembly [https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19)
 
 #### Input Format
 
