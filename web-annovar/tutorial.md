@@ -82,7 +82,7 @@ If any Phenotype/Disease terms are entered, there will be an addtional section i
 #### Reference Genome
 
 *   **hg18:**The Homo Sapiens hg18 genome assembly [https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg18)
-    **hg19:**The Homo Sapiens hg19 genome assembly [https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19)
+*   **hg19:**The Homo Sapiens hg19 genome assembly [https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19](https://genome.ucsc.edu/cgi-bin/hgGateway?db=hg19)
 
 #### Input Format
 *  **VCF genotype calling format:** This is the most widely used format for exchanging variant calls. Details can be found on the 1000 Genomes web site:
