@@ -58,7 +58,7 @@ If any Phenotype/Disease terms are entered, there will be an addtional section i
 
 ![](/img/phenolyzer_result.png)
 
-     The first row 'Input Gene List' is the gene list extracted from the ANNOVAR output variant calling list. 
+The first row 'Input Gene List' is the gene list extracted from the ANNOVAR output variant calling list. 
 
  Tip: After your first run of wANNOVAR, you can run Phenotype/Disease specific prioritization with some other terms without the need to run wANNOVAR, which is 
  more time and computation efficient as Phenolyzer could finish in one minute and wANNOVAR usuually takes more than 5 minutes. What you need to do is just
