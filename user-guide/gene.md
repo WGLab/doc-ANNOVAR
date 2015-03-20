@@ -83,6 +83,7 @@ The first column tells whether the variant hit exons or hit intergenic regions, 
 The possible values of the first column is summarized below:
 
 | Value	|	Default precedence	|	Explanation	|
+|---|---|---|
 | exonic	|	1	|	variant overlaps a coding exon	|
 |	splicing	|	1	|	variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)	|
 |	ncRNA	|	2	|	variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)	|
@@ -154,6 +155,7 @@ Note that only exonic variants are annotated in this file, so the first column g
 More detailed explanation of these exonic_variant_functoin annotations are given below. Note that stopgain and stoploss take precedence over other annotations; for example, whenever a nonsynonymous mutation change the wild type amino acid to a stop codon, it will be annotated as stopgain rather than nonsynonymous SNV.
 
 |	Annotation	|	Precedence	|	Explanation	|
+|---|---|---|
 | frameshift insertion	| 1	| an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence  |
 | frameshift deletion	| 2	| a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence    |
 | frameshift block substitution	| 3	| a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence  |
