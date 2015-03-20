@@ -59,11 +59,11 @@ If ANNOVAR encounters an invalid input line, it will write the invalid line into
 
 The download package contains several example input files. The users can check them out.
 
-## Format conversion to generate ANNOVAR input files
+## Format Conversion
 
 The `convert2annovar.pl` script provide some very rudimentary utility to convert other "genotype calling" format into ANNOVAR format. Currently, the program can handle Samtools genotype-calling pileup format, Illumina export format from GenomeStudio, SOLiD GFF genotype-calling format, Complete Genomics variant format, and VCF format.
 
-### VCF4 genotype calling format
+### - VCF4 genotype calling format
 
 The "-format vcf4 " argument should be specified to convert VCF files to ANNOVAR input format. This functionality was re-implemented to address many users' comments to handle multiple alternative alleles and to handle multiple input samples in a single VCF file.
 
@@ -312,7 +312,7 @@ Therefore, in practice, you could use convert2annovar.pl program as a way to spl
 20 1234567 microsat1 GTCT G 50 PASS NS=3;DP=9;AA=G GT:GQ:DP 1/1:40:3
 ```
 
-### dbSNP identifiers
+### - dbSNP identifiers
 
 Many users have a list of dbSNP rs identifiers and want to annotate functinoality of these SNPs. This can be achieved by convert2annovar.pl by the -format rsid argument:
 
@@ -338,7 +338,7 @@ chr22 24325095 24325095 A G rs74487784
 
 As you can see above, the new file has the first five columns as chr, start, end, ref, alt, and the sixth column as dbSNP identifier. The LOG message tells us that 1 SNP (rs41534544) has multiple mappings to genome, and as a result, it has two entries in the output file.
 
-### All possible variants in a genomic region
+### - All possible variants in a genomic region
 
 Suppose that I am interested in annotating all SNP, 1-bp insertions and 1-bp deletions in a 3-bp genomic region chr1:2000001-2000003. This can be easily done in convert2annovar.pl now:
 
@@ -392,7 +392,7 @@ NOTICE: Finished writting FASTA for 1 genomic regions to stdout
 
 If you only want 2-bp deletions but not SNVs and insertions, use "-subsize 0 -delsize 2". By default, -subsize is set as 1 to indicate that SNVs are always desired.
 
-### All possible variants in exonic region of a transcript
+### - All possible variants in exonic region of a transcript
 
 Similar to the '-format region' above, users can generate ANNOVAR input files for all possible variants in exons (plus splicing variants) of a transcript. Let's take NM_022162 as an example:
 
@@ -444,7 +444,7 @@ Similar to the '-format region' above, '-delsize' and '-dupsize' and '-subsize' 
 One great utility of using '-format region' is that users can back-convert protein or cDNA mutation nomenclature back to genomic coordinate. To do this, one just need to generate all possible mutations for a transcript, and then annotate the resulting *.avinput file, and then search through this file for matches.
 
  
-### Samtools genotype-calling pileup format
+### - Samtools genotype-calling pileup format
 
 This section is also obselete now, and in fact samtools now use mpileup, rather than the "old" pileup.
 
@@ -519,7 +519,7 @@ After the program finishes, it will print out some statistics. Normally, for who
 Adanced notes: When the chromosome is "M", ANNOVAR will not print out "hom" or "het", instead, it will print out a number between 0 and 1 that suggest the fraction of reads that support alternative alleles. Use -chrmt argument if mitochondria is not annotated as M in your alignment.
 
  
-### Complete Genomics genotyping calling format
+### - Complete Genomics genotyping calling format
 
 The complete genomics company provides many genotyping-calling files for their customers. Among them is an var\*ASM.tsv file that looks like below.
 
@@ -575,7 +575,7 @@ NOTICE: Done with 25667914 lines
 
 In this example, 25.6 million lines from the var*ASM.tsv file from Complete Genomics data are processed, and 3.7 million variants are written to the output file in ANNOVAR input format.
 
-### GFF3-SOLiD format
+### - GFF3-SOLiD format
 
 Sometimes variant calls are in GFF3 format, and they can be converted to ANNOVAR input format. (This input file should not be confused with a GFF3 annotation database, as they serve different purposes. Here we are dealing with input files only.) For example, SOLiD provides SNP variant calls in the following format:
 
@@ -621,7 +621,7 @@ The conversion can be done using "-format gff3-solid" argument.
 
 Adding the --includeinfo argument will print out an additional column with the detailed attribute of the calls.
 
-### SOAPsnp format
+### - SOAPsnp format
 
 The Short Oligonucleotide Analysis Package (SOAP) suite is developed by BGI, and SOAPsnp is a component that generates variant calls. An example of the genotype call file is given below:
 
@@ -655,11 +655,11 @@ The convert2annovar.pl program can handle this format, using the "-format soapsn
 
 Note that is --includeinfo argument is used, all the information from input file will be included in the output file.
 
-### MAQ genotype calling format
+### - MAQ genotype calling format
 
 The convert2annovar.pl program can handle this format, using the "-format maq " argument. Both SNPs and indels can be correctly processed.
 
-### CASAVA genotype calling format
+### - CASAVA genotype calling format
 
 The convert2annovar.pl program can handle this format, using the "-format casava " argument and also specifying the chromosome by "-chr" argument, since CASAVA call file per se does not contain chromosome information. Both SNPs and indels can be correctly processed. This function is not tested rigorously yet. Please report bugs to me.
 
