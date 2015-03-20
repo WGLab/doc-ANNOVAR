@@ -55,7 +55,7 @@ NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_fu
 
 Two output files will be generated: ex1.variant_function and ex1.exonic_variant_function (to change the output file names, use the --outfile argument).
 
-- Output file 1 (refSeq gene annotation)
+####Output file 1 (refSeq gene annotation)
 
 The first file contains annotation for all variants, by adding two columns to the beginning of each input line (for example, "intronic DDR2" below in the first line):
 
@@ -97,11 +97,11 @@ The possible values of the first column is summarized below:
 
 The value of the first column takes the following precedence (as of December 2010 and later version of ANNOVAR): exonic = splicing > ncRNA> > UTR5/UTR3 > intron > upstream/downstream > intergenic. The precedence defined above is used to decide what function to print out when a variant fit multiple functional categories. Note that:
 
-the "exonic" here refers only to coding exonic portion , but not UTR portion, as there are two keywords (UTR5, UTR3) that are specifically reserved for UTR annotations.
-"splicing" in ANNOVAR is defined as variant that is within 2-bp away from an exon/intron boundary by default, but the threshold can be changed by the --splicing_threshold argument. Before Feb 2013, if "exonic,splicing" is shown, it means that this is a variant within exon but close to exon/intron boundary; this behavior is due to historical reason, when a user requested that exonic variants near splicing sites be annotated with splicing as well. However, I continue to get user emails complaining about this behavior despite my best efforts to put explanation in the ANNOVAR website with details. Therefore, starting from Feb 2013 , "splicing" only refers to the 2bp in the intron that is close to an exon, and if you want to have the same behavior as before, add -exonicsplicing argument.
-If a variant is located in both 5' UTR and 3' UTR region (possibly for two different genes), then the "UTR5,UTR3" will be printed as the output.
-The term "upstream" and "downstream" is defined as 1-kb away from transcription start site or transcription end site, respectively, taking in account of the strand of the mRNA; the --neargene threshold can be used to adjust this threshold.
-If a variant is located in both downstream and upstream region (possibly for 2 different genes), then the "upstream,downstream" will be printed as the output.
+1. the "exonic" here refers only to coding exonic portion , but not UTR portion, as there are two keywords (UTR5, UTR3) that are specifically reserved for UTR annotations.
+2. "splicing" in ANNOVAR is defined as variant that is within 2-bp away from an exon/intron boundary by default, but the threshold can be changed by the --splicing_threshold argument. Before Feb 2013, if "exonic,splicing" is shown, it means that this is a variant within exon but close to exon/intron boundary; this behavior is due to historical reason, when a user requested that exonic variants near splicing sites be annotated with splicing as well. However, I continue to get user emails complaining about this behavior despite my best efforts to put explanation in the ANNOVAR website with details. Therefore, starting from Feb 2013 , "splicing" only refers to the 2bp in the intron that is close to an exon, and if you want to have the same behavior as before, add -exonicsplicing argument.
+3. If a variant is located in both 5' UTR and 3' UTR region (possibly for two different genes), then the "UTR5,UTR3" will be printed as the output.
+4. The term "upstream" and "downstream" is defined as 1-kb away from transcription start site or transcription end site, respectively, taking in account of the strand of the mRNA; the --neargene threshold can be used to adjust this threshold.
+5. If a variant is located in both downstream and upstream region (possibly for 2 different genes), then the "upstream,downstream" will be printed as the output.
 In 2011 June version of ANNOVAR, the splicing annotation is improved. If the splicing site is in intron, then all isoforms and the corresponding base change will be printed. For example,
 
 ```
@@ -112,30 +112,38 @@ splicing BAGE(NM_001187:c.14+1A>G),BAGE4(NM_181704:c.14+1A>G),BAGE5(NM_182484:c.
 
 Several technical notes are discussed below.
 
-Technical Notes: ncRNA above refers to RNA without coding annotation. It does not mean that this is a RNA that will never be translated; it merely means that the user-selected gene annotation system was not able to give a coding sequence annotation. It could still code protein products and may have such annotations in future versions of gene annotation or in another gene annotation system. For example, BC039000 is regarded as ncRNA by ANNOVAR when using UCSC Known Gene annotation, but it is regarded as a protein-coding gene by ANNOVAR when using ENSEMBL annotation. If the goal of the user is to find known (well-annotated) microRNA or other known (well-annotated) non-coding RNA, then the region-based annotation should be used and the wgRNA track should be selected. Read instructions here.
+*Technical Notes:* ncRNA above refers to RNA without coding annotation. It does not mean that this is a RNA that will never be translated; it merely means that the user-selected gene annotation system was not able to give a coding sequence annotation. It could still code protein products and may have such annotations in future versions of gene annotation or in another gene annotation system. For example, BC039000 is regarded as ncRNA by ANNOVAR when using UCSC Known Gene annotation, but it is regarded as a protein-coding gene by ANNOVAR when using ENSEMBL annotation. If the goal of the user is to find known (well-annotated) microRNA or other known (well-annotated) non-coding RNA, then the region-based annotation should be used and the wgRNA track should be selected. Read instructions here.
 
-Technical Notes: if the first codon of a transcript is deleted, it will be reported as wholegene deletion by ANNOVAR because the gene cannot be translated.
+*Technical Notes:* if the first codon of a transcript is deleted, it will be reported as wholegene deletion by ANNOVAR because the gene cannot be translated.
 
-If the users want to have all functional consequences printed out (rather than just the In the figure above, SNP1 is an intergenic variant, as it is >1kb away from any gene, SNP2 is a downstream variant, as it is 1kb from the 3'end of the NADK gene; SNP3 is a UTR3 variant; SNP4 is an intronic variant; SNP5 is an exonic variant.
+If the users want to have all functional consequences printed out (rather than just the most important one defined by the precedence above), the --separate argument should be used. In this case, several output lines may be present for each variant, representing several possible functional consequences
+
+To further explain the variant_function annotation, check the figure below:
+
+![](/img/gene_snp_1.png)
+
+In the figure above, SNP1 is an intergenic variant, as it is >1kb away from any gene, SNP2 is a downstream variant, as it is 1kb from the 3'end of the NADK gene; SNP3 is a UTR3 variant; SNP4 is an intronic variant; SNP5 is an exonic variant.
+
+![](/img/gene_del_1.png)
 
 Similarly, Deletion 1 is an intergenic variant; deletion 2 is a downstream variant; deletion3 is a UTR3 variant; deletion 4 overlaps both with UTR3 and intron, and based on the precedence rule, it is a UTR3 variant; deletion 5 is an intronic variant; deletion6 overlaps with both an exon and an intron, and based on the precedence rule, it is an exonic variant.
 
-Technical notes: Sometimes users may want to change the default precedence rule. The "-precedence" argument can be used to fine-tune the priority of variant function. The different variant functions should be separated by comma in the command line based on their desired priority levels. The allowable keywords for variant functions are exonic, intronic, splicing, utr5, utr3, upstream, downstream, splicing, ncrna.
+*Technical notes:* Sometimes users may want to change the default precedence rule. The "-precedence" argument can be used to fine-tune the priority of variant function. The different variant functions should be separated by comma in the command line based on their desired priority levels. The allowable keywords for variant functions are exonic, intronic, splicing, utr5, utr3, upstream, downstream, splicing, ncrna.
 
 For example, when "-precedence intronic,utr5,utr3" is specified, the intronic variant will take precedence over UTR variants, and the deletion 4 will become an intronic variant above. This is the only change, and all other default precedence rule still applies here.
 
-Technical Notes: By default, the gene name is printed in the second column in the variant_function file. Sometimes, a user may want to see transcript name instead. The --transcript_function argument can be used to specify this behavior. Note that it is very likely that multiple transcript names will be printed in the output separated by comma, as each gene name typically corresponds to several transcript names.
+*Technical Notes:* By default, the gene name is printed in the second column in the variant_function file. Sometimes, a user may want to see transcript name instead. The --transcript_function argument can be used to specify this behavior. Note that it is very likely that multiple transcript names will be printed in the output separated by comma, as each gene name typically corresponds to several transcript names.
 
-Technical Notes: Current logic in gene definition: Genomes are complex and therefore gene definitions are also complex. ANNOVAR completely relies on user-supplied gene definitions (such as RefSeq, UCSC Gene and Ensembl Gene) to map a transcript to genomes and relate transcripts to genes, and uses the following logic to handle complex scenarios:
-(1) If a gene is annotated as both coding and non-coding ( multiple transcripts, some coding, some non-coding), the gene will be regarded as coding (the non-coding transcript definition will be ignored).
-(2) If a gene or a transcript has one or several non-coding definitions but without coding definition, it will be regarded as ncRNA in annotation output. 
-(3) If a transcript maps to multiple locations as "coding transcripts", but some with complete ORF, some without complete ORF (that is, with premature stop codon), then the ones without complete ORF will be ignored.
-(4) If a transcript maps to multiple locations, all as "coding transcripts", but none has a complete ORF, then this transcript will not be used in exonic_variant_function annotation and the corresponding annotation will be marked as "UNKNOWN". 
-(5) NEW in July 2014: If a transcript maps to multiple genomic locations, all mapping wil be used in the annotation process. Previously, only the "most likely" mapping will be used in annotation. 
+*Technical Notes:* Current logic in gene definition: Genomes are complex and therefore gene definitions are also complex. ANNOVAR completely relies on user-supplied gene definitions (such as RefSeq, UCSC Gene and Ensembl Gene) to map a transcript to genomes and relate transcripts to genes, and uses the following logic to handle complex scenarios:
+1. If a gene is annotated as both coding and non-coding ( multiple transcripts, some coding, some non-coding), the gene will be regarded as coding (the non-coding transcript definition will be ignored).
+2. If a gene or a transcript has one or several non-coding definitions but without coding definition, it will be regarded as ncRNA in annotation output. 
+3. If a transcript maps to multiple locations as "coding transcripts", but some with complete ORF, some without complete ORF (that is, with premature stop codon), then the ones without complete ORF will be ignored.
+4. If a transcript maps to multiple locations, all as "coding transcripts", but none has a complete ORF, then this transcript will not be used in exonic_variant_function annotation and the corresponding annotation will be marked as "UNKNOWN". 
+5. NEW in July 2014: If a transcript maps to multiple genomic locations, all mapping wil be used in the annotation process. Previously, only the "most likely" mapping will be used in annotation. 
 The above rules do make sense.
 The rule 3 and 4 were made in Nov 2011 version of ANNOVAR (so that users no longer send me emails complaining errors in exonic annotation which is not really a fault of ANNOVAR per se). But as a result, you may see more "UNKNOWN" exonic annotations in the output file.
 
-Output file 2 (refSeq gene annotation)
+####Output file 2 (refSeq gene annotation)
 
 The second output file, ex1.exonic_variant_function, contains the amino acid changes as a result of the exonic variant. The exact format of the output below may change slightly between different versions of ANNOVAR.
 
@@ -192,13 +200,13 @@ line14 frameshift deletion GJB2:NM_004004:exon2:c.35delG:p.G12fs, 13 20763686 20
 line15 frameshift deletion GJB6:NM_001110220:wholegene,GJB6:NM_001110221:wholegene,GJB6:NM_001110219:wholegene,CRYL1:NM_015974:wholegene,GJB6:NM_006783:wholegene, 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-Technical note: Similar to the *.variant_function file, the *.exonic_variant_function file also follows the precedence rule, but users cannot change this rule (there is no much biological reason to change this rule anyway). For example, the mutation "chr7 140453136 140453136 A T" will be annotated as stoploss mutation X208R by ANNOVAR using ENSEMBL definition, because the stop loss takes precedence over the nonsynonymous mutation (V600E for ENST00000288602, V28E for ENST00000479537). If users want to have the comprehensive set of exonic_variant_function output, use the -separate argument!
+*Technical note:* Similar to the *.variant_function file, the *.exonic_variant_function file also follows the precedence rule, but users cannot change this rule (there is no much biological reason to change this rule anyway). For example, the mutation "chr7 140453136 140453136 A T" will be annotated as stoploss mutation X208R by ANNOVAR using ENSEMBL definition, because the stop loss takes precedence over the nonsynonymous mutation (V600E for ENST00000288602, V28E for ENST00000479537). If users want to have the comprehensive set of exonic_variant_function output, use the -separate argument!
 
-Technical notes: Some genes have multiple transcripts and ANNOVAR may randomly sort the order of transcripts in the output file. For example, the same mutation may be annotated as "BRAF:ENST00000288602:exon15:c.T1799A:p.V600E,BRAF:ENST00000479537:exon2:c.T83A:p.V28E" from one input file, but as "BRAF:ENST00000479537:exon2:c.T83A:p.V28E,BRAF:ENST00000288602:exon15:c.T1799A:p.V600E" from another input file. Some users want absolute consistency in the annotation. In this case, you can add -exonsort argument to the command line, so that the exon2 always precede exon15 in the output file.
+*Technical notes:* Some genes have multiple transcripts and ANNOVAR may randomly sort the order of transcripts in the output file. For example, the same mutation may be annotated as "BRAF:ENST00000288602:exon15:c.T1799A:p.V600E,BRAF:ENST00000479537:exon2:c.T83A:p.V28E" from one input file, but as "BRAF:ENST00000479537:exon2:c.T83A:p.V28E,BRAF:ENST00000288602:exon15:c.T1799A:p.V600E" from another input file. Some users want absolute consistency in the annotation. In this case, you can add -exonsort argument to the command line, so that the exon2 always precede exon15 in the output file.
 
-Technical notes: Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is coding_change.pl within ANNOVAR package. Try it and see how it works!
+*Technical notes:* Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is coding_change.pl within ANNOVAR package. Try it and see how it works!
 
-Technical notes on amino acid changes: In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN").
+*Technical notes on amino acid changes:* In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN").
 
  
 
