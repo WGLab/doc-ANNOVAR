@@ -376,6 +376,7 @@ Users can also use chromHMM predictions to annotate and classify non-coding vari
 | NHLF | lung fibroblasts | endoderm | lung | normal |
  
 
+
 Then download the HMM predictions for this cell line. Then annotate against the HMM predictions by region-based annotation.
 
 ```
@@ -413,6 +414,7 @@ The details of the HMM state definition can be found below. The prediction is gi
 - State 13 - Heterochromatin; low signal
 - State 14 - Repetitive/Copy Number Variation
 - State 15 - Repetitive/Copy Number Variation
+
 
 For example, the rs1801002 mutation was predicted to be in state 12 (polycomb-repressed region) above in GM12878 cells, even though it is also a coding mutation. We can confirm this observation in the Genome Browser shot below. It is interesting to see that it serves different functions in different cell lines (but of course everything is based on prediction and this may or may not be reliable).
 

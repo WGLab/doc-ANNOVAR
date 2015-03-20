@@ -201,23 +201,23 @@ Some users may wonder how exactly ANNOVAR handles the different variant call set
 
 The counts of SNPs and indels in March 2010 release in each of the HapMap populations are given below:
 
-CEU: SNPs=7,725,713 indels=751,528 total=8,477,241
-YRI: SNPs=10,556,876 indels=978,444 total=11,535,320 
-JPTCHB: SNPs= 6,109,233 indels=687,884 total=6,797,117
+- CEU: SNPs=7,725,713 indels=751,528 total=8,477,241
+- YRI: SNPs=10,556,876 indels=978,444 total=11,535,320 
+- JPTCHB: SNPs= 6,109,233 indels=687,884 total=6,797,117
 
 In comparison, the counts of SNPs in Aprial 2009 release in each of the HapMap populations are given below:
 
-CEU: SNPs=9,633,115
-YRI: SNPs=13,759,844 
-JPTCHB: SNPs=10,970,708 
+- CEU: SNPs=9,633,115
+- YRI: SNPs=13,759,844 
+- JPTCHB: SNPs=10,970,708 
 
 So it appears that 2010 release contains fewer number of SNPs compared to the 2009 release, though it provides indel calls. 
 
 The next natural question is how much overlap there is between the 2009 release and the 2010 release. This can be done easily by ANNOVAR. Just make an ANNOVAR input file using 2009 release data, and then scan the 2010 release using the -filter operation in ANNOVAR (command line is "annotate_variation.pl -filter -dbtype 1000g2010_ceu inputfile humandb/"). It takes just 4 minutes in my computer for CEU population, while adding "-batchsize 20m" argument further improves the speed. 
 
-CEU: overlapping SNPs= 6,145,332
-YRI: overlapping SNPs=9,155,523
-JPTCHB: overlapping SNPs=5,393,065
+- CEU: overlapping SNPs= 6,145,332
+- YRI: overlapping SNPs=9,155,523
+- JPTCHB: overlapping SNPs=5,393,065
 
 So the overlap with 2009 release is around 80%-90% for SNPs in the 1000G 2010 release, for each of the three populations. 
 1000 Genomes Pilot Proejct continuously to put out updates to their variant calls. The keyword 1000g2010jul was added in July 2010 to handle the new version of data:
@@ -328,6 +328,7 @@ NOTICE: Finished downloading annotation files for hg19 build version, with files
 
 To give users an idea of the size of the various dbSNP databases prepared by me (first column represents number of variants). It is amazing that the number increased from 13.6 million in dbSNP129 to 63.3 million in dbSNP138 in just a few years!
 
+```
 13602827 hg19_snp129NonFlagged.txt
 13610296 hg19_snp129.txt
 18396965 hg19_snp130NonFlagged.txt
@@ -342,6 +343,7 @@ To give users an idea of the size of the various dbSNP databases prepared by me 
 55449842 hg19_snp137.txt
 63224151 hg19_snp138NonFlagged.txt
 63289767 hg19_snp138.txt
+```
 
 The dbSNP entries does not include allele frequency measure, so users should exercise caution when using dbSNP as a filtering step to identify causal variants for Mendelian diseases, as some dbSNP entries may well be related to disease susceptibility.
 
@@ -359,19 +361,20 @@ The keyword used for downloading these data include: ljb23_sift, ljb23_pp2hdiv, 
 
 Detailed information for all the LJB23 databases are given below:
 
-Score (dbtype)	# variants in LJB23 build hg19	Categorical Prediction
-SIFT (sift)	77593284	D: Deleterious (sift<=0.05); T: tolerated (sift>0.05)
-PolyPhen 2 HDIV (pp2_hdiv)	72533732	D: Probably damaging (>=0.957), P: possibly damaging (0.453<=pp2_hdiv<=0.956); B: benign (pp2_hdiv<=0.452)
-PolyPhen 2 HVar (pp2_hvar)	72533732	D: Probably damaging (>=0.909), P: possibly damaging (0.447<=pp2_hdiv<=0.909); B: benign (pp2_hdiv<=0.446)
-LRT (lrt)	68069321	D: Deleterious; N: Neutral; U: Unknown
-MutationTaster (mt)	88473874	A" ("disease_causing_automatic"); "D" ("disease_causing"); "N" ("polymorphism"); "P" ("polymorphism_automatic"
-MutationAssessor (ma)	74631375	H: high; M: medium; L: low; N: neutral. H/M means functional and L/N means non-functional
-FATHMM (fathmm)	70274896	D: Deleterious; T: Tolerated
-MetaSVM (metasvm)	82098217	D: Deleterious; T: Tolerated
-MetaLR (metalr)	82098217	D: Deleterious; T: Tolerated
-GERP++ (gerp++)	89076718	higher scores are more deleterious
-PhyloP (phylop)	89553090	higher scores are more deleterious
-SiPhy (siphy)	88269630	higher scores are more deleterious
+| Score (dbtype) | # variants in LJB23 build hg19 | Categorical Prediction |
+| -------------  | ------------------------------ | ---------------------- |
+| SIFT (sift)  |  77593284  |  D: Deleterious (sift<=0.05); T: tolerated (sift>0.05)  |
+| PolyPhen 2 HDIV (pp2_hdiv)  |  72533732  |  D: Probably damaging (>=0.957), P: possibly damaging (0.453<=pp2_hdiv<=0.956); B: benign (pp2_hdiv<=0.452)  |
+| PolyPhen 2 HVar (pp2_hvar)  |  72533732  |  D: Probably damaging (>=0.909), P: possibly damaging (0.447<=pp2_hdiv<=0.909); B: benign (pp2_hdiv<=0.446)  |
+| LRT (lrt)  |  68069321  |  D: Deleterious; N: Neutral; U: Unknown  |
+| MutationTaster (mt)  |  88473874  |  A" ("disease_causing_automatic"); "D" ("disease_causing"); "N" ("polymorphism"); "P" ("polymorphism_automatic"  |
+| MutationAssessor (ma)  | 74631375  | H: high; M: medium; L: low; N: neutral. H/M means functional and L/N means non-functional  |
+| FATHMM (fathmm)  |  70274896  |  D: Deleterious; T: Tolerated  |
+| MetaSVM (metasvm)  |  82098217  |  D: Deleterious; T: Tolerated  |
+| MetaLR (metalr)  |  82098217  |  D: Deleterious; T: Tolerated  |
+| GERP++ (gerp++)  |  89076718  |  higher scores are more deleterious  |
+| PhyloP (phylop)  |  89553090  |  higher scores are more deleterious  |
+| SiPhy (siphy)  |   88269630  |  higher scores are more deleterious   |
  
 
 Some examples were given below:
@@ -558,12 +561,12 @@ It has clear advantage over other competing approaches such as SIFT/PolyPhen/CAD
 
 In a benchmarking study using manually compiled data set (basically variants published in Nature Genetics in 2011 as true positive), including 244 variants with half being disease causal, our method achieves best performance, compared to all other methods in ljb2 database (SIFT/PolyPhen/MutationTaster/MutationAssessor/LRT/FATHMM), as well as Condel/CADD/KGGSeq/MutPred/SNPGO/SNAP/PhDSNP/PANTHER/PONP. Click the image below to see details.
 
-## ROC comparisonROC comparison
+![](img/filter_roc_1.png)
+![](img/filter_roc_2.png)
 
 In another benchmarking study using the VariBench data, but excluding cancer mutations and then excluding all mutations reported in UniProt, totalling ~20,000 variants with 1/3 being disease causal, our method also achieves best performance compared to all other methods in ljb2.
 
-ROC comparison
-
+![](img/filter_roc_3.png)
  
 
 An example to use the MetaSVM method is given below:
