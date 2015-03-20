@@ -1,6 +1,6 @@
 ## Overview
 
-The table_annovar.pl program can take VCF files and annotate them (with `-vcfinput` argument). Nowadays, [VCF](http://vcftools.sourceforge.net/specs.html) is already a gold standard format that most researchers use. For recommendations to process VCF file, please see "[VCF Processing Guide](../articles/vcf.md)" the article.
+The table_annovar.pl program can take VCF files and annotate them (with `-vcfinput` argument). Nowadays, [VCF](http://vcftools.sourceforge.net/specs.html) is already a gold standard format that most researchers use. For recommendations to process VCF file, please see "[VCF Processing Guide](../articles/VCF.md)" the article.
 
 The annotate_variation.pl program requires a simple text-based format, which we refer to as ANNOVAR input format. Below we describe the file format, and how to generate these input files from various variant callers. 
 
