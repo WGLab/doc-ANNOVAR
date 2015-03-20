@@ -1,4 +1,4 @@
-## Overview
+## VCF file
 
 The table_annovar.pl program can take VCF files and annotate them (with `-vcfinput` argument). Nowadays, [VCF](http://vcftools.sourceforge.net/specs.html) is already a gold standard format that most researchers use. For recommendations to process VCF file, please see "[VCF Processing Guide](../articles/VCF.md)" the article.
 
@@ -6,7 +6,7 @@ The annotate_variation.pl program requires a simple text-based format, which we 
 
 ## ANNOVAR input file
 
-ANNOVAR (`annotate_variation.pl` program) takes text-based input files, where each line corresponds to one variant. On each line, the first five space- or tab- delimited columns represent chromosome, start position, end position, the reference nucleotides and the observed nucleotides. Additional columns can be supplied and will be printed out in identical form. For convenience, users can use “0” to fill in the reference nucleotides, if this information is not readily available. Insertions, deletions or block substitutions can be readily represented by this simple file format, by using “–” to represent a null nucleotide. One example is given below (this example is included as ex1.human file in the ANNOVAR package), with extra columns that serve as comments on the variants. By default, 1-based coordinate system will be assumed; if --zerostart argument is issued, a half-open zero-based coordinate system will be used in ANNOVAR instead.
+ANNOVAR (`annotate_variation.pl` program) takes text-based input files, where each line corresponds to one variant. On each line, the first five space- or tab- delimited columns represent chromosome, start position, end position, the reference nucleotides and the observed nucleotides. Additional columns can be supplied and will be printed out in identical form. For convenience, users can use “0” to fill in the reference nucleotides, if this information is not readily available. Insertions, deletions or block substitutions can be readily represented by this simple file format, by using “–” to represent a null nucleotide. One example is given below (this example is included as `ex1.avinput` file in the ANNOVAR package), with extra columns that serve as comments on the variants. By default, 1-based coordinate system will be assumed.
 
 The ANNOVAR package contains a few example input files. For example, the content of the ex1.human file is below:
 
@@ -55,7 +55,7 @@ Another example is shown below. Note that the first five columns conform to the 
 
 In some cases, users may want to specify only positions but not the actual nucleotides. In that case, "0" can be used to fill in the 4th and 5th column. ANNOVAR can still run on this input file, but obviously there is no output on amino acid changes. Additionally, the observed amino acid will be assumed to be of equal length of the wildtype allele (as specified by the start and end position at each line).
 
-If ANNOVAR encounters an invalid input line, it will write the invalid line into a file called $outfile.invalid_input where $outfile is specified by the --outfile argument. If all input lines are of valid format, this output file will not exist. Therefore, even if the input file contains empty lines or invalid format, ANNOVAR can still proceed with the next input line.
+If ANNOVAR encounters an invalid input line, it will write the invalid line into a file called `$outfile.invalid_input` where $outfile is specified by the `--outfile` argument. If all input lines are of valid format, this output file will not exist. Therefore, even if the input file contains empty lines or invalid format, ANNOVAR can still proceed with the next input line.
 
 The download package contains several example input files. The users can check them out.
 
@@ -98,7 +98,7 @@ The ANNOVAR package should contain an example VCF file in the example/ directory
 20 1234567 microsat1 GTCT G,GTACT 50 PASS NS=3;DP=9;AA=G GT:GQ:DP 0/1:35:4 0/2:17:2 1/1:40:3
 ```
 
-More detailed explanation of this VCF file is given at http://www.1000genomes.org/node/101, as I basically copied the file from there with minor modification. You can see that seven loci are contained within the file, together with many comment lines.
+More detailed explanation of this VCF file is given at [here](http://vcftools.sourceforge.net/specs.html), as I basically copied the file from there with minor modification. You can see that seven loci are contained within the file, together with many comment lines.
 
 Now let's do the conversion:
 
@@ -126,7 +126,7 @@ Instead of using redirection, we can also do this to write the output into the `
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2.avinput
 ```
 
-Now, if we want to write all 3 samples into the output file (as three separate output files), we can add the -allsample argument
+Now, if we want to write all 3 samples into the output file (as three separate output files), we can add the `-allsample` argument
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2 -allsample
@@ -181,7 +181,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 20 1234568 1234570 TCT - 20 1234567 microsat1 GTCT G 50 PASS NS=3;DP=9;AA=G GT:GQ:DP 0/1:35:4
 ```
 
-If you need the zygosity, quality and read coverage information in the output line as well, add the -withzyg argument:
+If you need the zygosity, quality and read coverage information in the output line as well, add the `-withzyg` argument:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2 -allsample -include -withzyg
@@ -197,7 +197,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 20 1234568 1234570 TCT - het 50 4 20 1234567 microsat1 GTCT G 50 PASS NS=3;DP=9;AA=G GT:GQ:DP 0/1:35:4
 ```
 
-Now, here is one very very important argument: -withfreq. When -withfreq is set, it will print out the allele frequency of each SNP in the VCF file, based on all samples within the file. Because we are not looking at all samples as a whole, the individual genotypes will not be considered here, so the output file should contain all loci from the input file:
+Now, here is one very very important argument: `-withfreq`. When `-withfreq` is set, it will print out the allele frequency of each SNP in the VCF file, based on all samples within the file. Because we are not looking at all samples as a whole, the individual genotypes will not be considered here, so the output file should contain all loci from the input file:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2.avinput -allsample -withfreq
@@ -218,7 +218,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 20 1234567 1234570 GTCT GTACT 0.5 50 2
 ```
 
-In practice, you probably want to add -includeinfo so that all genotype records for all samples are included in the final output file:
+In practice, you probably want to add `-includeinfo` so that all genotype records for all samples are included in the final output file:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2.avinput -allsample -withfreq -include
@@ -277,7 +277,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 20 1234568 1234570 TCT - 20 1234567 microsat1 GTCT G 50 PASS NS=3;DP=9;AA=G GT:GQ:DP 0/1:35:4
 ```
 
-Note that the output file contains only VCF information for that particular sample (in other word, only the GT:GQ:DP:HQ information for sample NA00001 is in the ex2.NA00001.avinput output file).
+Note that the output file contains only VCF information for that particular sample (in other word, only the GT:GQ:DP:HQ information for sample NA00001 is in the `ex2.NA00001.avinput` output file).
 
 Therefore, in practice, you could use convert2annovar.pl program as a way to split a huge VCF files into many parts, each for one particular sample, by back-converting the ANNOVAR input file into a VCF file for a particular sample. In a sense, it is similar to the vcf-subset program in VCFtools, but in this case ANNOVAR will be far more efficient, especially when handling large VCF files like those over 1TB. See below:
 
@@ -314,7 +314,7 @@ Therefore, in practice, you could use convert2annovar.pl program as a way to spl
 
 ### - dbSNP identifiers
 
-Many users have a list of dbSNP rs identifiers and want to annotate functinoality of these SNPs. This can be achieved by convert2annovar.pl by the -format rsid argument:
+Many users have a list of dbSNP rs identifiers and want to annotate functinoality of these SNPs. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument:
 
 ```
 [kaiwang@biocluster ~/]$ cat example/snplist.txt 
@@ -340,7 +340,7 @@ As you can see above, the new file has the first five columns as chr, start, end
 
 ### - All possible variants in a genomic region
 
-Suppose that I am interested in annotating all SNP, 1-bp insertions and 1-bp deletions in a 3-bp genomic region chr1:2000001-2000003. This can be easily done in convert2annovar.pl now:
+Suppose that I am interested in annotating all SNP, 1-bp insertions and 1-bp deletions in a 3-bp genomic region chr1:2000001-2000003. This can be easily done in `convert2annovar.pl` now:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format region -seqdir humandb/hg19_seq/ chr1:2000001-2000003
@@ -358,7 +358,7 @@ NOTICE: Finished writting FASTA for 1 genomic regions to stdout
 1 2000003 2000003 C T
 ```
 
-For adding x-bp insertions and deletions to this, use "-inssize x" and "-delsize x", where x is an integer.
+For adding x-bp insertions and deletions to this, use `-inssize x` and `-delsize x`, where x is an integer.
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format region -seqdir humandb/hg19_seq/ chr1:2000001-2000003 -inssize 1 -delsize 2
