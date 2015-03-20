@@ -83,7 +83,7 @@ The first column tells whether the variant hit exons or hit intergenic regions, 
 The possible values of the first column is summarized below:
 
 | Value	|	Default precedence	|	Explanation	|
-|exonic	|	1	|	variant overlaps a coding exon	|
+| exonic	|	1	|	variant overlaps a coding exon	|
 |	splicing	|	1	|	variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)	|
 |	ncRNA	|	2	|	variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)	|
 |	UTR5	|	3	|	variant overlaps a 5' untranslated region	|
@@ -154,17 +154,17 @@ Note that only exonic variants are annotated in this file, so the first column g
 More detailed explanation of these exonic_variant_functoin annotations are given below. Note that stopgain and stoploss take precedence over other annotations; for example, whenever a nonsynonymous mutation change the wild type amino acid to a stop codon, it will be annotated as stopgain rather than nonsynonymous SNV.
 
 |	Annotation	|	Precedence	|	Explanation	|
-frameshift insertion	1	an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence
-frameshift deletion	2	a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence
-frameshift block substitution	3	a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence
-stopgain	4	a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"!
-stoploss	5	a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site
-nonframeshift insertion	6	an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence
-nonframeshift deletion	7	a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence
-nonframeshift block substitution	8	a block substitution of one or more nucleotides that do not cause frameshift changes in protein coding sequence
-nonsynonymous SNV	9	a single nucleotide change that cause an amino acid change
-synonymous SNV	10	a single nucleotide change that does not cause an amino acid change
-unknown	11	unknown function (due to various errors in the gene structure definition in the database file)
+| frameshift insertion	| 1	| an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence  |
+| frameshift deletion	| 2	| a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence    |
+| frameshift block substitution	| 3	| a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence  |
+| stopgain	| 4	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"!   |
+| stoploss	| 5	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site   |
+| nonframeshift insertion	| 6	 |  an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence  |
+| nonframeshift deletion	| 7	 |  a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence   |
+| nonframeshift block substitution	| 8	 |  a block substitution of one or more nucleotides that do not cause frameshift changes in protein coding sequence  |
+| nonsynonymous SNV	 |  9  |  a single nucleotide change that cause an amino acid change  |
+| synonymous SNV  |  10  |  a single nucleotide change that does not cause an amino acid change  |
+| unknown  |  11  |  unknown function (due to various errors in the gene structure definition in the database file)  |
 In 2012 Oct version of ANNOVAR, the --aamatrixfile argument is added so that users can print out GRANTHAM scores (or any other amino acid substitution matrix) for nonsynonymous variantsin gene-based annotation. See below, the "AAMatrix=43" notation is added to the output, indicating that the R->Q change has a grantham score of 43.
 
 ```
@@ -391,7 +391,7 @@ Occasionally, the user will sequence a new species yourself, so the genome build
 
 Sometimes, the refGene or the knownGene annotations themselves contain errors. One clear example is shown below:
 
-GBshot
+![gene_shot](/img/gene_annotation_1.gif)
 
 As can be seen from the above figure, refGene mis-annotated the stop codon (such that one nucleotide T is missing from the reading frame). UCSC Gene however correctly identified the last stop codon. ANNOVAR recognizes such mistakes and will annotate "UNKNOWN" as exonic function for refGene annotation for a variant located at chr17:3141680 (it is unknown because a codon cannot have only 2 nucleotides).
 
@@ -399,17 +399,17 @@ For some variants, ANNOVAR may generate different annotations with other competi
 
 One interesting example is illustrated below. One other software annotates "3       17028503        17028503        A       G" as synonymous, but ANNOVAR annotates it as "non-synonymous" by refGene annotation. It turns out that refGene provides two transcript annotation at this region, and the same mutation can be both synonymous and non-synonymous. In ANNOVAR annotations, non-synonymous overrides synonymous (again, read the precedence table above to understand this), so the resulting call is non-synonymous. If users use "-separate" argument in the command line, ANNOVAR will print both annotations in the output file.
 
-GBshot
+![gene_shot](/img/gene_annotation_2.gif)
 
 Another interesting example is given below. Using RefSeq annotation, the mutation "chr12   6945846 6945846 A       C" is annotated as stop-lost by ANNOVAR. Checking it in genome browse shows that UCSC Gene annotates multiple transcripts in the region, so the mutation could be stop-lost, or 3-UTR or intronic, based on the actual gene definition that users want to use. This is an extremely rare scenario, but users should keep this in mind when interpreting data, especially after a potential candidate variant is found. ANNOVAR excels in this respect, compared to other annotation systems, because it allows flexible selection of gene definition systems.
 
-PHB2
+![gene_shot](/img/gene_annotation_3.gif)
 
  
 
 Another interesting example is shown below. Two genes (DGCR14 and TSSK2) overlap with each other, yet the coding region for one gene is the UTR for another gene. For one of the gene, Ensembl provides three peptide/transcript annotations, but one of them (ENST00000383058) is completely opposite of the other in terms of orientation, with one extra amino acid. So the mutation per se cannot determine the orientation of the transcript (which is determined by both the gene annotation system and the genome build), and that is why ANNOVAR does not give orientation annotation. To know the orientation, users will have to do a "grep ENST00000383058 hg18_ensGene.txt", which includes information on both gene annotation and build annotation.
 
-TSSK2
+![gene_shot](/img/gene_annotation_4.gif)
 
  
 
