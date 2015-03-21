@@ -243,7 +243,7 @@ dgvMerged Name=esv2751132 13 20797176 21105944 0 - comments: a 342kb deletion en
 
 As we can see from the results above, adding a "-minqueryfrac 0.5" argument reduces the number of database hits (now only esv2751132 is shown in the Name field for the 342kb deletion). To understand this more, check the genome browser shots for this region:
 
-GJB6
+![](img/region_1.png)
 
  
 
@@ -363,17 +363,19 @@ There are multiple ways in which users can accomplish this goal. For example, us
 
 Users can also use chromHMM predictions to annotate and classify non-coding variants into enhancers, repressors, promoters, insulators, etc. First, select a cell line of interest, from the following choices.
 
-Cell	Description	Lineage	Tissue	Karyotype
-GM12878	B-lymphocyte, lymphoblastoid, International HapMap Project - CEPH/Utah - European Caucasion, Epstein-Barr Virus	mesoderm	blood	normal
-H1-hESC	embryonic stem cells	inner cell mass	embryonic stem cell	normal
-K562	leukemia, "The continuous cell line K-562 was established by Lozzio and Lozzio from the pleural effusion of a 53-year-old female with chronic myelogenous leukemia in terminal blast crises." - ATCC	mesoderm	blood	cancer
-HepG2	hepatocellular carcinoma	endoderm	liver	cancer
-HUVEC	umbilical vein endothelial cells	mesoderm	blood vessel	normal
-HMEC	mammary epithelial cells	ectoderm	breast	normal
-HSMM	skeletal muscle myoblasts	mesoderm	muscle	normal
-NHEK	epidermal keratinocytes	ectoderm	skin	normal
-NHLF	lung fibroblasts	endoderm	lung	normal
+| Cell	| Description | Lineage | Tissue | Karyotype |
+|  ---  | ----------- | ------- | ------ | --------- |
+| GM12878 | B-lymphocyte, lymphoblastoid, International HapMap Project - CEPH/Utah - European Caucasion, Epstein-Barr Virus | mesoderm | blood | normal |
+| H1-hESC | embryonic stem cells | inner cell mass | embryonic stem cell | normal |
+| K562 | leukemia, "The continuous cell line K-562 was established by Lozzio and Lozzio from the pleural effusion of a 53-year-old female with chronic myelogenous leukemia in terminal blast crises." - ATCC | mesoderm | blood | cancer |
+| HepG2 | hepatocellular carcinoma | endoderm | liver | cancer |
+| HUVEC | umbilical vein endothelial cells | mesoderm | blood vessel | normal |
+| HMEC | mammary epithelial cells | ectoderm | breast | normal |
+| HSMM | skeletal muscle myoblasts | mesoderm | muscle | normal |
+| NHEK | epidermal keratinocytes | ectoderm	skin | normal |
+| NHLF | lung fibroblasts | endoderm | lung | normal |
  
+
 
 Then download the HMM predictions for this cell line. Then annotate against the HMM predictions by region-based annotation.
 
@@ -397,27 +399,28 @@ wgEncodeBroadHmmGm12878HMM Name=12 Repressed,4 Strong Enhancer,2 Weak Promoter,3
 
 The details of the HMM state definition can be found below. The prediction is given in the "Name" field (second column in the output file). In the result above, the GJB6 deletion emcompasses multiple elements, including repressor, enhancer, promoter and so on. The rs11209026 SNP covers a weak transcriptional unit. The SNPs in NOD2 overlaps transcriptional elongation elements, the frameshift mutation in GJB2 covers a repressor, and other SNPs cover heterochromatin regions.
 
-State 1 - Active Promoter
-State 2 - Weak Promoter
-State 3 - Inactive/poised Promoter
-State 4 - Strong enhancer
-State 5 - Strong enhancer
-State 6 - Weak/poised enhancer
-State 7 - Weak/poised enhancer
-State 8 - Insulator
-State 9 - Transcriptional transition
-State 10 - Transcriptional elongation
-State 11 - Weak transcribed
-State 12 - Polycomb-repressed
-State 13 - Heterochromatin; low signal
-State 14 - Repetitive/Copy Number Variation
-State 15 - Repetitive/Copy Number Variation
+- State 1 - Active Promoter
+- State 2 - Weak Promoter
+- State 3 - Inactive/poised Promoter
+- State 4 - Strong enhancer
+- State 5 - Strong enhancer
+- State 6 - Weak/poised enhancer
+- State 7 - Weak/poised enhancer
+- State 8 - Insulator
+- State 9 - Transcriptional transition
+- State 10 - Transcriptional elongation
+- State 11 - Weak transcribed
+- State 12 - Polycomb-repressed
+- State 13 - Heterochromatin; low signal
+- State 14 - Repetitive/Copy Number Variation
+- State 15 - Repetitive/Copy Number Variation
+
 
 For example, the rs1801002 mutation was predicted to be in state 12 (polycomb-repressed region) above in GM12878 cells, even though it is also a coding mutation. We can confirm this observation in the Genome Browser shot below. It is interesting to see that it serves different functions in different cell lines (but of course everything is based on prediction and this may or may not be reliable).
 
  
 
-GB
+![](img/region_2.png)
 
  
 

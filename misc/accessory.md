@@ -107,7 +107,9 @@ The output file is written to myanno.hg19_multianno.txt. This is a tab-delimited
 
 Users can open the file in Excel 2007 (select "tab-delimited" when opening the file). Click the "DATA" tab at the menu bar, then click the big "Filter" button. Then click any one of the headings such as 1000G_CEU or SIFT to filter out variants, essentially by clicking the check boxes. For SIFT score, make sure to use "less than 0.05 OR equal to (blank)" so that variants without SIFT score do not get filtered out. It should be straightfoward to do, but it may need a little practice for users not familiar with Excel.
 
-excel
+
+![](img/accessary_excel_1.gif)
+
 
 Sometimes, the input file contains many extra columns (for example, when you convert a VCF file to ANNOVAR input format with -includeinfo argument), and the users may want to keep these extra information in the output. In this case, just add the -otherinfo argument to table_annovar.pl. The extra columns will be appended at the end of the annotation columns.
 
@@ -181,7 +183,7 @@ A few examples are given below to illustrate the use of this program. Before run
 [kai@biocluster ~/]$ annotate_variation.pl -downdb seq humandb/hg18seq/
 ```
 
-1. simple input files
+####1. simple input files
 
 The file list simple regions in the first column of each line (other columns can be present but will not be used). For example,
 
@@ -204,7 +206,7 @@ NOTICE: Finished writting FASTA for 2 genomic regions to example.simple_region.f
 CACCATAATCCGTCTCGCCATTCTTTCCCAAGGGGCTTTATTCGTTCTATCTCCATGCTCTTCTCAACATCACCTGCCACTGTTGGCTCGTGGACTTTTT
 ```
 
-2. tab-delimited input files
+####2. tab-delimited input files
 
 The file list chr, start and end position in tab delimited format as the first 3 columns of each line (other columns can be present but will not be used). An example is given below. Note that the -outfile can be used to specify an output file name.
 
@@ -218,7 +220,7 @@ NOTICE: Finished reading 1 sequences from ../humandb/hg18_seq/chr10.fa
 NOTICE: Finished writting FASTA for 2 genomic regions to example.fa.
 ```
 
-3. refGene input files
+####3. refGene input files
 
 The file is in UCSC refGene format that contains exon start and end positions. The output will be mRNA/cDNA sequences, rather than genomic seqences.
 
@@ -239,15 +241,15 @@ NOTICE: Finished reading 1 sequences from hg19_seq/chr14.fa
 NOTICE: Finished writting FASTA for 36824 genomic regions to example.fa.
 ```
 
-4. knownGene input files
+####4. knownGene input files
 
 The handling of this type of input files is very similar to the refGene input files. Future versions of ANNOVAR may merge these input files together.
 
-5. ensGene inputfiles
+####5. ensGene inputfiles
 
 The handling of this type of input files is very similar to the refGene input files. Future versions of ANNOVAR may merge these input files together.
 
-6. Others (such as Gencode) input files
+####6. Others (such as Gencode) input files
 
 Use the genericGene as the `-format` argument.
 
