@@ -2,7 +2,7 @@
 
 One of the functionalities of ANNOVAR is to generate gene-based annotation. For example, from a whole-genome sequencing experiment on a human subject, given a list of 4 million SNVs (single nucleotide variants) and 0.5 million indels (insertions or deletions), it is of interest to identify the genes that are disrupted. For intergenic variants, we are interested in knowing what are the two flanking genes, and what are the distances between the variants and the flanking genes. For exonic variants, we are interested in knowing the amino acid changes.
 
-Before working on gene-based annotation, a gene definition file and associated FASTA file must be downloaded into a directory if they are not already downloaded. Let's call this directory as "humandb/".
+Before working on gene-based annotation, a gene definition file and associated FASTA file must be downloaded into a directory if they are not already downloaded. Let's call this directory as `humandb/`.
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -downdb -buildver hg19 -webfrom annovar refGene humandb/
@@ -16,9 +16,9 @@ NOTICE: Finished downloading annotation files for hg19 build version, with files
 
 This command downloads a few files and save them in the "humandb/" directory for later use.
 
->>>Technical Notes: The above command includes '-webfrom annovar', because I already pre-built the FASTA file and included them in ANNOVAR distribution site. For other gene definition systems (such as GENCODE, CCDS) or for other species (such as mouse), the user needs to build the FASTA file yourself. See below for more details.
+>>>Technical Notes: The above command includes `-webfrom annovar`, because I already pre-built the FASTA file and included them in ANNOVAR distribution site. For other gene definition systems (such as GENCODE, CCDS) or for other species (such as mouse/fly/worm/yeast), the user needs to build the FASTA file yourself. See below for more details.
 
-Suppose we use the input file ex1.avinput which is included as an example in the ANNOVAR package. This is a simple text file, and its content is displayed below:
+Suppose we use the input file `ex1.avinput` which is included as an example in the ANNOVAR package. This is a simple text file, and its content is displayed below:
 
 ```
 [kaiwang@biocluster ~/]$ cat example/ex1.avinput
@@ -39,9 +39,9 @@ Suppose we use the input file ex1.avinput which is included as an example in the
 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-Read the "PREPARE INPUT FILE" section to understand the file format. Basically, only the first five columns are used by ANNOVAR, and the following fields are optional and can be anything, like quality scores, confidence score, comments, identifiers, etc.
+Read the "[Prepare Input Files](input.md)" section to understand the file format. Basically, only the first five columns are used by ANNOVAR, and the following fields are optional and can be anything, like quality scores, confidence score, comments, identifiers, etc.
 
-The gene-based annotation can be issued by the following command (by default, "--geneanno -dbtype refGene" is assumed):
+The gene-based annotation can be issued by the following command (by default, `--geneanno -dbtype refGene` is assumed):
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -out ex1 -build hg19 example/ex1.avinput humandb/
@@ -53,7 +53,7 @@ NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avi
 NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
 ```
 
-Two output files will be generated: ex1.variant_function and ex1.exonic_variant_function (to change the output file names, use the --outfile argument).
+Two output files will be generated: `ex1.variant_function` and `ex1.exonic_variant_function` (to change the output file names, use the `--outfile` argument).
 
 ####Output file 1 (refSeq gene annotation)
 
@@ -116,7 +116,7 @@ Several technical notes are discussed below.
 
 *Technical Notes:* if the first codon of a transcript is deleted, it will be reported as wholegene deletion by ANNOVAR because the gene cannot be translated.
 
-If the users want to have all functional consequences printed out (rather than just the most important one defined by the precedence above), the --separate argument should be used. In this case, several output lines may be present for each variant, representing several possible functional consequences
+If the users want to have all functional consequences printed out (rather than just the most important one defined by the precedence above), the `--separate` argument should be used. In this case, several output lines may be present for each variant, representing several possible functional consequences.
 
 To further explain the variant_function annotation, check the figure below:
 
@@ -124,28 +124,28 @@ To further explain the variant_function annotation, check the figure below:
 
 In the figure above, SNP1 is an intergenic variant, as it is >1kb away from any gene, SNP2 is a downstream variant, as it is 1kb from the 3'end of the NADK gene; SNP3 is a UTR3 variant; SNP4 is an intronic variant; SNP5 is an exonic variant.
 
-![](/img/gene_del_1.png)
-
 Similarly, Deletion 1 is an intergenic variant; deletion 2 is a downstream variant; deletion3 is a UTR3 variant; deletion 4 overlaps both with UTR3 and intron, and based on the precedence rule, it is a UTR3 variant; deletion 5 is an intronic variant; deletion6 overlaps with both an exon and an intron, and based on the precedence rule, it is an exonic variant.
 
 *Technical notes:* Sometimes users may want to change the default precedence rule. The "-precedence" argument can be used to fine-tune the priority of variant function. The different variant functions should be separated by comma in the command line based on their desired priority levels. The allowable keywords for variant functions are exonic, intronic, splicing, utr5, utr3, upstream, downstream, splicing, ncrna.
 
-For example, when "-precedence intronic,utr5,utr3" is specified, the intronic variant will take precedence over UTR variants, and the deletion 4 will become an intronic variant above. This is the only change, and all other default precedence rule still applies here.
+For example, when `-precedence intronic,utr5,utr3` is specified, the intronic variant will take precedence over UTR variants, and the deletion 4 will become an intronic variant above. This is the only change, and all other default precedence rule still applies here.
 
 *Technical Notes:* By default, the gene name is printed in the second column in the variant_function file. Sometimes, a user may want to see transcript name instead. The --transcript_function argument can be used to specify this behavior. Note that it is very likely that multiple transcript names will be printed in the output separated by comma, as each gene name typically corresponds to several transcript names.
 
 *Technical Notes:* Current logic in gene definition: Genomes are complex and therefore gene definitions are also complex. ANNOVAR completely relies on user-supplied gene definitions (such as RefSeq, UCSC Gene and Ensembl Gene) to map a transcript to genomes and relate transcripts to genes, and uses the following logic to handle complex scenarios:
-1. If a gene is annotated as both coding and non-coding ( multiple transcripts, some coding, some non-coding), the gene will be regarded as coding (the non-coding transcript definition will be ignored).
+
+1. If a gene is annotated as both coding and non-coding (multiple transcripts, some coding, some non-coding), the gene will be regarded as coding (the non-coding transcript definition will be ignored).
 2. If a gene or a transcript has one or several non-coding definitions but without coding definition, it will be regarded as ncRNA in annotation output. 
 3. If a transcript maps to multiple locations as "coding transcripts", but some with complete ORF, some without complete ORF (that is, with premature stop codon), then the ones without complete ORF will be ignored.
 4. If a transcript maps to multiple locations, all as "coding transcripts", but none has a complete ORF, then this transcript will not be used in exonic_variant_function annotation and the corresponding annotation will be marked as "UNKNOWN". 
 5. NEW in July 2014: If a transcript maps to multiple genomic locations, all mapping wil be used in the annotation process. Previously, only the "most likely" mapping will be used in annotation. 
+
 The above rules do make sense.
 The rule 3 and 4 were made in Nov 2011 version of ANNOVAR (so that users no longer send me emails complaining errors in exonic annotation which is not really a fault of ANNOVAR per se). But as a result, you may see more "UNKNOWN" exonic annotations in the output file.
 
 ####Output file 2 (refSeq gene annotation)
 
-The second output file, ex1.exonic_variant_function, contains the amino acid changes as a result of the exonic variant. The exact format of the output below may change slightly between different versions of ANNOVAR.
+The second output file, `ex1.exonic_variant_function`, contains the amino acid changes as a result of the exonic variant. The exact format of the output below may change slightly between different versions of ANNOVAR.
 
 ```
 [kaiwang@biocluster ~/]$ cat ex1.exonic_variant_function 
@@ -185,7 +185,7 @@ line9 nonsynonymous SNV IL23R:NM_144701:exon9:c.G1142A:p.R381Q:AAMatrix=43, 1 67
 
 When specifying amino acid changes, the specification always relates to a position for a transcript (not a "gene"). For example, the R702W mutation refers to an amino acid change at position 702 in exon 4 in a transcript called NM_022162 (which corresponds to the NOD2 gene). Since there is only one transcript annotated with the NOD2 gene, there is no ambiguity here. However, due to alternative splicing, if there are two or more transcripts that are all annotated for a gene, then the position of the amino acid change will differ, and it is important to always list the transcripts, in addition to gene names.
 
-If the user is interested in using HGVS nomenclature for cDNA, add the '-hgvs' argument in gene annotation:
+If the user is interested in using HGVS nomenclature for cDNA, add the `-hgvs` argument in gene annotation:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -out ex1 -build hg19 -hgvs example/ex1.avinput humandb/ 
@@ -200,11 +200,11 @@ line14 frameshift deletion GJB2:NM_004004:exon2:c.35delG:p.G12fs, 13 20763686 20
 line15 frameshift deletion GJB6:NM_001110220:wholegene,GJB6:NM_001110221:wholegene,GJB6:NM_001110219:wholegene,CRYL1:NM_015974:wholegene,GJB6:NM_006783:wholegene, 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-*Technical note:* Similar to the *.variant_function file, the *.exonic_variant_function file also follows the precedence rule, but users cannot change this rule (there is no much biological reason to change this rule anyway). For example, the mutation "chr7 140453136 140453136 A T" will be annotated as stoploss mutation X208R by ANNOVAR using ENSEMBL definition, because the stop loss takes precedence over the nonsynonymous mutation (V600E for ENST00000288602, V28E for ENST00000479537). If users want to have the comprehensive set of exonic_variant_function output, use the -separate argument!
+*Technical note:* Similar to the `\*.variant_function` file, the `\*.exonic_variant_function` file also follows the precedence rule, but users cannot change this rule (there is no much biological reason to change this rule anyway). For example, the mutation "chr7 140453136 140453136 A T" will be annotated as stoploss mutation X208R by ANNOVAR using ENSEMBL definition, because the stop loss takes precedence over the nonsynonymous mutation (V600E for ENST00000288602, V28E for ENST00000479537). If users want to have the comprehensive set of exonic_variant_function output, use the `-separate` argument!
 
-*Technical notes:* Some genes have multiple transcripts and ANNOVAR may randomly sort the order of transcripts in the output file. For example, the same mutation may be annotated as "BRAF:ENST00000288602:exon15:c.T1799A:p.V600E,BRAF:ENST00000479537:exon2:c.T83A:p.V28E" from one input file, but as "BRAF:ENST00000479537:exon2:c.T83A:p.V28E,BRAF:ENST00000288602:exon15:c.T1799A:p.V600E" from another input file. Some users want absolute consistency in the annotation. In this case, you can add -exonsort argument to the command line, so that the exon2 always precede exon15 in the output file.
+*Technical notes:* Some genes have multiple transcripts and ANNOVAR may randomly sort the order of transcripts in the output file. For example, the same mutation may be annotated as "BRAF:ENST00000288602:exon15:c.T1799A:p.V600E,BRAF:ENST00000479537:exon2:c.T83A:p.V28E" from one input file, but as "BRAF:ENST00000479537:exon2:c.T83A:p.V28E,BRAF:ENST00000288602:exon15:c.T1799A:p.V600E" from another input file. Some users want absolute consistency in the annotation. In this case, you can add `-exonsort` argument to the command line, so that the exon2 always precede exon15 in the output file.
 
-*Technical notes:* Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is coding_change.pl within ANNOVAR package. Try it and see how it works!
+*Technical notes:* Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is `coding_change.pl` within ANNOVAR package. Try it and see how it works!
 
 *Technical notes on amino acid changes:* In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN").
 
@@ -214,19 +214,20 @@ line15 frameshift deletion GJB6:NM_001110220:wholegene,GJB6:NM_001110221:wholege
 
 ANNOVAR can annotate mitochondria variants as of Feb 2013 (as long as your chromosome identifier is M or MT or chrM or chrMT, the mitochondria-specific codon table will be used for inferring amino acid changes). However, there are several important caveats:
 
-RefSeq does not have mitochondria gene definition. So ANNOVAR users need to use either UCSC Known Gene or Ensembl Gene.
-UCSC's hg19 assembly used the old version mitochondria genome (NC_001807), but 1000 genomes cosortium has replace the chrM with the latest Cambridge Reference Sequence version (NC_012920). So if you align your sequence data and call variants against the NC_012920, then you cannot really annotate your variants using UCSC's gene definition. It is necessary to stick with the identical coordinate. To explain this better, when you get your raw sequence data as FASTQ files, if you align your data to reference genome compiled by UCSC (usually the file name is something like hg19.fa, and there are some chromosomes with name such as chrx_random), then you can directly use ANNOVAR to annotate all variants together. Mitochondria variants will be those that align to chrM, and Feb2013 version of ANNOVAR can correctly annotate them. Konrad Herbst from German Cancer Research Center wrote a script for positional conversion between both reference sequences (geared by some similar script in the MitoSeek package by Y. Guo et. al.) and used it to map the GRCh37 file to hg19 file. With retrieve_seq_from_fasta.pl used on the hg19 reference sequence (AF347015.1) the following files are produced for hg19-based mitochondria annotation.
+1. RefSeq does not have mitochondria gene definition. So ANNOVAR users need to use either UCSC Known Gene or Ensembl Gene.
 
-One complication that many users are not aware is that Ensemble has annotation errors (typically a few base pairs off) for mitochondria genes, so the gene annotation from Ensembl should not be used. Take a simple example, you can search ENST00000389680 in UCSC genome browser: while Gencode list the location as chrM:650-1603, Ensembl annotation comes out as chrM:646-1599, with 4bp off. For these reasons, you should use the file provided by ANNOVAR for any mitochondria annotation when you call variants on hg19 coordiante. 
+2. UCSC's hg19 assembly used the old version mitochondria genome (NC_001807), but 1000 genomes cosortium has replace the chrM with the latest Cambridge Reference Sequence version (NC_012920). So if you align your sequence data and call variants against the NC_012920, then you cannot really annotate your variants using UCSC's gene definition. It is necessary to stick with the identical coordinate. To explain this better, when you get your raw sequence data as FASTQ files, if you align your data to reference genome compiled by UCSC (usually the file name is something like `hg19.fa`, and there are some chromosomes with name such as chrx_random), then you can directly use ANNOVAR to annotate all variants together. Mitochondria variants will be those that align to chrM, and Feb2013 version of ANNOVAR can correctly annotate them. Konrad Herbst from German Cancer Research Center wrote a script for positional conversion between both reference sequences (geared by some similar script in the MitoSeek package by Y. Guo et. al.) and used it to map the GRCh37 file to hg19 file. With `retrieve_seq_from_fasta.pl` used on the hg19 reference sequence (AF347015.1) the following files are produced for hg19-based mitochondria annotation.
 
-To make this easier to users, I now provide the two files here: hg19_MT_ensGene.txt and hg19_MT_ensGeneMrna.fa in ANNOVAR package humandb/ directory. The -buildver is hg19_MT and -dbtype is ensGene. 
+    One complication that many users are not aware is that Ensemble has annotation errors (typically a few base pairs off) for mitochondria genes, so the gene annotation from Ensembl should not be used. Take a simple example, you can search ENST00000389680 in UCSC genome browser: while Gencode list the location as chrM:650-1603, Ensembl annotation comes out as chrM:646-1599, with 4bp off. For these reasons, you should use the file provided by ANNOVAR for any mitochondria annotation when you call variants on hg19 coordiante. 
 
-However, if you align your raw FASTQ files to reference genome that has NC_012920 (such as those provided by the 1000 Genomes Project, usually the file name is something like human_g1k_v37.fasta), then you need to use a custom gene definition file that has the correct mitochondria gene definition for NC_012920. Dr. Jun Ding from National Institute of Aging has graciously provided such files based on Ensemble definition. Note that the chromosome name should usually be MT (before June 2013, I used chrM in the file which caused confusion to some ANNOVAR users so I decided to change to MT and stick with the standard for GRCh37). In this case, you should use the following command for annotating mitochondria variants: annotate_variation.pl -buildver GRCh37_MT -dbtype ensGene mt.avinput humandb/. 
+    To make this easier to users, I now provide the two files here: `hg19_MT_ensGene.txt` and `hg19_MT_ensGeneMrna.fa` in ANNOVAR package `humandb/` directory. The `-buildver` is hg19_MT and `-dbtype` is ensGene. 
 
-To make this easier to users, I now provide the two files GRCh37_MT_ensGene.txt.gz and GRCh37_MT_ensGeneMrna.fa.gz in ANNOVAR package humandb/ directory. The -buildver is GRCh37_MT and -dbtype is ensGene.
+3. However, if you align your raw FASTQ files to reference genome that has NC_012920 (such as those provided by the 1000 Genomes Project, usually the file name is something like `human_g1k_v37.fasta`), then you need to use a custom gene definition file that has the correct mitochondria gene definition for NC_012920. Dr. Jun Ding from National Institute of Aging has graciously provided such files based on Ensemble definition. Note that the chromosome name should usually be MT (before June 2013, I used chrM in the file which caused confusion to some ANNOVAR users so I decided to change to MT and stick with the standard for GRCh37). In this case, you should use the following command for annotating mitochondria variants: `annotate_variation.pl -buildver GRCh37_MT -dbtype ensGene mt.avinput humandb/`. 
+
+    To make this easier to users, I now provide the two files `GRCh37_MT_ensGene.txt.gz` and `GRCh37_MT_ensGeneMrna.fa.g`z in ANNOVAR package humandb/ directory. The `-buildver` is GRCh37_MT and `-dbtype` is ensGene.
  
 
-Switching to UCSC Known Gene annotation or Ensembl Gene annotation
+## Switching to UCSC Known Gene annotation or Ensembl Gene annotation
 
 ANNOVAR can optionally process UCSC Known Gene annotation or Ensembl Gene annotation, both of which are more comprehensive than RefSeq by including many poorly annotated or computationally predicted genes. An example is shown below to annotate variants using UCSC Known Gene:
 
@@ -240,7 +241,7 @@ NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avi
 NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
 ```
 
-The transcript name (in the ex1.exonic_variant_function file) look like uc002eg1.1, etc, which are UCSC Gene identifiers.
+The transcript name (in the `ex1.exonic_variant_function` file) look like uc002eg1.1, etc, which are UCSC Gene identifiers.
 
 To annotate variants using Ensembl gene, use the commands below. The output format is similar to that described above. The "ENSG" and "ENST" are Ensembl identifiers for annotated genes and transcripts.
 
@@ -256,21 +257,21 @@ NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_fu
 
 Comparing the program message ("Done with xxx transcripts for yyy unique genes") from three different gene-definition systems, we can see that Ensembl annotates the greatest number of genes in human genome, yet RefSeq annotates the fewest number of genes.
 
-Technical notes: Most casual ANNOVAR users can safely ignore these notes.
+>>>>*Technical notes:* Most casual ANNOVAR users can safely ignore these notes.
 
-Technically, the RefSeq Gene and UCSC Gene are transcript-based gene definitions. They built gene model based on transcript data, and then map the gene model back to human genomes. In comparison, Ensemble Gene and Gencode Gene are assembly-based gene definitions that attempt to build gene model directly from reference human genome. They came from different angles, trying to do the same thing: define genes in human genome.
+>>>>Technically, the RefSeq Gene and UCSC Gene are transcript-based gene definitions. They built gene model based on transcript data, and then map the gene model back to human genomes. In comparison, Ensemble Gene and Gencode Gene are assembly-based gene definitions that attempt to build gene model directly from reference human genome. They came from different angles, trying to do the same thing: define genes in human genome.
 
-However, this has its own consequences. For example, RefSeq builds a gene model from assembling transcript data from a population, but the reference human genome may have an allele as minor allele in a population. In this case, the transcript may not align 100% to genome, resulting in discrepancies between the FASTA file for the transcript and the FASTA file generated from the whole-genome sequence (by concatenating exons together). 
+>>>>However, this has its own consequences. For example, RefSeq builds a gene model from assembling transcript data from a population, but the reference human genome may have an allele as minor allele in a population. In this case, the transcript may not align 100% to genome, resulting in discrepancies between the FASTA file for the transcript and the FASTA file generated from the whole-genome sequence (by concatenating exons together). 
 
-For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (retrieve_seq_from_fasta.pl) to build FASTA sequences for any other genomes for which I do not provide pre-built files. 
+>>>>For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (retrieve_seq_from_fasta.pl) to build FASTA sequences for any other genomes for which I do not provide pre-built files. 
 
-For these resons, the FASTA seuqence in the file provided by me may differe from the FASTA sequence that you get from RefSeq. The sequence used by ANNOVAR are "theoretical" seuqence based on a particular genome build and assembly, but the FASTA sequence compiled by RefSeq are "observed" sequence from large databases without any relationship to a particular assembly version. They may have the same identifier but they are different things.
+>>>>For these resons, the FASTA seuqence in the file provided by me may differe from the FASTA sequence that you get from RefSeq. The sequence used by ANNOVAR are "theoretical" seuqence based on a particular genome build and assembly, but the FASTA sequence compiled by RefSeq are "observed" sequence from large databases without any relationship to a particular assembly version. They may have the same identifier but they are different things.
 
 ## Switching to GENCODE gene, CCDS gene or other gene annotation systems
 
 Current version of ANNOVAR does not provide a specific keyword for GENCODE, but ANNOVAR is versatile enough to handle GENCODE or whatever other gene definitions just fine. The GENCODE system has changed a lot in the past a few years, with the latest version being V19 as of February 2014. In V19, the BASIC track is available now which contains high-quality gene definitions based on the description: "The GENCODE Basic Set is intended to provide a simplified subset of the GENCODE transcript annotations that will be useful to the majority of users. The goal was to have a high-quality basic set that also covered all loci. Selection of GENCODE annotations for inclusion in the basic set was determined independently for the coding and non-coding transcripts at each gene locus."
 
-Below is the command that I can use for GENCODE gene definitions for variant annotation (note that if whole-genome FASTA files are not available in humandb/hg19_seq, you should first do a "-downdb -build hg19 seq humandb/hg19_seq/").
+Below is the command that I can use for GENCODE gene definitions for variant annotation (note that if whole-genome FASTA files are not available in `humandb/hg19_seq`, you should first do a `annotate_variation.pl -downdb -build hg19 seq humandb/hg19_seq/`).
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -downdb wgEncodeGencodeBasicV19 humandb/ -build hg19
@@ -336,9 +337,9 @@ NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avi
 NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
 ```
 
-A note for CCDS gene: The output will not contain gene name, but the CCDS identifiers only. To get the gene name, users have to write your own program to process ANNOVAR output files. There are two tables that can be used to convert CCDS ID to other ID: ccdsNotes convert CCDS to UCSC Known Genes transcript ID, and then you can convert this to Gene name. The ccdsInfo table converts CCDS ID to ENSEMBL transcript or RefSeq transcript, and then you can further convert them to Gene name.
+>>>>A note for CCDS gene: The output will not contain gene name, but the CCDS identifiers only. To get the gene name, users have to write your own program to process ANNOVAR output files. There are two tables that can be used to convert CCDS ID to other ID: ccdsNotes convert CCDS to UCSC Known Genes transcript ID, and then you can convert this to Gene name. The ccdsInfo table converts CCDS ID to ENSEMBL transcript or RefSeq transcript, and then you can further convert them to Gene name.
 
-Create your own gene definition databases for non-human species
+## Create your own gene definition databases for non-human species
 
 Besides human genome, other species can be handled. However, ANNOVAR does not provide built-in mRNA FASTA files for other gene definitions, so users have to build it yourself.
 
@@ -389,13 +390,9 @@ Exercise: Try to run the same procedure above for rn5 (rate). Again users need t
 
 The above procedure will only work if the gene-based annotations exist in UCSC for the particular species or the particular build. For example, if you want to use ANNOVAR on pigs, since RefSeq gene and UCSC Gene are not available for pigs, you have to use "annotate_variation.pl --downdb -buildver susScr2 ensgene pigdb" instead and use "-dbtype ensgene" for the gene-based annotation.
 
-What about completely new species?
+## What about GFF3 file for new species?
 
-Occasionally, the user will sequence a new species yourself, so the genome build that is not available from UCSC or Ensembl or anywhere. Generally speaking, you can use one of the several gene prediction tools to compile gene structure from the contigs that you build, and this will usually be in GFF3 format. Then go to http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/, download the gff3ToGenePred tool, and convert the GFF3 file to a format that ANNOVAR can read. Everything else is the same as above.
-
- 
-
- 
+Occasionally, the user will sequence a new species yourself, so the genome build that is not available from UCSC or Ensembl or anywhere. Generally speaking, you can use one of the several gene prediction tools to compile gene structure from the contigs that you build, and this will usually be in GFF3 format. Then go to http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/, download the `gff3ToGenePred` tool, and convert the GFF3 file to a format that ANNOVAR can read. Everything else is the same as above.
 
 ## Understanding how ANNOVAR address rare problems in gene definition
 
@@ -407,7 +404,7 @@ As can be seen from the above figure, refGene mis-annotated the stop codon (such
 
 For some variants, ANNOVAR may generate different annotations with other competing annotation software or pipelines. This could be due to many reasons, for example, the use of different gene definitions. Nevertheless, it is always a good idea to visually examine variants in the Genome Browser and confirm whether ANNOVAR makes a mistake in annotation. This unfortunately works only with UCSC Genes (see example above), but for the majority of genes, UCSC Genes are quite consistent with refGene annotations.
 
-One interesting example is illustrated below. One other software annotates "3       17028503        17028503        A       G" as synonymous, but ANNOVAR annotates it as "non-synonymous" by refGene annotation. It turns out that refGene provides two transcript annotation at this region, and the same mutation can be both synonymous and non-synonymous. In ANNOVAR annotations, non-synonymous overrides synonymous (again, read the precedence table above to understand this), so the resulting call is non-synonymous. If users use "-separate" argument in the command line, ANNOVAR will print both annotations in the output file.
+One interesting example is illustrated below. One other software annotates "3       17028503        17028503        A       G" as synonymous, but ANNOVAR annotates it as "non-synonymous" by refGene annotation. It turns out that refGene provides two transcript annotation at this region, and the same mutation can be both synonymous and non-synonymous. In ANNOVAR annotations, non-synonymous overrides synonymous (again, read the precedence table above to understand this), so the resulting call is non-synonymous. If users use `-separate` argument in the command line, ANNOVAR will print both annotations in the output file.
 
 ![gene_shot](/img/gene_annotation_2.gif)
 
@@ -415,20 +412,9 @@ Another interesting example is given below. Using RefSeq annotation, the mutatio
 
 ![gene_shot](/img/gene_annotation_3.gif)
 
- 
-
-Another interesting example is shown below. Two genes (DGCR14 and TSSK2) overlap with each other, yet the coding region for one gene is the UTR for another gene. For one of the gene, Ensembl provides three peptide/transcript annotations, but one of them (ENST00000383058) is completely opposite of the other in terms of orientation, with one extra amino acid. So the mutation per se cannot determine the orientation of the transcript (which is determined by both the gene annotation system and the genome build), and that is why ANNOVAR does not give orientation annotation. To know the orientation, users will have to do a "grep ENST00000383058 hg18_ensGene.txt", which includes information on both gene annotation and build annotation.
+Another interesting example is shown below. Two genes (DGCR14 and TSSK2) overlap with each other, yet the coding region for one gene is the UTR for another gene. For one of the gene, Ensembl provides three peptide/transcript annotations, but one of them (ENST00000383058) is completely opposite of the other in terms of orientation, with one extra amino acid. So the mutation per se cannot determine the orientation of the transcript (which is determined by both the gene annotation system and the genome build), and that is why ANNOVAR does not give orientation annotation. To know the orientation, users will have to do a `grep ENST00000383058 hg18_ensGene.txt`, which includes information on both gene annotation and build annotation.
 
 ![gene_shot](/img/gene_annotation_4.gif)
 
- 
 
-## Switching to GFF3-based gene annotations
-
-Things become a little bit more compilcated when handling GFF3-based gene annotations, and the GFF3 file itself may or may not contain sequences for transcripts. Currently users can perform region-based annotation on GFF3-based annotation databases, but not gene-based annotation directly. To perform gene annotation, you need to convert it to UCSC compatile format first (try the http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/gff3ToGenePred tool).
-
-I think it will make the most sense to convert your GFF3 file to a standard UCSC-type file, and then use ANNOVAR for the gene-based annotation, rather than working on GFF3 directly (everybody has their own GFF3 file while their formats/definitions differ slightly so it is just impossible to handle all possible exceptions. It is therefore best to handle a specific format developed for gene definition). Having said that, it is possible that ANNOVAR will support an updated GTF specification in the future. GTF is a more strict GFF that behaves better than a random GFF file. But for now, stick with the UCSC-compatible format is the best bet.
-most important one defined by the precedence above), the --separate argument should be used. In this case, several output lines may be present for each variant, representing several possible functional consequences.
-
-To further explain the variant_function annotation, check the figure below:
 
