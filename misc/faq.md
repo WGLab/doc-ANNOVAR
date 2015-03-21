@@ -24,7 +24,7 @@
 
     By default "vcf4" will only process the first sample, and will only print out mutations that exist in the first sample. So if you have a multi-sample VCF file, then usually only a subset of lines will exist in the output file. The '-format vcf4' can be combined with '-allsample' argument, which will print out a separate output file for each sample in the VCF4 file (by default, only the first sample in the VCF4 file will be processed). More importantly, if you use '-format vcf4 -allsample -withfreq', then all input lines from VCF will be kept in output lines, yet an allele frequency measure is included in each line calculating the frequency of each variant among all the samples in the VCF file.
 
-   In general, '-format vcf4old' should be considered as obselete and should not be used by most users, since '-format vcf4' can now accomplish everything that '-format vcf4old' can do with appropriate combinations of arguments.
+    In general, '-format vcf4old' should be considered as obselete and should not be used by most users, since '-format vcf4' can now accomplish everything that '-format vcf4old' can do with appropriate combinations of arguments.
 
 - How to back convert cDNA coordinate such as c.385A>G to genomic coordinate such as chr1:123456A>G?
 
