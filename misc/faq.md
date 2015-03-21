@@ -182,9 +182,7 @@ If you further go to Genome Browser page for this particular SNP, you'll see tha
 
 - How to annotate simple repeat regions in human genome?
 
-   Read these pages: http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=simpleRepeat, http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmsk, http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmskRM327
-
-   Then pick one that matches your goal, then annotate by ANNOVAR. 
+    Read these pages: http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=simpleRepeat, http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmsk, http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmskRM327, then pick one that matches your goal, then annotate by ANNOVAR. 
 
 - How to handle E. coli, Arabidopsis thaliana and other genomes not in UCSC?
 
