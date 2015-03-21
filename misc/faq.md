@@ -32,7 +32,7 @@
 
     Read "all variants in a transcript" section from [this page](../user-guide/input.md). 
 
--Why my run of gene-based annotation differ slightly from those shown in website?
+- Why my run of gene-based annotation differ slightly from those shown in website?
 
     UCSC database updates constantly and ANNOVAR executable also updates constantly, so it is expected that ANNOVAR output format or the annotations may change slightly over time.
 
@@ -50,9 +50,9 @@
     mysql --user=genomep --password=password --host=genome-mysql.cse.ucsc.edu -A -D hg19 -e 'select distinct refGene.name,gbCdnaInfo.version from refGene,gbCdnaInfo WHERE refGene.name=gbCdnaInfo.acc' > refseq_version.txt
 ```
 
-    in your command line, and you will see the version number for each RefSeq transcript.
+in your command line, and you will see the version number for each RefSeq transcript.
 
-    Starting from Nov 2014, when you download refGene, the corresponding refGeneVersion.txt file will be automatically downloaded to help users who cannot figure out how to run mysql.
+Starting from Nov 2014, when you download refGene, the corresponding refGeneVersion.txt file will be automatically downloaded to help users who cannot figure out how to run mysql.
 
 - Why ANNOVAR says "WARNING: A total of 7 sequences cannot be found in mRNA.fa file"?
 
@@ -80,17 +80,17 @@
 line1   nonsynonymous   SNV     ROBO2:NM_001128929:exon3:p.W185R,       3       77613005        77613005        T       C
 ```
 
-    But UCSC Genome Browser (which ANNOVAR is based upon) will give a different result. Why?
+But UCSC Genome Browser (which ANNOVAR is based upon) will give a different result. Why?
 
-    There are many gene definitions in genome browser, including the "UCSC Genes" definition. When you check the Genome Browser, the track that shows amino acid identity is the "UCSC Gene" track, not the "RefSeq Gene" track, which is the default gene definition in ANNOVAR.
+There are many gene definitions in genome browser, including the "UCSC Genes" definition. When you check the Genome Browser, the track that shows amino acid identity is the "UCSC Gene" track, not the "RefSeq Gene" track, which is the default gene definition in ANNOVAR.
 
-    If running ANNOVAR using "-dbtype knowngene", the output will be
+If running ANNOVAR using "-dbtype knowngene", the output will be
 
 ```
 line1   synonymous SNV  ROBO2:uc003dpy.2:exon4:p.V204V, 3 77613005        77613005        T       C
 ```
 
-    which is identical to what Genome Browser reports. So this example again highlight the complication of genome annotation and gene structure prediction. It is however not an inherent problem in ANNOVAR per se. Users need to exercise caution in interpreting data, and ideally run the same analysis using two different gene definition systems just to make sure that things are working as expected.
+which is identical to what Genome Browser reports. So this example again highlight the complication of genome annotation and gene structure prediction. It is however not an inherent problem in ANNOVAR per se. Users need to exercise caution in interpreting data, and ideally run the same analysis using two different gene definition systems just to make sure that things are working as expected.
 
 - Why ANNOVAR reports T182A,T190A,T300A as the amino acid change but another web server reports only T300A?
 
@@ -132,9 +132,9 @@ line1   synonymous SNV  ROBO2:uc003dpy.2:exon4:p.V204V, 3 77613005        776130
 1194    chr17   79891146        79891147        rs61747618      0 +       T       T       A/G     genomic single  unknown      0       0 coding-synon,intron     exact   1
 ```
 
-    So the reference allele "T" is not part of the "allele description" in dbSNP.
+So the reference allele "T" is not part of the "allele description" in dbSNP.
 
-    If you further go to Genome Browser page for this particular SNP, you'll see that there is a specific warning message that " UCSC reference allele does not match any observed allele from dbSNP.". So essentially there is a potential annotation error in dbSNP (at least that's what UCSC thinks), where none of the alleles for this SNP is in the reference human genome. It is possible that this is a tri-allelic SNP (although dbSNP could have annotated this as tri-allelic), or it is possible that this is merely an alignment issue (UCSC and dbSNP did their alignment independently so their top alignments may not be identical to each other). There is really nothing that ANNOVAR can do, except to throw a warning message if you turn on -verbose.
+If you further go to Genome Browser page for this particular SNP, you'll see that there is a specific warning message that " UCSC reference allele does not match any observed allele from dbSNP.". So essentially there is a potential annotation error in dbSNP (at least that's what UCSC thinks), where none of the alleles for this SNP is in the reference human genome. It is possible that this is a tri-allelic SNP (although dbSNP could have annotated this as tri-allelic), or it is possible that this is merely an alignment issue (UCSC and dbSNP did their alignment independently so their top alignments may not be identical to each other). There is really nothing that ANNOVAR can do, except to throw a warning message if you turn on -verbose.
 
 - Why ANNOVAR complains "exonic SNPs have WRONG reference alleles " in gene-based annotation?
 
@@ -184,10 +184,7 @@ line1   synonymous SNV  ROBO2:uc003dpy.2:exon4:p.V204V, 3 77613005        776130
 
 - How to annotate simple repeat regions in human genome?
 
-   Read these pages: 
-http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=simpleRepeat
-http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmsk
-http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmskRM327
+   Read these pages: http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=simpleRepeat, http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmsk, http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=199336701&c=chr1&g=rmskRM327
 
    Then pick one that matches your goal, then annotate by ANNOVAR. 
 
