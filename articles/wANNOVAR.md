@@ -121,13 +121,14 @@ This part is mainly for advanced settings of wANNOVAR. You can change the genome
 
 ### Result Description
 
-<<<<<<< HEAD
+
 The basic section in the result page. In all cases you should see this part
 ![](/img/wannovar_result_1.png)
 
 The variant filtration/reduction part and the phenotype based prioritization part
 ![](/img/wannovar_result_2.png)
-=======
+
+
 Table below lists the some columns of variants annotation from wANNOVAR. For other details, please see ANNOVAR website: 
      	[region based annotation](http://www.openbioinformatics.org/annovar/annovar_region.html) and 
      	[filter based annotation](http://www.openbioinformatics.org/annovar/annovar_filter.html).
@@ -142,7 +143,5 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
 
 
 
-![](/img/wannovar_result_1.tif)
-![](/img/wannovar_result_2.tif)
->>>>>>> 812b41ae6e0f9d2597315314b29cdc54c0a17cdd
+
 
