@@ -1,6 +1,6 @@
 ## ANNOVAR main package
 
-The latest version of ANNOVAR can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php).
+The latest version of ANNOVAR can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 

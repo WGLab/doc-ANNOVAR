@@ -60,7 +60,7 @@ The download package contains several example input files. The users can check t
 
 ## Format Conversion
 
-The `convert2annovar.pl` script can convert other "genotype calling" format into ANNOVAR format. Currently, the program can handle Samtools genotype-calling pileup format, Illumina CASAVA format, SOLiD GFF genotype-calling format, Complete Genomics variant format, and VCF format. It should be emphasized that nowadays VCF is the most widely used file format, and most other formats are no longer being used.
+The `convert2annovar.pl` script can convert other "genotype calling" format into ANNOVAR format. Currently, the program can handle Samtools genotype-calling pileup format, Illumina CASAVA format, SOLiD GFF genotype-calling format, Complete Genomics variant format, SOAPsnp format, MAQ format and VCF format. Additionally, the program can generate ANNOVAR input files from a list of dbSNP identifiers, or from transcript identifiers, or from a genomic region. It should be emphasized that nowadays VCF is the most widely used file format, and most other formats are no longer being used.
 
 ### - VCF4 format
 
@@ -95,7 +95,7 @@ The `-format vcf4` argument can be used to convert VCF files to ANNOVAR input fo
 20 1234567 microsat1 GTCT G,GTACT 50 PASS NS=3;DP=9;AA=G GT:GQ:DP 0/1:35:4 0/2:17:2 1/1:40:3
 ```
 
-More detailed explanation of this VCF file is given at [here](http://vcftools.sourceforge.net/specs.html), as I basically copied the file from there with minor modification. You can see that seven loci are contained within the file, together with many comment lines.
+More detailed explanation of this VCF file is given at [here](http://vcftools.sourceforge.net/specs.html). You can see that seven loci are contained within the file, together with many comment lines.
 
 Now let's do the conversion:
 
@@ -238,7 +238,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 
 Again, note that there are two lines for chr20:1110696, because there are two alleles at the same locus. Similarly, there are two lines (chr20:1234568 and chr20:1234567) for the same VCF record, because there are two alleles (indels) at the same locus.
 
-If you need the VCF header information, just add the -comment argument:
+If you need the VCF header information, just add the `-comment` argument:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2 -allsample -include -comment
@@ -441,7 +441,7 @@ One great utility of using `-format region` is that users can back-convert prote
  
 ### - SAMtools pileup format
 
-This section is obselete now, and in fact samtools now use mpileup, rather than the "old" pileup.
+This section is obselete now, and in fact samtools now uses mpileup, rather than the "old" pileup.
 
 Note that there are many different pileup formats, but here we are dealing with the (obselete as of 2011) "genotype-calling" pileup which contains the variant calls in one of the columns. A more detailed description is given at the Samtools website. An example to generate the "genotype-calling" pileup file is shown below:
 
@@ -507,13 +507,13 @@ NOTICE: Column 6-9 in output are heterozygosity status, SNP quality, total reads
 1 881483 881483 C A het 228 24 10
 ```
 
-As can be seen by comparing the two output files, the first line of indel is no longer in output, because 10/53\<40%.
+As can be seen by comparing the two output files, the first line of indel is no longer in output, because 10/53<40%.
 
 Some additional useful arguments include: `--altcov`, which specifies the minimum coverage for the alternative allele (the `--coverage` specifies coverage for all reads regardless of whether they support reference allele or alternative allele); `--maxcoverage`, which specifies the maximum coverage level to print out this variant; `--includeinfo`, which specifies that all information in the input line should be included in the output line by appending them after the printed columns.
 
 After the program finishes, it will print out some statistics. Normally, for whole-genome sequencing on humans, the heterozytoes:homozygotes ratio should be around 2:1, the transitions:transversions ratio should be 2:1.
 
->>>Advanced notes: When the chromosome is "M", ANNOVAR will not print out "hom" or "het", instead, it will print out a number between 0 and 1 that suggest the fraction of reads that support alternative alleles. Use `-chrmt` argument if mitochondria is not annotated as M in your alignment.
+> *Advanced Notes: When the chromosome is "M", ANNOVAR will not print out "hom" or "het", instead, it will print out a number between 0 and 1 that suggest the fraction of reads that support alternative alleles. Use `-chrmt` argument if mitochondria is not annotated as M in your alignment.*
 
  
 ### - Complete Genomics format

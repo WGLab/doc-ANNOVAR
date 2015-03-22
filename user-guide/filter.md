@@ -8,13 +8,11 @@ These functionalities mentioned above can be performed using the `--filter` oper
 
 See general instructions below, but changing command line argument to 1000g2014oct. Note that ANNOVAR does provide 1000g2014sep and 1000g2014aug, but they are obselete now!
 
-The 2014Oct data set contains alternative allele frequency data in 1000 Genomes Project for autosomes and sex chromosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). The data is based on 201409 collection v5 (based on 201305 alignment).
+The 2014Oct data set contains alternative allele frequency data in 1000 Genomes Project for autosomes and sex chromosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). The data is based on 201409 collection v5 (based on 201305 alignment). See below for detailed usage instructions on a different version of the dataset.
 
 ## 1000 Genomes Project (2012 April) annotations (obselete!)
 
-This is based on phase 1 release v3 called from 20101123 alignment, and the database is prepared using input compiled here), thanks to Mehdi Pirooznia @ Hopkins. The populations include ALL, AMR, AFR, ASN and EUR.
-
-In addition, I also performed liftOver and provide these data sets in hg18 coordinate, to faciliate researchers working on hg18 coordinates.
+This is based on phase 1 release v3 called from 20101123 alignment. The populations include ALL, AMR, AFR, ASN and EUR. In addition, I also performed liftOver and provide these data sets in hg18 coordinate, to faciliate researchers working on hg18 coordinates.
 
 To download the database, use following:
 
@@ -127,8 +125,7 @@ NOTICE: Scanning filter database humandb/hg19_ASN.sites.2012_04.txt...Done
 
 You'll see that the R381Q in IL23R and R702W in NOD2 (both SNPs are pretty famous) are not found in Asians from the 1000 Genomes Project.
 
->>>>Technical notes: ANNOVAR has the ability to handle VCF file directly. Therefore, you can just directly interrogate 1000G data as a VCF database. For example, you can do this for 2011 May release of 1000G data:
-
+> *Technical notes: ANNOVAR has the ability to handle VCF file directly. Therefore, you can just directly interrogate 1000G data as a VCF database. For example, you can do this for 2011 May release of 1000G data:*
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl inputfile ./ -vcfdbfile ALL.wgs.phase1.projectConsensus.snps.sites.vcf -filter -dbtype vcf
 ```
@@ -171,11 +168,11 @@ snp138 rs2241880 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in
 
 Two output files are generated. The `ex1.hg19_snp138_filtered` file contains SNPs not in dbSNP. The `ex1.hg19_snp130_dropped` file contains variants that are annotated in dbSNP, and print out their rs identifiers (as the second column)
 
->>>>*Technical Notes*: dbSNP 129 is generally regarded as the last "clean" dbSNP without "contamination" from 1000 Genomes Project and other large-scale next-generation sequencing projects.Per user request, I now make a dbSNP 129 in hg19 coordinate, so that users can actually use it to benchmark their variant calling algorithms, given that dbSNP 129 does not contain the "contaminations" from variants calls from next-generation sequencing.
+> *Technical Notes: dbSNP 129 is generally regarded as the last "clean" dbSNP without "contamination" from 1000 Genomes Project and other large-scale next-generation sequencing projects.Per user request, I now make a dbSNP 129 in hg19 coordinate, so that users can actually use it to benchmark their variant calling algorithms, given that dbSNP 129 does not contain the "contaminations" from variants calls from next-generation sequencing.*
 
->>>>Advanced Notes: Since January 2011, per users' request, ANNOVAR now handles tri-allelic or quad-allelic SNPs. For example, rs12931472 can have four alleles (A, C, G, T) with wildtype as A, so any non-A mutation will be filtered by ANNOVAR, and rs12931472 will be printed out during filtering. In previous versions of ANNOVAR, only di-allelic SNPs are handled.
+> *Technical Notes: Since January 2011, per users' request, ANNOVAR now handles tri-allelic or quad-allelic SNPs. For example, rs12931472 can have four alleles (A, C, G, T) with wildtype as A, so any non-A mutation will be filtered by ANNOVAR, and rs12931472 will be printed out during filtering. In previous versions of ANNOVAR, only di-allelic SNPs are handled.*
 
->>>>Advanced Notes: These annotations may be assigned to "SNPs" in dbSNP: 'unknown','single','in-del','het','microsatellite','named','mixed','mnp','insertion','deletion'. ANNOVAR will only care about 'single', 'deletion', 'in-del', 'insertion' and ignore others. 'single' SNP accounts for the vast majority of dbSNP entries.
+> *Technical Notes: These annotations may be assigned to "SNPs" in dbSNP: 'unknown','single','in-del','het','microsatellite','named','mixed','mnp','insertion','deletion'. ANNOVAR will only care about 'single', 'deletion', 'in-del', 'insertion' and ignore others. 'single' SNP accounts for the vast majority of dbSNP entries.*
 
 In 2012, sevearl additional "NonFlagged" dbSNP database are provided by me. Basically, these are dbSNP files subtracting Flagged dbSNP entries. Flagged SNPs include SNPs < 1% minor allele frequency (MAF) (or unknown), mapping only once to reference assembly, flagged in dbSnp as "clinically associated". Some users have reported that some SNPs are still flagged as "clinically associated" in the NonFlagged set; this is because these SNPs are not found in the Flagged set from UCSC, possibly because they are more recently associated with diseases so are not recorded in Flagged database yet.
 
@@ -211,13 +208,11 @@ To give users an idea of the size of the various dbSNP databases prepared by me 
 
 The dbSNP entries does not include allele frequency measure, so users should exercise caution when using dbSNP as a filtering step to identify causal variants for Mendelian diseases, as some dbSNP entries may well be related to disease susceptibility.
 
->>>>IMPORTANT NOTE: the dbSNP commonSNP track from UCSC is extremely incomplete and users really should not use it for annotation under any circumstance. Use the 1000g2014oct database or better the popfreq_all database provided in ANNOVAR for this purpose instead.
+> *Technical Notes: the dbSNP commonSNP track from UCSC is extremely incomplete and users really should not use it for annotation under any circumstance. Use the 1000g2014oct database or better the popfreq_all database provided in ANNOVAR for this purpose instead.*
 
 ## LJB\* (dbNSFP) non-synonymous variants annotation
 
-The LJB\* databases (for historical reasons, it is named as ljb rather than dbNSFP in ANNOVAR) include SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores. These scores were retrieved from the dbNSFP and big thanks to the authors (Liu, Jian, Boerwinkle), hence the name ljb. As of 2015, the lastest ljb database is ljb26. The description below refers to ljb23 but the format/usage is very similar.
-
-In February 2014, I updated the database to version 2.3, so the new keyword ljb23 is used. There are several differences: (1) additional scores based on latest gene models are added into the version 2.3 file, compared to version 2 file (2) we added two new scores developed in our labs, called MetaSVM and MetaLR scores (4) the version 2.3 scores include raw/original scores, as well as converted scores (normalized to 0-1 range with higher scores indicating more deleterious variants) and categorical predictions. Previous versions of the database lead to a lot of confusion and adds my support burden significantly and I hope that the version will be much easier to understand and use and that I get less support emails.
+The LJB\* databases (for historical reasons, it is named as ljb rather than dbNSFP in ANNOVAR) include SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores. These scores were retrieved from the dbNSFP and big thanks to the authors (Liu, Jian, Boerwinkle), hence the name ljb. **As of 2015, the lastest ljb database is ljb26.** The description below refers to ljb23 but the format/usage is very similar.
 
 The keyword used for downloading these data include: ljb23_sift, ljb23_pp2hdiv, ljb23_pp2hvar, ljb23_lrt, ljb23_mt, ljb23_ma, ljb23_fathmm, ljb23_metasvm, ljb23_metalr, ljb23_gerp++, ljb23_phylop, ljb23_siphy, ljb23_all. The ljb23_all includes ALL scores, and it is very useful in table_annovar.pl.
 
@@ -237,15 +232,15 @@ Detailed information for all the LJB23 databases are given below:
 | GERP++ (gerp++)  |  89076718  |  higher scores are more deleterious  |
 | PhyloP (phylop)  |  89553090  |  higher scores are more deleterious  |
 | SiPhy (siphy)  |   88269630  |  higher scores are more deleterious   |
- 
+
 
 Some examples were given below:
 
-### - LJB23_SIFT annotation
+### - SIFT annotation
 
-EXTREMELY IMPORTANT!!!!!! in first version of dbNSFP (ljb_sift), the scores were calculated as 1-SIFT. In the updated version 2 (ljb2_sift), the scores were now the SIFT score itself. In version 2.3, the default scores are also the SIFT score itself, but you can optionally print out the "converted score" which is 1-SIFT, and the categorical prediction. This mean a variant with score\<0.05 is predicted as deleterious.
+EXTREMELY IMPORTANT!!!!!! in first version of dbNSFP (ljb_sift), the scores were calculated as 1-SIFT. In the updated version 2 (ljb2_sift), the scores were now the SIFT score itself. In version 2.3 and later, the default scores are also the SIFT score itself, but you can optionally print out the "converted score" which is 1-SIFT, and the categorical prediction. This mean a variant with score<0.05 is predicted as deleterious.
 
-In the example below, two missense variants were predicted as deleterious based on SIFT scores (\<0.05). The command should take merely a few seconds.
+In the example below, two missense variants were predicted as deleterious based on SIFT scores (<0.05). The command should take merely a few seconds.
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_sift -buildver hg19 -out ex1 example/ex1.avinput humandb/
@@ -262,7 +257,7 @@ ljb23_sift 0.02 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-syno
 ljb23_sift 0.57 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
 
-To show the categorical predictions in the output file, add the -otherinfo argument:
+To show the categorical predictions in the output file, add the `-otherinfo` argument:
 
 ```
 [kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_sift -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
@@ -285,9 +280,9 @@ The three comma-separated numbers are raw score, converted score and categorical
 
 There are two databases for PolyPhen2: HVAR and HDIV. They are explained below:
 
-ljb2_pp2hvar should be used for diagnostics of Mendelian diseases, which requires distinguishing mutations with drastic effects from all the remaining human variation, including abundant mildly deleterious alleles.The authors recommend calling "probably damaging" if the score is between 0.909 and 1, and "possibly damaging" if the score is between 0.447 and 0.908, and "benign" is the score is between 0 and 0.446.
+- ljb2_pp2hvar should be used for diagnostics of Mendelian diseases, which requires distinguishing mutations with drastic effects from all the remaining human variation, including abundant mildly deleterious alleles.The authors recommend calling "probably damaging" if the score is between 0.909 and 1, and "possibly damaging" if the score is between 0.447 and 0.908, and "benign" is the score is between 0 and 0.446.
 
-ljb2_pp2hdiv should be used when evaluating rare alleles at loci potentially involved in complex phenotypes, dense mapping of regions identified by genome-wide association studies, and analysis of natural selection from sequence data. The authors recommend calling "probably damaging" if the score is between 0.957 and 1, and "possibly damaging" if the score is between 0.453 and 0.956, and "benign" is the score is between 0 and 0.452.
+- ljb2_pp2hdiv should be used when evaluating rare alleles at loci potentially involved in complex phenotypes, dense mapping of regions identified by genome-wide association studies, and analysis of natural selection from sequence data. The authors recommend calling "probably damaging" if the score is between 0.957 and 1, and "possibly damaging" if the score is between 0.453 and 0.956, and "benign" is the score is between 0 and 0.452.
 
 An example is given below:
 
@@ -327,7 +322,7 @@ ljb23_pp2hvar 0.005,B 2 234183368 234183368 A G comments: rs2241880 (T300A), a S
 
 In the output, the scores and predictions are separated by comma. There are three possible predictions: "D" ("porobably damaging"), "P" ("possibly damaging") and "B" ("benign").
 
-Technical comments: The original LJB23 database provided by original authors may contain multiple annotations for each mutation. For example, the chr1:67705958G>A mutation has two separate records, one showing E>K amino acid substitution, and the other showing R>Q amino acid substitution. The former does not have any functional scores associated, so in my compilation, only the latter will enter into the database. Next, in the LJB2 database, even for R>Q substution, it can have multiple scores such as "1.0;1.0;1.0;1.0;0.993;1.0;1.0;1.0;0.999" and multiple predictions such as "D;D;D;D;D;D;D;D;D", probably due to multiple transcriptional isoforms. In this case, only the largest score (1 is the largest score among multiple isoforms), as well as its associated D/P/B annotation, will be used in ANNOVAR database.
+> *Technical comments: The original LJB23 database provided by original authors may contain multiple annotations for each mutation. For example, the chr1:67705958G>A mutation has two separate records, one showing E>K amino acid substitution, and the other showing R>Q amino acid substitution. The former does not have any functional scores associated, so in my compilation, only the latter will enter into the database. Next, in the LJB2 database, even for R>Q substution, it can have multiple scores such as "1.0;1.0;1.0;1.0;0.993;1.0;1.0;1.0;0.999" and multiple predictions such as "D;D;D;D;D;D;D;D;D", probably due to multiple transcriptional isoforms. In this case, only the largest score (1 is the largest score among multiple isoforms), as well as its associated D/P/B annotation, will be used in ANNOVAR database.*
 
 ### - MutationTaster annotation
 
@@ -446,7 +441,7 @@ ljb23_metasvm -0.696,0.327,T 16 50756540 50756540 G C comments: rs2066845 (G908R
 ljb23_metasvm -1.007,0.249,T 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
 
-Similarly, the comma-delimited fields are raw score, converted score (0-1 range, higher score denoting more deleterious variants) and predictions. All the missense variants were predicted as tolerated. Note that the model building used variants that are known to cause Mendelian diseases so the method is specifically designed to work for Mendelian diseases but not complex diseases. These variants all lead to increased susceptibility to NOD2 with odds ratio\<2, so they are not predicted as deleterious by MetaSVM.
+Similarly, the comma-delimited fields are raw score, converted score (0-1 range, higher score denoting more deleterious variants) and predictions. All the missense variants were predicted as tolerated. Note that the model building used variants that are known to cause Mendelian diseases so the method is specifically designed to work for Mendelian diseases but not complex diseases. These variants all lead to increased susceptibility to NOD2 with odds ratio<2, so they are not predicted as deleterious by MetaSVM.
 
 ### - MetaLR annotation
 
@@ -468,8 +463,6 @@ ljb23_metalr 0.000,T 2 234183368 234183368 A G comments: rs2241880 (T300A), a SN
 ```
 
 Only two comma-delimited fields are shown here, indicating raw score (0-1 range) and binary prediction. All variants were predicted as tolerated.
-
- 
 
 ### - GERP++ annotation
 
@@ -533,7 +526,7 @@ ljb23_siphy 12.660 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP 
 
 As you can see, SiPhy differs from GERP++ and PhyloP, and predicted that the last variant is also highly conserved. Therefore, even conceptually similar tools may sometimes generate drastically different results. It is a good idea to use several techniques when doing funcitonal annotations of missense variants.
 
-Notes: it is important for users to note that (1) these types of "conservation scores" only considers conservation level at the current base, and they do not care about the actual nucleotide identity so synonymous and non-synonymous variants at the same site will be scored as the same (2) these scores are not designed specifically for finding causal variants for Mendelian diseases, but for finding functionally important sites, so variants that confer increased susceptibility may be scored well.
+> *Notes: it is important for users to note that (1) these types of "conservation scores" only considers conservation level at the current base, and they do not care about the actual nucleotide identity so synonymous and non-synonymous variants at the same site will be scored as the same (2) these scores are not designed specifically for finding causal variants for Mendelian diseases, but for finding functionally important sites, so variants that confer increased susceptibility may be scored well.*
 
 ### - ljb23_all annotation
 
@@ -541,9 +534,11 @@ You can also just print out all scores for given variants using ljb23, by adding
 
 The columns are LJB23_SIFT_score LJB23_SIFT_score_converted LJB23_SIFT_pred LJB23_Polyphen2_HDIV_score LJB23_Polyphen2_HDIV_pred LJB23_Polyphen2_HVAR_score LJB23_Polyphen2_HVAR_pred LJB23_LRT_score LJB23_LRT_score_converted LJB23_LRT_pred LJB23_MutationTaster_score LJB23_MutationTaster_score_converted LJB23_MutationTaster_pred LJB23_MutationAssessor_score LJB23_MutationAssessor_score_converted LJB23_MutationAssessor_pred LJB23_FATHMM_score LJB23_FATHMM_score_converted LJB23_FATHMM_pred LJB23_RadialSVM_score LJB23_RadialSVM_score_converted LJB23_RadialSVM_pred LJB23_LR_score LJB23_LR_pred LJB23_GERP++ LJB23_PhyloP LJB23_SiPhy.
 
+When using `table_annovar.pl`, it is best to use ljb23_all as the keyword, so that all these columns will be printed out automatically in the output file.
+
 ## ESP (exome sequencing project) annotations
 
-The ESP is a NHLBI funded exome sequencing project aiming to identify genetic variants in exonic regions from over 6000 individuals, including healthy ones as well as subjects with different diseases. The variant call data set is constantly being updated. ANNOVAR provide the allele frequency data so that users can evaluate if their variants have been previously observed in large population cohorts. As the size of the database is more than 1000 Genomes Project and the fold coverage is far higher, this data set will be particularly useful for users with exome sequencing data sets. As of October 2012, esp5400 and esp6500 are available, respresnting summary statistics from 5400 exoms and 6500 exomes, respectively. As of Feburary 2013, the most recent version of ESP is esp6500si, so whenever possible, users should use this database for annotation. Compared to esp6500, the esp6500si contains more calls, and indel calls and chrY calls.
+The ESP is a NHLBI funded exome sequencing project aiming to identify genetic variants in exonic regions from over 6000 individuals, including healthy ones as well as subjects with different diseases. The variant call data set is constantly being updated. ANNOVAR provide the allele frequency data so that users can evaluate if their variants have been previously observed in large population cohorts. As the size of the database is more than 1000 Genomes Project and the fold coverage is far higher, this data set will be particularly useful for users with exome sequencing data sets. As of October 2012, esp5400 and esp6500 are available, respresnting summary statistics from 5400 exoms and 6500 exomes, respectively. As of March 2015, the most recent version of ESP is esp6500siv2, so whenever possible, users should use this database for annotation. The instructions below was compiled for esp6500si.
 
 The following commands download ESP6500si database for all ethnicity groups, then scan the `ex1.avinput` file against the database to find SNPs observed in ESP6500si:
 
@@ -599,7 +594,7 @@ esp6500si_ea 0.523953 2 234183368 234183368 A G comments: rs2241880 (T300A), a S
 
 The same six variants are found in esp6500si_all and esp6500si_ea database, but with different allele frequencies.
 
-It is possible to use an allele frequency threshold. Unfortunately, the "maf_threshold" argument is reserved for 1000G data set only. The "score_threshold" argument can be used for all other databases. This is due to historical reasons.
+It is possible to use an allele frequency threshold. Unfortunately, the `-maf_threshold` argument is reserved for 1000G data set only. The `-score_threshold` argument can be used for all other databases. This is due to historical reasons.
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype esp6500si_ea -build hg19 -out ex1 example/ex1.avinput humandb/ -score_threshold 0.05
@@ -616,7 +611,7 @@ esp6500si_ea 0.956385 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of 
 esp6500si_ea 0.523953 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
 
-Compared to the results above, the two SNPs with MAF\<0.05 are no longer in the \*dropped file. It is also possible to apply a `-reverse` argument:
+Compared to the results above, the two SNPs with MAF<0.05 are no longer in the \*dropped file. It is also possible to apply a `-reverse` argument:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype esp6500si_ea -build hg19 -out ex1 example/ex1.avinput humandb/ -score_threshold 0.05 -reverse
@@ -635,11 +630,11 @@ esp6500si_ea 0.014535 16 50756540 50756540 G C comments: rs2066845 (G908R), a no
 esp6500si_ea 0.022171 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
 ```
 
-Now, only rare SNPs that are observed in esp6500si_ea are printed to the \*dropped file.
+Now, only rare SNPs that are observed in esp6500si_ea are printed to the *dropped file.
 
 ## GERP++ annotations
 
-GERP identifies constrained elements in multiple alignments by quantifying substitution deficits (see http://mendel.stanford.edu/SidowLab/downloads/gerp/ for details). I made annotation databases for all mutations with GERP++>2 in human genome, as this threshold is typically regarded as evolutioanrily conserved and potentially functional. Anything less than 2 is not informative, which helps reduce file size substantially.
+GERP identifies constrained elements in multiple alignments by quantifying substitution deficits (see <http://mendel.stanford.edu/SidowLab/downloads/gerp/> for details). I made annotation databases for all mutations with GERP++>2 in human genome, as this threshold is typically regarded as evolutioanrily conserved and potentially functional. Anything less than 2 is not informative, which helps reduce file size substantially.
 
 The database (in hg19 or hg18 coordinate) needs to be downloaded first. Note that this is actually a large file (around 36GB) so it may take a while to download and decompress.
 
@@ -700,14 +695,12 @@ Each technical platform, such as Complete Genomics and Illumina HiSeq, may gener
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -downdb -webfrom annovar -build hg19 cg46 humandb/
 
-
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -out ex1 -dbtype cg46 -build hg19 example/ex1.avinput humandb/
 NOTICE: the --dbtype cg46 is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_cg46_dropped, other variants are written to ex1.hg19_cg46_filtered
 NOTICE: Processing next batch with 12 unique variants in 12 input lines
 NOTICE: Database index loaded. Total number of bins is 2783303 and the number of bins to be scanned is 12
 NOTICE: Scanning filter database humandb/hg19_cg46.txt...Done
-
 
 [kaiwang@biocluster ~/]$ cat ex1.hg19_cg46_dropped
 cg46 0.011 1 13211293 13211294 TC - comments: rs59770105, a 2-bp deletion
@@ -725,7 +718,7 @@ The commands above first download the "cg46" database to the `humandb/` director
 
 As you can see, the rs59770105 SNP occured only once in the cg46 database, with allele frequency of 0.011. If you compare the results with the esp6500_ea results, you will see that more SNPs can be identified from cg46 (which is not surprising as cg46 is for whole-genome variants), but the allele frequency measure in esp6500_ea may be more accurate given the larger number of samples from that database.
 
-We can set up a MAF threshold of 0.05, so that only very common SNPs are dropped. We also add -out argument to specify output file name prefix:
+We can set up a MAF threshold of 0.05, so that only very common SNPs are dropped. We also add `-out` argument to specify output file name prefix:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype cg46 -build hg19 example/ex1.avinput humandb/ -score_threshold 0.05 -out ex1
@@ -734,7 +727,6 @@ NOTICE: Variants matching filtering criteria are written to ex1.hg19_cg46_droppe
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 2783303 and the number of bins to be scanned is 12
 NOTICE: Scanning filter database humandb/hg19_cg46.txt...Done
-
 
 [kaiwang@biocluster ~/]$ cat ex1.hg19_cg46_dropped
 cg46 0.620 1 162736463 162736463 C T comments: rs1000050, a SNP in Illumina SNP arrays
@@ -784,7 +776,6 @@ NOTICE: Variants matching filtering criteria are written to ex1.hg19_popfreq_all
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 2816654 and the number of bins to be scanned is 12
 NOTICE: Scanning filter database humandb/hg19_popfreq_all.txt...Done
-
 
 [kaiwang@biocluster ~/]$ cat ex1.hg19_popfreq_all_dropped
 popfreq_all 0.011,.,.,.,.,.,.,.,.,0.011 1 13211293 13211294 TC - comments: rs59770105, a 2-bp deletion
@@ -839,7 +830,6 @@ NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 286120 and the number of bins to be scanned is 12
 NOTICE: Scanning filter database humandb/hg19_cadd.txt...Done
 
-
 [kaiwang@biocluster ~/]$ cat ex1.hg19_cadd_dropped 
 cadd -0.910814 1 1404001 1404001 G T comments: rs149123833, a SNP in 3' UTR of ATAD3C
 cadd 0.515537 1 162736463 162736463 C T comments: rs1000050, a SNP in Illumina SNP arrays
@@ -876,7 +866,7 @@ cadd 4.373037,23.1 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-s
 cadd 1.504884,10.98 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
 
-The comma-delimited values are raw scores and phred-scaled scores. Basically, for scaled scores, 10 means 10% percentile highest scores, 20 means 1% percentile highest scores, and 30% means 0.1% percentile highest scores. So we do find one \<1% percentile variant in the dataset.
+The comma-delimited values are raw scores and phred-scaled scores. Basically, for scaled scores, 10 means 10% percentile highest scores, 20 means 1% percentile highest scores, and 30% means 0.1% percentile highest scores. So we do find one <1% percentile variant in the dataset.
 
 I evaluated the performance to annotate ~30,000 variants from an exome sequencing project. It takes 2.5 minutes in my computer.
 

@@ -6,11 +6,11 @@ It is important to explain the difference between region-based annotation and fi
 
 Generally speaking , users can select annotation tracks that are already provided by the UCSC Genome Browser annotation databases. Most of these annotation tracks have similar file formats, but sometimes they differ (for example, different number of columns in the file). ANNOVAR will try to be smart in guessing the correct column headers, and usually it works well. However, ANNOVAR may also provide built-in region annotation databases, which can be downloaded by `-downdb -webfrom annovar`. Finally, users can supply your own region annotation databases in generic, BED or GFF formats.
 
-## Most conserved element annotation
+## Conserved genomic elements annotation
 
 One of the particularly useful function is to identify variants at conserved genomic regions. For this analysis, users can choose several different annotation tracks. For example, when handling human genomes, users may want to choose tracks such as the 17-way / 28-way / 44-way most conserved track (for NCBI 36 genome assembly), or 46-way / 46-way primates / 46-way placental / 100-way alignment (for NCBI 37 genome assembly). ANNOVAR will attempt to identify the subset of variants that either fall within the conserved regions (for SNPs and short in-dels), or overlap with these conserved regions (for large-scale CNVs, and the extent of overlap is user-configurable).
 
-Notes: these are phastCons conserved elements, which means specific genomic regions that are conserved. These are different from base-level conservation scores which are typically referred to as PhyloP scores. For base-level conservation scores, ANNOVAR provides filter-based annotation for exonic variants.
+> *Technical Notes: these are phastCons conserved elements, which means specific genomic regions that are conserved. These are different from base-level conservation scores which are typically referred to as PhyloP scores. For base-level conservation scores, ANNOVAR provides filter-based annotation for exonic variants.*
 
 Here ANNOVAR uses phastCons 46-way alignments to annotate variants that fall within conserved genomic regions. Here the `--regionanno` argument need to be supplied so that the program knows what to do. In addition, the `--dbtype` need to be specified so that the program knows which annotation database file to interrogate. Make sure that the annotation database is already downloaded (the command is `annotate_variation.pl -downdb phastConsElements46way humandb/`).
 
@@ -70,7 +70,7 @@ phastConsElements100way Score=327;Name=lod=29 13 20763686 20763686 G - comments:
 phastConsElements100way Score=592;Name=lod=422 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-## Transcription factor binding site annotation
+## Transcription factor binding site
 
 Similarly, annotation of TFBS can be done by the commands below. Download the database if it is not already downloaded. Users should be aware that there are many different types of TFBS annotations that ANNOVAR can use. See FAQ entry for more explanation. The example below uses the tfbsConsSites region annotation, which contains the location and score of transcription factor binding sites conserved in the human/mouse/rat alignment, where score and threshold are computed with the Transfac Matrix Database. See details here.
 
@@ -95,9 +95,9 @@ tfbsConsSites Score=1000;Name=V$STAT4_01,V$AML1_01,V$SRY_01,V$MZF1_01 13 2079717
 
 The second column again has the Score and Name annotation, which represents the normalized score and binding site motif name. Note that some caution should be taken when interpreting the results and users may want to filter the prediction data (for example, only consider variants within 1kb of transcription start site of genes as truly disrupting potential TFBS).
 
-Note that the name such as V$PAX5_02 merely indicates a name for a motif that some transcription factors recognize. It is up to the user to investigate what transcription factors may recognize this motif. There are many online resources to help with this aspect, for example, MSigDB provides gene list that recognize these motifs, see for example http://www.broadinstitute.org/gsea/msigdb/cards/V$PAX5_02.
+Note that the name such as V$PAX5_02 merely indicates a name for a motif that some transcription factors recognize. It is up to the user to investigate what transcription factors may recognize this motif. There are many online resources to help with this aspect, for example, MSigDB provides gene list that recognize these motifs, see for example <http://www.broadinstitute.org/gsea/msigdb/cards/V$PAX5_02>.
 
-## Identify cytogenetic band for genetic variants
+## Identify cytogenetic band
 
 To identify Giemsa-stained chromosomes bands, the `-dbtype cytoBand` can be used. The second column in the output file below represent cytogenetic bands. When a variant spans multiple bands, they will be connected by a dash (for example, 1q21.1-q23.3).
 
@@ -274,7 +274,7 @@ The above command identifies 3 variants previously reported in GWAS (note that t
 
 ENCODE now provides huge amounts of data in Genome Browser tracks that ANNOVAR can annotate against, such as transcribed regions, H3K4Me1 regions, H3K4Me3 regions, H3K27Ac regions, DNaseI hypersensitivity regions, transcription factor ChIP-Seq regions, etc. Some specific examples are shown below, but obviously, there are hundreds of ENCODE annotation tracks that can be used in ANNOVAR.
 
->>>>*Technical Notes:* Although UCSC may provide more ENCODE annotations for hg19 in the future, at least at end of 2013 rich annotation is only available for hg18. The examples below all used hg18. If you are interested to annotate your hg19 variants, some of these databases may not be available and you should check Table Browser yourself to know what is available and what is not. If you absolutely need to use these specific tables, it is best that you liftOver the database yourself to hg19 for annotation.
+> *Technical Notes: Although UCSC may provide more ENCODE annotations for hg19 in the future, at least at end of 2013 rich annotation is only available for hg18. The examples below all used hg18. If you are interested to annotate your hg19 variants, some of these databases may not be available and you should check Table Browser yourself to know what is available and what is not. If you absolutely need to use these specific tables, it is best that you liftOver the database yourself to hg19 for annotation.*
 
 A general rule of thumb is that:
 
@@ -388,6 +388,7 @@ wgEncodeBroadHmmGm12878HMM Name=12 Repressed 13 19661686 19661686 G - comments: 
 wgEncodeBroadHmmGm12878HMM Name=12 Repressed,4 Strong Enhancer,2 Weak Promoter,3 Poised Promoter,1 Active Promoter,6 Weak Enhancer,8 Insulator,13 Heterochrom/lo,15 Repetitive/CNV,14 Repetitive/CNV,7 Weak Enhancer,11 Weak Txn,5 Strong Enhancer 13 19695176 20003944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
+
 The details of the HMM state definition can be found below. The prediction is given in the "Name" field (second column in the output file). In the result above, the GJB6 deletion emcompasses multiple elements, including repressor, enhancer, promoter and so on. The rs11209026 SNP covers a weak transcriptional unit. The SNPs in NOD2 overlaps transcriptional elongation elements, the frameshift mutation in GJB2 covers a repressor, and other SNPs cover heterochromatin regions.
 
 - State 1 - Active Promoter
@@ -405,7 +406,6 @@ The details of the HMM state definition can be found below. The prediction is gi
 - State 13 - Heterochromatin; low signal
 - State 14 - Repetitive/Copy Number Variation
 - State 15 - Repetitive/Copy Number Variation
-
 
 For example, the rs1801002 mutation was predicted to be in state 12 (polycomb-repressed region) above in GM12878 cells, even though it is also a coding mutation. We can confirm this observation in the Genome Browser shot below. It is interesting to see that it serves different functions in different cell lines (but of course everything is based on prediction and this may or may not be reliable).
 
@@ -430,7 +430,7 @@ Users can change "hotspot" to "peaks" to find the most significant hypersensitiv
 
 ## Annotating custom-made databases conforming to GFF3 (Generic Feature Format version 3)
 
-ANNOVAR also offer some rudimentary ability to annotate variants against GFF3-formatted annotation databases, using the region-based annotation procedure. In this case, the -dbtype is 'gff3', but users need to specify a -gff3dbfile argument as well to supply the actual database file to be scanned. The GFF3 format specification is described here: http://www.sequenceontology.org/gff3.shtml. One example database is provided in the ANNOVAR package:
+ANNOVAR also offer some rudimentary ability to annotate variants against GFF3-formatted annotation databases, using the region-based annotation procedure. In this case, the -dbtype is 'gff3', but users need to specify a -gff3dbfile argument as well to supply the actual database file to be scanned. The GFF3 format specification is described here: <http://www.sequenceontology.org/gff3.shtml>. One example database is provided in the ANNOVAR package:
 
 ```
 [kai@biocluster ~/]$ head humandb/hg18_example_db_gff3.txt 

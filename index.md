@@ -7,7 +7,5 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 - Filter-based annotation: identify variants that are reported in dbSNP, or identify the subset of common SNPs (MAF>1%) in the 1000 Genome Project, or identify subset of non-synonymous SNPs with SIFT score>0.05, or find intergenic variants with GERP++ score < 2, or many other annotations on specific mutations.
 - Other functionalities: Retrieve the nucleotide sequence in any user-specific genomic positions in batch, identify a candidate gene list for Mendelian diseases from exome data, and other utilities.
 
-TABLE_ANNOVAR is a script within the ANNOVAR package that is very popular among users. Given a list of variants from whole-exome or whole-genome sequencing, it will generate an Excel-compatible file with gene annotation, amino acid change annotation, SIFT scores, PolyPhen scores, LRT scores, MutationTaster scores, PhyloP conservation scores, GERP++ conservation scores, dbSNP identifiers, 1000 Genomes Project allele frequencies, NHLBI-ESP 6500 exome project allele frequencies and other information.
-
-Please click the menu items to navigate through this website. If you have questions, comments, feature requests, or bug reports, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
+Please click the menu items to navigate through this website. Check [here](misc/whatsnew.md) to see what is new in ANNOVAR. If you have questions, comments, feature requests, or bug reports, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
 
