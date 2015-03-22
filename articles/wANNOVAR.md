@@ -4,6 +4,8 @@
 
 Below we describe the input fields and output format in wANNOVAR.
 
+---
+
 ### Basic Information
 
 - Email
@@ -25,6 +27,8 @@ This is the place where you should submit your variant calls, either by a file o
 
 Five different types of formats could be accepted here, separately, vcf, tsv, annovar, gff3 and masterVar.
 The details of these formats could be seen through the Zoom In icon in the Parameter Setting section.
+
+---
 
 ### Phenotype/Disease Specific Prioritization
 
@@ -62,6 +66,8 @@ The first row 'Input Gene List' is the gene list extracted from the ANNOVAR outp
 > *Tip: After your first run of wANNOVAR, you can run Phenotype/Disease specific prioritization with some other terms without the need to run wANNOVAR, which is more time and computation efficient as Phenolyzer could finish in one minute and wANNOVAR usuually takes more than 5 minutes. What you need to do is just take the **Input Gene List** here, go to Phenolyzer website and submit it and your new phenotypes there!*
 
 In the result page, 'Result Gene List' is the output from Phenolyzer, with the information of ranks, gene names, NCBI IDs, and scores. 'Show' will lead you to the Phenolyzer's network visualization. You could do interactive research there, like finding all the genes and diseases interacting with one gene by **double click** the gene. You can also see the details about how one gene is discovered through the prioritization algorithm.  
+
+---
 
 ### Parameter Setting
 
@@ -102,6 +108,19 @@ This part is mainly for advanced settings of wANNOVAR. You can change the genome
 
 ### - Custom Filtering
 
+- Depth threshold (VCF only): Specify read depth threshold.
+- Quality threshold (VCF only): Specify quality score threshold.
+- MAF in variants filtering: Specify Minor allele frequency threshold.
+- dbSNP version: Specify dbSNP version for filtering.
+- disease type: Activated When "custom filtering" option is selected. Identify candidate genes with more than two deleterious alleles (compound heterozygote or homozygote or hemizygote in chrX in males) are found in the same gene for "recessive". Identify candidate genes with more than one deleterious allele is found in the gene for "dominant".
+- Variants filtering: Activated When "custom filtering" option is selected. Specify the optimized filtering step according to users' samples.
+- Variant file on controls: A variants list file is required when "not in controls" step is selected in "Variants filtering pipeline". wANNOVAR will remove the candidate variants which are also occured in controls.
+- Paste variants on controls: Paste the variants list on controls directly.
+
+---
+
+### Result Description
+
 Table below lists the some columns of variants annotation from wANNOVAR. For other details, please see ANNOVAR website: 
      	[region based annotation](http://www.openbioinformatics.org/annovar/annovar_region.html) and 
      	[filter based annotation](http://www.openbioinformatics.org/annovar/annovar_filter.html).
@@ -114,7 +133,8 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
 | AAChange | Amino acid changes |
 | Conserved | Region-level phastCons LOD scores |
 
-### Result Description
+
+
 ![](/img/wannovar_result_1.tif)
 ![](/img/wannovar_result_2.tif)
 
