@@ -260,14 +260,14 @@ ljb23_sift 0.57 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in 
 To show the categorical predictions in the output file, add the `-otherinfo` argument:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_sift -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_sift -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_sift is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_sift_dropped, other variants are written to ex1.hg19_ljb23_sift_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 187938 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_sift.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_sift_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_sift_dropped
 ljb23_sift 0.1,0.90,T 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_sift 0.01,0.99,D 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_sift 0.02,0.98,D 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -287,14 +287,14 @@ There are two databases for PolyPhen2: HVAR and HDIV. They are explained below:
 An example is given below:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_pp2hvar -buildver hg19 -out ex1 example/ex1.avinput humandb/
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_pp2hvar -buildver hg19 -out ex1 example/ex1.avinput humandb/
 NOTICE: the --dbtype ljb23_pp2hvar is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_pp2hvar_dropped, other variants are written to ex1.hg19_ljb23_pp2hvar_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 184437 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_pp2hvar.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_pp2hvar_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_pp2hvar_dropped
 ljb23_pp2hvar 0.999 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_pp2hvar 0.901 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_pp2hvar 0.986 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -306,14 +306,14 @@ As you can see, two of the four missense variants were predicted to have scores 
 If you want to have the "probably damaging", "possibly damaging" and "benign" calls, you can add the `-otherinfo` argument:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_pp2hvar -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_pp2hvar -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_pp2hvar is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_pp2hvar_dropped, other variants are written to ex1.hg19_ljb23_pp2hvar_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 184437 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_pp2hvar.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_pp2hvar_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_pp2hvar_dropped
 ljb23_pp2hvar 0.999,D 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_pp2hvar 0.901,P 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_pp2hvar 0.986,D 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -329,14 +329,14 @@ In the output, the scores and predictions are separated by comma. There are thre
 This is very similar to SIFT and PolyPhen. One example is shown below.
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_mt -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_mt -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_mt is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_mt_dropped, other variants are written to ex1.hg19_ljb23_mt_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 193192 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_mt.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_mt_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_mt_dropped
 ljb23_mt 0.559,0.559,D 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_mt 1.000,0.000,N 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_mt 1.000,1.000,D 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -350,14 +350,14 @@ In the output, the raw scores, converted scores and predictions are separated by
 Again very similar to SIFT and Polyphen. one example is given below:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_ma -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_ma -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_ma is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_ma_dropped, other variants are written to ex1.hg19_ljb23_ma_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 179275 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_ma.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_ma_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_ma_dropped
 ljb23_ma 1.935,0.649,M 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_ma 2.32,0.683,M 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_ma 1.79,0.637,L 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -371,14 +371,14 @@ Due to the use of -otherinfo argument, in the output, the scores and predictions
 Again very similar to SIFT and Polyphen. one example is given below:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_lrt -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_lrt -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_lrt is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_lrt_dropped, other variants are written to ex1.hg19_ljb23_lrt_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 168542 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_lrt.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_lrt_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_lrt_dropped
 ljb23_lrt 0.000,1.000,D 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_lrt 0.993,0.503,N 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_lrt 0.000,1.000,D 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -392,14 +392,14 @@ Due to the use of -otherinfo argument, in the output, the scores and predictions
 Again very similar to SIFT and Polyphen. one example is given below:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_fathmm -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_fathmm -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_fathmm is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_fathmm_dropped, other variants are written to ex1.hg19_ljb23_fathmm_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 178425 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_fathmm.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_fathmm_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_fathmm_dropped
 ljb23_fathmm 0.31,0.386,T 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_fathmm -0.62,0.421,T 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_fathmm 0.57,0.376,T 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -427,14 +427,14 @@ In another benchmarking study using the VariBench data, but excluding cancer mut
 An example to use the MetaSVM method is given below:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_metasvm -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_metasvm -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_metasvm is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_metasvm_dropped, other variants are written to ex1.hg19_ljb23_metasvm_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 194687 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_metasvm.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_metasvm_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_metasvm_dropped
 ljb23_metasvm -0.599,0.351,T 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_metasvm -0.855,0.287,T 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_metasvm -0.696,0.327,T 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -448,14 +448,14 @@ Similarly, the comma-delimited fields are raw score, converted score (0-1 range,
 Very similar to MetaSVM with similar performance. However, the model is far more interpretable.
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_metalr -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_metalr -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_metalr is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_metalr_dropped, other variants are written to ex1.hg19_ljb23_metalr_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 194687 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_metalr.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_metalr_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_metalr_dropped
 ljb23_metalr 0.275,T 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_metalr 0.138,T 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_metalr 0.138,T 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
@@ -471,14 +471,14 @@ The ljb23_gerp++ contains only annotation for coding variants!!! If you want to 
 Generally the higher the score, the more conserved the site.
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_gerp++ -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_gerp++ -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_gerp++ is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_gerp++_dropped, other variants are written to ex1.hg19_ljb23_gerp++_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 194631 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_gerp++.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_gerp++_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_gerp++_dropped
 ljb23_gerp++ 4.93 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
 ljb23_gerp++ 5.19 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_gerp++ 3.66 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
@@ -495,28 +495,28 @@ Both are similar to GERP++ and these three can be considered as competitors of e
 PhyloP score is based on multiple alignments of 46 genomes. Similarly, SiPhy score is based on 29 mammals genomes. The larger the score, the more conserved the site.
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_phylop -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_phylop -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo
 NOTICE: the --dbtype ljb23_phylop is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_phylop_dropped, other variants are written to ex1.hg19_ljb23_phylop_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 195369 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_phylop.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_phylop_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_phylop_dropped
 ljb23_phylop 0.745 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
 ljb23_phylop 2.865 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_phylop 1.421 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
 ljb23_phylop 2.813 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
 ljb23_phylop -1.999 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 
-[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -dbtype ljb23_siphy -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo 
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -dbtype ljb23_siphy -buildver hg19 -out ex1 example/ex1.avinput humandb/ -otherinfo 
 NOTICE: the --dbtype ljb23_siphy is assumed to be in generic ANNOVAR database format
 NOTICE: Variants matching filtering criteria are written to ex1.hg19_ljb23_siphy_dropped, other variants are written to ex1.hg19_ljb23_siphy_filtered
 NOTICE: Processing next batch with 15 unique variants in 15 input lines
 NOTICE: Database index loaded. Total number of bins is 192540 and the number of bins to be scanned is 7
 NOTICE: Scanning filter database humandb/hg19_ljb23_siphy.txt...Done
 
-[kaiwang@biocluster ~/project/annotate_variation]$ cat ex1.hg19_ljb23_siphy_dropped
+[kaiwang@biocluster ~/]$ cat ex1.hg19_ljb23_siphy_dropped
 ljb23_siphy 6.573 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
 ljb23_siphy 14.412 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ljb23_siphy 6.914 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
@@ -631,6 +631,66 @@ esp6500si_ea 0.022171 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017i
 ```
 
 Now, only rare SNPs that are observed in esp6500si_ea are printed to the *dropped file.
+
+## ExAC annotations
+
+The Exome Aggregation Consortium (ExAC) is a coalition of investigators seeking to aggregate and harmonize exome sequencing data from a wide variety of large-scale sequencing projects. The allele frequency information for the ExAC can be downloaded using exac02, exac03 keywords in ANNOVAR. Currently supported population groups include ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)).
+
+> *Technical Notes: unlike 1000G or esp6500 where allele frequency for each ethnicity group is contained within a separate file, the exac dataset in ANNOVAR include allele frequency information for all populations within a single file.*
+
+To download ExAC03 and examine allele frequeny for all variants within a file:
+
+```
+[kaiwang@biocluster ~/]$ annotate_variation.pl -downdb -webfrom annovar -build hg19 exac03 humandb/
+
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -build hg19 -dbtype exac03 example/ex1.avinput humandb/
+NOTICE: the --dbtype exac03 is assumed to be in generic ANNOVAR database format
+NOTICE: Variants matching filtering criteria are written to example/ex1.avinput.hg19_exac03_dropped, other variants are written to example/ex1.avinput.hg19_exac03_filtered
+NOTICE: Processing next batch with 15 unique variants in 15 input lines
+NOTICE: Database index loaded. Total number of bins is 749886 and the number of bins to be scanned is 10
+NOTICE: Scanning filter database humandb/hg19_exac03.txt...Done
+
+[kaiwang@biocluster ~/]$ cat example/ex1.avinput.hg19_exac03_dropped
+exac03  0.054   1       1404001 1404001 G       T       comments: rs149123833, a SNP in 3' UTR of ATAD3C
+exac03  0.825   1       5935162 5935162 A       T       comments: rs1287637, a splice site variant in NPHP4
+exac03  0.041   1       67705958        67705958        G       A       comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
+exac03  0.941   1       948921  948921  T       C       comments: rs15842, a SNP in 5' UTR of ISG15
+exac03  0.006038        13      20763686        20763686        G       -       comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
+exac03  0.023   16      50745926        50745926        C       T       comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
+exac03  0.009917        16      50756540        50756540        G       C       comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
+exac03  0.013   16      50763778        50763778        -       C       comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
+exac03  0.457   2       234183368       234183368       A       G       comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
+```
+
+The second column in the output file contains allele frequency for all samples (mixed ethnicity groups) within ExAC03.
+
+To obtain frequency for each specific group, add `-otherinfo` argument:
+
+```
+[kaiwang@biocluster ~/]$ annotate_variation.pl -filter -build hg19 -dbtype exac03 example/ex1.avinput humandb/ -otherinfo
+NOTICE: the --dbtype exac03 is assumed to be in generic ANNOVAR database format
+NOTICE: Variants matching filtering criteria are written to example/ex1.avinput.hg19_exac03_dropped, other variants are written to example/ex1.avinput.hg19_exac03_filtered
+NOTICE: Processing next batch with 15 unique variants in 15 input lines
+NOTICE: Database index loaded. Total number of bins is 749886 and the number of bins to be scanned is 10
+NOTICE: Scanning filter database humandb/hg19_exac03.txt...Done
+
+[kaiwang@biocluster ~/]$ cat example/ex1.avinput.hg19_exac03_dropped
+exac03  0.054,0.0318,0.1525,0.1359,0.0874,0.0344,0.0783,0.0844  1       1404001 1404001 G       T       comments: rs149123833, a SNP in 3' UTR of ATAD3C
+exac03  0.825,0.8949,0.7944,0.8179,0.9195,0.8304,0.8247,0.8305  1       5935162 5935162 A       T       comments: rs1287637, a splice site variant in NPHP4
+exac03  0.041,0.0124,0.0321,0.0005,0.0555,0.0594,0.0541,0.0151  1       67705958        67705958        G       A       comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
+exac03  0.941,0.7386,0.9632,0.9998,0.9681,0.9543,0.9410,0.9617  1       948921  948921  T       C       comments: rs15842, a SNP in 5' UTR of ISG15
+exac03  0.006038,0.0013,0.0041,0,0.0103,0.0088,0.0088,0.0007    13      20763686        20763686        G       -       comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
+exac03  0.023,0.0076,0.0177,0,0.0200,0.0349,0.0191,0.0004       16      50745926        50745926        C       T       comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
+exac03  0.009917,0.0013,0.0071,0,0.0026,0.0141,0.0154,0.0083    16      50756540        50756540        G       C       comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
+exac03  0.013,0.0027,0.0068,0.0005,0.0148,0.0202,0.0055,0.0015  16      50763778        50763778        -       C       comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
+exac03  0.457,0.3272,0.2130,0.3330,0.4387,0.5225,0.4989,0.5207  2       234183368       234183368       A       G       comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
+```
+
+The columns represent ExAC_Freq, ExAC_AFR, ExAC_AMR, ExAC_EAS, ExAC_FIN, ExAC_NFE, ExAC_OTH, ExAC_SAS, respectively.
+
+Note that exac03 keyword can be used in `table_annovar.pl` directly to print out allele frequency for all ethnicity groups.
+
+> *Technical Notes: Some users reported that the allele frequency measure differs slightly from the ExAC server itself, for some rare variants. This is because ExAC server displays "adjusted allele counts" and frequencies, yet ExAC03 within ANNOVAR displays raw allele counts and frequency. In the future, we may include both measures in ExAC output to faciliate users with different needs.*
 
 ## GERP++ annotations
 
