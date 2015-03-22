@@ -7,5 +7,5 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 - Filter-based annotation: identify variants that are reported in dbSNP, or identify the subset of common SNPs (MAF>1%) in the 1000 Genome Project, or identify subset of non-synonymous SNPs with SIFT score>0.05, or find intergenic variants with GERP++ score < 2, or many other annotations on specific mutations.
 - Other functionalities: Retrieve the nucleotide sequence in any user-specific genomic positions in batch, identify a candidate gene list for Mendelian diseases from exome data, and other utilities.
 
-Please click the menu items to navigate through this website. If you have questions, comments, feature requests, or bug reports, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
+Please click the menu items to navigate through this website. Check [here](misc/whatsnew.md) to see what is new in ANNOVAR. If you have questions, comments, feature requests, or bug reports, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
 
