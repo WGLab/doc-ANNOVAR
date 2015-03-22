@@ -120,6 +120,10 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
 | Conserved | Region-level phastCons LOD scores |
 
 ### Result Description
-![](/img/wannovar_result_1.tif)
-![](/img/wannovar_result_2.tif)
+
+The basic section in the result page. In all cases you should see this part
+![](/img/wannovar_result_1.png)
+
+The variant filtration/reduction part and the phenotype based prioritization part
+![](/img/wannovar_result_2.png)
 
