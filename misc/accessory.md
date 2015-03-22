@@ -161,8 +161,6 @@ in the output file. Note that two ANNOVAR_DATE and two ALLELE_END are present in
 
 The `convert2annovar.pl` program can be uesd to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the [Input](../user-guide/input.md) section.
 
- 
-
 ## Retrieve_Seq_from_FASTA: Retrieve nucleotide/protein sequences
 
 The `retrieve_seq_from_fasta.pl` program can be used to retrieve genomic nucleotide sequences or cDNA sequences, or translated amino acid sequences (this functionality is currently being developed and will be released in future ANNOVAR version) from many user-specified genomic regions. It can take several different types of region files, hereafter referred to as "simple", "tab", "refGene", "ensGene", "knownGene".
