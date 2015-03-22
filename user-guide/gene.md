@@ -93,7 +93,7 @@ The possible values of the first column is summarized below:
 |	upstream	|	5	|	variant overlaps 1-kb region upstream of transcription start site	|
 |	downstream	|	5	|	variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)	|
 |	intergenic	|	6	|	variant is in intergenic region	|
- 
+
 
 The value of the first column takes the following precedence (as of December 2010 and later version of ANNOVAR): exonic = splicing > ncRNA> > UTR5/UTR3 > intron > upstream/downstream > intergenic. The precedence defined above is used to decide what function to print out when a variant fit multiple functional categories. Note that:
 
@@ -137,7 +137,7 @@ For example, when `-precedence intronic,utr5,utr3` is specified, the intronic va
 2. If a gene or a transcript has one or several non-coding definitions but without coding definition, it will be regarded as ncRNA in annotation output. 
 3. If a transcript maps to multiple locations as "coding transcripts", but some with complete ORF, some without complete ORF (that is, with premature stop codon), then the ones without complete ORF will be ignored.
 4. If a transcript maps to multiple locations, all as "coding transcripts", but none has a complete ORF, then this transcript will not be used in exonic_variant_function annotation and the corresponding annotation will be marked as "UNKNOWN". 
-5. NEW in July 2014: If a transcript maps to multiple genomic locations, all mapping wil be used in the annotation process. Previously, only the "most likely" mapping will be used in annotation. *
+5. NEW in July 2014: If a transcript maps to multiple genomic locations, all mapping wil be used in the annotation process. Previously, only the "most likely" mapping will be used in annotation.*
 
 The above rules do make sense. The rule 3 and 4 were made in Nov 2011 version of ANNOVAR (so that users no longer send me emails complaining errors in exonic annotation which is not really a fault of ANNOVAR per se). But as a result, you may see more "UNKNOWN" exonic annotations in the output file.
 
@@ -174,6 +174,7 @@ More detailed explanation of these exonic_variant_functoin annotations are given
 | synonymous SNV  |  10  |  a single nucleotide change that does not cause an amino acid change  |
 | unknown  |  11  |  unknown function (due to various errors in the gene structure definition in the database file)  |
 
+
 In 2012 Oct version of ANNOVAR, the `--aamatrixfile` argument is added so that users can print out GRANTHAM scores (or any other amino acid substitution matrix) for nonsynonymous variantsin gene-based annotation. See below, the `AAMatrix=43` notation is added to the output, indicating that the R->Q change has a grantham score of 43.
 
 ```
@@ -203,9 +204,9 @@ line15 frameshift deletion GJB6:NM_001110220:wholegene,GJB6:NM_001110221:wholege
 
 > *Technical Notes: Some genes have multiple transcripts and ANNOVAR may randomly sort the order of transcripts in the output file. For example, the same mutation may be annotated as "BRAF:ENST00000288602:exon15:c.T1799A:p.V600E,BRAF:ENST00000479537:exon2:c.T83A:p.V28E" from one input file, but as "BRAF:ENST00000479537:exon2:c.T83A:p.V28E,BRAF:ENST00000288602:exon15:c.T1799A:p.V600E" from another input file. Some users want absolute consistency in the annotation. In this case, you can add `-exonsort` argument to the command line, so that the exon2 always precede exon15 in the output file.*
 
-> *Technical Notes: Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is `coding_change.pl` within ANNOVAR package. Try it and see how it works! *
+> *Technical Notes: Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is `coding_change.pl` within ANNOVAR package. Try it and see how it works!*
 
-> *Technical Notes: In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN"). *
+> *Technical Notes: In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN").*
 
 ## Annotating mitochrondria variants
 
@@ -256,9 +257,9 @@ Comparing the program message ("Done with xxx transcripts for yyy unique genes")
 
 > *Technical Notes: Technically, the RefSeq Gene and UCSC Gene are transcript-based gene definitions. They built gene model based on transcript data, and then map the gene model back to human genomes. In comparison, Ensemble Gene and Gencode Gene are assembly-based gene definitions that attempt to build gene model directly from reference human genome. They came from different angles, trying to do the same thing: define genes in human genome.*
 
-> *However, this has its own consequences. For example, RefSeq builds a gene model from assembling transcript data from a population, but the reference human genome may have an allele as minor allele in a population. In this case, the transcript may not align 100% to genome, resulting in discrepancies between the FASTA file for the transcript and the FASTA file generated from the whole-genome sequence (by concatenating exons together). *
+> *However, this has its own consequences. For example, RefSeq builds a gene model from assembling transcript data from a population, but the reference human genome may have an allele as minor allele in a population. In this case, the transcript may not align 100% to genome, resulting in discrepancies between the FASTA file for the transcript and the FASTA file generated from the whole-genome sequence (by concatenating exons together).*
 
-> *For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (retrieve_seq_from_fasta.pl) to build FASTA sequences for any other genomes for which I do not provide pre-built files. *
+> *For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (retrieve_seq_from_fasta.pl) to build FASTA sequences for any other genomes for which I do not provide pre-built files.*
 
 > *For these resons, the FASTA seuqence in the file provided by me may differe from the FASTA sequence that you get from RefSeq. The sequence used by ANNOVAR are "theoretical" seuqence based on a particular genome build and assembly, but the FASTA sequence compiled by RefSeq are "observed" sequence from large databases without any relationship to a particular assembly version. They may have the same identifier but they are different things.*
 
