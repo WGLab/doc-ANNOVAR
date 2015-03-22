@@ -24,7 +24,7 @@ Another example command is given below:
 
 Basically, this command will perform a similar set of operations as above, but additionally remove any variants observed in the CG46 database. Additionally, the AAF threhsold will be applied to all the 1000G, ESP6500 and CG46 databases. Furthermore, variants believed to be likely benign by SIFT or PolyPhen are removed. Finally, the UCSC Known Gene, rather than RefSeq Gene (default), will be used for gene-based annotation.
 
-Notice: Due to user complaints, the `-maf_threshold` argument is no longer supported in July 2013 version of ANNOVAR. Users need to use `--aaf_threshold` argument instead, to denote alternative allele frequency, because "minor" allele does not have a clear-cut definition.
+> *Technical Notes: Due to user complaints, the `-maf_threshold` argument is no longer supported in July 2013 version of ANNOVAR. Users need to use `--aaf_threshold` argument instead, to denote alternative allele frequency, because "minor" allele does not have a clear-cut definition.*
 
 As you will see, basically as users, you specify what operations are used by ANNOVAR, and what specfic databases are used by the corresponding operation. Users have somewhat limited ability to select custom thresholds such as different MAF for different databases.
 
