@@ -1,10 +1,10 @@
 ## Overview
 
-Besides gene-based annotations, ANNOVAR has several other utilities, such as region-based annotation. This function is issued by the --regionanno argument (by default, --geneanno is ON)
+Besides gene-based annotations, ANNOVAR has several other utilities, such as region-based annotation. This function is issued by the `--regionanno` argument (by default, `--geneanno` is ON)
 
 It is important to explain the difference between region-based annotation and filter-based annotation here. Filter-based annotation looks exact matches between a query variant and a record in a database; two items are identical only if they have identical chromosome, start position, end position, ref allele and alaternative allele. Region-based annotation looks for over lap of a query variant with a region (this region could be a single position) in a database, and it does not care about exact match of positions, and it does not care about nucleotide identity at all. So in a sense, region-based annotation is somewhat similar to tabix, except that it does have involve index so it is much slower, yet it allows more user configuration to fine-tune results.
 
-Generally speaking , users can select annotation tracks that are already provided by the UCSC Genome Browser annotation databases. Most of these annotation tracks have similar file formats, but sometimes they differ (for example, different number of columns in the file). ANNOVAR will try to be smart in guessing the correct column headers, and usually it works well. However, ANNOVAR may also provide built-in region annotation databases, which can be downloaded by '-downdb -webfrom annovar'. Finally, users can supply your own region annotation databases in generic, BED or GFF formats.
+Generally speaking , users can select annotation tracks that are already provided by the UCSC Genome Browser annotation databases. Most of these annotation tracks have similar file formats, but sometimes they differ (for example, different number of columns in the file). ANNOVAR will try to be smart in guessing the correct column headers, and usually it works well. However, ANNOVAR may also provide built-in region annotation databases, which can be downloaded by `-downdb -webfrom annovar`. Finally, users can supply your own region annotation databases in generic, BED or GFF formats.
 
 ## Most conserved element annotation
 
@@ -12,7 +12,7 @@ One of the particularly useful function is to identify variants at conserved gen
 
 Notes: these are phastCons conserved elements, which means specific genomic regions that are conserved. These are different from base-level conservation scores which are typically referred to as PhyloP scores. For base-level conservation scores, ANNOVAR provides filter-based annotation for exonic variants.
 
-Here ANNOVAR uses phastCons 46-way alignments to annotate variants that fall within conserved genomic regions. Here the --regionanno argument need to be supplied so that the program knows what to do. In addition, the --dbtype need to be specified so that the program knows which annotation database file to interrogate. Make sure that the annotation database is already downloaded (the command is " annotate_variation.pl -downdb phastConsElements46way humandb/ ").
+Here ANNOVAR uses phastCons 46-way alignments to annotate variants that fall within conserved genomic regions. Here the `--regionanno` argument need to be supplied so that the program knows what to do. In addition, the `--dbtype` need to be specified so that the program knows which annotation database file to interrogate. Make sure that the annotation database is already downloaded (the command is `annotate_variation.pl -downdb phastConsElements46way humandb/`).
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -build hg19 -downdb phastConsElements46way humandb/
@@ -34,9 +34,9 @@ phastConsElements46way Score=395;Name=lod=54 13 20763686 20763686 G - comments: 
 phastConsElements46way Score=545;Name=lod=218 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-The output is saved in the varlist.hg19_phastConsElements46way file. The first column in the output is "phastConsElements46way" indicating the type of annotation. The second column contains two pieces of information: Score and Name. Score is the normalized score assigned by UCSC Genome Browser, and this score range from 0 to 1000 for the sole purpose of having a standard range of values to display in browser. (Note that the --score_threshold or --normscore_threshold can also be used to filter out specific variants with low conservation scores.) The "Name=lod=x" is used to tell the user a name for the region (in this case, I assign the "name" as the LOD score because the region does not have an extra name). All other columns are identical as those in the input file. Only variants that actually are located within a conserved region will be printed in the output file. As a result, only 5 variants are in the output file.
+The output is saved in the `ex1.hg19_phastConsElements46way` file. The first column in the output is "phastConsElements46way" indicating the type of annotation. The second column contains two pieces of information: Score and Name. Score is the normalized score assigned by UCSC Genome Browser, and this score range from 0 to 1000 for the sole purpose of having a standard range of values to display in browser. (Note that the --score_threshold or --normscore_threshold can also be used to filter out specific variants with low conservation scores.) The "Name=lod=x" is used to tell the user a name for the region (in this case, I assign the "name" as the LOD score because the region does not have an extra name). All other columns are identical as those in the input file. Only variants that actually are located within a conserved region will be printed in the output file. As a result, only 5 variants are in the output file.
 
-Let's try using the -normscore_threshold:
+Let's try using the `-normscore_threshold`:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -regionanno -build hg19 -out ex1 -dbtype phastConsElements46way example/ex1.avinput humandb/ -normscore_threshold 400
@@ -51,7 +51,7 @@ phastConsElements46way Score=545;Name=lod=218 13 20797176 21105944 0 - comments:
 
 As you will see, only two variants are in output file now.
 
-Technical Notes: The exact columns that should be in output file (Name=?) can be controlled by the -colWanted argument. The exact column for the scores (Score=?) can be controlled by the -scorecolumn argument. For some annotation (such as phastCons conserved elements), ANNOVAR already sets up default values, such as in the example above. For some other less used annotation, the default from ANNOVAR may not work for the user, and you can use the -colWanted and -scorecolumn argument to fine-tune the annotation output.
+Technical Notes: The exact columns that should be in output file (Name=?) can be controlled by the `-colWanted` argument. The exact column for the scores (Score=?) can be controlled by the `-scorecolumn` argument. For some annotation (such as phastCons conserved elements), ANNOVAR already sets up default values, such as in the example above. For some other less used annotation, the default from ANNOVAR may not work for the user, and you can use the `-colWanted` and `-scorecolumn` argument to fine-tune the annotation output.
 
 For each genome build, the user needs to specify the correct argument. For example, when dealing with hg19 coordinate, you can check http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/ for all supported databases. Let's try 100-way elements this time:
 
@@ -99,7 +99,7 @@ Note that the name such as V$PAX5_02 merely indicates a name for a motif that so
 
 ## Identify cytogenetic band for genetic variants
 
-To identify Giemsa-stained chromosomes bands, the "-dbtype cytoBand" can be used. The second column in the output file below represent cytogenetic bands. When a variant spans multiple bands, they will be connected by a dash (for example, 1q21.1-q23.3).
+To identify Giemsa-stained chromosomes bands, the `-dbtype cytoBand` can be used. The second column in the output file below represent cytogenetic bands. When a variant spans multiple bands, they will be connected by a dash (for example, 1q21.1-q23.3).
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -build hg19 -downdb cytoBand humandb/
@@ -149,7 +149,7 @@ NOTICE: Output files were written to ex1.hg19_wgRna
 
 In this case, none of the variants overlap with a microRNA or snoRNA.
 
-Identify variants disrupting predicted microRNA binding sites
+## Identify variants disrupting predicted microRNA binding sites
 
 In addition to finding overlap to microRNAs, we can also find variants disrupting predicted microRNA binding sites. UCSC provides the TargetScanS annotation database, which shows conserved mammalian microRNA regulatory target sites for conserved microRNA families in the 3' UTR regions of Refseq Genes, as predicted by TargetScanHuman.
 
@@ -169,7 +169,6 @@ NOTICE: Output files were written to ex1.hg19_targetScanS
 ```
 
 In this case, none of the variants overlap with a microRNA target site.
-
  
 
 ## Identify variants located in segmental duplications
@@ -194,9 +193,9 @@ genomicSuperDups Score=0.99612;Name=chr1:13142561 1 13211293 13211294 TC - comme
 
 The "Name" field in output represents the other "matching" segment in genome (which is located in the same chromosome at chr1:13142561). The "Score" field is the sequence identity with indels between two genomic segments (fracMatchIndel in the UCSC database table).
 
-## Identify previously reported structural variants in DGV (Database of Genomic Variants)
+## Identify previously reported structural variants
 
-By using the --regionanno operation and the --dbtype of dgvMerged, ANNOVAR can also conveniently annotate deletions and duplications and compare them to previously published variants. Note that previously, the keyword "dgv" can be used in ANNOVAR, but UCSC no longer makes it available. For example,
+By using the `--regionanno` operation and the `--dbtype dgvMerged`, ANNOVAR can also conveniently annotate deletions and duplications and compare them to previously published variants in Database of Genomic Variants (DGV). Note that previously, the keyword `dgv` can be used in ANNOVAR, but UCSC no longer makes it available. For example,
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -build hg19 -downdb dgvMerged humandb/
@@ -222,7 +221,7 @@ dgvMerged Name=esv259791,esv1000311,esv25857,esv2751132,nsv821552,nsv517163,dgv3
 The above command identifies 3 variants located in previously reported structural variation regions in Database of Genomic Variants. Their scores are all zero, because score is not defined for DGV track. The Name represent DGV database identifiers for CNVs. The GJB6 deletion overlaps with a few different entries in the DGV.
 ```
 
-For structural variants such as deletions and duplications, the -minqueryoverlap may be very useful (otherwise many SNPs/indels will overlap with a DGV region). It requires that at least this percentage of query be overlapped with a database entry.
+For structural variants such as deletions and duplications, the `-minqueryoverlap` may be very useful (otherwise many SNPs/indels will overlap with a DGV region). It requires that at least this percentage of query be overlapped with a database entry.
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -regionanno -build hg19 -out ex1 -dbtype dgvMerged example/ex1.avinput humandb/ -minqueryfrac 0.5
@@ -241,17 +240,15 @@ dgvMerged Name=nsv899871 13 20763686 20763686 G - comments: rs1801002 (del35G), 
 dgvMerged Name=esv2751132 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-As we can see from the results above, adding a "-minqueryfrac 0.5" argument reduces the number of database hits (now only esv2751132 is shown in the Name field for the 342kb deletion). To understand this more, check the genome browser shots for this region:
+As we can see from the results above, adding a `-minqueryfrac 0.5` argument reduces the number of database hits (now only esv2751132 is shown in the Name field for the 342kb deletion). To understand this more, check the genome browser shots for this region:
 
 ![](img/region_1.png)
 
- 
-
 The above figure shows that this query region overlaps with several CNVs reported in DGV, but only one of them (identifier is esv2751132) contains more than 50% of the query.
 
- 
+## Identify variants reported in previously published GWAS
 
-## Identify variants reported in previously published GWAS (Genome-wide association studies)
+To find variants that were previously reported to be associated with diseases or traits in genome-wide association studies, the `gwasCatalog` keyword can be used:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -build hg19 -downdb gwasCatalog humandb/
@@ -273,18 +270,18 @@ gwasCatalog Name=Crohn's disease 16 50763778 50763778 - C comments: rs2066847 (c
 
 The above command identifies 3 variants previously reported in GWAS (note that the IL23R variant is known to be associated with multiple diseases already, but the gwasCatalog track is not that comprehensive yet).
 
-Identify variants in ENCODE annotated regions (transcribed regions, H3K4Me1 regions, H3K4Me3 regions, H3K27Ac regions, DNaseI hypersensitivity regions, transcription factor ChIP-Seq regions, etc)
+## Identify variants in ENCODE annotated regions
 
-ENCODE now provides huge amounts of data in Genome Browser tracks that ANNOVAR can annotate against. Some specific examples are shown below, but obviously, there are hundreds of ENCODE annotation tracks that can be used in ANNOVAR.
+ENCODE now provides huge amounts of data in Genome Browser tracks that ANNOVAR can annotate against, such as transcribed regions, H3K4Me1 regions, H3K4Me3 regions, H3K27Ac regions, DNaseI hypersensitivity regions, transcription factor ChIP-Seq regions, etc. Some specific examples are shown below, but obviously, there are hundreds of ENCODE annotation tracks that can be used in ANNOVAR.
 
-Notes: Although UCSC may provide more ENCODE annotations for hg19 in the future, at least at end of 2013 rich annotation is only available for hg18. The examples below all used hg18. If you are interested to annotate your hg19 variants, some of these databases may not be available and you should check Table Browser yourself to know what is available and what is not. If you absolutely need to use these specific tables, it is best that you liftOver the database yourself to hg19 for annotation.
+>>>>*Technical Notes:* Although UCSC may provide more ENCODE annotations for hg19 in the future, at least at end of 2013 rich annotation is only available for hg18. The examples below all used hg18. If you are interested to annotate your hg19 variants, some of these databases may not be available and you should check Table Browser yourself to know what is available and what is not. If you absolutely need to use these specific tables, it is best that you liftOver the database yourself to hg19 for annotation.
 
 A general rule of thumb is that:
 
-active promoter: H3K4me3, H3K9Ac
-active enhancer: H3K4me1, H3K27Ac
-active elongation: H3K36me3, H3K79me2 
-repressed promoters and broad regions: H3K27me3, H3K9me3
+- active promoter: H3K4me3, H3K9Ac
+- active enhancer: H3K4me1, H3K27Ac
+- active elongation: H3K36me3, H3K79me2 
+- repressed promoters and broad regions: H3K27me3, H3K9me3
 
 To check whether the variants are located in transcribed regions in the RNA-Seq data for GM12878 cell lines:
 
@@ -297,7 +294,7 @@ To check whether the variants are located in transcribed regions in the RNA-Seq 
 7 ex1.human.hg18_wgEncodeCaltechRnaSeqRawSignalRep1Gm12878CellLongpolyaBb12x75
 ```
 
-So 7 of of the 12 regions in ex1.hg18.avinput are transcribed in the GM12878 cell lines. Note that here we used RawSignal; it may make sense to use summarized signals that impose a specific expression activity threshold to eliminate lowly-expressed genes.
+So 7 of of the 12 regions in `ex1.hg18.avinput` are transcribed in the GM12878 cell lines. Note that here we used RawSignal; it may make sense to use summarized signals that impose a specific expression activity threshold to eliminate lowly-expressed genes.
 
 To check whether the variants are located in enhancer regions, based on H3K4Me1 (or H3K27Ac if you want) chromatin marks in GM12878 cells:
 
@@ -311,7 +308,7 @@ wgEncodeBroadChipSeqPeaksGm12878H3k4me1 Score=1000;Name=. 16 49303427 49303427 C
 wgEncodeBroadChipSeqPeaksGm12878H3k4me1 Score=1000;Name=. 13 19695176 20003944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-2 out of the 12 variants are considered to be in enhancers. The Name is "." because ENCODE did not assign a name to these regions. Note that in the command above, we used -scorecolumn 5, to tell the program that the fifth column is the score column.
+2 out of the 12 variants are considered to be in enhancers. The Name is "." because ENCODE did not assign a name to these regions. Note that in the command above, we used `-scorecolumn 5`, to tell the program that the fifth column is the score column.
 
 To check whehter the variants are located in DNase I hypersensitivity sites from ENCODE:
 
@@ -325,7 +322,7 @@ wgEncodeRegDnaseClustered Score=446;Name=5 16 49303427 49303427 C T comments: rs
 wgEncodeRegDnaseClustered Score=1000;Name=25,64,9,15,56,45,19,23,13 13 19695176 20003944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-As an exercise, the users should try to annotate CTCF binding site (hint: use -dbtype wgEncodeBroadChipSeqPeaksGm12878Ctcf).
+As an exercise, the users should try to annotate CTCF binding site (hint: use `-dbtype wgEncodeBroadChipSeqPeaksGm12878Ctcf`).
 
 To annotate ENCODE transcription factor ChIP-Seq data:
 
@@ -341,21 +338,17 @@ wgEncodeRegTfbsClustered Score=1000;Name=BAF155,EBF,IRF4,BATF,TCF12,Max,BAF170,P
 
 Note that the 342kb deletion encompass multiple binding sites, just because of its large size.
 
- 
-
 ## Identify dbSNP variants in user-specified regions
 
-This is straightfoward, by using -dbtype snp130 together with -regionanno opeartion. Note that -regionanno only cares about region overlap, whereas -filter cares about exact region and exact base pair identities.
+This is straightfoward, by using `-dbtype snp138` together with `-regionanno` opeartion. Note that `-regionanno` only cares about region overlap, whereas `-filter` cares about exact region and exact base pair identities.
 
 ```
-[kaiwang@biocluster ~/]$ annotate_variation.pl ex1.hg18.avinput humandb/ -region -dbtype snp130 -out ex1
+[kaiwang@biocluster ~/]$ annotate_variation.pl ex1.hg18.avinput humandb/ -region -dbtype snp138 -out ex1
 ```
 
-Now check the ex1.hg18_snp130 output file. For each input line, it listed whether this line contains one or more known dbSNP entries. The 300kb deletion has many SNPs inside.
+Now check the `ex1.hg18_snp138` output file. For each input line, it listed whether this line contains one or more known dbSNP entries. The 300kb deletion has many SNPs inside.
 
-This is different from filter-based annotation. Here, we only cares about if two regions have overlap, rather than being identical. Therefore, the deletion region can match to multiple SNPs in the dbSNP database.
-
- 
+This is different from filter-based annotation. Here, we only cares about if two regions have overlap, rather than being identical. Therefore, the deletion region can match to multiple SNPs in the dbSNP database. 
 
 ## Identify non-coding variants that disrupt enhancers, repressors, promoters
 
@@ -374,8 +367,6 @@ Users can also use chromHMM predictions to annotate and classify non-coding vari
 | HSMM | skeletal muscle myoblasts | mesoderm | muscle | normal |
 | NHEK | epidermal keratinocytes | ectoderm	skin | normal |
 | NHLF | lung fibroblasts | endoderm | lung | normal |
- 
-
 
 Then download the HMM predictions for this cell line. Then annotate against the HMM predictions by region-based annotation.
 
@@ -418,15 +409,9 @@ The details of the HMM state definition can be found below. The prediction is gi
 
 For example, the rs1801002 mutation was predicted to be in state 12 (polycomb-repressed region) above in GM12878 cells, even though it is also a coding mutation. We can confirm this observation in the Genome Browser shot below. It is interesting to see that it serves different functions in different cell lines (but of course everything is based on prediction and this may or may not be reliable).
 
- 
-
 ![](img/region_2.png)
 
- 
-
- 
-
-Identify variants in other genomic regions annotated with other functions
+## Identify variants in other genomic regions annotated with other functions
 
 If you use UCSC database for the annotation, in principle, the vast majority of tracks (hundreds) conforming to the standard file format can be handled by ANNOVAR.
 
@@ -442,8 +427,6 @@ wgEncodeUwDnaseSeqHotspotsRep2Gm12878 Score=549 13 19695176 20003944 0 - comment
 ```
 
 Users can change "hotspot" to "peaks" to find the most significant hypersensitivity sites among the zones, and change GM12878 to dozens of other cell lines to identify these regions in other lines. The possibility is limited only by the current database annotation, as well as the genomic regions that have been assayed.
-
- 
 
 ## Annotating custom-made databases conforming to GFF3 (Generic Feature Format version 3)
 

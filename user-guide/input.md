@@ -1,14 +1,13 @@
 ## VCF file
 
-The table_annovar.pl program can take VCF files and annotate them (with `-vcfinput` argument). Nowadays, [VCF](http://vcftools.sourceforge.net/specs.html) is already a gold standard format that most researchers use. For recommendations to process VCF file, please see "[VCF Processing Guide](../articles/VCF.md)" the article.
+The `table_annovar.pl` program can take VCF files and annotate them (with `-vcfinput` argument). Nowadays, [VCF](http://vcftools.sourceforge.net/specs.html) is already a gold standard format that most researchers use. For additional recommendations to process VCF file, please see "[VCF Processing Guide](../articles/VCF.md)" the article.
 
-The annotate_variation.pl program requires a simple text-based format, which we refer to as ANNOVAR input format. Below we describe the file format, and how to generate these input files from various variant callers. 
 
 ## ANNOVAR input file
 
-ANNOVAR (`annotate_variation.pl` program) takes text-based input files, where each line corresponds to one variant. On each line, the first five space- or tab- delimited columns represent chromosome, start position, end position, the reference nucleotides and the observed nucleotides. Additional columns can be supplied and will be printed out in identical form. For convenience, users can use “0” to fill in the reference nucleotides, if this information is not readily available. Insertions, deletions or block substitutions can be readily represented by this simple file format, by using “–” to represent a null nucleotide. One example is given below (this example is included as `ex1.avinput` file in the ANNOVAR package), with extra columns that serve as comments on the variants. By default, 1-based coordinate system will be assumed.
+The `annotate_variation.pl` program requires a simple text-based format, which we refer to as ANNOVAR input format. In this file, each line corresponds to one variant. On each line, the first five space- or tab- delimited columns represent chromosome, start position, end position, the reference nucleotides and the observed nucleotides. Additional columns can be supplied and will be printed out in identical form. For convenience, users can use “0” to fill in the reference nucleotides, if this information is not readily available. Insertions, deletions or block substitutions can be readily represented by this simple file format, by using “–” to represent a null nucleotide. One example is given below (this example is included as `ex1.avinput` file in the ANNOVAR package), with extra columns that serve as comments on the variants. By default, 1-based coordinate system is used.
 
-The ANNOVAR package contains a few example input files. For example, the content of the ex1.human file is below:
+The ANNOVAR package contains a few example input files. For example, the content of the `ex1.avinput` file is below:
 
 ```
 [kaiwang@biocluster ~/]$ cat example/ex1.avinput
@@ -29,7 +28,7 @@ The ANNOVAR package contains a few example input files. For example, the content
 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
 ```
 
-The first five space or tab delimited fields are Chromosome ("chr" prefix is optional), Start, End, Reference Allelel, Alternative Allele. The rest of the columns are completely optional
+The first five space or tab delimited fields are Chromosome ("chr" prefix is optional), Start, End, Reference Allelel, Alternative Allele. The rest of the columns are completely optional.
 
 The example above contains several genetic variants. The first variant is a single nucleotide variant, with a substitution of C in reference genome to T. The third variant is a 2-bp deletion, with the observed nucleotides being represented by "-". The fourth variant is a 2-bp insertion, since the reference nucleotide in the reference genome is represented by “–”. The last variant is a large-scale deletion, but the reference allele is represented by “0”, eliminating the need to include reference nucleotides on this line.
 
@@ -55,19 +54,17 @@ Another example is shown below. Note that the first five columns conform to the 
 
 In some cases, users may want to specify only positions but not the actual nucleotides. In that case, "0" can be used to fill in the 4th and 5th column. ANNOVAR can still run on this input file, but obviously there is no output on amino acid changes. Additionally, the observed amino acid will be assumed to be of equal length of the wildtype allele (as specified by the start and end position at each line).
 
-If ANNOVAR encounters an invalid input line, it will write the invalid line into a file called `$outfile.invalid_input` where $outfile is specified by the `--outfile` argument. If all input lines are of valid format, this output file will not exist. Therefore, even if the input file contains empty lines or invalid format, ANNOVAR can still proceed with the next input line.
+If ANNOVAR encounters an invalid input line, it will write the invalid line into a file called `<outfile>.invalid_input` where `<outfile>` is specified by the `--outfile` argument. If all input lines are of valid format, this output file will not exist. Therefore, even if the input file contains empty lines or invalid format, ANNOVAR can still proceed with the next input line.
 
 The download package contains several example input files. The users can check them out.
 
 ## Format Conversion
 
-The `convert2annovar.pl` script provide some very rudimentary utility to convert other "genotype calling" format into ANNOVAR format. Currently, the program can handle Samtools genotype-calling pileup format, Illumina export format from GenomeStudio, SOLiD GFF genotype-calling format, Complete Genomics variant format, and VCF format.
+The `convert2annovar.pl` script can convert other "genotype calling" format into ANNOVAR format. Currently, the program can handle Samtools genotype-calling pileup format, Illumina CASAVA format, SOLiD GFF genotype-calling format, Complete Genomics variant format, and VCF format. It should be emphasized that nowadays VCF is the most widely used file format, and most other formats are no longer being used.
 
-### - VCF4 genotype calling format
+### - VCF4 format
 
-The "-format vcf4 " argument should be specified to convert VCF files to ANNOVAR input format. This functionality was re-implemented to address many users' comments to handle multiple alternative alleles and to handle multiple input samples in a single VCF file.
-
-The ANNOVAR package should contain an example VCF file in the example/ directory. We can use this file as an example:
+The `-format vcf4` argument can be used to convert VCF files to ANNOVAR input format. The ANNOVAR package should contain an example VCF file in the example/ directory. We can use this file as an example:
 
 ```
 [kaiwang@biocluster ~/]$ cat example/ex2.vcf 
@@ -116,7 +113,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 20 1234568 1234570 TCT - het 50 4
 ```
 
-The above command takes ex2.vcf as input file, and generate the ex2.avinput as output file. The 3 extra columns are zygosity status, genotype quality and read depth.
+The above command takes `ex2.vcf` as input file, and generate the `ex2.avinput` as output file. The 3 extra columns are zygosity status, genotype quality and read depth.
 
 If you read the screen message carefully, it tells that only 1 out of 3 samples have been processed in this VCF file. By default, only the first sample in VCF file will be written to output file. The input contains seven loci, but many of them do not have non-reference genotypes for the first sample, and that is why the output contains only 3 variants.
 
@@ -168,7 +165,7 @@ Pay attention to chr20:1110696 in NA0002. There are two alternative alleles for 
 If you need the output file to contain the all information as the VCF file, you can add `-includeinfo` argument:
 
 ```
-[kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2 -allsample -include
+[kaiwang@biocluster ~/]$ convert2annovar.pl -format vcf4 example/ex2.vcf -outfile ex2 -allsample -includeinfo
 NOTICE: output files will be written to ex2.<samplename>.avinput
 NOTICE: Finished reading 25 lines from VCF file
 NOTICE: A total of 7 locus in VCF file passed QC threshold, representing 6 SNPs (3 transitions and 3 transversions) and 3 indels/substitutions
@@ -241,8 +238,6 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 
 Again, note that there are two lines for chr20:1110696, because there are two alleles at the same locus. Similarly, there are two lines (chr20:1234568 and chr20:1234567) for the same VCF record, because there are two alleles (indels) at the same locus.
 
- 
-
 If you need the VCF header information, just add the -comment argument:
 
 ```
@@ -279,7 +274,7 @@ WARNING: Skipped 1 invalid alternative alleles found in input file
 
 Note that the output file contains only VCF information for that particular sample (in other word, only the GT:GQ:DP:HQ information for sample NA00001 is in the `ex2.NA00001.avinput` output file).
 
-Therefore, in practice, you could use convert2annovar.pl program as a way to split a huge VCF files into many parts, each for one particular sample, by back-converting the ANNOVAR input file into a VCF file for a particular sample. In a sense, it is similar to the vcf-subset program in VCFtools, but in this case ANNOVAR will be far more efficient, especially when handling large VCF files like those over 1TB. See below:
+Therefore, in practice, you could use `convert2annovar.pl` program as a way to split a huge VCF files into many parts, each for one particular sample, by back-converting the ANNOVAR input file into a VCF file for a particular sample. In a sense, it is similar to the `vcf-subset` program in VCFtools, but in this case ANNOVAR will be far more efficient, especially when handling large VCF files like those over 1TB. See below:
 
 ```
 [kaiwang@biocluster ~/]$ grep -P '^#' example1.NA00001.avinput > example1.NA00002.vcf
@@ -314,7 +309,7 @@ Therefore, in practice, you could use convert2annovar.pl program as a way to spl
 
 ### - dbSNP identifiers
 
-Many users have a list of dbSNP rs identifiers and want to annotate functinoality of these SNPs. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument:
+Many users have a list of dbSNP rs identifiers and want to annotate functionality of these SNPs. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument:
 
 ```
 [kaiwang@biocluster ~/]$ cat example/snplist.txt 
@@ -338,7 +333,7 @@ chr22 24325095 24325095 A G rs74487784
 
 As you can see above, the new file has the first five columns as chr, start, end, ref, alt, and the sixth column as dbSNP identifier. The LOG message tells us that 1 SNP (rs41534544) has multiple mappings to genome, and as a result, it has two entries in the output file.
 
-### - All possible variants in a genomic region
+### - All variants in a genomic region
 
 Suppose that I am interested in annotating all SNP, 1-bp insertions and 1-bp deletions in a 3-bp genomic region chr1:2000001-2000003. This can be easily done in `convert2annovar.pl` now:
 
@@ -390,11 +385,11 @@ NOTICE: Finished writting FASTA for 1 genomic regions to stdout
 1 2000003 2000003 - T
 ```
 
-If you only want 2-bp deletions but not SNVs and insertions, use "-subsize 0 -delsize 2". By default, -subsize is set as 1 to indicate that SNVs are always desired.
+If you only want 2-bp deletions but not SNVs and insertions, use `-subsize 0 -delsize 2`. By default, `-subsize` is set as 1 to indicate that SNVs are always desired.
 
-### - All possible variants in exonic region of a transcript
+### - All variants in a transcript
 
-Similar to the '-format region' above, users can generate ANNOVAR input files for all possible variants in exons (plus splicing variants) of a transcript. Let's take NM_022162 as an example:
+Similar to the `-format region` above, users can generate ANNOVAR input files for all possible variants in exons (plus splicing variants) of a transcript. Let's take NM_022162 as an example:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl -format transcript NM_022162 -gene humandb/hg19_refGene.txt -seqdir humandb/hg19_seq/ > NM_022162.avinput
@@ -437,20 +432,22 @@ NOTICE: Finished reading 1 sequences from humandb/hg19_seq/chr16.fa
 NOTICE: Finished writting FASTA for 1 genomic regions to stdout
 ```
 
-By default, splicing site (2-bp outside of each exon) is also processed. If you do not want them, or want to chagne the definition of splicing, use the -splicing_threshold argument.
+By default, splicing site (2-bp outside of each exon) is also processed. If you do not want them, or want to chagne the definition of splicing, use the `-splicing_threshold` argument.
 
-Similar to the '-format region' above, '-delsize' and '-dupsize' and '-subsize' are all supported, so that you can customize the output file.
+Similar to the `-format region` above, `-delsize` and `-dupsize` and `-subsize` are all supported, so that you can customize the output file.
 
-One great utility of using '-format region' is that users can back-convert protein or cDNA mutation nomenclature back to genomic coordinate. To do this, one just need to generate all possible mutations for a transcript, and then annotate the resulting *.avinput file, and then search through this file for matches.
+One great utility of using `-format region` is that users can back-convert protein or cDNA mutation nomenclature back to genomic coordinate. To do this, one just need to generate all possible mutations for a transcript, and then annotate the resulting \*.avinput file, and then search through this file for matches.
 
  
-### - Samtools genotype-calling pileup format
+### - SAMtools pileup format
 
-This section is also obselete now, and in fact samtools now use mpileup, rather than the "old" pileup.
+This section is obselete now, and in fact samtools now use mpileup, rather than the "old" pileup.
 
-Note that there are many different pileup formats, but here we are dealing with the (now-obselete as of 2011) "genotype-calling" pileup which contains the variant calls in one of the columns. A more detailed description is given at the Samtools website. An example to generate the "genotype-calling" pileup file is shown below:
+Note that there are many different pileup formats, but here we are dealing with the (obselete as of 2011) "genotype-calling" pileup which contains the variant calls in one of the columns. A more detailed description is given at the Samtools website. An example to generate the "genotype-calling" pileup file is shown below:
 
+```
 samtools pileup -vcf ref.fa aln.bam > raw.pileup
+```
 
 The commands generates pileup files that contain the consensus calls with the model implemented in MAQ (there are certainly many other specified SNP callers available as well that users can freely choose). An example genotype-calling pileup format generated from SamTools is illustrated below:
 
@@ -469,7 +466,7 @@ chr1 556683 G G 99 0 60 24 ....,...,....,,,,,,,,,,. %A%3B@%?%C?AB@BB/./-1A7?
 
 The columns are chromosome, 1-based coordinate, reference base, consensus base (IUPAC nomenclature for nucleotides), consensus quality, SNP quality, maximum mapping quality of the reads covering the sites, the number of reads covering the site, read bases and base qualities.
 
-The convert2annovar.pl program can convert the pileup file format to ANNOVAR input files. By default, the "-snpqual 20" argument will be imposed, so that only SNPs reaching quality score >=20 will be processed and written to output files. The output varlist file contains the called mutations in ANNOVAR format (non-mutations are obviously not in the output file).
+The `convert2annovar.pl` program can convert the pileup file format to ANNOVAR input files. By default, the `-snpqual 20` argument will be imposed, so that only SNPs reaching quality score >=20 will be processed and written to output files. The output varlist file contains the called mutations in ANNOVAR format (non-mutations are obviously not in the output file).
 
 In the 2011 Januaray version of ANNOVAR, the format for handling pileup file has been quite mature/fixed. Note that the first five columns conform to the standard ANNOVAR input format, yet the sixth and following columns give information on the alleles.
 
@@ -491,7 +488,7 @@ NOTICE: Column 6-9 in output are heterozygosity status, SNP quality, total reads
 
 The NOTICE line aboves tells the user what the columns 6-9 means in the output. In the first line, we see an indel with depth coverage of 53, and 10 of them support the indel. In the second line, we see a SNP with depth coverage of 39, and 37 of them supports the alternative allele (G). These additional numbers after column 6 helps user decide whether the variant calls are reliable or not.
 
-The -fraction argument can be used to filter out variants whose alternative allele has too low percentage among all reads. For example, if we suppose that all variant calls must be supported by at least 40% reads covering a site, we can use:
+The `-fraction` argument can be used to filter out variants whose alternative allele has too low percentage among all reads. For example, if we suppose that all variant calls must be supported by at least 40% reads covering a site, we can use:
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl 84060.pileup -coverage 10 -fraction 0.4 | head
@@ -512,14 +509,14 @@ NOTICE: Column 6-9 in output are heterozygosity status, SNP quality, total reads
 
 As can be seen by comparing the two output files, the first line of indel is no longer in output, because 10/53\<40%.
 
-Some additional useful arguments include: -altcov, which specifies the minimum coverage for the alternative allele (the -coverage specifies coverage for all reads regardless of whether they support reference allele or alternative allele); -maxcoverage, which specifies the maximum coverage level to print out this variant; --includeinfo, which specifies that all information in the input line should be included in the output line by appending them after the printed columns.
+Some additional useful arguments include: `--altcov`, which specifies the minimum coverage for the alternative allele (the `--coverage` specifies coverage for all reads regardless of whether they support reference allele or alternative allele); `--maxcoverage`, which specifies the maximum coverage level to print out this variant; `--includeinfo`, which specifies that all information in the input line should be included in the output line by appending them after the printed columns.
 
-After the program finishes, it will print out some statistics. Normally, for whole-genome sequencing on humans, the heterozytoes:homozygotes ratio should be around 2:1, the transitions:transversions ratio should be 2:1. (ANNOVAR version before Sep 2010 has a bug in the ratio calculation and it has been fixed now).
+After the program finishes, it will print out some statistics. Normally, for whole-genome sequencing on humans, the heterozytoes:homozygotes ratio should be around 2:1, the transitions:transversions ratio should be 2:1.
 
-Adanced notes: When the chromosome is "M", ANNOVAR will not print out "hom" or "het", instead, it will print out a number between 0 and 1 that suggest the fraction of reads that support alternative alleles. Use -chrmt argument if mitochondria is not annotated as M in your alignment.
+>>>Advanced notes: When the chromosome is "M", ANNOVAR will not print out "hom" or "het", instead, it will print out a number between 0 and 1 that suggest the fraction of reads that support alternative alleles. Use `-chrmt` argument if mitochondria is not annotated as M in your alignment.
 
  
-### - Complete Genomics genotyping calling format
+### - Complete Genomics format
 
 The complete genomics company provides many genotyping-calling files for their customers. Among them is an var\*ASM.tsv file that looks like below.
 
@@ -546,7 +543,7 @@ The complete genomics company provides many genotyping-calling files for their c
 12 2 all chr1 1267 1275 no-call = ?
 ```
 
-The `convert2annovar.pl` program can be used to convert this file to ANNOVAR format, using the "-format cg" argument. The output file looks like this:
+The `convert2annovar.pl` program can be used to convert this file to ANNOVAR format, using the `-format cg` argument. The output file looks like this:
 
 ```
 [kai@beta ~/]$ head var-GS000000088-ASM.tsv.snp 
@@ -573,11 +570,11 @@ NOTICE: Done with 25667914 lines
 3728645 GS000000455.query
 ```
 
-In this example, 25.6 million lines from the var*ASM.tsv file from Complete Genomics data are processed, and 3.7 million variants are written to the output file in ANNOVAR input format.
+In this example, 25.6 million lines from the var\*ASM.tsv file from Complete Genomics data are processed, and 3.7 million variants are written to the output file in ANNOVAR input format.
 
-### - GFF3-SOLiD format
+### - GFF3-SOLiD calling format
 
-Sometimes variant calls are in GFF3 format, and they can be converted to ANNOVAR input format. (This input file should not be confused with a GFF3 annotation database, as they serve different purposes. Here we are dealing with input files only.) For example, SOLiD provides SNP variant calls in the following format:
+This section is also obselete as few people work on SOLiD data nowadays. SOLiD BioScope generates genotype calls in GFF3 format, which we refer to as GFF3-SOLiD here. (This input file should not be confused with a GFF3 annotation database, as they serve different purposes. Here we are dealing with input files only.) For example, SOLiD provides SNP variant calls in the following format:
 
 ```
 [kaiwang@biocluster ~/]$ head -n 20 var/Yoruban_snp_18x.gff 
@@ -603,7 +600,7 @@ Sometimes variant calls are in GFF3 format, and they can be converted to ANNOVAR
 1 AB_SOLiD SNP caller SNP 18426 18426 1 . . coverage=3;ref_base=A; ref_score=0.0000;ref_confi=0.0000;ref_single=0/0;ref_paired=0/0;consen_base=G; consen_score=1.0000;consen_confi=0.8163;consen_single=0/0;consen_paired=3/3
 ```
 
-The conversion can be done using "-format gff3-solid" argument.
+The conversion can be done using `-format gff3-solid` argument.
 
 ```
 [kaiwang@biocluster ~/]$ convert2annovar.pl var/Yoruban_snp_18x.gff -format gff3-solid | head
@@ -619,9 +616,9 @@ The conversion can be done using "-format gff3-solid" argument.
 1 18426 18426 A G hom
 ```
 
-Adding the --includeinfo argument will print out an additional column with the detailed attribute of the calls.
+Adding the `--includeinfo` argument will print out an additional column with the detailed attribute of the calls.
 
-### - SOAPsnp format
+### - SOAPsnp calling format
 
 The Short Oligonucleotide Analysis Package (SOAP) suite is developed by BGI, and SOAPsnp is a component that generates variant calls. An example of the genotype call file is given below:
 
@@ -638,7 +635,7 @@ chr10 434997 C Y 73 T 26 5 5 C 26 4 4 9 0.682540 1.00000 1 64
 chr10 435061 C T 36 T 30 16 16 C 0 0 0 16 1.00000 1.00000 1 64
 ```
 
-The convert2annovar.pl program can handle this format, using the "-format soapsnp" argument. An example of the output file is given below:
+The `convert2annovar.pl` program can handle this format, using the `-format soapsnp` argument. An example of the output file is given below:
 
 ```
 10 84026 84026 G A het
@@ -653,15 +650,15 @@ The convert2annovar.pl program can handle this format, using the "-format soapsn
 10 435061 435061 C T hom
 ```
 
-Note that is --includeinfo argument is used, all the information from input file will be included in the output file.
+Note that is `--includeinfo` argument is used, all the information from input file will be included in the output file.
 
-### - MAQ genotype calling format
+### - MAQ calling format
 
-The convert2annovar.pl program can handle this format, using the "-format maq " argument. Both SNPs and indels can be correctly processed.
+The `convert2annovar.pl` program can handle this format, using the `-format maq` argument. Both SNPs and indels can be correctly processed.
 
-### - CASAVA genotype calling format
+### - CASAVA calling format
 
-The convert2annovar.pl program can handle this format, using the "-format casava " argument and also specifying the chromosome by "-chr" argument, since CASAVA call file per se does not contain chromosome information. Both SNPs and indels can be correctly processed. This function is not tested rigorously yet. Please report bugs to me.
+The `convert2annovar.pl` program can handle this format, using the `-format casava` argument and also specifying the chromosome by `--chr` argument, since CASAVA call file per se does not contain chromosome information. Both SNPs and indels can be correctly processed.
 
 
 
