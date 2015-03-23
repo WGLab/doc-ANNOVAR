@@ -210,6 +210,21 @@ The dbSNP entries does not include allele frequency measure, so users should exe
 
 > *Technical Notes: the dbSNP commonSNP track from UCSC is extremely incomplete and users really should not use it for annotation under any circumstance. Use the 1000g2014oct database or better the popfreq_all database provided in ANNOVAR for this purpose instead.*
 
+
+## avSNP annotations
+
+avSNP datasets are basically reformatted dbSNP datasets. Currently we made hg19_avsnp138 and hg19_avsnp142 available, but this list may expand in the future.
+
+Unlike dbSNP, avSNP files have standard six-column "generic" format, and its indels have been left-normalized, and it contains only one variant per line. This makes the assignment of dbSNP identifiers much cleaner. For more detailed discussions, please read [this article](../articles/dbSNP.md).
+
+The use of avsnp datasets are straightforward with the avsnp138/avsnp142 as `-dbtype`:
+
+```
+annotate_variation.pl -downdb -buildver hg19 avsnp142 humandb/
+annotate_variation.pl ex1.avinput humandb/ -filter -build hg19 -dbtype avsnp142
+```
+
+
 ## LJB\* (dbNSFP) non-synonymous variants annotation
 
 The LJB\* databases (for historical reasons, it is named as ljb rather than dbNSFP in ANNOVAR) include SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores. These scores were retrieved from the dbNSFP and big thanks to the authors (Liu, Jian, Boerwinkle), hence the name ljb. **As of 2015, the lastest ljb database is ljb26.** The description below refers to ljb23 but the format/usage is very similar.
