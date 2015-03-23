@@ -23,6 +23,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20150322 |
 | hg19 | ensGene | same as above | 20150322 |
 
+---
 
 ### - For filter-based annotation
 
@@ -226,6 +227,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | cadd | whole-genome CADD scores (350GB file, make sure you have sufficient disk space before downloading) | 20140223 |
 
 
+---
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
