@@ -63,6 +63,8 @@ changed -downdb behavior on 1000G data sets, convert2annovar.pl now handles soap
 
 - On 2014Nov12, fixed a problem of convert2annovar with some NR records in VCF file, fixed a bug in handling dup variants in coding_change.pl, improved the ability to handle VCF file in able_annovar.pl, significantly reduce memory usage for filter annotation, improve compatibility for unconventional chromosome names for species such as tomato, fixed a problem in annotating against multi-allelic indels in VCF file, fixed a problem in exon numbering for splice variants in reverse strand, refGene version file included in -downdb
 
+- On 2015Mar22, fix a bug with -score_threshold does not work with ljb2\* databases
+added -poscolumn argument to fine-tune region-based annotation, convert2annovar.pl can now handle PATH automatically and better predicts depth coverage in VCF file, handle situations where a variant disrupt both ncRNA_exonic and splice site in gene-based annotation, slight change in retrieve_seq_from_fasta.pl to increase compatibility for certain species, improve table_annovar.pl to print out all columns for exac03 and other databases, fixed a bug in coding_change.pl to handle c.dup identifiers
 
 
 
