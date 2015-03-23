@@ -162,6 +162,7 @@ Table below lists the some columns of variants annotation from wANNOVAR. For oth
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'annovar';
     var disqus_identifier = 'wANNOVAR';
+    var disqus_title = 'wANNOVAR tutorial';
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
