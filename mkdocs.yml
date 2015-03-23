@@ -24,7 +24,7 @@ pages:
 - ['user-guide/input.md', 'User Guide', 'Prepare Input Files']
 - ['user-guide/gene.md', 'User Guide', 'Gene-based Annotation']
 - ['user-guide/region.md', 'User Guide', 'Region-based Annotation']
-- ['user-guide/filter.md', 'User Guide', 'Filter-based annotation']
+- ['user-guide/filter.md', 'User Guide', 'Filter-based Annotation']
 
 # Misc
 - ['misc/accessory.md', 'Misc', 'Accessoary Programs']
@@ -32,11 +32,11 @@ pages:
 - ['misc/whatsnew.md', 'Misc', 'What is New']
 - ['misc/version_history.md', 'Misc', 'Version History']
 - ['misc/credit.md', 'Misc', 'Credit']
-- ['misc/contributing.md', 'Misc', 'How to contribute']
+- ['misc/contributing.md', 'Misc', 'How to Contribute']
 
 
 # Articles
-- ['articles/VCF.md', 'Articles', 'VCF processing guide']
-- ['articles/dbSNP.md', 'Articles', 'Assigning dbSNP identifiers']
-- ['articles/wANNOVAR.md', 'Articles', 'wANNOVAR tutorial']
+- ['articles/VCF.md', 'Articles', 'VCF Processing Guide']
+- ['articles/dbSNP.md', 'Articles', 'Assigning dbSNP Identifiers']
+- ['articles/wANNOVAR.md', 'Articles', 'wANNOVAR Tutorial']
 
