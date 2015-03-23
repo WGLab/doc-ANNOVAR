@@ -31,6 +31,8 @@ Several very commonly used annotation databases for human genomes are additional
 |---|---|---|---|
 | hg18 | avsift | whole-exome SIFT scores for non-synonymous variants (obselete and should not be uesd any more) | 20120222 |
 | hg19	|	avsift	|	same as above	| 20120222 |
+| hg19 | avsnp138 | dbSNP138 with allelic splitting and left-normalization | 20141223 |
+| hg19 | avsnp142 | dbSNP142 with allelic splitting and left-normalization | 20141228 | 
 | hg18	|	ljb_sift	|	whole-exome LJBSIFT scores (1-SIFT!)	|	20120222 |
 | hg19 | ljb_sift | same as above | 20120222 |
 | hg18 | ljb2_sift | whole-exome SIFT scores (version 2) | 20130621 |
