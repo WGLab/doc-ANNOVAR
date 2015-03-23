@@ -810,64 +810,6 @@ cg46 0.511 1 84875173 84875173 C T comments: rs6576700 or SNP_A-1780419, a SNP i
 cg46 0.793 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
 cg46 0.304 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
- 
-
-## Population frequency ensembl annotations
-
-Many users complain that there are too many allele frequency files and that they are too confusing to use, and they just want one single file that have all the available information. I created this file in February 2014 called popfreq_all to solve this problem. This database integrates the following information: PopFreqMax 1000G2012APR_ALL 1000G2012APR_AFR 1000G2012APR_AMR 1000G2012APR_ASN 1000G2012APR_EUR ESP6500si_ALL ESP6500si_AA ESP6500si_EA CG46.
-
-```
-[kaiwang@biocluster ~/]$ annotate_variation.pl example/ex1.avinput humandb/ -filter -dbtype popfreq_all -buildver hg19 -out ex1
-NOTICE: the --dbtype popfreq_all is assumed to be in generic ANNOVAR database format
-NOTICE: Variants matching filtering criteria are written to ex1.hg19_popfreq_all_dropped, other variants are written to ex1.hg19_popfreq_all_filtered
-NOTICE: Processing next batch with 15 unique variants in 15 input lines
-NOTICE: Database index loaded. Total number of bins is 2816654 and the number of bins to be scanned is 12
-NOTICE: Scanning filter database humandb/hg19_popfreq_all.txt...Done
-
-
-[kaiwang@biocluster ~/]$ cat ex1.hg19_popfreq_all_dropped
-popfreq_all 0.011 1 13211293 13211294 TC - comments: rs59770105, a 2-bp deletion
-popfreq_all 0.13 1 1404001 1404001 G T comments: rs149123833, a SNP in 3' UTR of ATAD3C
-popfreq_all 0.87 1 162736463 162736463 C T comments: rs1000050, a SNP in Illumina SNP arrays
-popfreq_all 0.89 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
-popfreq_all 0.064 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-popfreq_all 0.6 1 84875173 84875173 C T comments: rs6576700 or SNP_A-1780419, a SNP in Affymetrix SNP arrays
-popfreq_all 1. 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
-popfreq_all 0.011 13 20763686 20763686 G - comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-popfreq_all 0.05 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-popfreq_all 0.03 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-popfreq_all 0.022 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-popfreq_all 0.53 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-```
-
-The above command search the ex1.avinput file against the database. In the output file, the first column is database name, while the second column is the maximum allele frequency observed in many databases.
-
-If you want the complete set of information, just add the `-otherinfo` argument.
-
-```
-[kaiwang@biocluster ~/]$ annotate_variation.pl example/ex1.avinput humandb/ -filter -dbtype popfreq_all -buildver hg19 -out ex1 -otherinfo
-NOTICE: the --dbtype popfreq_all is assumed to be in generic ANNOVAR database format
-NOTICE: Variants matching filtering criteria are written to ex1.hg19_popfreq_all_dropped, other variants are written to ex1.hg19_popfreq_all_filtered
-NOTICE: Processing next batch with 15 unique variants in 15 input lines
-NOTICE: Database index loaded. Total number of bins is 2816654 and the number of bins to be scanned is 12
-NOTICE: Scanning filter database humandb/hg19_popfreq_all.txt...Done
-
-[kaiwang@biocluster ~/]$ cat ex1.hg19_popfreq_all_dropped
-popfreq_all 0.011,.,.,.,.,.,.,.,.,0.011 1 13211293 13211294 TC - comments: rs59770105, a 2-bp deletion
-popfreq_all 0.13,0.08,0.07,0.09,0.13,0.04,0.028,0.025,0.029,. 1 1404001 1404001 G T comments: rs149123833, a SNP in 3' UTR of ATAD3C
-popfreq_all 0.87,0.65,0.39,0.68,0.58,0.87,.,.,.,0.62 1 162736463 162736463 C T comments: rs1000050, a SNP in Illumina SNP arrays
-popfreq_all 0.89,0.83,0.88,0.81,0.83,0.81,0.84,0.89,0.82,0.62 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
-popfreq_all 0.064,0.03,0.01,0.06,.,0.06,0.047,0.014,0.064,0.043 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-popfreq_all 0.6,0.55,0.51,0.54,0.6,0.54,.,.,.,0.51 1 84875173 84875173 C T comments: rs6576700 or SNP_A-1780419, a SNP in Affymetrix SNP arrays
-popfreq_all 1.,0.9,0.67,0.93,1.,0.96,0.89,0.75,0.96,0.79 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
-popfreq_all 0.011,.,.,.,.,.,0.0074,0.0009,0.011,. 13 20763686 20763686 G - comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-popfreq_all 0.05,0.02,0.0041,0.03,.,0.05,0.032,0.0082,0.043,0.022 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-popfreq_all 0.03,0.01,.,0.03,.,0.01,0.01,0.0016,0.015,. 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-popfreq_all 0.022,0.01,0.01,0.01,.,0.01,0.016,0.0047,0.022,. 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-popfreq_all 0.53,0.39,0.25,0.38,0.33,0.53,0.46,0.32,0.52,0.3 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-```
-
-Of course, you can use the popfreq_all database in `table_annovar.pl`, so that the output file contains all relevant information in Excel compatible format for easy viewing and browsing.
 
 ## CLINVAR annotations
 
