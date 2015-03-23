@@ -57,6 +57,8 @@ For ANNOVAR users, these will be the most "correct" dbSNP release to use to ensu
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'annovar';
+    var disqus_identifier = 'dbSNP';
+    var disqus_title = 'Assigning dbSNP identifiers';
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
