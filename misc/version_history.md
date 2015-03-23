@@ -62,3 +62,16 @@ changed -downdb behavior on 1000G data sets, convert2annovar.pl now handles soap
 - On 2014Jul14, table_annovar now supports -tempdir argument, table_annovar now supports VCF input format and write to output VCF file, table_annovar now use separate column for splicing/UTR notations, convert2annovar can generate all possible SNVs/indels in a genomic region or in a transcript, convert2annovar can generate ANNOVAR input files for list of dbSNP identifiers, improve convert2annovar to better handle block indel/substitution in VCF4, changed 'stopgain SNV' and 'stoploss SNV' to 'stopgain' and 'stoploss' as they apply to both SNVs and indels, add -withfilter argument to convert2annovar to print out FILTER field in output for VCF files, fixed bug to handle VCFdbfile when AF record is in scientific notation, add UTR cdot annotation, improved table_annovar to print out correct column headers when the database file has the information, fixed a convert2annovar bug when VCF file does not have valid VCF header but -includeinfo is specified, add details for splicing variant when -separate flag is used, minor bug fix for dup annotation for insertions in negative strand, minor change to default parameters in table_annovar.pl for ljb2_pp2, fixed an error in convert2annovar to handle multi-sample VCF files
 
 - On 2014Nov12, fixed a problem of convert2annovar with some NR records in VCF file, fixed a bug in handling dup variants in coding_change.pl, improved the ability to handle VCF file in able_annovar.pl, significantly reduce memory usage for filter annotation, improve compatibility for unconventional chromosome names for species such as tomato, fixed a problem in annotating against multi-allelic indels in VCF file, fixed a problem in exon numbering for splice variants in reverse strand, refGene version file included in -downdb
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48623707-1', 'openbioinformatics.org');
+  ga('send', 'pageview');
+</script>
