@@ -73,6 +73,8 @@ Credits: A number of ANNOVAR users participated in the discussion and provided v
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'annovar';
+    var disqus_identifier = 'VCF';
+    var disqus_title = 'VCF processing guide';
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
