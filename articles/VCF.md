@@ -57,7 +57,7 @@ Some basic facts to keep in mind:
 Credits: A number of ANNOVAR users participated in the discussion and provided valuable comments on some issues described in this article, including Pär Engström (Stockholm University).
 
 
-
+---
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
