@@ -229,7 +229,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | caddgt20 | whole-genome CADD scores that are within top 1% percentile, for most likely functional variants | 20140310 |
 | hg19 | caddgt10 | whole-genome CADD scores that are within top 10% percentile, for most likely functional variants | 20140310 |
 | hg19 | cadd | whole-genome CADD scores (350GB file, make sure you have sufficient disk space before downloading) | 20140223 |
-
+| hg19 | caddindel | whole-genome CADDindel scores | 20150325 |
 
 ---
 
