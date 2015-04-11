@@ -26,7 +26,7 @@ pages:
 - ['user-guide/filter.md', 'User Guide', 'Filter-based Annotation']
 
 # Misc
-- ['misc/accessory.md', 'Misc', 'Accessoary Programs']
+- ['misc/accessory.md', 'Misc', 'Accessory Programs']
 - ['misc/faq.md', 'Misc', 'FAQ']
 - ['misc/whatsnew.md', 'Misc', 'What is New']
 - ['misc/version_history.md', 'Misc', 'Version History']
