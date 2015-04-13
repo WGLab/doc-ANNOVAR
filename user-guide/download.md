@@ -217,10 +217,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | clinvar_20140902 | same as above | 20140911 |
 | hg38 | clinvar_20140902 | same as above | 20140911 |
 | hg19 | clinvar_20140929 | same as above | 20141002 |
-| hg18 | popfreq_max | A database containing the maximum allele frequency from these tables: 1000G2012APR_ALL 1000G2012APR_AFR 1000G2012APR_AMR 1000G2012APR_ASN 1000G2012APR_EUR ESP6500si_ALL ESP6500si_AA ESP6500si_EA CG46 | 20130821 |
-| hg19 | popfreq_max | same as above | 20130821 |
-| hg18 | popfreq_all | A database containing the all allele frequency from these tables: popfreq_max, 1000G2012APR_ALL 1000G2012APR_AFR 1000G2012APR_AMR 1000G2012APR_ASN 1000G2012APR_EUR ESP6500si_ALL ESP6500si_AA ESP6500si_EA CG46 | 20140223 |
-| hg19 | popfreq_all | same as above | 20140223 |
+| hg19 | popfreq_max_20150413 |  A database containing the maximum allele frequency from 1000G, ESP6500, ExAC and CG46 | 20150413 |
+| hg19 | popfreq_all_20150413 |  A database containing all allele frequency from 1000G, ESP6500, ExAC and CG46  | 20150413 |
 | hg18 | gerp++elem | conserved genomic regions by GERP++ | 20140223 |
 | hg19 | gerp++elem | same as above | 20140223 |
 | mm9 | gerp++elem | same as above | 20140223 |
