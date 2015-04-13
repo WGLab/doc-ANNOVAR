@@ -811,6 +811,30 @@ cg46 0.793 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
 cg46 0.304 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
 
+## PopFreqMax and PopFreqAll annotations
+
+The popfreq_max database contains the maximum allele frequency from several population frequency databases, including 1000 Genomes Project (ALL+5 ethnicity groups), ESP6500 (ALL+2 ethnicity groups), ExAC (ALL+7 ethnicity groups), CG46. The popfreq_all database contains multiple columns representing all allele frequency measures from these population frequency databases.
+
+The name of the database is suffixed by the date when the database is made. Currently, 20150413 is the suffix.
+
+For example, to check the allele frequency information for variants in the `ex1.avinput` file:
+
+```
+[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -downdb -webfrom annovar -build hg19 popfreq_max_20150413 humandb/
+
+[kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -out ex1 -dbtype popfreq_max_20150413 -build hg19 example/ex1.avinput humandb/
+
+[kaiwang@biocluster ~/project/annotate_variation]$ head -n 5 ex1.hg19_popfreq_max_20150413_dropped
+popfreq_max_20150413    0.011   1       13211293        13211294        TC      -       comments: rs59770105, a 2-bp deletion
+popfreq_max_20150413    0.15    1       1404001 1404001 G       T       comments: rs149123833, a SNP in 3' UTR of ATAD3C
+popfreq_max_20150413    0.85    1       162736463       162736463       C       T       comments: rs1000050, a SNP in Illumina SNP arrays
+popfreq_max_20150413    0.92    1       5935162 5935162 A       T       comments: rs1287637, a splice site variant in NPHP4
+popfreq_max_20150413    0.064   1       67705958        67705958        G       A       comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
+```
+
+The same procedure can be used for `popfreq_all_20150413`, though one may want to add `-otherinfo` argument in the command line so that all frequency information is printed out. This database is more useful when using `table_annovar.pl`, as the column header will be printed out automatically in the output file.
+
+
 ## CLINVAR annotations
 
 The ClinVar database archives and aggregates information about relationships among variation and human health. Accessions, of the format SCV000000000.0, are assigned to each record.
