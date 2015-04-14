@@ -823,6 +823,11 @@ For example, to check the allele frequency information for variants in the `ex1.
 [kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -downdb -webfrom annovar -build hg19 popfreq_max_20150413 humandb/
 
 [kaiwang@biocluster ~/project/annotate_variation]$ annotate_variation.pl -filter -out ex1 -dbtype popfreq_max_20150413 -build hg19 example/ex1.avinput humandb/
+NOTICE: the --dbtype popfreq_max_20150413 is assumed to be in generic ANNOVAR database format
+NOTICE: Variants matching filtering criteria are written to ex1.hg19_popfreq_max_20150413_dropped, other variants are written to ex1.hg19_popfreq_max_20150413_filtered
+NOTICE: Processing next batch with 15 unique variants in 15 input lines
+NOTICE: Database index loaded. Total number of bins is 26410909 and the number of bins to be scanned is 15
+NOTICE: Scanning filter database humandb/hg19_popfreq_max_20150413.txt...Done
 
 [kaiwang@biocluster ~/project/annotate_variation]$ head -n 5 ex1.hg19_popfreq_max_20150413_dropped
 popfreq_max_20150413    0.011   1       13211293        13211294        TC      -       comments: rs59770105, a 2-bp deletion
@@ -839,7 +844,7 @@ The same procedure can be used for `popfreq_all_20150413`, though one may want t
 
 The ClinVar database archives and aggregates information about relationships among variation and human health. Accessions, of the format SCV000000000.0, are assigned to each record.
 
-I compiled the database to be used by ANNOVAR. An example command is below:
+I compiled the database to be used by ANNOVAR. Note that the database name has a date as suffix, so make sure to check the [download](download.md) page to use the latest version. An example command is below:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl example/ex1.avinput humandb/ -filter -dbtype clinvar_20140211 -buildver hg19 -out ex1 
