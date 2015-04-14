@@ -846,7 +846,7 @@ The ClinVar database archives and aggregates information about relationships amo
 
 I compiled the database to be used by ANNOVAR. Note that the database name has a date (which is identical to Clinvar release date) as suffix, so make sure to check the [download](download.md) page to use the latest version. 
 
-Starting from March 2015, all Clinvar databases in ANNOVAR are processed by the allele-splitting and left-normalization pipeline described [here](/articles/vcf.md).
+Starting from March 2015, all Clinvar databases in ANNOVAR are processed by the allele-splitting and left-normalization pipeline described [here](../articles/VCF.md).
 
 An example command is below:
 
