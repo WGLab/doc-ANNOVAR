@@ -2,9 +2,9 @@ This article describes some thoughts about VCF pre-processing to ensure a more a
 
 ---
 
-Introduction to VCF file and some of its complications
+**Introduction to VCF file and some of its complications**
 
-When ANNOVAR was originally developed, almost all variant callers (SamTools, SOAPSNP, SOLiD BioScope, Illumina CASAVA, CG ASM-var, CG ASM-masterVAR, etc) use a different file format for output files, so ANNOVAR decides to take an extremely simple format (chr, start, end, ref, alt, plus optional fields) as input. Let's call it avinput file for now. Then I provide the convert2annovar.pl program in the ANNOVAR package to faciliate format conversion.
+When ANNOVAR was originally developed, almost all variant callers (SamTools, SOAPSNP, SOLiD BioScope, Illumina CASAVA, CG ASM-var, CG ASM-masterVAR, etc) use a different file format for output files, so ANNOVAR decides to take an extremely simple format (chr, start, end, ref, alt, plus optional fields) as input. Let's call it avinput file for now. Then I provide the `convert2annovar.pl` program in the ANNOVAR package to faciliate format conversion.
 
 Later on, VCF (Variant Call Format) becomes the main stream format for describing variants. It was originally developed and used by the 1000 Genomes Project, but its specification and extension is currently handled by the Global Alliance for Genomics and Health Data Working group. See [here]( http://www.1000genomes.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-41) for details on its format specification.
 
@@ -36,21 +36,30 @@ Some basic facts to keep in mind:
 
     So as a user, this is what you should do: (1) split VCF lines so that each line contains one and only one variant (2) left-normalize all VCF lines (3) annotate by ANNOVAR.
 
-    For example, suppose the input is ex1.vcf.gz (make sure that it is processed by bgzip and then by tabix), this is what you would do:
+    For example, suppose the input is `ex1.vcf.gz` (make sure that it is processed by `bgzip` and then by `tabix`), this is what you would do:
 
     `bcftools norm -m-both -o ex1.step1.vcf ex1.vcf.gz`
 
     `bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf`
 
-    The first command split multi-allelic variants calls into separate lines, yet the second command perform the actual left-normalization. The FASTA file is needed in the second command.
+    The first command split multi-allelic variants calls into separate lines, yet the second command perform the actual left-normalization. The FASTA file is needed in the second command. (Occasionally I found that the first command has a bug that reports none of the variants can be decomposed despite the presence of such variants in the file; if that is the case, you can try use the [vt program](http://genome.sph.umich.edu/wiki/Vt) instead.)
 
-    Now after this pre-processing step, you can start annotating ex1.step2.vcf by ANNOVAR.
+    Now after this pre-processing step, you can start annotating `ex1.step2.vcf` by ANNOVAR.
 
 6. There are several problems with the above approach, that users should keep in mind.
 
     First, a positive strand gene may well be a negative strand gene in a different genome build (different version of the same reference genome such as hg17/hg18/hg19/hg38, or reference genome from different ethnicity groups such as Caucasian/African/Chinese/Korean/Venter), so that left-normalization results in discordant protein-level annotations; yet if we adopt the HGVS standard, this will not be a problem. In any case, as human genome is relatively mature today, I consider this as a relatively minor issue at least for humans.
 
     Second, due to the way VCF is designed, left-normalization and spliting software tools are just not as smart as you may think yet, and the INFO field may not be splitted correctly, resulting in future frustrations when interpreting the results. Let's take a simple example from a real ESP6500 file: the record "EA_AC=76,129,1560" may be present in the INFO field in the VCF file, yet it denote counts for alternative allele 1, counts for alternative allele 2, counts for reference allele, respectively (but a software such as bcftools won't be smart to know this hidden info and won't be smart to know the exact order of alleles). Now if you split and left-normalize the VCF, no software tool would be smart enough to re-generate the correct record, so users can no longer correctly interpret the INFO field unless you know exactly what kind of processing has been performed on VCF. To address this, you may want to just re-join the multiple variants at the same locus and generate a new VCF file.
+
+Currently, the following databases in ANNOVAR are left-normalized so that users can directly use them to compare to your left-normalized variant file:
+
+- avsnp138
+- avsnp142
+- clinvar_20150330
+- 1000g2014oct
+- exac03
+- esp6500siv2
 
 ---
 
