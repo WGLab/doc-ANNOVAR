@@ -844,7 +844,11 @@ The same procedure can be used for `popfreq_all_20150413`, though one may want t
 
 The ClinVar database archives and aggregates information about relationships among variation and human health. Accessions, of the format SCV000000000.0, are assigned to each record.
 
-I compiled the database to be used by ANNOVAR. Note that the database name has a date as suffix, so make sure to check the [download](download.md) page to use the latest version. An example command is below:
+I compiled the database to be used by ANNOVAR. Note that the database name has a date (which is identical to Clinvar release date) as suffix, so make sure to check the [download](download.md) page to use the latest version. 
+
+Starting from March 2015, all Clinvar databases in ANNOVAR are processed by the allele-splitting and left-normalization pipeline described [here](vcf.md).
+
+An example command is below:
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl example/ex1.avinput humandb/ -filter -dbtype clinvar_20140211 -buildver hg19 -out ex1 
