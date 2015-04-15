@@ -4,6 +4,8 @@ Please join the ANNOVAR mailing list at google groups [here](https://groups.goog
 
 The latest version of ANNOVAR (2015Mar22) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
 
+**20150414**: A patch to the `table_annovar.pl` program in the above version is available [here](http://www.openbioinformatics.org/annovar/download/table_annovar.pl), which improves backward compatibility to ljb and popfreq databases.
+
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
 ## Additional databases
