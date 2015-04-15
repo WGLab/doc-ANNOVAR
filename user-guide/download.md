@@ -32,102 +32,9 @@ Several very commonly used annotation databases for human genomes are additional
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
 | hg18 | avsift | whole-exome SIFT scores for non-synonymous variants (obselete and should not be uesd any more) | 20120222 |
-| hg19	|	avsift	|	same as above	| 20120222 |
+| hg19	| avsift	|	same as above	| 20120222 |
 | hg19 | avsnp138 | dbSNP138 with allelic splitting and left-normalization | 20141223 |
 | hg19 | avsnp142 | dbSNP142 with allelic splitting and left-normalization | 20141228 | 
-| hg18	|	ljb_sift	|	whole-exome LJBSIFT scores (1-SIFT!)	|	20120222 |
-| hg19 | ljb_sift | same as above | 20120222 |
-| hg18 | ljb2_sift | whole-exome SIFT scores (version 2) | 20130621 |
-| hg19 | ljb2_sift | same as above | 20130621 |
-| hg18 | ljb23_sift | whole-exome SIFT scores with missing values imputed | 20140222 |
-| hg19 | ljb23_sift | same as above |  20140222 |
-| hg18 | ljb26_sift | whole-exome SIFT scores with missing values imputed |  20140925 |
-| hg19 | ljb26_sift | samea s above |  20140925 |
-| hg18 | ljb_pp2 | whole-exome PolyPhen scores | 20120222 |
-| hg19 | ljb_pp2 | same as above | 20120222 |
-| hg18 | ljb2_pp2hdiv | whole-exome PolyPhen scores built on HumanDiv database (for complex phenotypes) | 20130621 |
-| hg19 | ljb2_pp2hdiv | same as above | 20120222 |
-| hg18 | ljb23_pp2hdiv | whole-exome PolyPhen 2 scores built on HumanDiv database (for complex phenotypes) | 20140222 |
-| hg19 | ljb23_pp2hdiv | same as above | 20140222 |
-| hg18 | ljb26_pp2hdiv | same as above | 20140925 |
-| hg19 | ljb26_pp2hdiv | same as above | 20140925 |
-| hg18 | ljb2_pp2hvar | whole-exome PolyPhen version 2 scores built on HumanVar database (for Mendelian phenotypes) | 20130621 |
-| hg19 | ljb2_pp2hvar | same as above | 20130621 |
-| hg18 | ljb23_pp2hvar | whole-exome PolyPhen 2 scores built on HumanVar database (for Mendelian phenotypes) | 20140222 |
-| hg19 | ljb23_pp2hvar | same as above | 20140222 |
-| hg19 | ljb26_pp2hvar | same as above | 20140925 |
-| hg19 | ljb26_pp2hvar | same as above | 20140925 |
-| hg18 | ljb26_cadd | whole-exome CADD scores, including raw score and categorical prediction | 20140915 |
-| hg18 | ljb_phylop | whole-exome PhyloP scores | 20120222 |
-| hg19 | ljb_phylop | same as above | 20120222 |
-| hg18 | ljb2_phylop | whole-exome PhyloP scores | 20130621 |
-| hg19 | ljb2_phylop | same as above | 20130621 |
-| hg18 | ljb23_phylop | whole-exome PhyloP scores | 20140222 |
-| hg19 | ljb23_phylop | same as above | 20140222 |
-| hg18 | ljb26_phylop46way_placental | whole-exome PhyloP scores based on 46-way alignment placental subset | 20140925 |
-| hg19 | ljb26_phylop46way_placental | same as above | 20140925 |
-| hg18 | ljb26_phylop100way_vertebrate | whole-exome PhyloP scores based on 100-way alignment vertebrate subset | 20140925 |
-| hg19 | ljb26_phylop100way_vertebrate | same as above | 20140925 |
-| hg18 | ljb_lrt | whole-exome LRT scores | 20120222 |
-| hg19 | ljb_lrt | same as above | 20120222 |
-| hg18 | ljb2_lrt | whole-exome LRT scores (version 2) | 20130621 |
-| hg19 | ljb2_lrt | same as above | 20130621 |
-| hg18 | ljb23_lrt | whole-exome LRT scores | 20140222 |
-| hg19 | ljb23_lrt | same as above | 20140222 |
-| hg18 | ljb26_lrt | whole-exome LRT scores  | 20140915 |
-| hg19 | ljb26_lrt | same as above | 20140915 |
-| hg18 | ljb_mt | whole-exome MutationTaster scores | 20120222 |
-| hg19 | ljb_mt | same as above | 20120222 |
-| hg18 | ljb2_mt | whole-exome MutationTaster scores | 20130621 |
-| hg19 | ljb2_mt | same as above | 20130621 |
-| hg18 | ljb23_mt | whole-exome MutationTaster scores | 20140222 |
-| hg19 | ljb23_mt | same as above | 20140222 |
-| hg18 | ljb26_mt | whole-exome MutationTaster scores | 20140925 |
-| hg19 | ljb26_mt | same as above | 20140925 |
-| hg18 | ljb2_ma | whole-exome MutationAssessor scores | 20130621 |
-| hg19 | ljb2_ma | same as above | 20140915 |
-| hg18 | ljb23_ma | whole-exome MutationAssessor scores | 20140222 |
-| hg19 | ljb23_ma | same as above | 20140222 |
-| hg18 | ljb26_ma | whole-exome MutationAssessor scores | 20140925 |
-| hg19 | ljb26_ma | same as above | 20140925 |
-| hg18 | ljb2_fathmm | whole-exome FATHMM scores | 20130621 |
-| hg19 | ljb2_fathmm | same as above | 20130621 |
-| hg18 | ljb23_fathmm | whole-exome FATHMM scores | 20140222 |
-| hg19 | ljb23_fathmm | same as above | 20140222 |
-| hg18 | ljb26_fathmm | whole-exome FATHMM scores | 20140925 |
-| hg19 | ljb26_fathmm | same as above | 20140925 |
-| hg18 | ljb2_siphy | whole-exome SiPhy scores | 20130621 |
-| hg19 | ljb2_siphy | same as above | 20130621 |
-| hg18 | ljb23_siphy | whole-exome SiPhy scores | 20140222 |
-| hg19 | ljb23_siphy | same as above | 20140222 |
-| hg18 | ljb26_siphy | whole-exome SiPhy scores | 20140925 |
-| hg19 | ljb26_siphy | same as above | 20140925 |
-| hg18 | ljb_gerp++ | whole-exome GERP++ scores | 20120222 |
-| hg19 | ljb_gerp++ | same as above | 20120222 |
-| hg18 | ljb2_gerp++ | whole-exome GERP++ scores | 20130621 |
-| hg19 | ljb2_gerp++ | same as above | 20130621 |
-| hg18 | ljb23_gerp++ | whole-exome GERP++ scores | 20140222 |
-| hg19 | ljb23_gerp++ | same as above | 20140222 |
-| hg18 | ljb26_gerp++ | whole-exome GERP++ scores | 20140925 |
-| hg19 | ljb26_gerp++ | same as above | 20140925 |
-| hg18 | ljb23_metasvm | whole-exome MetaSVM scores | 20140222 |
-| hg19 | ljb23_metasvm | same as above | 20140222 |
-| hg18 | ljb26_metasvm | whole-exome MetaSVM scores | 20140925 |
-| hg19 | ljb26_metasvm | same as above | 20140925 |
-| hg18 | ljb23_metalr | whole-exome MetaLR scores | 20140222 |
-| hg19 | ljb23_metalr | same as above | 20140222 |
-| hg18 | ljb26_metalr | whole-exome MetaLR scores | 20140925 |
-| hg19 | ljb26_metalr | same as above | 20140925 |
-| hg18 | ljb26_vest | whole-exome VEST scores | 20140925 |
-| hg19 | ljb26_vest | same as above | 20140925 |
-| hg18 | ljb26_cadd | whole-exome CADD scores | 20140925 |
-| hg19 | ljb26_cadd | same as above | 20140925 |
-| hg18 | ljb_all | whole-exome LJBSIFT, PolyPhen, PhyloP, LRT, MutationTaster, GERP++ scores | 20120222 |
-| hg19 | ljb_all | same as above | 20120222 |
-| hg18 | ljb2_all | whole-exome SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores | 20130621 |
-| hg19 | ljb2_all | same as above | 20130621 |
-| hg18 | ljb23_all | whole-exome SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, MetaSVM scores, MetaLR scores, GERP++ scores, PhyloP scores and SiPhy scores | 20140222 |
-| hg19 | ljb23_all | same as above | 20140222 |
 | hg18 | ljb26_all | whole-exome SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, MetaSVM scores, MetaLR scores, VEST scores, CADD scores, GERP++ scores, PhyloP scores and SiPhy scores from dbsnp version 2.6 | 20140925 |
 | hg19 | ljb26_all | same as above |  20140925 |
 | hg18 | cg46 | alternative allele frequency in 46 unrelated human subjects sequenced by Complete Genomics | 20120222 |
@@ -141,24 +48,6 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | cosmic68 | COSMIC database version 68 | 20140224 |
 | hg19 | cosmic68wgs | COSMIC database version 68 on WGS data | 20140224 |
 | hg19 | cosmic70 | same as above | 20140911 |
-| hg18 | esp5400_aa | alternative allele frequency in African Americans in the NHLBI-ESP project with 5400 exomes | 20120711 |
-| hg19 | esp5400_aa | same as above | 20120711 |
-| hg18 | esp5400_ea | alternative allele frequency in European Americans in the NHLBI-ESP project with 5400 exomes | 20120711 |
-| hg19 | esp5400_ea | same as above | 20120711 |
-| hg18 | esp5400_all | alternative allele frequency in all subjects in the NHLBI-ESP project with 5400 exomes | 20120711 |
-| hg19 | esp5400_all | same as above | 20120711 |
-| hg18 | esp6500_aa | alternative allele frequency in African Americans in the NHLBI-ESP project with 6500 exomes | 20120621 |
-| hg19 | esp6500_aa | same as above | 20120621 |
-| hg18 | esp6500_ea | alternative allele frequency in European Americans in the NHLBI-ESP project with 6500 exomes | 20120621 |
-| hg19 | esp6500_ea | same as above | 20120621 |
-| hg18 | esp6500_all | alternative allele frequency in all subjects in the NHLBI-ESP project with 6500 exomes | 20120621 |
-| hg19 | esp6500_all | same as above | 20120621 |
-| hg18 | esp6500si_aa | alternative allele frequency in African Americans in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls | 20130122 |
-| hg19 | esp6500si_aa | same as above | 20130122 |
-| hg18 | esp6500si_ea | alternative allele frequency in European Americans in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls | 20130122 |
-| hg19 | esp6500si_ea | same as above | 20130122 |
-| hg18 | esp6500si_all | alternative allele frequency in all subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls | 20130122 |
-| hg19 | esp6500si_all | same as above | 20130122 |
 | hg18 | esp6500siv2_ea | alternative allele frequency in European American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself | 20141222 |
 | hg19 | esp6500siv2_ea | same as above | 20141222 |
 | hg38 | esp6500siv2_ea | same as above, lifted over from hg19 by myself |  20141222 |
@@ -168,9 +57,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg18 | esp6500siv2_all | alternative allele frequency in All subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. | 20141222 |
 | hg19 | esp6500siv2_all | same as above | 20141222 |
 | hg38 | esp6500siv2_all | same as above, lifted over from hg19 by myself | 20141222 |
-| hg19 | exac01 | ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). | 20141101 |
-| hg19 | exac02 | same as above but for version v0.2 | 20141101 |
-| hg19 | exac03 | same as above but for version 0.3 | 20150302 |
+| hg19 | exac03 | ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). version 0.3 | 20150302 |
 | hg18 | 1000g (3 data sets) | alternative allele frequency data in 1000 Genomes Project | 20120222 |
 | hg18 | 1000g2010 (3 data sets) | same as above | 20120222 |
 | hg18 | 1000g2010jul (3 data sets) | same as above | 20120222 |
