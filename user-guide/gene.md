@@ -382,7 +382,7 @@ So after running the above commands, the gene annotation database for the chimp 
 
 > *Exercise: Try to run the same procedure above for bosTau6 (cow). Note that as of April 2012, UCSC has not split the FASTA file for bosTau6 genome sequence into individual chromosomes. Therefore, users need to use "-seqfile bosTau6.fa", rather than "-seqdir cowdb/bosTau6_seq", in the retrieve_seq_from_fasta.pl command. Similarly, try to run the same procedure above for micMur1 (Mouse Lemur) and note the use of -seqfile rather than -seqdir.*
 
-> *Exercise: Try to run the same procedure above for rn5 (rate). Again users need to supply FASTA files rather than FASTA directory.*
+> *Exercise: Try to run the same procedure above for rn5 (rat) or dm6 (Drosophila). Again users need to supply FASTA files rather than FASTA directory.*
 
 The above procedure will only work if the gene-based annotations exist in UCSC for the particular species or the particular build. For example, if you want to use ANNOVAR on pigs, since RefSeq gene and UCSC Gene are not available for pigs, you have to use `annotate_variation.pl --downdb -buildver susScr2 ensgene pigdb` instead and use `-dbtype ensgene` for the gene-based annotation.
 
