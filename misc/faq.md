@@ -120,7 +120,7 @@
 
 1. Can ANNOVAR identify all SNPs annotated within dbSNP in a given region (say chr1:3751541-3751607)?
 
-    In ANNOVAR, filter annotation identifes exact matches including base pair identity, yet region annotation identify overlapping regions. When you use `--filter`, the program will tell whether the region chr1:3751541-3751607 is a SNP within dbSNP (highly unlikely to be the case). In more recent versions of ANNOVAR, region annotation can handle snp130 now. For example, just try `annotate_variation.pl ex1.human humandb/ -region -dbtype snp130`. However, this command require about 10GB memory to run.
+    In ANNOVAR, filter annotation identifes exact matches including base pair identity, yet region annotation identify overlapping regions. When you use `--filter`, the program will tell whether the region chr1:3751541-3751607 is a SNP within dbSNP (highly unlikely to be the case). In more recent versions of ANNOVAR, region annotation can handle snp130 now. For example, just try <code>annotate_variation.pl ex1.human humandb/ -region -dbtype snp130</code>. However, this command require about 10GB memory to run.
 
     However, if you are only looking at one single specific region, a simple script can be used to address this question, after using `-downdb snp130` in ANNOVAR: `perl -ne '@a=split(/\t/,$_); $a[1] eq "chr1" and $a[3]>=3751541 and $a[3]<=3751607 and print $a[4],"\n"' < hg18_snp130.txt`.
 
