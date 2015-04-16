@@ -102,13 +102,11 @@ Starting from Nov 2014, when you download refGene for human (hg18/hg19/hg38), th
 
     When `-verbose` is used, ANNOVAR may complain that "wildtype base is not part of the allele description" in filter-based annotation using dbSNP. For example, this may occur for the SNP rs61747618. If you look at the actual snp130.txt file downloaded by ANNOVAR, you'll see
 
-```
+    ```
 1194    chr17   79891146        79891147        rs61747618      0 +       T       T       A/G     genomic single  unknown      0       0 coding-synon,intron     exact   1
 ```
 
-So the reference allele "T" is not part of the "allele description" in dbSNP.
-
-If you further go to Genome Browser page for this particular SNP, you'll see that there is a specific warning message that " UCSC reference allele does not match any observed allele from dbSNP.". So essentially there is a potential annotation error in dbSNP (at least that's what UCSC thinks), where none of the alleles for this SNP is in the reference human genome. It is possible that this is a tri-allelic SNP (although dbSNP could have annotated this as tri-allelic), or it is possible that this is merely an alignment issue (UCSC and dbSNP did their alignment independently so their top alignments may not be identical to each other). There is really nothing that ANNOVAR can do, except to throw a warning message if you turn on `-verbose`.
+    So the reference allele "T" is not part of the "allele description" in dbSNP. If you further go to Genome Browser page for this particular SNP, you'll see that there is a specific warning message that " UCSC reference allele does not match any observed allele from dbSNP.". So essentially there is a potential annotation error in dbSNP (at least that's what UCSC thinks), where none of the alleles for this SNP is in the reference human genome. It is possible that this is a tri-allelic SNP (although dbSNP could have annotated this as tri-allelic), or it is possible that this is merely an alignment issue (UCSC and dbSNP did their alignment independently so their top alignments may not be identical to each other). There is really nothing that ANNOVAR can do, except to throw a warning message if you turn on `-verbose`.
 
 - Why ANNOVAR complains "exonic SNPs have WRONG reference alleles " in gene-based annotation?
 
