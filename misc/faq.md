@@ -40,11 +40,7 @@
 
 1. How to infer the version number for RefSeq transcripts in ANNOVAR annotation results?
 
-    Run this command (for human hg19 build): 
-
-```
-mysql --user=genomep --password=password --host=genome-mysql.cse.ucsc.edu -A -D hg19 -e 'select distinct refGene.name,gbCdnaInfo.version from refGene,gbCdnaInfo WHERE refGene.name=gbCdnaInfo.acc' > refseq_version.txt
-```
+    Run this command (for human hg19 build): mysql --user=genomep --password=password --host=genome-mysql.cse.ucsc.edu -A -D hg19 -e 'select distinct refGene.name,gbCdnaInfo.version from refGene,gbCdnaInfo WHERE refGene.name=gbCdnaInfo.acc' > refseq_version.txt
 
     Starting from Nov 2014, when you download refGene for human (hg18/hg19/hg38), the corresponding `refGeneVersion.txt` file will be automatically downloaded to help users who cannot figure out how to run mysql. However, you will need to run the MySQL command manually for other species.
 
