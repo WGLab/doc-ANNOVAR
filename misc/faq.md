@@ -40,15 +40,11 @@
 
 1. How to infer the version number for RefSeq transcripts in ANNOVAR annotation results?
 
-    Run this command (for human hg19 build):
-
-```
-    mysql --user=genomep --password=password --host=genome-mysql.cse.ucsc.edu -A -D hg19 -e 'select distinct refGene.name,gbCdnaInfo.version from refGene,gbCdnaInfo WHERE refGene.name=gbCdnaInfo.acc' > refseq_version.txt
-```
+    Run this command (for human hg19 build): `mysql --user=genomep --password=password --host=genome-mysql.cse.ucsc.edu -A -D hg19 -e 'select distinct refGene.name,gbCdnaInfo.version from refGene,gbCdnaInfo WHERE refGene.name=gbCdnaInfo.acc' > refseq_version.txt`
 
     Starting from Nov 2014, when you download refGene for human (hg18/hg19/hg38), the corresponding `refGeneVersion.txt` file will be automatically downloaded to help users who cannot figure out how to run mysql. However, you will need to run the MySQL command manually for other species.
 
-- Why ANNOVAR says "WARNING: A total of 7 sequences cannot be found in mRNA.fa file"?
+1. Why ANNOVAR says "WARNING: A total of 7 sequences cannot be found in mRNA.fa file"?
 
     When you issue `-downdb` command without `-webfrom annovar`, ANNOVAR downloads gene definitions from UCSC website, yet download FASTA files from ANNOVAR website. UCSC may update far more frequently then I update FASTA files, so sometimes some sequences cannot be found in the FASTA file. Users should use `retrieve_seq_from_fasta.pl` to generate your own set of most updated FASTA files for your genome of interests. To avoid this problem, for human genome, user should add `-webfrom annovar` in `-downdb` command, so that these gene definitions are downloaded from ANNOVAR site to be fully synchronized with the mRNA FASTA file.
 
