@@ -202,9 +202,6 @@
 
     You can use [this script](http://www.openbioinformatics.org/annovar/download/maf2annovar.pl) to convert MAF to ANNOVAR input format and then annotate the file.
 
-1. **How to support ANNOVAR?**
-
-    If ANNOVAR is helpful to your work or research, please cite it in your powerpoint slides, or in your published scientific manuscripts. This means a lot to me.
 
 
 
