@@ -100,7 +100,7 @@
 
     When `-verbose` is used, ANNOVAR may complain that "wildtype base is not part of the allele description" in filter-based annotation using dbSNP. For example, this may occur for the SNP rs61747618. If you look at the actual snp130.txt file downloaded by ANNOVAR, you'll see
 
-    ```
+```
 1194    chr17   79891146        79891147        rs61747618      0 +       T       T       A/G     genomic single  unknown      0       0 coding-synon,intron     exact   1
 ```
 
