@@ -1,24 +1,24 @@
-- How to report a bug or to ask a question?
+1. How to report a bug or to ask a question?
 
     The best way is: First, do read the website thoroughly especially FAQ. I received too many emails whose answers can easily be found in FAQ. Second, if you cannot find answer in FAQ or do not understand the answer well, then drop me an email  as which should contain (1) command line argument (2) error message in screen or the LOG file (3) sometimes example inputfile (4) in case you use Mac or Windows, let me know. The reason is that I can fix something or diagnose something only if I can understand the question and reproduce the results. So do yourself a favor and do me a favor, include details in your email to avoid wasting our mutual time sending multiple emails.
 
     There is no such thing as "ANNOVAR development team", as I am the only person who reply user emails, address user questions, and fix bugs. As of April 2015, I have communicated over 13,399 emails with ANNOVAR users. If you read FAQ #1 before sending me an email, it will save both of us a lot of valuable time.
 
-- How to annotate variants in a VCF file?
+1. How to annotate variants in a VCF file?
 
     The easiest way is to use `table_annovar.pl`: just add `-vcfinput` argument and supply a VCF file as input file, and your ouput file will be in VCF format with INFO field populated with ANNOVAR annotations that you have specified in `-protocol` argument. One additional output file called \*multianno.txt will be in tab-delimited text format for easier manual examination in Excel or other programs.
 
     It is also possible to handle VCF file manually when retrieving a subset of records from VCF file without altering its content. For example, I want to find out all novel variants (not in dbSNP135 and not in 1000G and not in NHLBI-ESP5400) in a VCF file, but without changing the VCF format. This can be done using `convert2annovar.pl` with the `-includeinfo` argument, so that you convert VCF file to ANNOVAR inputfile without losing any VCF-specific information. Then annotate the inputfile by a series of filter operation, then convert the outputfile to VCF file using the `cut -f 3-` command in Linux system.
 
-- Why I cannot download the databases listed in your download page?
+1. Why I cannot download the databases listed in your download page?
 
     What is your command line? Did you add "-webfrom annovar"?
 
-- How to find frequency information from 1000 Genomes Projec data?
+1. How to find frequency information from 1000 Genomes Projec data?
 
     The instructions were described in [this page](/user-guide/filter.md). But one important thing to emphasize is that due to historical reasons, one must use something like `-dbtype 1000g2014oct_all`, not `-dbtype ALL.sites.2014_10` for annotation.
 
-- What is the difference between vcf4 and vcf4old format in convert2annovar.pl?
+1. What is the difference between vcf4 and vcf4old format in convert2annovar.pl?
 
     In August 2013, I changed the VCF4 conversion subroutine in `convert2annovar.pl`, but I kept the vcf4old format for users who like the "old-fashion" conversion. The difference is that nowadays people tend to do multi-sample calling or candidate variant calling, so that the variants listed in the VCF4 file do not necessarily have mutations for a specific sample. This happens when genotype call is 0/0 (reference/reference). I got some complaints from users about the inability to process multi-sample VCF files, so I decided to make this change.
 
@@ -26,29 +26,29 @@
 
     In general, `-format vcf4old` should be considered as obselete and should not be used by most users, since `-format vcf4` can now accomplish everything that `-format vcf4old` can do with appropriate combinations of arguments.
 
-- How to back convert cDNA coordinate such as c.385A>G to genomic coordinate such as chr1:123456A>G?
+1. How to back convert cDNA coordinate such as c.385A>G to genomic coordinate such as chr1:123456A>G?
 
     Read "all variants in a transcript" section from [this page](../user-guide/input.md). 
 
-- Why my run of gene-based annotation differ slightly from those shown in website?
+1. Why my run of gene-based annotation differ slightly from those shown in website?
 
     UCSC database updates constantly and ANNOVAR executable also updates constantly, so it is expected that ANNOVAR output format or the annotations may change slightly over time.
 
-- Why ANNOVAR produced different non-synonymous SNP annotations than another software?
+1. Why ANNOVAR produced different non-synonymous SNP annotations than another software?
 
     For example, ANNOVAR may report a mutation as W185R mutation, but another software may report the same mutation as R285W mutation. This could be due to a variety of reasons: (1) the use of different gene-definition systems. Depending on your command line argument, ANNOVAR always use the lastest refGene, knownGene or ensGene to ensure that the information is up to date. You should check what gene definition system is used by the other annotation software. (2) Even if both software tools are using Ensembl, they could be using different versions of the gene definition. (3) ANNOVAR automatically excludes any transcript in gene definition file that does not have a complete coding sequence or has a premature stop codon (since this means the protein annotation is wrong). Each gene definition (especially Ensembl) has a lot of such transcripts. (4) ANNOVAR uses precedence rules, so if a variant is intronic for one transcript but coding for another transcript, it will be reported as coding only. You need to use `-separate` argument to show all annotations if this is of interest to you. (5) This also could be due to the presence of bugs in one software or the other. If there is a potential bug that you find in ANNOVAR, please report to me.
 
-- How to infer the version number for RefSeq transcripts in ANNOVAR annotation results?
+1. How to infer the version number for RefSeq transcripts in ANNOVAR annotation results?
 
     Run this command (for human hg19 build):
 
-```
+    ```
     mysql --user=genomep --password=password --host=genome-mysql.cse.ucsc.edu -A -D hg19 -e 'select distinct refGene.name,gbCdnaInfo.version from refGene,gbCdnaInfo WHERE refGene.name=gbCdnaInfo.acc' > refseq_version.txt
 ```
 
-in your command line, and you will see the version number for each RefSeq transcript.
+    in your command line, and you will see the version number for each RefSeq transcript.
 
-Starting from Nov 2014, when you download refGene for human (hg18/hg19/hg38), the corresponding `refGeneVersion.txt` file will be automatically downloaded to help users who cannot figure out how to run mysql. However, you will need to run the MySQL command manually for other species.
+    Starting from Nov 2014, when you download refGene for human (hg18/hg19/hg38), the corresponding `refGeneVersion.txt` file will be automatically downloaded to help users who cannot figure out how to run mysql. However, you will need to run the MySQL command manually for other species.
 
 - Why ANNOVAR says "WARNING: A total of 7 sequences cannot be found in mRNA.fa file"?
 
