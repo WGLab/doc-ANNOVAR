@@ -72,7 +72,7 @@
 
     The c.C100T is a cDNA (actually, mRNA) level change. ANNOVAR input (G to A) has to be in the forward strand, and if the transcript is in the reverse strand, there will be a C to T change in the mRNA.
 
-- Why ANNOVAR reports c.T5997G when my input is T to C change in chr14:31582550-31582550 in hg19 coordinate?
+1. Why ANNOVAR reports c.T5997G when my input is T to C change in chr14:31582550-31582550 in hg19 coordinate?
 
     First, this transcript is in the reverse strand, so the mutation is changed to "G". Second, your input is wrong: this position should be A in hg19, so c.T5997 should be the reference base. Maybe you used a wrong genome build, or your genotype calling software has a bug. ANNOVAR did it correctly. Starting from September 2011, ANNOVAR will try to print out WARNING messages telling user that they used wrong reference alleles in their input file for exonic variants.
 
@@ -91,16 +91,6 @@
 1. Why ANNOVAR reports the same function for two different mutations in two sites?
 
     Sometimes different mutations are reported to have the same function in gene-based annotation. For example, these mutations at chromsome 4 at coordiante 8945506, 8950251, 8954996, 8959741, 8964486, 8969231, 8973977 are all reported to be USP17:NM_001105662:exon1:c.A25G:p.R9G. There is nothing wrong: if you check the USP17 gene in genome browser, you'll see that there are at least 9 copies of the gene in each haplotype. So all the mutations (if they are real) all have the same function. In reality, it is likely that these mutations are not real, but are rather artifacts of base-level differences between any random two copies of the same gene.
-
-1. Why ANNOVAR complains that "wildtype base is not part of the allele description" in filter-based annotation?
-
-    When `-verbose` is used, ANNOVAR may complain that "wildtype base is not part of the allele description" in filter-based annotation using dbSNP. For example, this may occur for the SNP rs61747618. If you look at the actual snp130.txt file downloaded by ANNOVAR, you'll see
-
-```
-1194    chr17   79891146        79891147        rs61747618      0 +       T       T       A/G     genomic single  unknown      0       0 coding-synon,intron     exact   1
-```
-
-    So the reference allele "T" is not part of the "allele description" in dbSNP. If you further go to Genome Browser page for this particular SNP, you'll see that there is a specific warning message that " UCSC reference allele does not match any observed allele from dbSNP.". So essentially there is a potential annotation error in dbSNP (at least that's what UCSC thinks), where none of the alleles for this SNP is in the reference human genome. It is possible that this is a tri-allelic SNP (although dbSNP could have annotated this as tri-allelic), or it is possible that this is merely an alignment issue (UCSC and dbSNP did their alignment independently so their top alignments may not be identical to each other). There is really nothing that ANNOVAR can do, except to throw a warning message if you turn on `-verbose`.
 
 1. Why ANNOVAR complains "exonic SNPs have WRONG reference alleles " in gene-based annotation?
 
@@ -132,11 +122,8 @@
 
     In ANNOVAR, filter annotation identifes exact matches including base pair identity, yet region annotation identify overlapping regions. When you use `--filter`, the program will tell whether the region chr1:3751541-3751607 is a SNP within dbSNP (highly unlikely to be the case). In more recent versions of ANNOVAR, region annotation can handle snp130 now. For example, just try `annotate_variation.pl ex1.human humandb/ -region -dbtype snp130`. However, this command require about 10GB memory to run.
 
-    However, if you are only looking at one single specific region, a simple script can be used to address this question, after using `-downdb snp130` in ANNOVAR:
+    However, if you are only looking at one single specific region, a simple script can be used to address this question, after using `-downdb snp130` in ANNOVAR: `perl -ne '@a=split(/\t/,$_); $a[1] eq "chr1" and $a[3]>=3751541 and $a[3]<=3751607 and print $a[4],"\n"' < hg18_snp130.txt`
 
-```
-[kai@biocluster ~/]$ perl -ne '@a=split(/\t/,$_); $a[1] eq "chr1" and $a[3]>=3751541 and $a[3]<=3751607 and print $a[4],"\n"' < hg18_snp130.txt
-```
 
 1. How to annotate simple repeat regions in human genome?
 
