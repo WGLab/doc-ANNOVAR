@@ -870,7 +870,7 @@ SIG refers to Variant Clinical Significance, including unknown, untested, non-pa
 
 ## CADD annotations
 
-CADD (Combined Annotation Dependent Depletion) is a score that is based on SVM on multiple other scores. One nice thing about it is that it assigns a score to each possible mutation in the human genome, therefore can evaluate non-coding variants as well as coding ones. The problem with this database is that the size is just too big (350GB in ANNOVAR format). However, several ANNOVAR users requested that I make it available through ANNOVAR, so that they can realistically use CADD in their exome sequencing studies. Therefore, I made the database available in Februray 2014 to ANNOVAR users. Download it by `-downdb cadd -buildver hg19`. Unfortunately I do not have the resources to make hg18 scores available.
+CADD (Combined Annotation Dependent Depletion) is a score that is based on SVM on multiple other scores. One nice thing about it is that it assigns a score to each possible mutation in the human genome, therefore can evaluate non-coding variants as well as coding ones. The problem with this database is that the size is just too big (350GB in ANNOVAR format). However, several ANNOVAR users requested that I make it available through ANNOVAR, so that they can realistically use CADD in their exome sequencing studies. Therefore, I made the database available in Februray 2014 to ANNOVAR users. Download it by `-downdb cadd -buildver hg19`, but before you download/use it, make sure that you have the appropriate license to use it (contact the authors themselves to obtain the license). Unfortunately I do not have the resources to make hg18 scores available.
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl example/ex1.avinput humandb/ -filter -dbtype cadd -buildver hg19 -out ex1 
@@ -930,6 +930,12 @@ NOTICE: Scanning filter database tempdb/hg19_cadd.txt...Done
 ```
 
 In comparison, it would take 22 minutes in tabix, not to mention the need to post-processing tabix results to filter for nucleotide-level matches. So it seems that ANNOVAR is >8X faster than tabix for this particular data set. Performance-wise, it is practical to use ANNOVAR in at least exome sequencing studies.
+
+## DANN annotations
+
+[DANN](http://bioinformatics.oxfordjournals.org/content/31/5/761) scores whole-genome variants by training a deep neural network (DNN). DNNs can capture non-linear relationships among features and are better suited than SVMs for problems with a large number of samples and features. It seems to perform much better than CADD and FATHMM (http://www.enlis.com/blog/2015/03/17/the-best-variant-prediction-method-that-no-one-is-using/).
+
+Users can use `-build hg19 -downdb dann .` to download this database with ANNOVAR index files. Note that this file is over 200GB and it may take a while to get it.
 
 ## COSMIC annotations
 
