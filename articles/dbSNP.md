@@ -30,7 +30,7 @@ In some software tools, the answer is yes for 1 only, or yes for both 1 and 2. F
 
 However, in ANNOVAR, the answer is no for both. Remember that in filter-based annotation, ANNOVAR will only identify exact match to a database, which includes not only position but also nucleotide identity. It is important to keep the 'exact match' ability in filter-based annotation, otherwise allele frequency, functional score, etc all lose their identifiability.
 
-For indels, things are bit more complicated; however, if you are willing to perform left-normalization, then I now provide a fully normalized "new" dbSNP, which I refer to as avsnp, to match up against your variants (see previous section for details). This avsnp will ensure better matching of indels for user data against a dbSNP rs ID. Currently, avsnp138 is available for hg19 coordinate, yet avsnp142 is available in hg19 and hg38 coordinate. Additional avsnp will be added in the future. An example usage is given below:
+For indels, things are bit more complicated; however, if you are willing to perform left-normalization, then I now provide a fully normalized "new" dbSNP, which I refer to as `avsnp`, to match up against your variants (see [this page](../articles/VCF.md) for details). This `avsnp` will ensure better matching of indels for user data against a dbSNP rs ID. Currently, `avsnp138` is available for hg19 coordinate, yet `avsnp142` is available in hg19 and hg38 coordinate. Additional avsnp will be added in the future. An example usage is given below:
 
 ```
 annotate_variation.pl -downdb -buildver hg19 avsnp142 humandb/
