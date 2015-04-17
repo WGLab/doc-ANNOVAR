@@ -220,7 +220,7 @@ Unlike dbSNP, avSNP files have standard six-column "generic" format, and its ind
 The use of avsnp datasets are straightforward with the avsnp138/avsnp142 as `-dbtype`:
 
 ```
-annotate_variation.pl -downdb -buildver hg19 avsnp142 humandb/
+annotate_variation.pl -downdb -webfrom annovar -buildver hg19 avsnp142 humandb/
 annotate_variation.pl ex1.avinput humandb/ -filter -build hg19 -dbtype avsnp142
 ```
 
