@@ -705,7 +705,9 @@ The columns represent ExAC_Freq, ExAC_AFR, ExAC_AMR, ExAC_EAS, ExAC_FIN, ExAC_NF
 
 Note that exac03 keyword can be used in `table_annovar.pl` directly to print out allele frequency for all ethnicity groups.
 
-> *Technical Notes: Some users reported that the allele frequency measure differs slightly from the ExAC server itself, for some rare variants. This is because ExAC server displays "adjusted allele counts" and frequencies, yet ExAC03 within ANNOVAR displays raw allele counts and frequency. In the future, we may include both measures in ExAC output to faciliate users with different needs.*
+> *Technical Notes: Some users reported that the allele frequency measure differs slightly from the ExAC server itself, for some rare variants. This is because ExAC server displays "adjusted allele counts" and frequencies, yet ExAC03 within ANNOVAR displays the "AF" record in VCF file provided by ExAC. To address a growing number of user concerns, on 20150420, we finally decided to issue a new ExAC03 with ExAC_ALL header that shows the adjusted allele frequency for each variant to match the ExAC web site exactly.*
+
+> *Technical Notes: ExAC03 in ANNOVAR is one of the several data sets that have been left-normalized. See [here](../articles/VCF.md) for more details.*
 
 ## GERP++ annotations
 
