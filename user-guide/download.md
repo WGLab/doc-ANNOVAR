@@ -101,6 +101,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | snp137NonFlagged | same as above | 20130109 |
 | hg19 | snp138NonFlagged | same as above | 20140222 |
 | hg19 | nci60 | NCI-60 human tumor cell line panel exome sequencing allele frequency data | 20130724 |
+| hg38 | nci60 | same as above | 20150424 |
 | hg19 | clinvar_20131105 | CLINVAR database with Variant Clinical Significance (unknown, untested, non-pathogenic, probable-non-pathogenic, probable-pathogenic, pathogenic, drug-response, histocompatibility, other) and Variant disease name | 20140430 |
 | hg19 | clinvar_20140211 | same as above | 20140430 |
 | hg19 | clinvar_20140303 | same as above | 20140430 |
