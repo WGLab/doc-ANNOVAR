@@ -12,7 +12,7 @@ ANNOVAR is written in Perl and can be run as a standalone application on diverse
 
 Many of the databases that ANNOVAR uses can be directly retrieved from UCSC Genome Browser Annotation Database by `-downdb` argument.
 
-Several very commonly used annotation databases for human genomes are additionally provided below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these databases.
+Several very commonly used annotation databases for human genomes are additionally provided below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these databases. To view of full list of databases prepared by ANNOVAR developers, use `avdblist` keyword in `-downdb` operation.
 
 ### - For gene-based annotation
 
