@@ -35,10 +35,9 @@ Several very commonly used annotation databases for human genomes are additional
 |---|---|---|---|
 | hg18 | avsift | whole-exome SIFT scores for non-synonymous variants (obselete and should not be uesd any more) | 20120222 |
 | hg19	| avsift	|	same as above	| 20120222 |
-| hg19 | avsnp138 | dbSNP138 with allelic splitting and left-normalization | 20141223 |
-| hg19 | avsnp142 | dbSNP142 with allelic splitting and left-normalization | 20141228 | 
-| hg18 | ljb26_all | whole-exome SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, MetaSVM scores, MetaLR scores, VEST scores, CADD scores, GERP++ scores, PhyloP scores and SiPhy scores from dbsnp version 2.6 | 20140925 |
+| hg18 | ljb26_all | whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, MetaSVM, MetaLR, VEST, CADD, GERP++, PhyloP and SiPhy scores from dbNSFP version 2.6 | 20140925 |
 | hg19 | ljb26_all | same as above |  20140925 |
+| hg38 | ljb26_all | same as above | 20150420 |
 | hg18 | cg46 | alternative allele frequency in 46 unrelated human subjects sequenced by Complete Genomics | 20120222 |
 | hg19 | cg46 | same as above | index updated 2012Feb22 |
 | hg18 | cg69 | allele frequency in 69 human subjects sequenced by Complete Genomics | 20120222 |
@@ -87,6 +86,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | snp137 | same as above | 20130109 |
 | hg18 | snp138 | I lifted over SNP138 to hg18 | 20140910 |
 | hg19 | snp138 | same as above | file and index updated 20140910 |
+| hg19 | avsnp138 | dbSNP138 with allelic splitting and left-normalization | 20141223 |
+| hg19 | avsnp142 | dbSNP142 with allelic splitting and left-normalization | 20141228 | 
 | hg18 | snp128NonFlagged | dbSNP with ANNOVAR index files, after removing those flagged SNPs (SNPs < 1% minor allele frequency (MAF) (or unknown), mapping only once to reference assembly, flagged in dbSnp as "clinically associated") | 20120524 |
 | hg18 | snp129NonFlagged | same as above | 20120524 |
 | hg18 | snp130NonFlagged | same as above | 20120524 |
@@ -122,6 +123,17 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | caddindel | whole-genome CADDindel scores | 20150325 |
 
 ---
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48623707-1', 'openbioinformatics.org');
+  ga('send', 'pageview');
+</script>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
