@@ -12,7 +12,7 @@ ANNOVAR is written in Perl and can be run as a standalone application on diverse
 
 Many of the databases that ANNOVAR uses can be directly retrieved from UCSC Genome Browser Annotation Database by `-downdb` argument.
 
-Several very commonly used annotation databases for human genomes are additionally provided below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these databases.
+Several very commonly used annotation databases for human genomes are additionally provided below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these databases. To view of full list of databases (and their size and last changed date) prepared by ANNOVAR developers, use `avdblist` keyword in `-downdb` operation.
 
 ### - For gene-based annotation
 
@@ -49,6 +49,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | cosmic68 | COSMIC database version 68 | 20140224 |
 | hg19 | cosmic68wgs | COSMIC database version 68 on WGS data | 20140224 |
 | hg19 | cosmic70 | same as above | 20140911 |
+| hg38 | cosmic70 | same as above | 20150424 |
 | hg18 | esp6500siv2_ea | alternative allele frequency in European American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself | 20141222 |
 | hg19 | esp6500siv2_ea | same as above | 20141222 |
 | hg38 | esp6500siv2_ea | same as above, lifted over from hg19 by myself |  20141222 |
@@ -72,6 +73,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | 1000g2014aug (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201408 collection v4 (based on 201305 alignment) | 20140915 |
 | hg19 | 1000g2014sep (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) | 20140925 |
 | hg19 | 1000g2014oct (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) but including chrX and chrY data finally! | 20141216 |
+| hg38 | 1000g2014oct (6 data sets) | same as above | 20150424 |
 | hg18 | snp128 | dbSNP with ANNOVAR index files | 20120222 |
 | hg18 | snp129 | same as above | 20120222 |
 | hg19 | snp129 | liftover from hg18_snp129.txt | 20120809 |
@@ -100,6 +102,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | snp137NonFlagged | same as above | 20130109 |
 | hg19 | snp138NonFlagged | same as above | 20140222 |
 | hg19 | nci60 | NCI-60 human tumor cell line panel exome sequencing allele frequency data | 20130724 |
+| hg38 | nci60 | same as above | 20150424 |
 | hg19 | clinvar_20131105 | CLINVAR database with Variant Clinical Significance (unknown, untested, non-pathogenic, probable-non-pathogenic, probable-pathogenic, pathogenic, drug-response, histocompatibility, other) and Variant disease name | 20140430 |
 | hg19 | clinvar_20140211 | same as above | 20140430 |
 | hg19 | clinvar_20140303 | same as above | 20140430 |
