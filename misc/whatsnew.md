@@ -8,7 +8,7 @@
 
 ![new](/img/new.png) 2015Jan06: I wrote a new article with some thoughts and guidelines on processing VCF files and assigning dbSNP identifiers to variants. You can take a look by clicking the "VCF Processing" menu to the left.
 
-![new](/img/new.jpg) 2014Dec22: I now created new dbSNP that has indel left-realigned and provide to ANNOVAR users, including avsnp138 in hg19 coordiante and avsnp142 in hg19 and hg38 coordinate. Please read "VCF Processing" menu to the left.
+![new](/img/new.png) 2014Dec22: I now created new dbSNP that has indel left-realigned and provide to ANNOVAR users, including avsnp138 in hg19 coordiante and avsnp142 in hg19 and hg38 coordinate. Please read "VCF Processing" menu to the left.
 
 ![new](/img/new.png) 2014Dec16: Updated 1000g2014oct are available now that addressed some issues with indel mismatch. Please read "VCF Processing" menu to the left. In addition, esp6500siv2_all, esp6500siv2_aa, esp6500siv2_ea are available, and both hg19 and hg38 are available to download now.
 
