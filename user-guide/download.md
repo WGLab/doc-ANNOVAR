@@ -73,6 +73,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | 1000g2014aug (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201408 collection v4 (based on 201305 alignment) | 20140915 |
 | hg19 | 1000g2014sep (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) | 20140925 |
 | hg19 | 1000g2014oct (6 data sets) | alternative allele frequency data in 1000 Genomes Project for autosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). Based on 201409 collection v5 (based on 201305 alignment) but including chrX and chrY data finally! | 20141216 |
+| hg38 | 1000g2014oct (6 data sets) | same as above | 20150424 |
 | hg18 | snp128 | dbSNP with ANNOVAR index files | 20120222 |
 | hg18 | snp129 | same as above | 20120222 |
 | hg19 | snp129 | liftover from hg18_snp129.txt | 20120809 |
