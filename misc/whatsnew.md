@@ -1,8 +1,10 @@
-![new](/img/new.jpg) 2015Apr20: Updated exac03 database is available, which now include adjusted allelel frequency as ExAC_ALL for ALL population (previously the AF record from ExAC VCF file was annotated as ExAC_Freq). Clinvar20150330 is available in hg19 and hg38. popfreqmax_20150413 and popfreqall_20150413 are available in hg19 coordinate.
+![new](/img/new.png) 2015Apr24: COSMIC70, NCI60 and 1000G in hg38 coordinate are available now!
 
-![new](/img/new.jpg) 2015Mar22: ANNOVAR new version is available, with minor function improvements and bug fixes. Registered users should receive an email within a week with updated link, otherwise you can re-register to get the link immediately. New ANNOVAR website becomes available to improve the readibility of the documentation, and offers search and comment functionality.
+![new](/img/new.png) 2015Apr20: Updated exac03 database is available, which now include adjusted allelel frequency as ExAC_ALL for ALL population (previously the AF record from ExAC VCF file was annotated as ExAC_Freq). Clinvar20150330 is available in hg19 and hg38. popfreqmax_20150413 and popfreqall_20150413 are available in hg19 coordinate.
 
-![new](/img/new.jpg) 2015Feb17: The ExAC03 that has indel left-realigned is now available in ANNOVAR. It includes all populations and seven subpopulations (AFR,AMR,EAS,FIN,NFE,OTH,SAS). (Update 20150218: file was updated due to a user-reported bug, please download again). (Update 20150302: multiple users reported that chrX contains only ALL population, so I updated the file again, and please download again. Thanks for the bug report)
+![new](/img/new.png) 2015Mar22: ANNOVAR new version is available, with minor function improvements and bug fixes. Registered users should receive an email within a week with updated link, otherwise you can re-register to get the link immediately. New ANNOVAR website becomes available to improve the readibility of the documentation, and offers search and comment functionality.
+
+![new](/img/new.png) 2015Feb17: The ExAC03 that has indel left-realigned is now available in ANNOVAR. It includes all populations and seven subpopulations (AFR,AMR,EAS,FIN,NFE,OTH,SAS). (Update 20150218: file was updated due to a user-reported bug, please download again). (Update 20150302: multiple users reported that chrX contains only ALL population, so I updated the file again, and please download again. Thanks for the bug report)
 
 ![new](/img/new.jpg) 2015Jan06: I wrote a new article with some thoughts and guidelines on processing VCF files and assigning dbSNP identifiers to variants. You can take a look by clicking the "VCF Processing" menu to the left.
 
