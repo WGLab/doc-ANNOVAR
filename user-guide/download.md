@@ -124,10 +124,10 @@ Several very commonly used annotation databases for human genomes are additional
 | mm9 | gerp++elem | same as above | 20140223 |
 | hg18 | gerp++gt2 | whole-genome GERP++ scores greater than 2 (RS score threshold of 2 provides high sensitivity while still strongly enriching for truly constrained sites. ) | 20120621 |
 | hg19 | gerp++gt2 | same as above | 20120621 |
-| hg19 | caddgt20 | whole-genome CADD scores that are within top 1% percentile, for most likely functional variants | 20140310 |
-| hg19 | caddgt10 | whole-genome CADD scores that are within top 10% percentile, for most likely functional variants | 20140310 |
-| hg19 | cadd | whole-genome CADD scores (350GB file, make sure you have sufficient disk space before downloading) | 20140223 |
-| hg19 | caddindel | whole-genome CADDindel scores | 20150505 |
+| hg19 | caddgt20 | removed | 20140310 |
+| hg19 | caddgt10 | removed | 20140310 |
+| hg19 | cadd | removed | 20140223 |
+| hg19 | caddindel | removed | 20150505 |
 
 ---
 
