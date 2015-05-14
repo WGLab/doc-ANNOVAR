@@ -1,3 +1,5 @@
+![new](/img/new.png) 2015May14: mitimpact2 (an exhaustive collection of pre-computed pathogenicity predictions of human mitochondrial non-synonymous variants) is available now on hg19 coordiante!
+
 ![new](/img/new.png) 2015Apr28: Updated COSMIC70, NCI60 and 1000G in hg18/hg38 coordinate are available now!
 
 ![new](/img/new.png) 2015Apr24: COSMIC70, NCI60 and 1000G in hg38 coordinate are available now!
@@ -134,4 +136,3 @@
   ga('create', 'UA-48623707-1', 'openbioinformatics.org');
   ga('send', 'pageview');
 </script>
-
