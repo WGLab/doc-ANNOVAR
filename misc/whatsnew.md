@@ -1,3 +1,5 @@
+![new](/img/new.png) 2015May20: mitimpact2 is updated with header information for use in table_annovar. hg38_ljb26_all is updated to fix missing alt_allele.
+
 ![new](/img/new.png) 2015May14: mitimpact2 (an exhaustive collection of pre-computed pathogenicity predictions of human mitochondrial non-synonymous variants) is available now on hg19 coordiante!
 
 ![new](/img/new.png) 2015Apr28: Updated COSMIC70, NCI60 and 1000G in hg18/hg38 coordinate are available now!
