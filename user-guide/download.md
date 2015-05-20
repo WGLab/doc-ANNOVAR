@@ -119,7 +119,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | clinvar_20150330 | same as above but with variant normalization| 20150413 |
 | hg19 | popfreq_max_20150413 |  A database containing the maximum allele frequency from 1000G, ESP6500, ExAC and CG46 | 20150413 |
 | hg19 | popfreq_all_20150413 |  A database containing all allele frequency from 1000G, ESP6500, ExAC and CG46  | 20150413 |
-| hg19 | mitimpact2 | pathogenicity predictions of human mitochondrial missense variants (see [here](http://www.ncbi.nlm.nih.gov/m/pubmed/25516408/)  | 20150514 |
+| hg19 | mitimpact2 | pathogenicity predictions of human mitochondrial missense variants (see [here](http://www.ncbi.nlm.nih.gov/m/pubmed/25516408/)  | 20150520 |
 | hg18 | gerp++elem | conserved genomic regions by GERP++ | 20140223 |
 | hg19 | gerp++elem | same as above | 20140223 |
 | mm9 | gerp++elem | same as above | 20140223 |
