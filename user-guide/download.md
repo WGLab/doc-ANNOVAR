@@ -37,7 +37,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19	| avsift	|	same as above	| 20120222 |
 | hg18 | ljb26_all | whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, MetaSVM, MetaLR, VEST, CADD, GERP++, PhyloP and SiPhy scores from dbNSFP version 2.6 | 20140925 |
 | hg19 | ljb26_all | same as above |  20140925 |
-| hg38 | ljb26_all | same as above | 20150420 |
+| hg38 | ljb26_all | same as above | 20150520 |
 | hg18 | cg46 | alternative allele frequency in 46 unrelated human subjects sequenced by Complete Genomics | 20120222 |
 | hg19 | cg46 | same as above | index updated 2012Feb22 |
 | hg18 | cg69 | allele frequency in 69 human subjects sequenced by Complete Genomics | 20120222 |
