@@ -177,7 +177,7 @@ GEAKSVHAMPGFIWLIRSLYEMQEERLARKAARGLNVGHLKLTFCSVGPTECAALAFVLQHLRRPVALQLDYNSVGDIGV
 SDRGICKLIECALHCEQLQKLALFNNKLTDGCAHSMAKLLACRQNFLALRLGNNYITAAGAQVLAEGLRGNTSLQFLGFWGNRVGDEGAQALAEALGDHQ
 SLRWLSLVGNNIGSVGAQALALMLAKNVMLEELCLEENHLQDEGVCSLAEGLKKNSSLKILKLSNNCITYLGAEALLQALERNDTILEVWLRGNTFSLEE
 VDKLGCRDTRLLL*
->line13 NM_001293557 c.2936dupC nonsynonymous  (position 979-979 changed from A to A)
+>line13 NM_001293557 c.2936dupC protein-altering (position 980 changed from L to P)
 MCSQEAFQAQRSQLVELLVSGSLEGFESVLDWLLSWEVLSWEDYEGFHLLGQPLSHLARRLLDTVWNKGTWACQKLIAAAQEAQADSQSPKLHGCWDPHS
 LHPARDLQSHRPAIVRRLHSHVENMLDLAWERGFVSQYECDEIRLPIFTPSQRARRLLDLATVKANGLAAFLLQHVQELPVPLALPLEAATCKKYMAKLR
 TTVSAQSRFLSTYDGAETLCLEDIYTENVLEVWADVGMAGPPQKSPATLGLEELFSTPGHLNDDADTVLVVGEAGSGKSTLLQRLHLLWAAGQDFQEFLF
@@ -192,13 +192,15 @@ SLRWLSLVGNNIGSVGAQALALMLAKNVMLEELCLEENHLQDEGVCSLAEGLKKNSSLKILKLSNNCITYLGAEALLQAP
 MDWGTLQTILGGVNKHSTSIGKIWLTVLFIFRIMILVVAAKEVWGDEQADFVCNTLQPGCKNVCYDHYFPISHIRLWALQLIFVSTPALLVAMHVAYRRH
 EKKRKFIKGEIKSEFKDIEEIKTQKVRIEGSLWWTYTSSIFFRVIFEAAFMYVFYVMYDGFSMQRLVKCNAWPCPNTVDCFVSRPTEKTVFTVFMIAVSG
 ICILLNVTELCYLLIRYCSGKSKKPV*
->line14 NM_004004 c.35delG nonsynonymous  (position 12-12 changed from G to V)
+>line14 NM_004004 c.35delG protein-altering  (position 12-12 changed from G to V)
 MDWGTLQTILGV*
 ```
 
 The output is a FASTA file, with wildtype sequence and with mutated sequence. The stop codon is represented by \*.
 
 > *Technical Notes: To print out mRNA sequences rather than protein sequences, add the `-mrnaseq` argument. To include SNPs in the output, add the `-includesnp` argument (by default, only indels will be processed).*
+
+> *Technical Notes: In previous version of ANNOVAR, "nonsynonymous" is used in the output which caused lots of confusion since the program was designed for indels; it is changed to "protein-altering" now. In previous version of ANNOVAR, the "position changed from X to Y" was for the position of the wildtype amino acid, but the actual protein-level change may be multiple amino acids away which caused confusion among users. It is changed now to the first position where wildtype and mutated protein disagree.
 
 ## Convert2Annovar: Conversion of input file format
 
@@ -323,4 +325,3 @@ Use the genericGene as the `-format` argument.
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
