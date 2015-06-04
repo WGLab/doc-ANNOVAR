@@ -130,6 +130,14 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | cadd | removed | 20140223 |
 | hg19 | caddindel | removed | 20150505 |
 
+## User-contributed datasets
+
+Several generous ANNOVAR users provide additional annotation datasets that may help other users. These datasets are described below:
+
+* MitImpact2: pathogenicity predictions of human mitochondrial missense variants. This is prepared as filter-based annotation format and users can directly download from ANNOVAR (see table above).
+* LoFtool score: gene loss-of-function score percentiles. The smaller the percentile, the most intolerant is the gene to functional variation. The file can be downloaded [here](http://www.openbioinformatics.org/annovar/download/LoFtool_scores.txt.gz). Manuscript in preparation (please contact Dr. Joao Fadista - joao.fadista@med.lu.se). The authors would like to thank the Exome Aggregation Consortium and the groups that provided exome variant data for comparison. A full list of contributing groups can be found at http://exac.broadinstitute.org/about.
+
+
 ---
 
 <script>
