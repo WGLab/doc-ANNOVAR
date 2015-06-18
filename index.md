@@ -9,6 +9,16 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 
 Please click the menu items to navigate through this website. Check [here](misc/whatsnew.md) to see what is new in ANNOVAR. If you have questions, comments, feature requests, or bug reports, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). Thank you very much for your help and support!
 
+## Latest news
+
+![new](/img/new.png) 2015Jun17: ANNOVAR new version is available at the same download URL as the March version. 
+
+![new](/img/new.png) 2015May20: mitimpact2 (an exhaustive collection of pre-computed pathogenicity predictions of human mitochondrial non-synonymous variants) is updated with header information for use in table_annovar. hg38_ljb26_all is updated to fix missing alt_allele.
+
+![new](/img/new.png) 2015Apr28: Updated COSMIC70, NCI60 and 1000G in hg18/hg38 coordinate are available now!
+
+![new](/img/new.png) 2015Apr20: Updated exac03 database is available, which now include adjusted allelel frequency as ExAC_ALL for ALL population (previously the AF record from ExAC VCF file was annotated as ExAC_Freq). Clinvar20150330 is available in hg19 and hg38. popfreqmax_20150413 and popfreqall_20150413 are available in hg19 coordinate.
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
