@@ -82,17 +82,17 @@ The first column tells whether the variant hit exons or hit intergenic regions, 
 
 The possible values of the first column is summarized below:
 
-| Value	|	Default precedence	|	Explanation	|
-|---|---|---|
-| exonic	|	1	|	variant overlaps a coding exon	|
-|	splicing	|	1	|	variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)	|
-|	ncRNA	|	2	|	variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)	|
-|	UTR5	|	3	|	variant overlaps a 5' untranslated region	|
-|	UTR3	|	3	|	variant overlaps a 3' untranslated region	|
-|	intronic	|	4	|	variant overlaps an intron	|
-|	upstream	|	5	|	variant overlaps 1-kb region upstream of transcription start site	|
-|	downstream	|	5	|	variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)	|
-|	intergenic	|	6	|	variant is in intergenic region	|
+| Value	|	Default precedence	|	Explanation	| Sequence Ontology |
+|---|---|---|---|
+| exonic	|	1	|	variant overlaps a coding | exon_variant (SO:0001791)	|
+|	splicing	|	1	|	variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)	| splicing_variant (SO:0001568) |
+|	ncRNA	|	2	|	variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)	| ncRNA (SO:0000655) |
+|	UTR5	|	3	|	variant overlaps a 5' untranslated region	| 5_prime_UTR_variant (SO:0001623) |
+|	UTR3	|	3	|	variant overlaps a 3' untranslated region	| 3_prime_UTR_variant (SO:0001624) |
+|	intronic	|	4	|	variant overlaps an intron	| intron_variant (SO:0001627) | 
+|	upstream	|	5	|	variant overlaps 1-kb region upstream of transcription start site	| upstream_gene_variant (SO:0001631) |
+|	downstream	|	5	|	variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)	| downstream_gene_variant (SO:0001632) |
+|	intergenic	|	6	|	variant is in intergenic region	| intergenic_variant (SO:0001628) |
 
 
 The value of the first column takes the following precedence (as of December 2010 and later version of ANNOVAR): exonic = splicing > ncRNA> > UTR5/UTR3 > intron > upstream/downstream > intergenic. The precedence defined above is used to decide what function to print out when a variant fit multiple functional categories. Note that:
