@@ -86,7 +86,7 @@ The possible values of the first column is summarized below:
 |---|---|---|---|
 | exonic	|	1	|	variant overlaps a coding | exon_variant (SO:0001791)	|
 |	splicing	|	1	|	variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)	| splicing_variant (SO:0001568) |
-|	ncRNA	|	2	|	variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)	| ncRNA (SO:0000655) |
+|	ncRNA	|	2	|	variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)	| non_coding_transcript_variant (SO:0001619) |
 |	UTR5	|	3	|	variant overlaps a 5' untranslated region	| 5_prime_UTR_variant (SO:0001623) |
 |	UTR3	|	3	|	variant overlaps a 3' untranslated region	| 3_prime_UTR_variant (SO:0001624) |
 |	intronic	|	4	|	variant overlaps an intron	| intron_variant (SO:0001627) | 
