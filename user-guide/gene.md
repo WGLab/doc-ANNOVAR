@@ -160,19 +160,19 @@ Note that only exonic variants are annotated in this file, so the first column g
 
 More detailed explanation of these exonic_variant_functoin annotations are given below. Note that stopgain and stoploss take precedence over other annotations; for example, whenever a nonsynonymous mutation change the wild type amino acid to a stop codon, it will be annotated as stopgain rather than nonsynonymous SNV.
 
-|	Annotation	|	Precedence	|	Explanation	|
-|---|---|---|
-| frameshift insertion	| 1	| an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence  |
-| frameshift deletion	| 2	| a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence    |
-| frameshift block substitution	| 3	| a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence  |
-| stopgain	| 4	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"!   |
-| stoploss	| 5	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site   |
-| nonframeshift insertion	| 6	 |  an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence  |
-| nonframeshift deletion	| 7	 |  a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence   |
-| nonframeshift block substitution	| 8	 |  a block substitution of one or more nucleotides that do not cause frameshift changes in protein coding sequence  |
-| nonsynonymous SNV	 |  9  |  a single nucleotide change that cause an amino acid change  |
-| synonymous SNV  |  10  |  a single nucleotide change that does not cause an amino acid change  |
-| unknown  |  11  |  unknown function (due to various errors in the gene structure definition in the database file)  |
+|	Annotation	|	Precedence	|	Explanation	| Sequence Ontology |
+|---|---|---|---|
+| frameshift insertion	| 1	| an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence  | frameshift_elongation (SO:0001909) |
+| frameshift deletion	| 2	| a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence    | frameshift_truncation (SO:0001910) |
+| frameshift block substitution	| 3	| a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence  | frameshift_variant (SO:0001589) |
+| stopgain	| 4	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"!   | stop_gained (SO:0001587) |
+| stoploss	| 5	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site   | stop_lost (SO:0001578) |
+| nonframeshift insertion	| 6	 |  an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence  | inframe_insertion (SO:0001821) |
+| nonframeshift deletion	| 7	 |  a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence   | inframe_deletion (SO:0001822) |
+| nonframeshift block substitution	| 8	 |  a block substitution of one or more nucleotides that do not cause frameshift changes in protein coding sequence  | inframe_variant (SO:0001650) |
+| nonsynonymous SNV	 |  9  |  a single nucleotide change that cause an amino acid change  | missense_variant (SO:0001583) |
+| synonymous SNV  |  10  |  a single nucleotide change that does not cause an amino acid change  | synonymous_variant (SO:0001819) |
+| unknown  |  11  |  unknown function (due to various errors in the gene structure definition in the database file)  | sequence_variant (SO:0001060) |
 
 
 In 2012 Oct version of ANNOVAR, the `--aamatrixfile` argument is added so that users can print out GRANTHAM scores (or any other amino acid substitution matrix) for nonsynonymous variantsin gene-based annotation. See below, the `AAMatrix=43` notation is added to the output, indicating that the R->Q change has a grantham score of 43.
