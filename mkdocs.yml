@@ -14,28 +14,22 @@ include_search: true
 #use_directory_urls: false
 
 pages:
-# for strange reasons I can only put max of 7 items below for building to pass
-- ['index.md', 'ANNOVAR']
-
-# User Guide
-- ['user-guide/download.md', 'User Guide', 'Download ANNOVAR']
-- ['user-guide/startup.md', 'User Guide', 'Quick Start-Up Guide']
-- ['user-guide/input.md', 'User Guide', 'Prepare Input Files']
-- ['user-guide/gene.md', 'User Guide', 'Gene-based Annotation']
-- ['user-guide/region.md', 'User Guide', 'Region-based Annotation']
-- ['user-guide/filter.md', 'User Guide', 'Filter-based Annotation']
-
-# Misc
-- ['misc/accessory.md', 'Misc', 'Accessory Programs']
-- ['misc/faq.md', 'Misc', 'FAQ']
-- ['misc/whatsnew.md', 'Misc', 'What is New']
-- ['misc/version_history.md', 'Misc', 'Version History']
-- ['misc/credit.md', 'Misc', 'Credit']
-- ['misc/contributing.md', 'Misc', 'How to Contribute']
-
-
-# Articles
-- ['articles/VCF.md', 'Articles', 'VCF Processing Guide']
-- ['articles/dbSNP.md', 'Articles', 'Assigning dbSNP Identifiers']
-- ['articles/wANNOVAR.md', 'Articles', 'wANNOVAR Tutorial']
-
+- ANNOVAR: index.md
+- User Guide:
+  - Download ANNOVAR: user-guide/download.md
+  - Quick Start-Up Guide: user-guide/startup.md
+  - Prepare Input Files: user-guide/input.md
+  - Gene-based Annotation: user-guide/gene.md
+  - Region-based Annotation: user-guide/region.md
+  - Filter-based Annotation: user-guide/filter.md
+- Misc:
+  - Accessory Programs: misc/accessory.md
+  - FAQ: misc/faq.md
+  - What is New: misc/whatsnew.md
+  - Version History: misc/version_history.md
+  - Credit: misc/credit.md
+  - How to Contribute: misc/contributing.md
+- Articles:
+  - VCF Processing Guide: articles/VCF.md
+  - Assigning dbSNP Identifiers: articles/dbSNP.md
+  - wANNOVAR Tutorial: articles/wANNOVAR.md
