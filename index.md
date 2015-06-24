@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. Check [here](misc/
 
 ---
 
+![new](/img/new.png) 2015Jun23: Whole-genome scores on hg19 coordinate for FATHMM and GWAVA are available in ANNOVAR now. Together with CADD and GERP++ scores, these provide the most comprehensive annotations and prioritization strategies for non-coding variants in human genome. (Warning: each file is over 200G!)
+
 ![new](/img/new.png) 2015Jun17: ANNOVAR new version is available at the same download URL as the March version. 
 
 ![new](/img/new.png) 2015May20: mitimpact2 (an exhaustive collection of pre-computed pathogenicity predictions of human mitochondrial non-synonymous variants) is updated with header information for use in table_annovar. hg38_ljb26_all is updated to fix missing alt_allele.
