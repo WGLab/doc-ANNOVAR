@@ -58,9 +58,9 @@ Several very commonly used annotation databases for human genomes are additional
 | hg18 | esp6500siv2_all | alternative allele frequency in All subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself. | 20141222 |
 | hg19 | esp6500siv2_all | same as above | 20141222 |
 | hg38 | esp6500siv2_all | same as above, lifted over from hg19 by myself | 20141222 |
-| hg19 | exac03 | ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). version 0.3. Left normalization done | 20150302 |
-| hg18 | exac03 | same as above| 20150428 |
-| hg38 | exac03 | same as above| 20150428 |
+| hg19 | exac03 | ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). version 0.3. Left normalization done. | 20150729 |
+| hg18 | exac03 | same as above| 20150729 |
+| hg38 | exac03 | same as above| 20150729 |
 | hg18 | 1000g (3 data sets) | alternative allele frequency data in 1000 Genomes Project | 20120222 |
 | hg18 | 1000g2010 (3 data sets) | same as above | 20120222 |
 | hg18 | 1000g2010jul (3 data sets) | same as above | 20120222 |
