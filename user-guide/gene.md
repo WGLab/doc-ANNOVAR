@@ -253,6 +253,8 @@ NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avi
 NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
 ```
 
+Since the output contains only Ensembl identifiers, if you want to translate that to gene synonym, you can download [this file for hg19](http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/ensemblToGeneName.txt.gz) and use the two-column file for the translation yourself. 
+
 Comparing the program message ("Done with xxx transcripts for yyy unique genes") from three different gene-definition systems, we can see that Ensembl annotates the greatest number of genes in human genome, yet RefSeq annotates the fewest number of genes.
 
 > *Technical Notes: Technically, the RefSeq Gene and UCSC Gene are transcript-based gene definitions. They built gene model based on transcript data, and then map the gene model back to human genomes. In comparison, Ensemble Gene and Gencode Gene are assembly-based gene definitions that attempt to build gene model directly from reference human genome. They came from different angles, trying to do the same thing: define genes in human genome.*
