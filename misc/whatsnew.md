@@ -1,6 +1,10 @@
 ![new](/img/new.png) 2015Sep26: The SPIDEX dataset (Xiong et al, Science 2015) is available at ANNOVAR now! This dataset provides machine-learning prediction on how genetic variants affect RNA splicing. Please download from [here](http://www.openbioinformatics.org/annovar/spidex_download_form.php).
 
+![new](/img/new.png) 2015Aug24: 1000 Genomes Project version 2015 August data is available! An ANNOVAR user identified bugs in chrX frequency in 1000G data, which I traced back to the distribution of the original data provided by 1000G. The 1000G team has fixed this bug on 8/18/2015, which is now relected in the 1000g2015aug dataset in ANNOVAR.
+
 ![new](/img/new.png) 2015Jul29: The exac03 datasets are updated to fix a bug on inconsistent allele frequency in the exac03 data for certain multi-allelic variants.
+
+![new](/img/new.png) 2015Jun23: Whole-genome scores on hg19 coordinate for FATHMM and GWAVA are available in ANNOVAR now. Together with CADD and GERP++ scores, these provide the most comprehensive annotations and prioritization strategies for non-coding variants in human genome. (Warning: each file is over 200G!)
 
 ![new](/img/new.png) 2015Jun17: ANNOVAR new version is available at the same download URL as the March version. Major changes include: improve convert2annovar to handle CASAVA format better, enable convert2annovar to handle ANNOVAR to VCF conversion for specific input files, improve backward compatibility of table_annovar.pl for ljb* and popfreq* databases, add avdblist keyword to list all databases provided by '-webfrom annovar', add tilde expansion for annotate_variation.pl, fix bug in convert2annovar to handle gz files, add ability to handle vcf.gz file for table_annovar, change exit code for failure to downdb in annotate_variation, improve variants_reduction.pl to handle more genome builds, change FASTA line to indicate mutation position in coding_change.pl, fix exon count bug for splice variant on negative strand, improve compatibility for certain plant genomes
 
