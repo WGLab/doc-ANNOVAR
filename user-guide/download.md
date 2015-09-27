@@ -142,6 +142,14 @@ Several generous ANNOVAR users provide additional annotation datasets that may h
 * LoFtool score: gene loss-of-function score percentiles. The smaller the percentile, the most intolerant is the gene to functional variation. The file can be downloaded [here](http://www.openbioinformatics.org/annovar/download/LoFtool_scores.txt.gz). Manuscript in preparation (please contact Dr. Joao Fadista - joao.fadista@med.lu.se). The authors would like to thank the Exome Aggregation Consortium and the groups that provided exome variant data for comparison. A full list of contributing groups can be found at http://exac.broadinstitute.org/about.
 * RVIS-ESV score: RVIS score measures genetic intolerance of genes to functional mutations, as described in [Petrovski et al](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003709). Original RVIS was constructed based on patterns of standing variation in 6503 samples. The authors have recently constructed scores based on the ~61,000 samples from ExAC. There is high correlation, but more resolution for many genes. The ExAC cohort implementation is what we consider RVIS (v2). It can be downloaded [here](http://www.openbioinformatics.org/annovar/download/RVIS_ExAC_4KW.txt.gz).
 
+## Third-party datasets
+
+Several third-party researchers have provided additional annotation datasets that can be used by ANNOVAR directly. However, users need to agree to specific license terms set forth by the third parties:
+
+* SPIDEX: SPIDEX 1.0 - Deep Genomics : (Xiong et al, Science 2015) Machine-learning prediction on how genetic variants affect RNA splicing. This dataset can be downloaded [here](http://www.openbioinformatics.org/annovar/spidex_download_form.php).
+
+
+
 
 ---
 
