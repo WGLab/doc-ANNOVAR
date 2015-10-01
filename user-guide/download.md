@@ -4,7 +4,7 @@ Please join the ANNOVAR mailing list at google groups [here](https://groups.goog
 
 The latest version of ANNOVAR (2015Jun17) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
 
-An update to the convert2annovar.pl program on 20151001 can be downloaded [here](http://www.openbioinformatics.org/annovar/convert2annovar.pl). It fixed a bug where start position may be higher than end position when converting complex block substitutions to simple indels.
+An update to the convert2annovar.pl program on 20151001 can be downloaded [here](http://www.openbioinformatics.org/annovar/download/convert2annovar.pl). It fixed a bug where start position may be higher than end position when converting complex block substitutions to simple indels.
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
