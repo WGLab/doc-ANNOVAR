@@ -198,6 +198,10 @@
 
     The -downdb use `wget` by default without any argument. You can add `-nowget` in the command line, so that Perl HTTP/FTP modules will be used instead which should handle proxy well. Or you can modify the ANNOVAR source code to use wget with proxy functionality.
 
+1. **How to download databases not stored in UCSC or ANNOVAR-DB?**
+
+    In general, you just need to manually download these databases, and reformat them to standard ANNOVAR genericdb format (Chr, Start, End, Ref, Alt, and other information), and use them. Occasionally, you may also automate the process by supplying the URL directly; for example, to download Regulome, you can do `perl annotate_variation.pl --downdb  --webfrom http://www.regulomedb.org/downloads/  RegulomeDB.dbSNP141 /Users/user/Desktop/annovar/humandb`.
+
 1. **How to handle MAF files from TCGA?**
 
     You can use [this script](http://www.openbioinformatics.org/annovar/download/maf2annovar.pl) to convert MAF to ANNOVAR input format and then annotate the file.
