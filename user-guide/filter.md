@@ -449,15 +449,7 @@ MetaSVM is developed by Coco Dong at my lab in collaboration with Dr. Xiaoming L
 
 It has clear advantage over other competing approaches such as SIFT/PolyPhen/CADD/Condel: (1) better performance (2) less missing values than SIFT/PolyPhen/Condel.
 
-In a benchmarking study using manually compiled data set (basically variants published in Nature Genetics in 2011 as true positive), including 244 variants with half being disease causal, our method achieves best performance, compared to all other methods in ljb2 database (SIFT/PolyPhen/MutationTaster/MutationAssessor/LRT/FATHMM), as well as Condel/CADD/KGGSeq/MutPred/SNPGO/SNAP/PhDSNP/PANTHER/PONP. Click the image below to see details.
-
-![](img/filter_roc_1.png)
-![](img/filter_roc_2.png)
-
-In another benchmarking study using the VariBench data, but excluding cancer mutations and then excluding all mutations reported in UniProt, totalling ~20,000 variants with 1/3 being disease causal, our method also achieves best performance compared to all other methods in ljb2.
-
-![](img/filter_roc_3.png)
- 
+In a benchmarking study using manually compiled data set (basically variants published in Nature Genetics in 2011 as true positive), including 244 variants with half being disease causal, our method achieves best performance, compared to all other methods in ljb2 database (SIFT/PolyPhen/MutationTaster/MutationAssessor/LRT/FATHMM), as well as Condel/CADD/KGGSeq/MutPred/SNPGO/SNAP/PhDSNP/PANTHER/PONP. In another benchmarking study using the VariBench data, but excluding cancer mutations and then excluding all mutations reported in UniProt, totalling ~20,000 variants with 1/3 being disease causal, our method also achieves best performance compared to all other methods in ljb2. For more details, please refer to [this paper](http://hmg.oxfordjournals.org/content/24/8/2125).
 
 An example to use the MetaSVM method is given below:
 
