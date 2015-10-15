@@ -4,6 +4,12 @@ An important and probably highly desirable feature is that ANNOVAR can help iden
 
 These functionalities mentioned above can be performed using the `--filter` operation in ANNOVAR. The major difference between `--filter` and `--regionanno` above is that that `--filter` operation works on mutations (nucleotide changes), but `--regionanno` operation works on chromosome locations. For example, `--region` compare variants with things like chr1:1000-1000, but `--filter` compare variants with things like A->G change at the position chr1:1000-1000.
 
+## 1000 Genomes Project (2015 Aug) annotations
+
+See general instructions below, but changing command line argument to 1000g2015aug.
+
+This set is almost identical to the 2014oct version. However, an ANNOVAR user identified bugs in chrX frequency in 1000G 2014oct data, which I traced back to the distribution of the original data provided by 1000G. The 1000G team has fixed this bug on 8/18/2015, which is now relected in the 1000g2015aug dataset in ANNOVAR.
+
 ## 1000 Genomes Project (2014 Oct) annotations
 
 See general instructions below, but changing command line argument to 1000g2014oct. Note that ANNOVAR does provide 1000g2014sep and 1000g2014aug, but they are obselete now!
@@ -227,7 +233,21 @@ annotate_variation.pl ex1.avinput humandb/ -filter -build hg19 -dbtype avsnp142
 
 ## LJB\* (dbNSFP) non-synonymous variants annotation
 
-The LJB\* databases (for historical reasons, it is named as ljb rather than dbNSFP in ANNOVAR) include SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores. These scores were retrieved from the dbNSFP and big thanks to the authors (Liu, Jian, Boerwinkle), hence the name ljb. **As of 2015, the lastest ljb database is ljb26.** The description below refers to ljb23 but the format/usage is very similar.
+The LJB\* databases (for historical reasons, it is named as ljb rather than dbNSFP in ANNOVAR) include SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, PhyloP scores and SiPhy scores. **As of October 2015, the lastest ljb database is dbnsfp30a.** Previously, this dataset is referred to as ljb26, ljb23, ljb2, ljb, which caused confusions among many users. Starting from version 3.0a, we will adopt the dbnsfp keyword for future updates. Additionally, users should start to use `table_annovar.pl` to calculate scores for non-synonymous variants, since we no longer provide individual scores for individual algorithms.
+
+The command below takes an input file and generates 20 different scores and predictions for all the non-synonymous variants in the file. You can open the output file by Excel or other spreadsheet programs to examine.
+
+```
+annotate_variation.pl -downdb -webfrom annovar -buildver hg19 dbnsfp30a humandb/
+table_annovar.pl ex1.avinput humandb/ -protocol dbnsfp30a -operation f -build hg19 -nastring .
+```
+
+The output include various scores in the following columns: SIFT_score      SIFT_pred       Polyphen2_HDIV_score    Polyphen2_HDIV_pred     Polyphen2_HVAR_score    Polyphen2_HVAR_pred     LRT_score       LRT_pred        MutationTaster_score    MutationTaster_pred     MutationAssessor_score  MutationAssessor_pred   FATHMM_score    FATHMM_pred     PROVEAN_score   PROVEAN_pred    VEST3_score     CADD_raw        CADD_phred      DANN_score      fathmm-MKL_coding_score fathmm-MKL_coding_pred  MetaSVM_score   MetaSVM_pred    MetaLR_score    MetaLR_pred     integrated_fitCons_score        integrated_confidence_value     GERP++_RS       phyloP7way_vertebrate   phyloP20way_mammalian   phastCons7way_vertebrate        phastCons20way_mammalian        SiPhy_29way_logOdds.
+
+If a variant does not have a score (for example, for intronic variant), the corresponding position will be denoated by a period (which is specified by the `-nastring` argument above.
+
+
+As mentioned above, for historical reasons, the dbNSFP database is referred to as LJB database, and we used to provide separate files for each individual scores. The description below refers to ljb23. They are helpful for users who only want to infer individual scores for individual prediction method.
 
 The keyword used for downloading these data include: ljb23_sift, ljb23_pp2hdiv, ljb23_pp2hvar, ljb23_lrt, ljb23_mt, ljb23_ma, ljb23_fathmm, ljb23_metasvm, ljb23_metalr, ljb23_gerp++, ljb23_phylop, ljb23_siphy, ljb23_all. The ljb23_all includes ALL scores, and it is very useful in table_annovar.pl.
 
