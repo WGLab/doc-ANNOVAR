@@ -955,6 +955,8 @@ Users can use `-build hg19 -downdb dann .` to download this database with ANNOVA
 
 COSMIC refers to "Catalogue Of Somatic Mutations In Cancer". It includes somatic mutations reported in literature in various types of cancers. ANNOVAR users can scan a file with somatic muations against the database, to know whether a mutation has previously been reported or observed, and in what types of cancer, and for how many times.
 
+Please note that COSMIC will no longer be updated due to license restrictions. The latest version from ANNOVAR is cosmic70. If you wish to use a more updated version, you will need to acquire COSMIC yourself and use it within ANNOVAR.
+
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -build hg19 -out ex4 -dbtype cosmic68 ex4.avinput humandb/
 NOTICE: the --dbtype cosmic68 is assumed to be in generic ANNOVAR database format
