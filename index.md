@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. Check [here](misc/
 
 ---
 
+![new](/img/new.png) 2015Oct15: The dbNSFP version 3.0a is available in ANNOVAR now! It provides whole-genome functional prediction scores on ~20 different algorithms. Now additions to the database include DANN, PROVEAN, fitConsPlease, etc. use keyword dbnsfp30a to download and use the database.
+
 ![new](/img/new.png) 2015Sep26: The SPIDEX dataset (Xiong et al, Science 2015) is available at ANNOVAR now! This dataset provides machine-learning prediction on how genetic variants affect RNA splicing. Please download from [here](http://www.openbioinformatics.org/annovar/spidex_download_form.php).
 
 ![new](/img/new.png) 2015Aug24: 1000 Genomes Project version 2015 August data is available! An ANNOVAR user identified bugs in chrX frequency in 1000G data, which I traced back to the distribution of the original data provided by 1000G. The 1000G team has fixed this bug on 8/18/2015, which is now relected in the 1000g2015aug dataset in ANNOVAR.
