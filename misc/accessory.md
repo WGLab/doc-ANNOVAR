@@ -10,7 +10,7 @@ If you are familiar with the `annotate_variation.pl` program, it should not be t
 [kaiwang@biocluster ~/]$ variants_reduction.pl sample.avinput humandb/ -protocol nonsyn_splicing,genomicSuperDups,phastConsElements46way,1000g2014oct_all,esp6500siv2_ea,esp6500siv2_aa,snp135NonFlagged,dominant -operation g,rr,r,f,f,f,f,m -out reduce -buildver hg19
 ```
 
-This command means to apply a series of filtering procedures to identify a small subset of variants/genes that are likely to be related to diseases. These filtering procedures include: identifying nonsynonymous and splicing variants, removing variants in segmental duplication regions, keeping variants in conserved genomic regions based on 46-way alignment, removing variants not observed in 1000 Genomes Project 2014 October release or ESP6500 European Americans or ESP6500 African Americans, removing variants observed in dbSNP135 Non Flagged set, and then apply a dominant disease model.
+This command means to apply a series of filtering procedures to identify a small subset of variants/genes that are likely to be related to diseases. These filtering procedures include: identifying nonsynonymous and splicing variants, removing variants in segmental duplication regions, keeping variants in conserved genomic regions based on 46-way alignment, removing variants observed in 1000 Genomes Project 2014 October release or ESP6500 European Americans or ESP6500 African Americans, removing variants observed in dbSNP135 Non Flagged set, and then apply a dominant disease model.
 
 The `-operation` argument instruct what operation are used: gene-based (g), reverse region-based (rr), region-based (r), filter-based (f), filter-based (f), filter-based (f), filter-based (f), model-based (m), respectively.
 
