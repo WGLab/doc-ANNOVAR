@@ -319,7 +319,7 @@ Similarly, you can switch to Comprehensive annotations and PolyA annotations of 
 
 When using these annotations, it is important to always note the correct file name to use (use Table Browser in UCSC Genome Browser if you are not sure about table names).
 
-Many other gene definition systems are also supported. For example, users can pick CCDS gene definition.
+Many other gene definition systems are also supported. For example, users can pick CCDS gene definition. (Note that if whole-genome FASTA files are not available in `humandb/hg19_seq`, you should first do a `annotate_variation.pl -downdb -build hg19 seq humandb/hg19_seq/`).
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -downdb -build hg19 ccdsGene humandb
