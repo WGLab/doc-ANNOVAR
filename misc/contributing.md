@@ -8,7 +8,7 @@ Due to institutional restrictions, I cannot put source code in GitHub. Please em
 
 ## Contributing to documentation
 
-Please fork the [GitHub repository](https://github.com/WangGenomicsLab/doc-ANNOVAR), modify it, and submit a pull request to us. We will incorporate the change promptly after review.
+Please fork the [GitHub repository](https://github.com/WGLab/doc-ANNOVAR), modify it, and submit a pull request to us. We will incorporate the change promptly after review.
 
 
 
