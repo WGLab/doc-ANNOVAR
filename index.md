@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. Check [here](misc/
 
 ---
 
+![new](/img/new.png) 2015Nov29: Minor change to exac03 dataset was made to fix a bug in calculating allele frequency for multi-allelic variants for minority populations.
+
 ![new](/img/new.png) 2015Nov02: The dbSNP144 is available from ANNOVAR now using avsnp144 keyword as -dbtype. Around 630,000 variants in the dataset has been left-normalized.
 
 ![new](/img/new.png) 2015Oct22: The GDI (Gene Damaging Index) score is available to download in the [download](user-guide/download.md#user-contributed-datasets) section. GDI describes the accumulated mutational damage for each human gene in the general population, similar to LoFTool and RVIS. The data set includes general damage prediction (low/medium/high) for different disease type (all, Mendelian, cancer, and PID).
