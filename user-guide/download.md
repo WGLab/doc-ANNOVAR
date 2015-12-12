@@ -18,14 +18,14 @@ Several very commonly used annotation databases for human genomes are additional
 
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
-| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20150322 |
-| hg19 | refGene | same as above | 20150322 |
-| hg38 | refGene | save as above | 20150322 |
-| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20150322 |
-| hg19 | knownGene | same as above | 20150322 |
-| hg38 | knownGene | same as above | 20150322 |
-| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20150322 |
-| hg19 | ensGene | same as above | 20150322 |
+| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20151211 |
+| hg19 | refGene | same as above | 20151211 |
+| hg38 | refGene | save as above | 20151211 |
+| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20151211 |
+| hg19 | knownGene | same as above | 20151211 |
+| hg38 | knownGene | same as above | 20151211 |
+| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20151211 |
+| hg19 | ensGene | same as above | 20151211 |
 
 ---
 
