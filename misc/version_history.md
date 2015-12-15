@@ -67,6 +67,7 @@ changed -downdb behavior on 1000G data sets, convert2annovar.pl now handles soap
 
 - On 2015Jun16, improve convert2annovar to handle CASAVA format better, enable convert2annovar to handle ANNOVAR to VCF conversion for specific input files, improve backward compatibility of table_annovar.pl for ljb* and popfreq* databases, add avdblist keyword to list all databases provided by '-webfrom annovar', add tilde expansion for annotate_variation.pl, fix bug in convert2annovar to handle gz files, add ability to handle vcf.gz file for table_annovar, change exit code for failure to downdb in annotate_variation, improve variants_reduction.pl to handle more genome builds, change FASTA line to indicate mutation position in coding_change.pl, fix exon count bug for splice variant on negative strand, improve compatibility for certain plant genomes
 
+- On 2015Dec14, enabled multi-threaded ANNOVAR for gene, region and filter annotation, add -idasscore argument to better handle VCFdb file in filter annotation, improve convert2annovar to better handle VCF file without header information, fix exon count bug for splice variant on negative strand
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
