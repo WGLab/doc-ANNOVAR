@@ -16,7 +16,9 @@ NOTICE: Finished downloading annotation files for hg19 build version, with files
 
 This command downloads a few files and save them in the "humandb/" directory for later use.
 
-> *Technical Notes: The above command includes `-webfrom annovar`, because I already pre-built the FASTA file and included them in ANNOVAR distribution site. For other gene definition systems (such as GENCODE, CCDS) or for other species (such as mouse/fly/worm/yeast), the user needs to build the FASTA file yourself. See below for more details.*
+.. note::
+
+    *Technical Notes: The above command includes `-webfrom annovar`, because I already pre-built the FASTA file and included them in ANNOVAR distribution site. For other gene definition systems (such as GENCODE, CCDS) or for other species (such as mouse/fly/worm/yeast), the user needs to build the FASTA file yourself. See below for more details.*
 
 Suppose we use the input file `ex1.avinput` which is included as an example in the ANNOVAR package. This is a simple text file, and its content is displayed below:
 
