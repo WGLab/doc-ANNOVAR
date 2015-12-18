@@ -39,6 +39,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg18 | dbnsfp30a | whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, MetaSVM, MetaLR, VEST, CADD, GERP++, DANN, fitCons, PhyloP and SiPhy scores from dbNSFP version 3.0a | 20151015 |
 | hg19 | dbnsfp30a | same as above |  20151015 |
 | hg38 | dbnsfp30a | same as above | 20151015 |
+| hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
+| hg38 | dbscsnv11 | same as above | 20151218 |
 | hg18 | cg46 | alternative allele frequency in 46 unrelated human subjects sequenced by Complete Genomics | 20120222 |
 | hg19 | cg46 | same as above | index updated 2012Feb22 |
 | hg18 | cg69 | allele frequency in 69 human subjects sequenced by Complete Genomics | 20120222 |
