@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. Check [here](misc/
 
 ---
 
+![new](/img/new.png) 2016Jan23: The mitimpact24 (version 2.4) database is made available in ANNOVAR now. It provides effect prediction of mitochondrial variants.
+
 ![new](/img/new.png) 2015Dec18: The dbscsnv11 database is made available in ANNOVAR now. It provides splice site effect prediction by AdaBoost and Random Forest from dbscSNV version 1.1.
 
 ![new](/img/new.png) 2015Dec14: New ANNOVAR version is available. The major change is to enable multi-threaded ANNOVAR for gene, region and filter annotation. Use an argument such as `-thread 6` to turn on multi-threading with 6 CPU cores. Special thanks to S/W R&D Center, Device Solutions at SAMSUNG for proposing the changes and demonstrating the performance using Samsung 830 SSD drives. I re-implemented their algorithm, and confirmed that >10 fold speed improvement for filter annotation for genomes can be achieved even in a Seagate HDD RAID-6 array.
