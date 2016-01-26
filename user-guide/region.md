@@ -242,7 +242,7 @@ dgvMerged Name=esv2751132 13 20797176 21105944 0 - comments: a 342kb deletion en
 
 As we can see from the results above, adding a `-minqueryfrac 0.5` argument reduces the number of database hits (now only esv2751132 is shown in the Name field for the 342kb deletion). To understand this more, check the genome browser shots for this region:
 
-![](img/region_1.png)
+![](../img/region_1.png)
 
 The above figure shows that this query region overlaps with several CNVs reported in DGV, but only one of them (identifier is esv2751132) contains more than 50% of the query.
 
@@ -409,7 +409,7 @@ The details of the HMM state definition can be found below. The prediction is gi
 
 For example, the rs1801002 mutation was predicted to be in state 12 (polycomb-repressed region) above in GM12878 cells, even though it is also a coding mutation. We can confirm this observation in the Genome Browser shot below. It is interesting to see that it serves different functions in different cell lines (but of course everything is based on prediction and this may or may not be reliable).
 
-![](img/region_2.png)
+![](../img/region_2.png)
 
 ## Identify variants in other genomic regions annotated with other functions
 
