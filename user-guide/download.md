@@ -2,7 +2,7 @@
 
 Please join the ANNOVAR mailing list at google groups [here](https://groups.google.com/forum/#!forum/annovar) to receive announcements on software updates.
 
-The latest version of ANNOVAR (2015Dec14) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required). Please note that the file was updated on 2016Feb01 due to a bug with multi-threaded gene annotation when thread is more than 6.
+The latest version of ANNOVAR (2016Feb01) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
