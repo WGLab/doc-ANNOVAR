@@ -105,7 +105,7 @@ The output file is written to `myanno.hg19_multianno.txt`. This is a tab-delimit
 
 Users can open the file in Excel 2007 (select "tab-delimited" when opening the file). Click the "DATA" tab at the menu bar, then click the big "Filter" button. Then click any one of the headings such as 1000G_CEU or SIFT to filter out variants, essentially by clicking the check boxes. For SIFT score, make sure to use "less than 0.05 OR equal to (blank)" so that variants without SIFT score do not get filtered out. It should be straightfoward to do, but it may need a little practice for users not familiar with Excel.
 
-![](img/accessary_excel_1.gif)
+![](/img/accessary_excel_1.gif)
 
 Sometimes, the input file contains many extra columns (for example, when you convert a VCF file to ANNOVAR input format with `-includeinfo` argument), and the users may want to keep these extra information in the output. In this case, just add the `-otherinfo` argument to table_annovar.pl. The extra columns will be appended at the end of the annotation columns.
 
