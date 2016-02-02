@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. Check [here](misc/
 
 ---
 
+![new](/img/new.png) 2016Feb01: A user pointed out a bug when more than 6 threads are used in multi-threaded gene-based annotation. This bug was fixed and you can now re-download the ANNOVAR package.
+
 ![new](/img/new.png) 2016Jan23: The mitimpact24 (version 2.4) database is made available in ANNOVAR now. It provides effect prediction of mitochondrial variants.
 
 ![new](/img/new.png) 2015Dec18: The dbscsnv11 database is made available in ANNOVAR now. It provides splice site effect prediction by AdaBoost and Random Forest from dbscSNV version 1.1.
