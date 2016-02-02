@@ -69,6 +69,8 @@ changed -downdb behavior on 1000G data sets, convert2annovar.pl now handles soap
 
 - On 2015Dec14, enabled multi-threaded ANNOVAR for gene, region and filter annotation, add -idasscore argument to better handle VCFdb file in filter annotation, improve convert2annovar to better handle VCF file without header information, fix exon count bug for splice variant on negative strand
 
+- On 2016Feb01, fixed a bug in multi-threaded gene annotation when thread is more than 6, added -maxgenethread argument to table_annovar.pl
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
