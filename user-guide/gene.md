@@ -390,7 +390,37 @@ The above procedure will only work if the gene-based annotations exist in UCSC f
 
 ## What about GFF3 file for new species?
 
-Occasionally, the user will sequence a new species yourself, so the genome build that is not available from UCSC or Ensembl or anywhere. Generally speaking, you can use one of the several gene prediction tools to compile gene structure from the contigs that you build, and this will usually be in GFF3 format. Then go to http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/, download the `gff3ToGenePred` tool, and convert the GFF3 file to a format that ANNOVAR can read. Everything else is the same as above.
+Occasionally, the user will sequence a new species yourself, so the genome build that is not available from UCSC or Ensembl or anywhere. Generally speaking, you can use one of the several gene prediction tools to compile gene structure from the contigs that you build, and this will usually be in GFF3 format. The GFF3 or GTF file downloaded from Ensembl or compiled by the user need to be converted to the GenePred format. The conversion can be performed by the `gff3ToGenePred` or `gtfToGenePred` tools, available at http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/. In our experience, occasionally some GFF3 files from Ensembl cannot be converted correctly. Thus, for non-human species not available from the UCSC annotation database, we recommend using the GTF file to generate the gene definition file. 
+
+We gave an example to annotate Arabidopsis in [this paper](http://www.nature.com/nprot/journal/v10/n10/full/nprot.2015.105.html), and the procedure is reproduced below:
+
+1. Please go to http://plants.ensembl.org/info/website/ftp/index.html to download the GTF file and the genome FASTA file for this plant into a folder called `atdb`.
+
+    ```
+mkdir atdb
+cd atdb
+wget ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz
+wget ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz
+```
+
+2. Please decompress both files:
+
+    ```
+gunzip Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz 
+gunzip Arabidopsis_thaliana.TAIR10.27.gtf.gz
+```
+
+3. Please use the gtfToGenePred tool to convert the GTF file to GenePred file:
+
+    `gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt`
+
+4. Please generate a transcript FASTA file with our provided script:
+
+    `perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa`
+
+    After this step, the annotation database files needed for gene-based annotation are ready. Now you can annotate a given VCF file. Please note that the `--buildver` argument should be set to `AT`.
+
+
 
 ## Understanding how ANNOVAR address rare problems in gene definition
 
