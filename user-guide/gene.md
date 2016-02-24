@@ -396,7 +396,7 @@ We gave an example to annotate Arabidopsis in [this paper](http://www.nature.com
 
 1. Please go to http://plants.ensembl.org/info/website/ftp/index.html to download the GTF file and the genome FASTA file for this plant into a folder called `atdb`.
 
-    ```
+```
 mkdir atdb
 cd atdb
 wget ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz
@@ -405,7 +405,7 @@ wget ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana
 
 2. Please decompress both files:
 
-    ```
+```
 gunzip Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz 
 gunzip Arabidopsis_thaliana.TAIR10.27.gtf.gz
 ```
