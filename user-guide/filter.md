@@ -955,7 +955,6 @@ Users can use `-build hg19 -downdb dann .` to download this database with ANNOVA
 
 COSMIC refers to "Catalogue Of Somatic Mutations In Cancer". It includes somatic mutations reported in literature in various types of cancers. ANNOVAR users can scan a file with somatic muations against the database, to know whether a mutation has previously been reported or observed, and in what types of cancer, and for how many times.
 
-Please note that COSMIC will no longer be updated due to license restrictions. The latest version from ANNOVAR is cosmic70. If you wish to use a more updated version, you will need to acquire COSMIC yourself and use it within ANNOVAR.
 
 ```
 [kaiwang@biocluster ~/]$ annotate_variation.pl -filter -build hg19 -out ex4 -dbtype cosmic68 ex4.avinput humandb/
@@ -970,6 +969,15 @@ cosmic68 ID=COSM1356066;OCCURENCE=1(large_intestine) 11 6579854 6579854 C T het
 ```
 
 The input file contains two variants that were reported in COSMIC database, both reported in cancer involving large inestine only once.
+
+Please note that COSMIC will no longer be updated due to license restrictions. The latest version from ANNOVAR is cosmic70. If you wish to use a more updated version, you will need to acquire COSMIC yourself and use it within ANNOVAR. The general instructions on preparing your own COSMIC data for user in ANNOVAR is given below:
+
+1. Download these VCF files for coding and non-coding mutations: /files/grch38/cosmic/v76/VCF/CosmicCodingMuts.vcf.gz and CosmicNonCodingVariants.vcf.gz from COSMIC's SFTP repository (sftp-cancer.sanger.ac.uk)
+2. Download MutantExport files: /files/grch38/cosmic/v76/CosmicMutantExport.tsv.gz 
+3. Use this command `prepare_annovar_user.pl -dbtype cosmic CosmicMutantExport.tsv  -vcf CosmicCodingMuts.vcf > hg38_cosmic76.txt`
+
+Note that the `prepare_annovar_user.pl` file can be downloaded from [here](http://www.openbioinformatics.org/annovar/download/). The final result file should contain coding mutations from COSMIC, as well as the number of occurrences in different tumor types (However, note that these include both targeted screen and genome screen. If you only want genome screen, you should use the CosmicGenomeScreensMutantExport.tsv.gz file instead). COSMIC changed their data formats so non-coding mutations are no longer in the `MutantExport` file, so we can no longer calculate their occurrences in various tumors. COSMIC now provides a `CosmicNCV.tsv` file, but it is not really that informative as the cancer tissue information is missing from this file.
+
 
 ## NCI60 annotations
 
