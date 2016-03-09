@@ -503,6 +503,7 @@ bed Name=NA 13 19695176 20003944 0 - comments: a 342kb deletion encompassing GJB
 
 In the output, "Name=NA" because there is no such annotation in a typical BED file.
 
+The `-colsWanted` argument can be used to specify which column or columns should be included in the output. For example, `-colsWanted 4,5,6` means the column 4, 5 and 6 should be in the output (assuming that your BED file has at least 6 columns). You can also use `-colsWanted all` to specify that all columns be printed out. When multiple columns are printed out, they will be comma-delimited.
 
 ---
 
