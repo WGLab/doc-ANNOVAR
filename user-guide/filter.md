@@ -970,7 +970,7 @@ cosmic68 ID=COSM1356066;OCCURENCE=1(large_intestine) 11 6579854 6579854 C T het
 
 The input file contains two variants that were reported in COSMIC database, both reported in cancer involving large inestine only once.
 
-Please note that COSMIC will no longer be updated due to license restrictions. The latest version from ANNOVAR is cosmic70. If you wish to use a more updated version, you will need to acquire COSMIC yourself and use it within ANNOVAR. The general instructions on preparing your own COSMIC data for user in ANNOVAR is given below:
+Please note that COSMIC will no longer be updated due to license restrictions. The latest version from ANNOVAR is cosmic70. If you wish to use a more updated version, you will need to acquire COSMIC yourself and use it within ANNOVAR. The general instructions on preparing your own COSMIC data for user in ANNOVAR is given below (using version 76 and GRCh38 coordinate as an example):
 
 1. Download these VCF files for coding and non-coding mutations: /files/grch38/cosmic/v76/VCF/CosmicCodingMuts.vcf.gz and CosmicNonCodingVariants.vcf.gz from COSMIC's SFTP repository (sftp-cancer.sanger.ac.uk)
 2. Download MutantExport files: /files/grch38/cosmic/v76/CosmicMutantExport.tsv.gz 
