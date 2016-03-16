@@ -153,7 +153,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | caddgt10 | removed | 20140310 |
 | hg19 | cadd | removed | 20140223 |
 | hg19 | caddindel | removed | 20150505 |
-| hg19 | fathmm | whole-genome FATHMM_coding and FATHMM_noncoding scores | 20150619 |
+| hg19 | fathmm | whole-genome FATHMM_coding and FATHMM_noncoding scores (noncoding and coding scores in the 2015 version was reversed) | 20160315 |
 | hg19 | gwava | whole genome GWAVA_region_score GWAVA_tss_score GWAVA_unmatched_score | 20150623 |
 
 ## User-contributed datasets
