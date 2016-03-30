@@ -951,6 +951,32 @@ In comparison, it would take 22 minutes in tabix, not to mention the need to pos
 
 Users can use `-build hg19 -downdb dann .` to download this database with ANNOVAR index files. Note that this file is over 200GB and it may take a while to get it.
 
+## Eigen score annotations
+
+[Eigen](http://www.ncbi.nlm.nih.gov/pubmed/26727659) score uses a spectral approach integrating functional genomic annotations for coding and noncoding variants. Unlike other approaches such as CADD/DANN, Eignen did not use labelled training data and should be considered as a unsupervised learning approach. Currently only hg19 is supported
+
+Users can use `-build hg19 -downdb eigen .` to download this database with ANNOVAR index files. Note that this file is over 200GB and it may take a while to get it. An example is given below:
+
+```
+[kaiwang@dragon ~/]$ annotate_variation.pl -filter ex1.avinput humandb/ -dbtype eigen -build hg19
+NOTICE: the --dbtype eigen is assumed to be in generic ANNOVAR database format
+NOTICE: Variants matching filtering criteria are written to ex1.avinput.hg19_eigen_dropped, other variants are written to ex1.avinput.hg19_eigen_filtered
+NOTICE: Processing next batch with 15 unique variants in 15 input lines
+NOTICE: Database index loaded. Total number of bins is 26412189 and the number of bins to be scanned is 15
+NOTICE: Scanning filter database humandb/hg19_eigen.txt...Done
+
+[kaiwang@dragon ~/]$ cat ex1.avinput.hg19_eigen_dropped
+eigen   -1.4191 1       1404001 1404001 G       T       comments: rs149123833, a SNP in 3' UTR of ATAD3C
+eigen   0.0309  1       162736463       162736463       C       T       comments: rs1000050, a SNP in Illumina SNP arrays
+eigen   0.1277  1       5935162 5935162 A       T       comments: rs1287637, a splice site variant in NPHP4
+eigen   0.5929  1       67705958        67705958        G       A       comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
+eigen   0.0120  1       84875173        84875173        C       T       comments: rs6576700 or SNP_A-1780419, a SNP in Affymetrix SNP arrays
+eigen   -0.0445 1       948921  948921  T       C       comments: rs15842, a SNP in 5' UTR of ISG15
+eigen   0.1154  16      50745926        50745926        C       T       comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
+eigen   0.7733  16      50756540        50756540        G       C       comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
+eigen   -1.4621 2       234183368       234183368       A       G       comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
+```
+
 ## COSMIC annotations
 
 COSMIC refers to "Catalogue Of Somatic Mutations In Cancer". It includes somatic mutations reported in literature in various types of cancers. ANNOVAR users can scan a file with somatic muations against the database, to know whether a mutation has previously been reported or observed, and in what types of cancer, and for how many times.
