@@ -68,10 +68,10 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | exac03 | ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). version 0.3. Left normalization done. | 20151129 |
 | hg18 | exac03 | same as above | 20151129 |
 | hg38 | exac03 | same as above | 20151129 |
-| hg19 | exac03nontcga | ExAC on non-TCGA samples | 20151203 |
-| hg38 | exac03nontcga | same as above | 20151203 |
-| hg19 | exac03nonpsych | ExAC on non-Psychiatric disease samples | 20151203 |
-| hg38 | exac03nonpsych | same as above | 20151203 |
+| hg19 | exac03nontcga | ExAC on non-TCGA samples (updated header) | 20160423 |
+| hg38 | exac03nontcga | same as above | 20160423 |
+| hg19 | exac03nonpsych | ExAC on non-Psychiatric disease samples (updated header) | 20160423 |
+| hg38 | exac03nonpsych | same as above | 20160423 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
