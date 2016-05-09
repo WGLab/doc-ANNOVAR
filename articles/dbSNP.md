@@ -39,6 +39,28 @@ annotate_variation.pl ex1.avinput humandb/ -filter -build hg19 -dbtype avsnp142
 
 For ANNOVAR users, these will be the most "correct" dbSNP release to use to ensure identifiability of rs IDs, regardless of how dbSNP has originally planned to use rs IDs for.
 
+## Additional discussions
+
+1. Bugs in dbSNP: known SNPs are missing!
+
+    It is expected that many software tools and databases, including dbSNP, may contain bugs once in a while. For example, I had a discussion with a user and identified issues in dbSNP144: there are only a few SNPs in the entire ~200kb region 39.4Mb to 39.6Mb in chr17! However, things are perfectly fine in dbSNP142 or dbSNP146, and in earlier dbSNP versions as well. (To illustrate this, I show a UCSC genome browser shot below). So in general users should pay attention and sometimes need to annotate against more than one dbSNP versions to make sure that results are correct. 
+    
+    ![UCSC](https://cloud.githubusercontent.com/assets/5926328/15128367/47955ada-15f0-11e6-9052-c21bce458085.png).
+
+2. Be cautious about liftover for dbSNP!
+
+    I am in general very much against this practice of doing liftover rather than re-calling variants on a different genome coordinate. However, I also recognize that lots of researchers do this, for various reasons. I just want to point out that you should not expect that the dbSNP annotations are identical after your do liftover of your VCF files. Perhaps the more important thing that the vast majority of people never understand is that even the alleles themselves can be changed in different coordinates. For example, a sequence of ACGTACGTACGT in hg19 could well become ACGTACCTACGT in hg38 (there is a G>C change). So a mutation in hg19 may become reference allele in hg38 (this is the general experience that I have), so it looks like the mutation gets lost. However, if you do a simple liftover, the mutation will still exist, which is of course wrong.
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
