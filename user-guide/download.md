@@ -151,9 +151,9 @@ Several very commonly used annotation databases for human genomes are additional
 | mm9 | gerp++elem | same as above | 20140223 |
 | hg18 | gerp++gt2 | whole-genome GERP++ scores greater than 2 (RS score threshold of 2 provides high sensitivity while still strongly enriching for truly constrained sites. ) | 20120621 |
 | hg19 | gerp++gt2 | same as above | 20120621 |
-| hg19 | caddgt20 | removed | 20140310 |
-| hg19 | caddgt10 | removed | 20140310 |
-| hg19 | cadd | removed | 20140223 |
+| hg19 | caddgt20 | removed | 20160607 |
+| hg19 | caddgt10 | removed | 20160607 |
+| hg19 | cadd | removed | 20160607 |
 | hg19 | caddindel | removed | 20150505 |
 | hg19 | fathmm | whole-genome FATHMM_coding and FATHMM_noncoding scores (noncoding and coding scores in the 2015 version was reversed) | 20160315 |
 | hg19 | gwava | whole genome GWAVA_region_score GWAVA_tss_score GWAVA_unmatched_score, see [ref](http://www.nature.com/nmeth/journal/v11/n3/abs/nmeth.2832.html) | 20150623 |
