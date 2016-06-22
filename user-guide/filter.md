@@ -41,6 +41,7 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 **For disease-specific variants**:
 * clinvar_20160302: ClinVar database with separate columns (CLINSIG CLNDBN CLNACC CLNDSDB CLNDSDBID) for each variant
 * cosmic70: the latest COSMIC database with somatic mutations from cancer and the frequency of occurence in each subtype of cancer. For more updated cosmic, see instructions below on how to make them.
+* icgc21: International Cancer Genome Consortium version 21 mutations.
 * nci60: NCI-60 human tumor cell line panel exome sequencing allele frequency data
 
 **For variant identifiers**:
@@ -1049,6 +1050,27 @@ Please note that COSMIC will no longer be updated due to license restrictions. T
 
 Note that the `prepare_annovar_user.pl` file can be downloaded from [here](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl). The final result file should contain coding mutations from COSMIC, as well as the number of occurrences in different tumor types (However, note that these include both targeted screen and genome screen. If you only want genome screen, you should use the CosmicGenomeScreensMutantExport.tsv.gz file instead). COSMIC changed their data formats so non-coding mutations are no longer in the `MutantExport` file, so we can no longer calculate their occurrences in various tumors. COSMIC now provides a `CosmicNCV.tsv` file, but it is not really that informative as the cancer tissue information is missing from this file.
 
+## ICGC annotations
+
+icgc refers to International Cancer Genome Consortium. The instructions to build the database and the inital database were provided by Ferran Nadeu at Institut d'Investigacions Biomediques August Pi i Sunyer. The annotations include a ICGC_ID column and a ICGC_Occurrence column. The ICGC_Occurrence column includes the project in which the mutation was identified, the number of donors affected, the total number of donors studied in the project and the frequency of the mutation, separated by "|".
+
+```
+[kaiwang@biocluster ~/]$ table_annovar.pl ex1.avinput humandb/ -protocol icgc21 -operation f -build hg19
+-----------------------------------------------------------------
+NOTICE: Processing operation=f protocol=icgc21
+NOTICE: Finished reading 2 column headers for '-dbtype icgc21'
+
+NOTICE: Running system command <annotate_variation.pl -filter -dbtype icgc21 -buildver hg19 -outfile ex1.avinput ex1.avinput humandb/ -otherinfo>
+NOTICE: the --dbtype icgc21 is assumed to be in generic ANNOVAR database format
+NOTICE: Variants matching filtering criteria are written to ex1.avinput.hg19_icgc21_dropped, other variants are written to ex1.avinput.hg19_icgc21_filtered
+NOTICE: Processing next batch with 15 unique variants in 15 input lines
+NOTICE: Database index loaded. Total number of bins is 2831634 and the number of bins to be scanned is 15
+NOTICE: Scanning filter database humandb/hg19_icgc21.txt...Done
+-----------------------------------------------------------------
+NOTICE: Multianno output file is written to ex1.avinput.hg19_multianno.txt
+```
+
+Several mutations are present in ICGC and the related information is in the output file.
 
 ## NCI60 annotations
 
