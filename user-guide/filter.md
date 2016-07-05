@@ -9,21 +9,25 @@ These functionalities mentioned above can be performed using the `--filter` oper
 Due to the increased number of databases that are available at ANNOVAR, some users are not sure where to start. Here we give a brief summary of some of the mostly commonly used databases.
 
 **For frequency of variants in whole-genome data**:
+
 * 1000g2015aug: latest 1000 Genomes Project dataset with allele frequencies in six populations including ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian). These are whole-genome variants.
 * kaviar_20150923: latest Kaviar database with 170 million variants from 13K genomes and 64K exomes.
 * hrcr1: latest Haplotype Reference Consortium database with 40 million variants from 32K samples in haplotype reference consortium
 * cg69: allele frequency in 69 human subjects sequenced by Complete Genomics. useful to exclude platform specific variants.
 
 **For frequency of variants in whole-exome data**:
+
 * exac03: latest Exome Aggregation Consortium dataste with allele frequencies in ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian).
 * esp6500siv2: latest NHLBI-ESP project with 6500 exomes. Three separate key words are used for 3 population groupings: esp6500siv2_all, esp6500siv2_ea, esp6500siv2_aa.
 
 **For frequency of variants in isolated or less represented populations**:
+
 * ajews: common alleles in ashkenazi jews
 * TMC-SNPDB: common alleles in Indian populations
 * ???: I **strongly** encourage ANNOVAR users to donate your own allelel frequency database on isolated/special populations to be shared to worldwide users
 
 **For functional prediction of variants in whole-genome data**:
+
 * gerp++: functional prediction scores for 9 billion mutations based on selective constraints across human genome. You can optionally use gerp++gt2 instead since it includes only RS score greater than 2, which provides high sensitivity while still strongly enriching for truly constrained sites
 * cadd: Combined Annotation Dependent Depletion score for 9 billion mutations. It is basically constructed by a support vector machine trained to differentiate 14.7 million high-frequency human-derived alleles from 14.7 million simulated variants, using ~70 different features. For known indels, use caddindel.
 * cadd13: CADD version 1.3.
@@ -33,19 +37,23 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 * gwava: genome-wide annotation of variants that supports prioritization of noncoding variants by integrating various genomic and epigenomic annotations on 9 billion mutations.
 
 **For functional prediction of variants in whole-exome data**:
+
 * dbnsfp30a: this dataset already includes SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, MetaSVM, MetaLR, VEST, CADD, GERP++, DANN, fitCons, PhyloP and SiPhy scores, but ONLY on coding variants
 
 **For functional prediction of slice variants**:
+
 * dbscsnv11: dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest, which score how likely that the variant may affect splicing
 * spidex: deep learning based prediction of splice variants. Unlike dbscsnv11, these variants could be far away from canonical splice sites
 
 **For disease-specific variants**:
+
 * clinvar_20160302: ClinVar database with separate columns (CLINSIG CLNDBN CLNACC CLNDSDB CLNDSDBID) for each variant
 * cosmic70: the latest COSMIC database with somatic mutations from cancer and the frequency of occurence in each subtype of cancer. For more updated cosmic, see instructions below on how to make them.
 * icgc21: International Cancer Genome Consortium version 21 mutations.
 * nci60: NCI-60 human tumor cell line panel exome sequencing allele frequency data
 
 **For variant identifiers**:
+
 * snp142: dbSNP version 142
 * avsnp142: an abbreviated version of dbSNP 142 with left-normalization by ANNOVAR developers.
 
