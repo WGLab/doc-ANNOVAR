@@ -92,6 +92,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | 1000g2014oct (6 data sets) | same as above | 20150424 |
 | hg19 | 1000g2015aug (6 data sets) | The 1000G team fixed a bug in chrX frequency calculation. Based on 201508 collection v5b (based on 201305 alignment) | 20150824 |
 | hg38 | 1000g2015aug (6 data sets) | same as above | 20150824 |
+| hg19 | gme | Great Middle East allele frequency including NWA (northwest Africa), NEA (northeast Africa), AP (Arabian peninsula), Israel, SD (Syrian desert), TP (Turkish peninsula) and CA (Central Asia) | 20161024 |
+| hg38 | gme | same as above | 20161024 |
 | hg18 | snp128 | dbSNP with ANNOVAR index files | 20120222 |
 | hg18 | snp129 | same as above | 20120222 |
 | hg19 | snp129 | liftover from hg18_snp129.txt | 20120809 |
