@@ -24,6 +24,7 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 
 * ajews: common alleles in ashkenazi jews
 * TMC-SNPDB: common alleles in Indian populations
+* gme: GME (Greater Middle East Variome) allele frequency, including ALL, NWA (northwest Africa), NEA (northeast Africa), AP (Arabian peninsula), Israel, SD (Syrian desert), TP (Turkish peninsula) and CA (Central Asia).
 * ???: I **strongly** encourage ANNOVAR users to donate your own allelel frequency database on isolated/special populations to be shared to worldwide users
 
 **For functional prediction of variants in whole-genome data**:
