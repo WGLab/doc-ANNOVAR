@@ -67,7 +67,6 @@ Please click the menu items to navigate through this website. Check [here](misc/
 - Chang X, Wang K. [wANNOVAR: annotating genetic variants for personal genomes via the web](http://jmg.bmj.com/content/49/7/433.long) _Journal of Medical Genetics_, 49:433-436, 2012
 - Yang H, Wang K. [Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR](http://www.nature.com/nprot/journal/v10/n10/abs/nprot.2015.105.html) _Nature Protocols_, 10:1556-1566, 2015
 
-
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
