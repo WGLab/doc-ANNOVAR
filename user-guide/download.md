@@ -94,6 +94,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | 1000g2015aug (6 data sets) | same as above | 20150824 |
 | hg19 | gme | [Great Middle East](https://www.ncbi.nlm.nih.gov/pubmed/27428751) allele frequency including NWA (northwest Africa), NEA (northeast Africa), AP (Arabian peninsula), Israel, SD (Syrian desert), TP (Turkish peninsula) and CA (Central Asia) | 20161024 |
 | hg38 | gme | same as above | 20161024 |
+| hg19 | mcap | [M-CAP scores](http://bejerano.stanford.edu/mcap/index.html) for non-synonymous variants | 20161104 |
+| hg38 | mcap | same as above | 20161104 |
 | hg18 | snp128 | dbSNP with ANNOVAR index files | 20120222 |
 | hg18 | snp129 | same as above | 20120222 |
 | hg19 | snp129 | liftover from hg18_snp129.txt | 20120809 |
