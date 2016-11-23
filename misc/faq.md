@@ -50,6 +50,11 @@
 
     Starting from Nov 2014, when you download refGene for human (hg18/hg19/hg38), the corresponding `refGeneVersion.txt` file will be automatically downloaded to help users who cannot figure out how to run mysql. However, you will need to run the MySQL command manually for other species.
 
+1. **What is the difference between comma and semicolon when they are used to separate gene names in gene annotation?**
+
+    The semicolon (";") separate different annotations, for example, coding variants for one gene and splice variants for another gene (but these two genes may have the same name, since one gene may have multiple transcripts). The comma (",") separates different genes with the same annotation, for example, multiple genes may have overlapping exons, so a variant may be annotated as exonic in multiple genes.
+
+
 1. **Why ANNOVAR says "WARNING: A total of 7 sequences cannot be found in mRNA.fa file"?**
 
     When you issue `-downdb` command without `-webfrom annovar`, ANNOVAR downloads gene definitions from UCSC website, yet download FASTA files from ANNOVAR website. UCSC may update far more frequently then I update FASTA files, so sometimes some sequences cannot be found in the FASTA file. Users should use `retrieve_seq_from_fasta.pl` to generate your own set of most updated FASTA files for your genome of interests. To avoid this problem, for human genome, user should add `-webfrom annovar` in `-downdb` command, so that these gene definitions are downloaded from ANNOVAR site to be fully synchronized with the mRNA FASTA file.
