@@ -96,6 +96,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | gme | same as above | 20161024 |
 | hg19 | mcap | [M-CAP scores](http://bejerano.stanford.edu/mcap/index.html) for non-synonymous variants | 20161104 |
 | hg38 | mcap | same as above | 20161104 |
+| hg19 | revel | [REVEL scores](https://sites.google.com/site/revelgenomics/about) for non-synonymous variants | 20161205 |
+| hg38 | revel | same as above | 20161205 |
 | hg18 | snp128 | dbSNP with ANNOVAR index files | 20120222 |
 | hg18 | snp129 | same as above | 20120222 |
 | hg19 | snp129 | liftover from hg18_snp129.txt | 20120809 |
