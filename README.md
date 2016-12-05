@@ -1,4 +1,4 @@
-![Logo](http://genomics.usc.edu/images/lab/logo/annovar.png)
+![Logo](img/annovar.png)
 
 # ANNOVAR Documentation
 
