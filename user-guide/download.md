@@ -145,10 +145,12 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | clinvar_20150330 | same as above but with variant normalization | 20150413 |
 | hg19 | clinvar_20150629 | same as above but with variant normalization | 20150724 |
 | hg38 | clinvar_20150629 | same as above but with variant normalization | 20150724 |
-| hg19 | clinvar_20151201 | Clinvar with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20160303 |
+| hg19 | clinvar_20151201 | Clinvar version 20151201 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20160303 |
 | hg38 | clinvar_20151201 | same as avove| 20160303 |
-| hg19 | clinvar_20160302 | same as above | 20160303 | 
+| hg19 | clinvar_20160302 | Clinvar version 20160302 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20160303 | 
 | hg38 | clinvar_20160302 | same as above | 20160303 |
+| hg19 | clinvar_20161128 | Clinvar version 20161128 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20161205 |
+| hg38 | clinvar_20161128 | same as above | 20161205 |
 | hg19 | popfreq_max_20150413 |  A database containing the maximum allele frequency from 1000G, ESP6500, ExAC and CG46 | 20150413 |
 | hg19 | popfreq_all_20150413 |  A database containing all allele frequency from 1000G, ESP6500, ExAC and CG46  | 20150413 |
 | hg19 | mitimpact2 | pathogenicity predictions of human mitochondrial missense variants (see [here](http://www.ncbi.nlm.nih.gov/m/pubmed/25516408/)  | 20150520 |
