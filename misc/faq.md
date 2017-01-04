@@ -119,9 +119,11 @@
 
     The take home message is that there are many annotations on TFBS, and they may differ from each other substantially. Use caution when interpreting the data. Ultimately, it is the biologist himself/herself who can decide whether or not the annotation makes sense; ANNOVAR faciliate this process but it cannot make the decision for you.
     
-1. **Where are the values for protocol come from in table_annovar.pl?**
+1. **Where are the values for -protocol and -argument come from in table_annovar.pl?**
 
-    The values corresponds to file names that are stored in the directory specified by the user in command line (with a couple of exceptions such as 1000g-related files). They are generally referred to as database files, and they can either come from ANNOVAR's own repository (via `-downdb -webfrom annovar` argument), or from UCSC's annotation databases (via `-downdb` argument), or provided/compiled by users. Therefore, there are unlimited possibilities for protocols, and there is not a comprehensive list that we can provide.
+    The protocol values corresponds to file names that are stored in the directory specified by the user in command line (with a couple of exceptions such as 1000g-related files). They are generally referred to as database files, and they can either come from ANNOVAR's own repository (via `-downdb -webfrom annovar` argument), or from UCSC's annotation databases (via `-downdb` argument), or provided/compiled by users. Therefore, there are unlimited possibilities for protocols, and there is not a comprehensive list that we can provide.
+    
+    The argument values correspond to each of the protocols, as optional argument that you would use for annotate_variation.pl on this specific protocol. In other words,  -protocol, -operation and -arg are all parallel lists of corresponding entries and should have equal comma-delimited number of entries.
 
 1. **Why the SIFT/PolyPhen scores in ANNOVAR differ from those obtained from another website?**
 
