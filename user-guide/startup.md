@@ -66,6 +66,14 @@ Next, the program identifies a subset of variants in `ex1.avinput` that are not 
 
 The commands above represent a set of basic examples on how ANNOVAR can help researchers annoate genetic variants generated from high-throughput sequencing data. If you are interested, click the banner to the left to learn the input formats and see what additional things ANNOVAR can do for your research...
 
+## Additional resources
+
+A step-by-step protocol on using ANNOVAR and wANNOVAR is available at the reference below
+
+Yang H, Wang K. [Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR](http://www.nature.com/nprot/journal/v10/n10/abs/nprot.2015.105.html) _Nature Protocols_, 10:1556-1566, 2015
+
+
+
 
 ---
 
