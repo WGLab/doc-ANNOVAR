@@ -1,35 +1,5 @@
 The ANNOVAR package contains several accessary programs to help users convert file formats or perform additional functions. These accessary programs are described below.
 
-## Variants_Reduction: prioritizing causal variants
-
-In October 2012, a new program, `variants_reduction.pl`, was added into the ANNOVAR package. The new program is flexible to allow users choose customized filtering procedure, and identify a subset of functionally relevant variants.
-
-If you are familiar with the `annotate_variation.pl` program, it should not be too hard to use `variants_reduction.pl` program. One example is shown below:
-
-```
-[kaiwang@biocluster ~/]$ variants_reduction.pl sample.avinput humandb/ -protocol nonsyn_splicing,genomicSuperDups,phastConsElements46way,1000g2014oct_all,esp6500siv2_ea,esp6500siv2_aa,snp135NonFlagged,dominant -operation g,rr,r,f,f,f,f,m -out reduce -buildver hg19
-```
-
-This command means to apply a series of filtering procedures to identify a small subset of variants/genes that are likely to be related to diseases. These filtering procedures include: identifying nonsynonymous and splicing variants, removing variants in segmental duplication regions, keeping variants in conserved genomic regions based on 46-way alignment, removing variants observed in 1000 Genomes Project 2014 October release or ESP6500 European Americans or ESP6500 African Americans, removing variants observed in dbSNP135 Non Flagged set, and then apply a dominant disease model.
-
-The `-operation` argument instruct what operation are used: gene-based (g), reverse region-based (rr), region-based (r), filter-based (f), filter-based (f), filter-based (f), filter-based (f), model-based (m), respectively.
-
-The output are written to a set of files with reduce\* file names.
-
-Another example command is given below:
-
-```
-[kaiwang@biocluster ~/]$ variants_reduction.pl sample.avinput humandb -buildver hg19 -protocol nonsyn_splicing,1000g2014oct_all,esp6500siv2_ea,esp6500siv2_aa,snp135NonFlagged,cg46,ljb26_sift,ljb26_pp2hvar,dominant -operation g,f,f,f,f,f,f,f,m -outfile reduce -genetype knowngene -aaf_threshold 0.01
-```
-
-Basically, this command will perform a similar set of operations as above, but additionally remove any variants observed in the CG46 database. Additionally, the AAF threhsold will be applied to all the 1000G, ESP6500 and CG46 databases. Furthermore, variants believed to be likely benign by SIFT or PolyPhen are removed. Finally, the UCSC Known Gene, rather than RefSeq Gene (default), will be used for gene-based annotation.
-
-> *Technical Notes: Due to user complaints, the `-maf_threshold` argument is no longer supported in July 2013 version of ANNOVAR. Users need to use `--aaf_threshold` argument instead, to denote alternative allele frequency, because "minor" allele does not have a clear-cut definition.*
-
-As you will see, basically as users, you specify what operations are used by ANNOVAR, and what specfic databases are used by the corresponding operation. Users have somewhat limited ability to select custom thresholds such as different MAF for different databases.
-
-The program is not mature enough and will undergo additional changes in future versions to improve its functionality and to make it compatible in Windows operating system.
-
 ## Table_Annovar: automated execution of multiple annotation tasks
 
 Previous version of ANNOVAR before May 2013 included the `summarize_annovar` program. It takes an input file and generates tab-delimited annotation file, where each column represents one type of annotation. This program has been popular among ANNOVAR users, because it allows easy viewing of the results in Excel or other tools. However, `summarize_annovar` fixed the number and type of annotation, which severely limits user's ability to perform custom annotations.
@@ -119,7 +89,7 @@ Next, let's try something more complicated, to generate gene-based annotations b
 
 Examine the results to see the consistence between different annotation approaches/versions.
 
-The `-arg` argument is now supported, so that you can supply a list of comma-delimited optional arguments to table_annovar for each of the annotation tasks. For example, adding `-arg '-splicing 5',,,,,,,,,,,,` to the command will add change the splicing threshold to 5bp for the gene-based annotation. The use of `-arg` argument allows one to fully realize the potential of `table_annovar` to suit user needs in a much more customized manner.
+The `-arg` argument is now supported, so that you can supply a list of comma-delimited optional arguments to table_annovar for each of the annotation tasks. For example, adding `-arg '-splicing 5',,,,,,,,,,,,` to the command will add change the splicing threshold to 5bp for the gene-based annotation. The use of `-arg` argument allows one to fully realize the potential of `table_annovar` to suit user needs in a much more customized manner. The `-arg` argument has the same number of comma-delimited fields as the `-protocol` and `-operation` arguments, so each of the fields corresponds to one sub-task.
 
 In addition to ANNOVAR input files, `table_annovar` can directly take VCF file as input now, and generate a VCF file (as well as tab-delimited text file) as output file, with its INFO field populated with various ANNOVAR annotations.
 
@@ -201,6 +171,38 @@ The output is a FASTA file, with wildtype sequence and with mutated sequence. Th
 > *Technical Notes: To print out mRNA sequences rather than protein sequences, add the `-mrnaseq` argument. To include SNPs in the output, add the `-includesnp` argument (by default, only indels will be processed).*
 
 > *Technical Notes: In previous version of ANNOVAR, "nonsynonymous" is used in the output which caused lots of confusion since the program was designed for indels; it is changed to "protein-altering" now. In previous version of ANNOVAR, the "position changed from X to Y" was for the position of the wildtype amino acid, but the actual protein-level change may be multiple amino acids away which caused confusion among users. It is changed now to the first position where wildtype and mutated protein disagree.
+
+## Variants_Reduction: prioritizing causal variants
+
+In October 2012, a new program, `variants_reduction.pl`, was added into the ANNOVAR package. The new program is flexible to allow users choose customized filtering procedure, and identify a subset of functionally relevant variants.
+
+The variants_reduction program will be obselete in the future. We are planning to roll out a new Python program that allows disease variant identification from exome/genome sequencing data on individual samples or small nuclear families. 
+
+If you are familiar with the `annotate_variation.pl` program, it should not be too hard to use `variants_reduction.pl` program. One example is shown below:
+
+```
+[kaiwang@biocluster ~/]$ variants_reduction.pl sample.avinput humandb/ -protocol nonsyn_splicing,genomicSuperDups,phastConsElements46way,1000g2014oct_all,esp6500siv2_ea,esp6500siv2_aa,snp135NonFlagged,dominant -operation g,rr,r,f,f,f,f,m -out reduce -buildver hg19
+```
+
+This command means to apply a series of filtering procedures to identify a small subset of variants/genes that are likely to be related to diseases. These filtering procedures include: identifying nonsynonymous and splicing variants, removing variants in segmental duplication regions, keeping variants in conserved genomic regions based on 46-way alignment, removing variants observed in 1000 Genomes Project 2014 October release or ESP6500 European Americans or ESP6500 African Americans, removing variants observed in dbSNP135 Non Flagged set, and then apply a dominant disease model.
+
+The `-operation` argument instruct what operation are used: gene-based (g), reverse region-based (rr), region-based (r), filter-based (f), filter-based (f), filter-based (f), filter-based (f), model-based (m), respectively.
+
+The output are written to a set of files with reduce\* file names.
+
+Another example command is given below:
+
+```
+[kaiwang@biocluster ~/]$ variants_reduction.pl sample.avinput humandb -buildver hg19 -protocol nonsyn_splicing,1000g2014oct_all,esp6500siv2_ea,esp6500siv2_aa,snp135NonFlagged,cg46,ljb26_sift,ljb26_pp2hvar,dominant -operation g,f,f,f,f,f,f,f,m -outfile reduce -genetype knowngene -aaf_threshold 0.01
+```
+
+Basically, this command will perform a similar set of operations as above, but additionally remove any variants observed in the CG46 database. Additionally, the AAF threhsold will be applied to all the 1000G, ESP6500 and CG46 databases. Furthermore, variants believed to be likely benign by SIFT or PolyPhen are removed. Finally, the UCSC Known Gene, rather than RefSeq Gene (default), will be used for gene-based annotation.
+
+> *Technical Notes: Due to user complaints, the `-maf_threshold` argument is no longer supported in July 2013 version of ANNOVAR. Users need to use `--aaf_threshold` argument instead, to denote alternative allele frequency, because "minor" allele does not have a clear-cut definition.*
+
+As you will see, basically as users, you specify what operations are used by ANNOVAR, and what specfic databases are used by the corresponding operation. Users have somewhat limited ability to select custom thresholds such as different MAF for different databases.
+
+The program is not mature enough and will undergo additional changes in future versions to improve its functionality and to make it compatible in Windows operating system.
 
 ## Convert2Annovar: Conversion of input file format
 
