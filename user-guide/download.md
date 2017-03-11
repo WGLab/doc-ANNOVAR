@@ -60,7 +60,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | cosmic70 | same as above | 20140911 |
 | hg18 | cosmic70 | same as above | 20150428 |
 | hg38 | cosmic70 | same as above | 20150428 |
-| hg39 | cosmic71, 72, etc | read http://annovar.openbioinformatics.org/en/latest/user-guide/filter/#cosmic-annotations | |
+| hg39 | cosmic71, 72, ..., 80 | read [here](http://annovar.openbioinformatics.org/en/latest/user-guide/filter/#cosmic-annotations) | |
 | hg18 | esp6500siv2_ea | alternative allele frequency in European American subjects in the NHLBI-ESP project with 6500 exomes, including the indel calls and the chrY calls. This is lifted over from hg19 by myself | 20141222 |
 | hg19 | esp6500siv2_ea | same as above | 20141222 |
 | hg38 | esp6500siv2_ea | same as above, lifted over from hg19 by myself |  20141222 |
