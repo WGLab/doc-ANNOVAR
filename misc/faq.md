@@ -125,6 +125,10 @@
     
     The argument values correspond to each of the protocols, as optional argument that you would use for annotate_variation.pl on this specific protocol. In other words,  -protocol, -operation and -arg are all parallel lists of corresponding entries and should have equal comma-delimited number of entries.
 
+1. ** How to handle huge multi-sample VCF files?**
+
+    You can just just cut the first sample (basically the first ~10 columns), then annotate this file by table_annovar. Then just "paste" the annotation with the rest. For example, `cut -f 1-10 input.vcf | grep -v -P '^#' > input1.vcf; cut -f 11- input.vcf | grep -v -P '^#' > genotype`, then annotate input1.vcf, generate input1.anno.vcf, then `paste input1.anno.vcf genotype > input.anno.vcf` to generate the combined output file. You may want to add the VCF header back in.
+
 1. **Why the SIFT/PolyPhen scores in ANNOVAR differ from those obtained from another website?**
 
     The AVSIFT scores (now obselete!) in ANNOVAR was based on Ensembl55 database, and sometimes there are major differences from those computed from ensembl63 (default in SIFT website). If you selecte ensembl55 from SIFT website you'll see that the scores are consistent and identical. The LJB_SIFT scores in ANNOVAR was based on the original Liu et al paper, so read the paper for details on how they compile the scores.
