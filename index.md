@@ -11,7 +11,7 @@ Please click the menu items to navigate through this website. Check [here](misc/
 
 ---
 
-![new](/img/new.png) 2017May16: Updated instructions on how to handle noncoding variants in COSMIC version 81 [here](user-guide/filter.md).
+![new](/img/new.png) 2017May16: Updated instructions on how to handle noncoding variants in COSMIC version 81 [here](user-guide/filter.md#cosmic-annotations).
 
 ![new](/img/new.png) 2017Mar11: gnomAD collection is available at ANNOVAR now, for both hg19 and hg38 coordinates. Use keyword gnomad_exome and gnomad_genome to download and use them.
 
