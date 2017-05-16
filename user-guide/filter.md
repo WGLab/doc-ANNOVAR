@@ -1062,7 +1062,7 @@ Note that the `prepare_annovar_user.pl` file can be downloaded from [here](http:
 
 Recently, COSMIC changed their data formats so non-coding mutations are no longer in the `MutantExport` file, so we can no longer calculate their occurrences in various tumors. COSMIC now provides a `CosmicNCV.tsv` file, but it is not really that informative as the cancer tissue information is missing from this file.
 
-However, in more recent versions of COSMIC, the noncoding variants are now included in `CosmicNCV.tsv` file, so that we can use this file to annotate noncoding variants. In early 2017, the `prepare_annovar_user.pl` script was updated to handle noncoding variants in COSMIC. An example is given below for cosmic81:
+However, as of 2017, in more recent versions of COSMIC, the noncoding variants are now included in `CosmicNCV.tsv` file, so that we can use this file to annotate noncoding variants. In early 2017, the `prepare_annovar_user.pl` script was updated to handle noncoding variants in COSMIC. An example is given below for cosmic81:
 
 ```
 prepare_annovar_user.pl -dbtype cosmic CosmicMutantExport.tsv -vcf CosmicCodingMuts.vcf > hg38_cosmic81_coding.txt
