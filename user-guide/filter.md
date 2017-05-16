@@ -1058,7 +1058,18 @@ Please note that COSMIC will no longer be updated due to license restrictions. T
 2. Download MutantExport files: /files/grch38/cosmic/v76/CosmicMutantExport.tsv.gz 
 3. Use this command `prepare_annovar_user.pl -dbtype cosmic CosmicMutantExport.tsv  -vcf CosmicCodingMuts.vcf > hg38_cosmic76.txt`
 
-Note that the `prepare_annovar_user.pl` file can be downloaded from [here](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl). The final result file should contain coding mutations from COSMIC, as well as the number of occurrences in different tumor types (However, note that these include both targeted screen and genome screen. If you only want genome screen, you should use the CosmicGenomeScreensMutantExport.tsv.gz file instead). COSMIC changed their data formats so non-coding mutations are no longer in the `MutantExport` file, so we can no longer calculate their occurrences in various tumors. COSMIC now provides a `CosmicNCV.tsv` file, but it is not really that informative as the cancer tissue information is missing from this file.
+Note that the `prepare_annovar_user.pl` file can be downloaded from [here](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl). The final result file should contain coding mutations from COSMIC, as well as the number of occurrences in different tumor types (However, note that these include both targeted screen and genome screen. If you only want genome screen, you should use the CosmicGenomeScreensMutantExport.tsv.gz file instead). 
+
+Recently, COSMIC changed their data formats so non-coding mutations are no longer in the `MutantExport` file, so we can no longer calculate their occurrences in various tumors. COSMIC now provides a `CosmicNCV.tsv` file, but it is not really that informative as the cancer tissue information is missing from this file.
+
+However, in more recent versions of COSMIC, the noncoding variants are now included in `CosmicNCV.tsv` file, so that we can use this file to annotate noncoding variants. In early 2017, the `prepare_annovar_user.pl` script was updated to handle noncoding variants in COSMIC. An example is given below for cosmic81:
+
+```
+prepare_annovar_user.pl -dbtype cosmic CosmicMutantExport.tsv -vcf CosmicCodingMuts.vcf > hg38_cosmic81_coding.txt
+prepare_annovar.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariants.vcf > hg38_cosmic81_noncoding.txt
+```
+
+There should be 2.58M coding and 14.2M noncoding variants, after you run the commands above. Users cannot index the file, but the file size is not too large, and you do not need to use indexing to use ANNOVAR.
 
 ## ICGC annotations
 
