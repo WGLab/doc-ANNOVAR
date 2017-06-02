@@ -2,7 +2,7 @@
 
 Please join the ANNOVAR mailing list at google groups [here](https://groups.google.com/forum/#!forum/annovar) to receive announcements on software updates.
 
-The latest version of ANNOVAR (2016Feb01) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required). A patch to table_annovar.pl can be downloaded [here](http://www.openbioinformatics.org/annovar/download/table_annovar.pl) that fixed an error when `-separate` is used within `-arg` argument.
+The latest version of ANNOVAR (2017Jun01) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required). A patch to table_annovar.pl can be downloaded [here](http://www.openbioinformatics.org/annovar/download/table_annovar.pl) that fixed an error when `-separate` is used within `-arg` argument.
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
@@ -16,14 +16,14 @@ Several very commonly used annotation databases for human genomes are additional
 
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
-| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20151211 |
-| hg19 | refGene | same as above | 20151211 |
-| hg38 | refGene | save as above | 20151211 |
-| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20151211 |
-| hg19 | knownGene | same as above | 20151211 |
-| hg38 | knownGene | same as above | 20151211 |
-| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20151211 |
-| hg19 | ensGene | same as above | 20151211 |
+| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20170601 |
+| hg19 | refGene | same as above | 20170601 |
+| hg38 | refGene | save as above | 20170601 |
+| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20170601 |
+| hg19 | knownGene | same as above | 20170601 |
+| hg38 | knownGene | same as above | 20170601 |
+| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20170601 |
+| hg19 | ensGene | same as above | 20170601 |
 
 ---
 
