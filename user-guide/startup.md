@@ -22,12 +22,14 @@ Run the above commands one by one. The first a few commands download appropriate
 
 ![table_annovar](/img/table_annovar.PNG)
 
-The output file contains multiple columns. The first a few columns are your input column. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. For example, esp6500siv2_all means allele frequency in the ESP6500 database for all ethnicity groups. The 1000g2015aug_all and 1000g2015aug_eur refer to allele frequency in the 1000 Genomes Project for all populations and for European populations, respectively. The avsnp147 means the SNP identifier in the dbSNP version 147. The ExAC\* columns represent allele frequency in the all samples as well as sub-populations in the Exome Aggregation Consortium data sets. The other columns contains prediction scores for non-synonymous variants using several widely used tools, including SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. The `-operation` argument tells ANNOVAR which operations to use for each of the protocols: `g` means gene-based, `r` means region-based and `f` means filter-based. You will find details on what are gene/region/filter-based annotations in the other web pages. Sometimes, users want tab-delimited files rather than comma-delimited files. This can be easily done by removing `-csvout` argument to the above command.
+The output file contains multiple columns. The first a few columns are your input column. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was suffplied in the `example/gene_xref.txt` file in the command line). For the next a few columns, the ExAC\* columns represent allele frequency in the all samples as well as sub-populations in the Exome Aggregation Consortium data sets, while the avsnp147 means the SNP identifier in the dbSNP version 147. The other columns contains prediction scores for non-synonymous variants using several widely used tools, including SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
+
+We can examine the command line in greater detail. The `-operation` argument tells ANNOVAR which operations to use for each of the protocols: `g` means gene-based, `gx` means gene-based with cross-reference annotation (from `-xref` argument), `r` means region-based and `f` means filter-based. If you do not provide a xref file, then the operation can be `g` only. You will find details on what are gene/region/filter-based annotations in the other web pages. Sometimes, users want tab-delimited files rather than comma-delimited files. This can be easily done by removing `-csvout` argument to the above command.
 
 `table_annovar.pl` can directly support input and output of VCF files (the annotation will be written to the INFO field of the output VCF file). Let's try this:
 
 ```
-[kaiwang@biocluster ~/]$ table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,genomicSuperDups,esp6500siv2_all,1000g2015aug_all,1000g2015aug_eur,exac03,avsnp147,dbnsfp30a -operation g,r,r,f,f,f,f,f,f -nastring . -vcfinput
+[kaiwang@biocluster ~/]$ table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation g,r,f,f,f -nastring . -vcfinput
 ```
 
 You can download the output file here: [myanno.hg19_multianno.vcf](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [myanno.hg19_multianno.txt](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
@@ -45,7 +47,7 @@ annotate_variation.pl -geneanno -buildver hg19 example/ex1.avinput humandb/
 
 annotate_variation.pl -regionanno -dbtype cytoBand -buildver hg19 example/ex1.avinput humandb/ 
 
-annotate_variation.pl -filter -dbtype 1000g2014oct_all -buildver hg19 example/ex1.avinput humandb/
+annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput humandb/
 ```
 
 Note that these three commands correspond to gene-based, region-based and filter-based annotations.
@@ -54,7 +56,7 @@ The first command annotates the 12 variants in `ex1.avinput` file and classify t
 
 Next, the program annotates variants in `ex1.avinput` file and idenifies the cytogenetic band for these variants. The annotation procedure should take a few seconds. Examine the output file `ex1.avinput.hg19_cytoBand` to see what it contains. The first column shows `cytoBand`, the second column shows the annotation results, and the other columns are reproduced from input file.
 
-Next, the program identifies a subset of variants in `ex1.avinput` that are not observed in 1000G version 2014 Oct (saved in `ex1.avinput.hg19_ALL.sites.2012_04_filtered`) and those that are observed with allele frequencies (saved in `ex1.avinput.hg19_ALL.sites.2012_04_dropped` file).
+Next, the program identifies a subset of variants in `ex1.avinput` that are not observed in exac03 database (saved in `ex1.avinput.hg19_exac03_filtered`) and those that are observed with allele frequencies (saved in `ex1.avinput.hg19_exac03_dropped` file).
 
 >*Technical Notes: By default, ANNOVAR annotates variant on hg18 (human genome NCBI build 36) coordinate. Since the input file is in hg19 coordinate, we added `-buildver hg19` in every command above. Similarly, if you generated variant calls from human GRCh38 coordinate, add `-buildver hg38` in every command, if your variant file is from fly, add `-buildver dm3` in every command that you use; if your variant file is from mouse, add `-buildver mm9` in every command that you use ......*
 
