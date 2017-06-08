@@ -208,6 +208,10 @@ line15 frameshift deletion GJB6:NM_001110220:wholegene,GJB6:NM_001110221:wholege
 
 > *Technical Notes: In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN").*
 
+## Including RefSeq gene version number
+
+Since 2017 June, ANNOVAR package now includes `hg19_refGeneWithVer.txt` file to give an example how to annotate varians with refGene with versions. Instead of using `-dbtype refGene`, the users can use `-dbtype refGeneWithVer`, so that results will contain transcript identifiers with versions. For all other genome build, the user need to generate these files yourself.
+
 ## Annotating mitochrondria variants
 
 ANNOVAR can annotate mitochondria variants as of Feb 2013 (as long as your chromosome identifier is M or MT or chrM or chrMT, the mitochondria-specific codon table will be used for inferring amino acid changes). However, there are several important caveats:
