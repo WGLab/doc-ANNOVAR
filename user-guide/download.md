@@ -123,6 +123,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | snp138 | same as above | file and index updated 20140910 |
 | hg19 | avsnp138 | dbSNP138 with allelic splitting and left-normalization | 20141223 |
 | hg19 | avsnp142 | dbSNP142 with allelic splitting and left-normalization | 20141228 | 
+| hg38 | avsnp142 | same as above | 20141228 | 
 | hg19 | avsnp144 | dbSNP144 with allelic splitting and left-normalization (careful with [bugs](../articles/dbSNP.md#additional-discussions)!) | 20151102 | 
 | hg38 | avsnp144 | same as above | 20151102 | 
 | hg19 | avsnp147 | dbSNP147 with allelic splitting and left-normalization | 20160606 |
