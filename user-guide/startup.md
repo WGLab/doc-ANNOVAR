@@ -34,7 +34,11 @@ In the command above, we used `-xreffile` argument to provide annotation to gene
 A1BG    9.0649236354772e-05     0.786086131023045       0.2138232197406 alpha-1-B glycoprotein  .       .       TISSUE SPECIFICITY: Plasma.;    unclassifiable (Anatomical System);amygdala;prostate;lung;islets of Langerhans;liver;spleen;germinal center;brain;thymus;       fetal liver;liver;fetal lung;trigeminal ganglion;       0.07384 0.31615 -0.466531444    23.51380042     79.3774 1.88274
 ```
 
-The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](myanno_full.hg19_multianno.csv).
+The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](myanno_full.hg19_multianno.csv). Part of the file is shown below to give users an example:
+
+![table_annovar_fullxref](/img/table_annovar_fullxref.PNG)
+
+
 
 `table_annovar.pl` can directly support input and output of VCF files (the annotation will be written to the INFO field of the output VCF file). Let's try this:
 
