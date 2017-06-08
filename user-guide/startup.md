@@ -26,6 +26,17 @@ The output file contains multiple columns. The first a few columns are your inpu
 
 We can examine the command line in greater detail. The `-operation` argument tells ANNOVAR which operations to use for each of the protocols: `g` means gene-based, `gx` means gene-based with cross-reference annotation (from `-xref` argument), `r` means region-based and `f` means filter-based. If you do not provide a xref file, then the operation can be `g` only. You will find details on what are gene/region/filter-based annotations in the other web pages. Sometimes, users want tab-delimited files rather than comma-delimited files. This can be easily done by removing `-csvout` argument to the above command.
 
+In the command above, we used `-xreffile` argument to provide annotation to genes. If the file contains header line, it is possible to provide mulitple pieces of annotations to genes (rather than just one single column). To illustrate this, we can check the `example/gene_fullxref.txt` file:
+
+```
+[kaiwang@biocluster ~/project/annotate_variation]$ head example/gene_fullxref.txt  -n 3
+#Gene_name      pLi     pRec    pNull   Gene_full_name  Function_description    Disease_description     Tissue_specificity(Uniprot)     Expression(egenetics)  Expression(GNF/Atlas)    P(HI)   P(rec)  RVIS    RVIS_percentile GDI     GDI-Phred
+A1BG    9.0649236354772e-05     0.786086131023045       0.2138232197406 alpha-1-B glycoprotein  .       .       TISSUE SPECIFICITY: Plasma.;    unclassifiable (Anatomical System);amygdala;prostate;lung;islets of Langerhans;liver;spleen;germinal center;brain;thymus;       fetal liver;liver;fetal lung;trigeminal ganglion;       0.07384 0.31615 -0.466531444    23.51380042     79.3774 1.88274
+A1BG-AS1        .       .       .       A1BG antisense RNA 1    .       .       .       .       .       .       .       .       .       .       .
+```
+
+The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](myanno_full.hg19_multianno.csv).
+
 `table_annovar.pl` can directly support input and output of VCF files (the annotation will be written to the INFO field of the output VCF file). Let's try this:
 
 ```
