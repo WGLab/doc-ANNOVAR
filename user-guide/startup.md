@@ -53,7 +53,7 @@ Hopefully, after you finish this set of exercises above, you now have a better i
 The `annotate_variation.pl` program is the core program in ANNOVAR. We can go to the ANNOVAR directory, then run the following three commands one by one. 
 
 ```
-annotate_variation.pl -geneanno -buildver hg19 example/ex1.avinput humandb/
+annotate_variation.pl -geneanno -dbtyep refGene -buildver hg19 example/ex1.avinput humandb/
 
 annotate_variation.pl -regionanno -dbtype cytoBand -buildver hg19 example/ex1.avinput humandb/ 
 
