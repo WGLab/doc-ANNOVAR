@@ -127,7 +127,7 @@
     
     The argument values correspond to each of the protocols, as optional argument that you would use for annotate_variation.pl on this specific protocol. In other words,  -protocol, -operation and -arg are all parallel lists of corresponding entries and should have equal comma-delimited number of entries.
 
-1. ** How to handle huge multi-sample VCF files?**
+1. **How to handle huge multi-sample VCF files?**
 
     You can just just cut the first sample (basically the first ~10 columns), then annotate this file by table_annovar. Then just "paste" the annotation with the rest. For example, `cut -f 1-10 input.vcf | grep -v -P '^#' > input1.vcf; cut -f 11- input.vcf | grep -v -P '^#' > genotype`, then annotate input1.vcf, generate input1.anno.vcf, then `paste input1.anno.vcf genotype > input.anno.vcf` to generate the combined output file. You may want to add the VCF header back in.
 
@@ -228,6 +228,13 @@
 1. **How to handle MAF files from TCGA?**
 
     You can use [this script](http://www.openbioinformatics.org/annovar/download/maf2annovar.pl) to convert MAF to ANNOVAR input format and then annotate the file.
+
+1. **How to further speed up ANNOVAR?**
+
+    You can use the `-thread` argument (if your operating system and your perl build support it), so that multi-threading functionality is used to process the input files in parallel. However, it is extremely important that your database directory (for example, `humandb/` directory) can accormodate random disk access well. Typically, if you use a very large number of threads, you have to use SSD drive to achieve satisfactory performance. Mechanical drives cannot tolerate it for most large databases. Additionally, borrowing ideas from an ANNOVAR user, if you have a machine with large memory, you can also just simply create a RAM disk to treat a portion of the memory as a hard drive and then copy the `humandb` into this RAM disk. For example, do a `mount -t tmpfs -o size=100G tmpfs /tmp/newhumandb/`, followed by `sysctl vm.swappiness=1` to reduce swappiness, and then use the `/tmp/newhumandb` to store databases and perform annotation.
+
+
+
 
 
 
