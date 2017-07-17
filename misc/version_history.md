@@ -71,6 +71,11 @@ changed -downdb behavior on 1000G data sets, convert2annovar.pl now handles soap
 
 - On 2016Feb01, fixed a bug in multi-threaded gene annotation when thread is more than 6, added -maxgenethread argument to table_annovar.pl
 
+- On 2017Jun01: gx operation is added in table_annovar so that xref information for genes can be included, show complete amino acid change in gene annotaion in table_annovar.pl and coding_change.pl, add ability to handle avsnp file in convert2annovar.pl, fixed a bug that misses upstream/downstream variants when -separate is used, added support to use # rather than comma in -argument and -precedance and -avcolumn and -chromosome, upstream variants now show distance to transcriptional start, splice variants at UTR now shows details
+
+- On 2017Jul16: fixed a bug in calculating upstream distance that print when -separate is specified in annotate_variation.pl, improvements to coding_change.pl to report more stopgain/stoploss and fix use-of-uninitialized-value issue, slight change to convert2annovar.pl to handle mal-formed VCF file.
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
