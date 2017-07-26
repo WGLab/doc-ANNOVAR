@@ -18,6 +18,10 @@
 
     The instructions were described in [this page](../user-guide/filter.md). But one important thing to emphasize is that due to historical reasons, one must use something like `-dbtype 1000g2014oct_all`, not `-dbtype ALL.sites.2014_10` for annotation.
 
+1. **How to annotate copy number variations (CNV)?**
+
+    The REF and ALT in the input file can be 0. You can then annotate the file by gene-based and region-based annotation.
+
 1. **What is the difference between vcf4 and vcf4old format in convert2annovar.pl?**
 
     In August 2013, I changed the VCF4 conversion subroutine in `convert2annovar.pl`, but I kept the vcf4old format for users who like the "old-fashion" conversion. The difference is that nowadays people tend to do multi-sample calling or candidate variant calling, so that the variants listed in the VCF4 file do not necessarily have mutations for a specific sample. This happens when genotype call is 0/0 (reference/reference). I got some complaints from users about the inability to process multi-sample VCF files, so I decided to make this change.
