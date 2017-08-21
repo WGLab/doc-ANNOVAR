@@ -16,7 +16,7 @@
 
 1. **How to find frequency information from 1000 Genomes Projec data?**
 
-    The instructions were described in [this page](../user-guide/filter.md). But one important thing to emphasize is that due to historical reasons, one must use something like `-dbtype 1000g2014oct_all`, not `-dbtype ALL.sites.2014_10` for annotation.
+    The instructions were described in [this page](../user-guide/filter.md). But one important thing to emphasize is that due to historical reasons, one must use something like `-dbtype 1000g2015aug_all` (or `-dbtype 1000g2015aug_eur` for European population and `-dbtype 1000g2015aug_afr` for African population), not `-dbtype ALL.sites.2014_10` for annotation.
 
 1. **How to annotate copy number variations (CNV)?**
 
