@@ -14,11 +14,13 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 * kaviar_20150923: latest Kaviar database with 170 million variants from 13K genomes and 64K exomes.
 * hrcr1: latest Haplotype Reference Consortium database with 40 million variants from 32K samples in haplotype reference consortium
 * cg69: allele frequency in 69 human subjects sequenced by Complete Genomics. useful to exclude platform specific variants.
+* gnomad_genome: allele frequency in gnomAD database whole-genome sequence data on multiple populations.
 
 **For frequency of variants in whole-exome data**:
 
 * exac03: latest Exome Aggregation Consortium dataste with allele frequencies in ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian).
 * esp6500siv2: latest NHLBI-ESP project with 6500 exomes. Three separate key words are used for 3 population groupings: esp6500siv2_all, esp6500siv2_ea, esp6500siv2_aa.
+* gnomad_exome: allele frequency in gnomAD database whole-exome sequence data on multiple populations.
 
 **For frequency of variants in isolated or less represented populations**:
 
@@ -776,6 +778,12 @@ Note that exac03 keyword can be used in `table_annovar.pl` directly to print out
 > *Technical Notes: Some users reported that the allele frequency measure differs slightly from the ExAC server itself, for some rare variants. This is because ExAC server displays "adjusted allele counts" and frequencies, yet ExAC03 within ANNOVAR displays the "AF" record in VCF file provided by ExAC. To address a growing number of user concerns, on 20150420, we finally decided to issue a new ExAC03 with ExAC_ALL header that shows the adjusted allele frequency for each variant to match the ExAC web site exactly.*
 
 > *Technical Notes: ExAC03 in ANNOVAR is one of the several data sets that have been left-normalized. See [here](../articles/VCF.md) for more details.*
+
+
+## gnomAD allele frequency
+
+You can use `gnomad_exome` and `gnomad_genome` for exome and genome data, respectively. Currently, hg19 and hg38 are supported with liftOver. Typically users should use them as protocols in the table\_annovar command, since multiple population groups are included in each file.
+
 
 ## GERP++ annotations
 
