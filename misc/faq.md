@@ -219,6 +219,10 @@
 
     ANNOVAR retrieves ensGene definition from UCSC, so it depends on the version that UCSC has used. For human hg19 build, just go to http://www.genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=211204337&g=ensGene, and see what is the latest release for Ensembl gene prediction.
 
+1. **How to annotate ENSEMBL gene on the hg38 genome coordinate?**
+
+     The ensGene file for hg38 is not provided by ANNOVAR because UCSC did not generate this file. However, a user pointed out that UCSC have replaced the ensGene.txt using GENCODEV26 (wgEncodeGencodeCompV26.txt track). Both files contain the same information. Therefore, if you want to annotate Ensemble genes based on hg38, you should use the GENCODE file instead. Detailed instructions are given in the gene-based annotation page.
+
 1. **How ANNOVAR handles different coordinate systems for mitochondria?**
 
     UCSC's build (for example, hg19) differ from NCBI's build (for example NCBI 37) in a few subtle manners, for example, replacing contigs by chr_random, and the use of different mitochondia assemblies. UCSC's hg19 assembly used the old version mitochondria genome (NC_001807), but 1000 genomes cosortium has replace the chrM with the latest Cambridge Reference Sequence version (NC_012920). So if you align your sequence data and call variants against the NC_012920, then you cannot really annotate your variants using UCSC's gene definition. It is necessary to stick with the identical coordinate. For autosomes and chrX/Y, this is not a real issue as they are pretty consistent.
