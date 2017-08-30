@@ -18,7 +18,7 @@ Assume that we have downloaded ANNOVAR package and used `tar xvfz annovar.latest
 [kaiwang@biocluster ~/]$ table_annovar.pl example/ex1.avinput humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation gx,r,f,f,f -nastring . -csvout -polish -xref example/gene_xref.txt
 ```
 
-Run the above commands one by one. The first a few commands download appropriate databases into the `humandb/` directory. The final command run TABLE_ANNOVAR, using ExAC version 0.3 (referred to as exac03) dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147) databases and remove all temporary files, and generates the output file called `myanno.hg19_multianno.txt`. Fields that does not have any annotation will be filled by "." string. Open the output file in Excel and see what it contains. The expected output file that I generated can be downloaded here: [myanno.hg19_multianno.csv](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.csv). A screen shot of the first a few columns is shown below:
+Run the above commands one by one. The first a few commands download appropriate databases into the `humandb/` directory. The final command run TABLE_ANNOVAR, using ExAC version 0.3 (referred to as exac03) dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147) databases and remove all temporary files, and generates the output file called `myanno.hg19_multianno.txt`. Fields that does not have any annotation will be filled by "." string. Open the output file in Excel and see what it contains. The expected output file that I generated can be downloaded here: [ex1.hg19_multianno.csv](http://www.openbioinformatics.org/annovar/download/ex1.hg19_multianno.csv). A screen shot of the first a few columns is shown below:
 
 ![table_annovar](/img/table_annovar.PNG)
 
@@ -34,7 +34,7 @@ In the command above, we used `-xreffile` argument to provide annotation to gene
 A1BG    9.0649236354772e-05     0.786086131023045       0.2138232197406 alpha-1-B glycoprotein  .       .       TISSUE SPECIFICITY: Plasma.;    unclassifiable (Anatomical System);amygdala;prostate;lung;islets of Langerhans;liver;spleen;germinal center;brain;thymus;       fetal liver;liver;fetal lung;trigeminal ganglion;       0.07384 0.31615 -0.466531444    23.51380042     79.3774 1.88274
 ```
 
-The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](myanno_full.hg19_multianno.csv). Part of the file is shown below to give users an example:
+The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](ex1_full.hg19_multianno.csv). Part of the file is shown below to give users an example:
 
 ![table_annovar_fullxref](/img/table_annovar_fullxref.PNG)
 
@@ -46,7 +46,7 @@ The header line starts with `#`. The cross-reference file then contains 15 types
 [kaiwang@biocluster ~/]$ table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation g,r,f,f,f -nastring . -vcfinput
 ```
 
-You can download the output file here: [myanno.hg19_multianno.vcf](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [myanno.hg19_multianno.txt](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
+You can download the output file here: [ex2.hg19_multianno.vcf](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [ex2.hg19_multianno.txt](http://www.openbioinformatics.org/annovar/download/ex2.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
 
 ![table_vcf](/img/table_vcf.PNG)
 
