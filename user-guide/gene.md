@@ -245,7 +245,7 @@ NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_fu
 
 The transcript name (in the `ex1.exonic_variant_function` file) look like uc002eg1.1, etc, which are UCSC Gene identifiers.
 
-To annotate variants using Ensembl gene, use the commands below. The output format is similar to that described above. The "ENSG" and "ENST" are Ensembl identifiers for annotated genes and transcripts. (Note that ensGene for the hg38 is not made available by UCSC Genome Browser. A user pointed out that UCSC have replaced the ensGene.txt using GENCODEV26 (wgEncodeGencodeCompV26.txt track). Both files contain the same information. Therefore, if you want to annotate Ensemble genes based on hg38, you should use the Gencode file instead.)
+To annotate variants using Ensembl gene, use the commands below. The output format is similar to that described above. The "ENSG" and "ENST" are Ensembl identifiers for annotated genes and transcripts. 
 
 
 ```
@@ -260,7 +260,6 @@ NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_fu
 
 Since the output contains only Ensembl identifiers, if you want to translate that to gene synonym, you can download [this file for hg19](http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/ensemblToGeneName.txt.gz) and use the two-column file for the translation yourself. 
 
-
 Comparing the program message ("Done with xxx transcripts for yyy unique genes") from three different gene-definition systems, we can see that Ensembl annotates the greatest number of genes in human genome, yet RefSeq annotates the fewest number of genes.
 
 > *Technical Notes: Technically, the RefSeq Gene and UCSC Gene are transcript-based gene definitions. They built gene model based on transcript data, and then map the gene model back to human genomes. In comparison, Ensemble Gene and Gencode Gene are assembly-based gene definitions that attempt to build gene model directly from reference human genome. They came from different angles, trying to do the same thing: define genes in human genome.*
@@ -270,6 +269,23 @@ Comparing the program message ("Done with xxx transcripts for yyy unique genes")
 > *For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (retrieve_seq_from_fasta.pl) to build FASTA sequences for any other genomes for which I do not provide pre-built files.*
 
 > *For these reasons, the FASTA seuqence in the file provided by me may differ from the FASTA sequence that you get from RefSeq. The sequence used by ANNOVAR are "theoretical" seuqence based on a particular genome build and assembly, but the FASTA sequence compiled by RefSeq are "observed" sequence from large databases without any relationship to a particular assembly version. They may have the same identifier but they are different things.*
+
+
+## Switching to hg38 Ensembl gene annotation
+
+Note that ensGene for the hg38 is not made available by UCSC Genome Browser. A user pointed out that UCSC have replaced the ensGene.txt using GENCODE starting from version 22 (see https://groups.google.com/a/soe.ucsc.edu/forum/#!topic/genome/uOROZuefx_Y). Therefore, if you want to annotate Ensemble genes based on hg38, you should use the Gencode file instead.
+
+In September 2017, per user request, I prepared ensGene for hg38 directly within ANNOVAR now, using version 26 GENCODE Basic. The commands that I used to build this file are shown below for your reference:
+
+```
+annotate_variation.pl -downdb wgEncodeGencodeBasicV26 tempdir -build hg38
+retrieve_seq_from_fasta.pl -format genericGene -seqfile humandb/hg38_seq/hg38.fa -outfile tempdir/hg38_wgEncodeGencodeBasicV26Mrna.fa tempdir/hg38_wgEncodeGencodeBasicV26.txt
+mv hg38_wgEncodeGencodeBasicV26.txt hg38_ensGene.txt
+mv hg38_wgEncodeGencodeBasicV26Mrna.fa hg38_ensGeneMrna.fa
+```
+
+Now I just upload these files to ANNOVAR database respository so that users can directly do a `-build hg38 -downdb ensGene dir/` to download hg38 version of ensGene and perform gene-based annotation using Ensemble keywords.
+
 
 ## Switching to GENCODE/CCDS Gene annotation
 
