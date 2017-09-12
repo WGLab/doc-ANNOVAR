@@ -24,6 +24,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | knownGene | same as above | 20170601 |
 | hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20170601 |
 | hg19 | ensGene | same as above | 20170601 |
+| hg38 | ensGene | based on Gencode v26 Basic collection | 20170912 |
 
 ---
 
