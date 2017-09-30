@@ -130,6 +130,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | avsnp142 | dbSNP142 with allelic splitting and left-normalization | 20160106 |
 | hg38 | avsnp144 | dbSNP144 with allelic splitting and left-normalization | 20151102 |
 | hg38 | avsnp147 | dbSNP147 with allelic splitting and left-normalization | 20160606 |
+| hg19 | avsnp150 | dbSNP150 with allelic splitting and left-normalization | 20170929 |
+| hg38 | avsnp150 | dbSNP150 with allelic splitting and left-normalization | 20170929 |
 | hg18 | snp128NonFlagged | dbSNP with ANNOVAR index files, after removing those flagged SNPs (SNPs < 1% minor allele frequency (MAF) (or unknown), mapping only once to reference assembly, flagged in dbSnp as "clinically associated") | 20120524 |
 | hg18 | snp129NonFlagged | same as above | 20120524 |
 | hg18 | snp130NonFlagged | same as above | 20120524 |
