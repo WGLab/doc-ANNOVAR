@@ -161,10 +161,10 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | clinvar_20150629 | same as above but with variant normalization | 20150724 |
 | hg19 | clinvar_20151201 | Clinvar version 20151201 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20160303 |
 | hg38 | clinvar_20151201 | same as avove| 20160303 |
-| hg19 | clinvar_20160302 | Clinvar version 20160302 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20160303 | 
-| hg38 | clinvar_20160302 | same as above | 20160303 |
+| hg19 | clinvar_20160302 | Clinvar version 20160302 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 | 
+| hg38 | clinvar_20160302 | same as above (updated 20171003 to handle multi-allelic variants) | 20171003 |
 | hg19 | clinvar_20161128 | Clinvar version 20161128 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 |
-| hg38 | clinvar_20161128 | same as above (20170215 to add missing header line; 20171003 to handle multi-allelic variants) | 20171003 |
+| hg38 | clinvar_20161128 | same as above (updated 20170215 to add missing header line; 20171003 to handle multi-allelic variants) | 20171003 |
 | hg19 | clinvar_20170130 | Clinvar version 20170130 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 |
 | hg38 | clinvar_20170130 | same as above | 20171003 |
 | hg19 | clinvar_20170501 | Clinvar version 20170130 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 |
