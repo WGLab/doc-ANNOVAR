@@ -167,6 +167,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | clinvar_20161128 | same as above (updated 20170215 to add missing header line) | 20170215 |
 | hg19 | clinvar_20170130 | Clinvar version 20170130 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 |
 | hg38 | clinvar_20170130 | same as above | 20171003 |
+| hg19 | clinvar_20170501 | Clinvar version 20170130 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 |
+| hg38 | clinvar_20170501 | same as above | 20171003 |
 | hg19 | clinvar_20170905 | Clinvar version 20170905 with separate columns (CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID) | 20171003 |
 | hg38 | clinvar_20170905 | same as above | 20171003 |
 | hg19 | popfreq_max_20150413 |  A database containing the maximum allele frequency from 1000G, ESP6500, ExAC and CG46 | 20150413 |
