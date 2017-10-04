@@ -189,7 +189,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | cadd13gt20 | CADD version 1.3 score>20 | 20170123 |
 | hg19 | caddindel | removed | 20150505 |
 | hg19 | fathmm | whole-genome FATHMM_coding and FATHMM_noncoding scores (noncoding and coding scores in the 2015 version was reversed) | 20160315 |
-| hg19 | gwava | whole genome GWAVA_region_score GWAVA_tss_score GWAVA_unmatched_score, see [ref](http://www.nature.com/nmeth/journal/v11/n3/abs/nmeth.2832.html) | 20150623 |
+| hg19 | gwava | whole genome GWAVA_region_score and GWAVA_tss_score (GWAVA_unmatched_score has bug in file), see [ref](http://www.nature.com/nmeth/journal/v11/n3/abs/nmeth.2832.html). | 20150623 |
 | hg19 | eigen | whole-genome Eigen scores, see [ref](http://www.ncbi.nlm.nih.gov/pubmed/26727659) | 20160330 |
 
 ## User-contributed datasets
