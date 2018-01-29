@@ -1074,7 +1074,7 @@ However, as of 2017, in more recent versions of COSMIC, the noncoding variants a
 
 ```
 prepare_annovar_user.pl -dbtype cosmic CosmicMutantExport.tsv -vcf CosmicCodingMuts.vcf > hg38_cosmic81_coding.txt
-prepare_annovar.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariants.vcf > hg38_cosmic81_noncoding.txt
+prepare_annovar_user.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariants.vcf > hg38_cosmic81_noncoding.txt
 ```
 
 There should be 2.58M coding and 14.2M noncoding variants, after you run the commands above. Users cannot index the file, but the file size is not too large, and you do not need to use indexing to use ANNOVAR.
