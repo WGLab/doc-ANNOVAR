@@ -86,6 +86,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
 | hg38 | hrcr1 | same as above | 20151203 |
+| hg19 | abraom | 2.3 million [Brazilian genomic variants](https://www.ncbi.nlm.nih.gov/pubmed/28332257) | 20180312 |
 | hg18 | 1000g (3 data sets) | alternative allele frequency data in 1000 Genomes Project | 20120222 |
 | hg18 | 1000g2010 (3 data sets) | same as above | 20120222 |
 | hg18 | 1000g2010jul (3 data sets) | same as above | 20120222 |
