@@ -47,7 +47,9 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | dbnsfp33a | same as above | 20170221 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
-| hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants | 20170202 |
+| hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
+| hg19 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported) | 20180325 |
+| hg38 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported)| 20180325 |
 | hg18 | cg46 | alternative allele frequency in 46 unrelated human subjects sequenced by Complete Genomics | 20120222 |
 | hg19 | cg46 | same as above | index updated 2012Feb22 |
 | hg18 | cg69 | allele frequency in 69 human subjects sequenced by Complete Genomics | 20120222 |
