@@ -75,6 +75,7 @@ changed -downdb behavior on 1000G data sets, convert2annovar.pl now handles soap
 
 - On 2017Jul16: fixed a bug in calculating upstream distance that print when -separate is specified in annotate_variation.pl, improvements to coding_change.pl to report more stopgain/stoploss and fix use-of-uninitialized-value issue, slight change to convert2annovar.pl to handle mal-formed VCF file.
 
+- On 2018Apr16: added r.spl as a notation for certain indels based on HGVS guidelines, fixed a bug in calculating amino acid sequence when a block substitution covers both exon and intron, fixed a bug in classifying block substitutions as inframe mutations in coding_change.pl, coding_change.pl now handles gene names that contains dash or dot, fixed a bug table_annovar.pl when -dot2underline is used, shortened the protein sequence calculation for nonframeshift mutations in coding_change.pl, add -keepindelref argument in convert2annovar.pl to keep Ref/Alt allelles in VCF file, improved compatibility of coding_change.pl for certain gene names that contain @ and . characters
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
