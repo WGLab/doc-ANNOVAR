@@ -8,7 +8,7 @@ site_favicon: favicon.ico
 copyright: 2010-2018 ANNOVAR
 google_analytics: ['UA-48623707-1', 'annovar.openbioinformatics.org']
 
-docs_dir: .
+docs_dir: docs
 include_search: true
 #use_absolute_urls: true
 #use_directory_urls: false
