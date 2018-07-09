@@ -5,7 +5,7 @@ repo_name: GitHub
 site_description: Documentation for ANNOVAR software
 site_author: Kai Wang, et al
 site_favicon: favicon.ico
-copyright: 2010-2016 ANNOVAR
+copyright: 2010-2018 ANNOVAR
 google_analytics: ['UA-48623707-1', 'annovar.openbioinformatics.org']
 
 docs_dir: .
