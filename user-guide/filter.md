@@ -50,7 +50,7 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 
 **For disease-specific variants**:
 
-* clinvar_20160302: ClinVar database with separate columns (CLINSIG CLNDBN CLNACC CLNDSDB CLNDSDBID) for each variant
+* clinvar_20160302: ClinVar database with separate columns (CLINSIG CLNDBN CLNACC CLNDSDB CLNDSDBID) for each variant (Please check the download page for the latest version, or read below for creating your own most updated version)
 * cosmic70: the latest COSMIC database with somatic mutations from cancer and the frequency of occurence in each subtype of cancer. For more updated cosmic, see instructions below on how to make them.
 * icgc21: International Cancer Genome Consortium version 21 mutations.
 * nci60: NCI-60 human tumor cell line panel exome sequencing allele frequency data
@@ -58,7 +58,7 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 **For variant identifiers**:
 
 * snp142: dbSNP version 142
-* avsnp142: an abbreviated version of dbSNP 142 with left-normalization by ANNOVAR developers.
+* avsnp142: an abbreviated version of dbSNP 142 with left-normalization by ANNOVAR developers. (Please check the download page for the latest version)
 
 
 
@@ -945,6 +945,42 @@ clinvar_20140211 CLINSIG=other;CLNDBN=Inflammatory_bowel_disease_10\x2c_suscepti
 ```
 
 SIG refers to Variant Clinical Significance, including unknown, untested, non-pathogenic, probable-non-pathogenic, probable-pathogenic, pathogenic, drug-response,histocompatibility, other. CLINDBN refers to Variant disease name, CLINACC refers to Variant Accession and Versions.
+
+Starting from December 2015, due to the format change of ClinVar, we now provide the clinvar database in ANNOVAR as tab-delimited file that enables easier annotation by table_annovar. An example of the first a few lines of the database is shown below.
+
+```
+#Chr    Start   End     Ref     Alt     CLINSIG CLNDBN  CLNACC  CLNDSDB CLNDSDBID
+1       1014143 1014143 C       T       Pathogenic      Immunodeficiency_38_with_basal_ganglia_calcification    RCV000162196.3  MedGen:OMIM     CN221808:616126
+1       1014228 1014228 G       A       Benign  not_specified   RCV000455759.1  MedGen  CN169374
+1       1014316 1014316 -       G       Pathogenic      Immunodeficiency_38_with_basal_ganglia_calcification    RCV000148989.5  MedGen:OMIM     CN221808:616126
+1       1014359 1014359 G       T       Pathogenic      Immunodeficiency_38_with_basal_ganglia_calcification    RCV000148988.5  MedGen:OMIM     CN221808:616126
+1       1020183 1020183 G       C       Likely benign   not_specified   RCV000424799.1  MedGen  CN169374
+```
+
+In early 2018, the format of ClinVar changed, so the fields above no longer applies. An example of the first a few lines of the 20180603 verison is shown below:
+
+```
+#Chr    Start   End     Ref     Alt     CLNALLELEID     CLNDN   CLNDISDB        CLNREVSTAT      CLNSIG
+1       1       1       0       0       104943  not_provided    MedGen:CN517202 no_assertion_provided   not_provided
+1       1       1       0       0       106000  not_provided    MedGen:CN517202 no_assertion_provided   not_provided
+1       1       1       0       0       139985  Primary_familial_hypertrophic_cardiomyopathy|Dilated_cardiomyopathy_1AA|not_specified   MedGen:C0949658\x2cOrphanet:ORPHA155\x2cSNOMED_CT:83978005|MedGen:C2677338\x2cOMIM:612158|MedGen:CN169374       criteria_provided\x2c_multiple_submitters\x2c_no_conflicts      Benign
+1       1       1       0       0       139986  Primary_familial_hypertrophic_cardiomyopathy|Dilated_cardiomyopathy_1AA|not_specified   MedGen:C0949658\x2cOrphanet:ORPHA155\x2cSNOMED_CT:83978005|MedGen:C2677338\x2cOMIM:612158|MedGen:CN169374       criteria_provided\x2c_multiple_submitters\x2c_no_conflicts      Benign
+1       1       1       0       0       141597  not_specified   MedGen:CN169374 criteria_provided\x2c_multiple_submitters\x2c_no_conflicts      Benign
+```
+
+Although I periodically update ClinVar database in ANNOVAR for help users perform annotation, due to the frequent update schedule of ClinVar, users are advised to create a database yourself using the [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) tool. An example procedure is given below:
+
+```
+          wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20180603.vcf.gz
+          wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20180603.vcf.gz.tbi
+          vt decompose clinvar_20180603.vcf.gz -o temp.split.vcf
+          prepare_annovar_user.pl   -dbtype clinvar_preprocess2 temp.split.vcf -out temp.split2.vcf
+          vt normalize temp.split2.vcf -r ~/project/seqlib/GRCh38/old/GRCh38.fa -o temp.norm.vcf -w 2000000
+          prepare_annovar_user.pl -dbtype clinvar2 temp.norm.vcf -out hg38_clinvar_20180603_raw.txt
+          index_annovar.pl hg38_clinvar_20180603_raw.txt -out hg38_clinvar_20180603.txt -comment comment_20180708.txt
+```
+
+
 
 ## CADD annotations
 
