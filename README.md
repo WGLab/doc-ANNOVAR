@@ -1,4 +1,4 @@
-![Logo](img/annovar.png)
+![Logo](docs/img/annovar.png)
 
 # ANNOVAR Documentation
 
