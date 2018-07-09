@@ -17,53 +17,53 @@ Please click the menu items to navigate through this website. To recieve program
 
 ![new](img/new.png) 2018Mar25: pre-computed intervar scores (version 20180118) is available on both hg19 and hg38 now with intervar_20180118 keyword. Only missense variants are included, and this is meant for a quick-and-dirty analysis of most missense variants. For a more comprehensive/formal calculation of scores, download [https://github.com/WGLab/InterVar](InterVar) instead.
 
-![new](/img/new.png) 2018Mar02: About 2.4 million Brazilian genomic variants with allele frequencies are available now in hg19/hg38 coordinate. The data set comprises exomic variants of 609 elderly individuals from a census-based sample from the city of São Paulo. Please use `abraom` as the keyword to download and annotate, and refer to the [original publication](https://www.ncbi.nlm.nih.gov/pubmed/28332257) for details.
+![new](img/new.png) 2018Mar02: About 2.4 million Brazilian genomic variants with allele frequencies are available now in hg19/hg38 coordinate. The data set comprises exomic variants of 609 elderly individuals from a census-based sample from the city of São Paulo. Please use `abraom` as the keyword to download and annotate, and refer to the [original publication](https://www.ncbi.nlm.nih.gov/pubmed/28332257) for details.
 
-![new](/img/new.png) 2017Oct03: Latest clinvar (20170905) is available now through ANNOVAR in hg19 and hg38 coordinates. A long-standing problem on multi-allelic variants in ClinVar is now addressed, so that multi-allelic variants are now correctly assigned to the corresponding benign/pathogenic categories. The 20170130/20170501 versions are also updated to resolve this issue.
+![new](img/new.png) 2017Oct03: Latest clinvar (20170905) is available now through ANNOVAR in hg19 and hg38 coordinates. A long-standing problem on multi-allelic variants in ClinVar is now addressed, so that multi-allelic variants are now correctly assigned to the corresponding benign/pathogenic categories. The 20170130/20170501 versions are also updated to resolve this issue.
 
-![new](/img/new.png) 2017Sep29: avsnp150 is available through ANNOVAR now in hg19 and hg38 coordinate, to annotate your variants with dbSNP identifiers.
+![new](img/new.png) 2017Sep29: avsnp150 is available through ANNOVAR now in hg19 and hg38 coordinate, to annotate your variants with dbSNP identifiers.
 
-![new](/img/new.png) 2017Sep12: Per user request, we have now made hg38 version of ensGene available through ANNOVAR directly so that users do not need to build it themselves.
+![new](img/new.png) 2017Sep12: Per user request, we have now made hg38 version of ensGene available through ANNOVAR directly so that users do not need to build it themselves.
 
-![new](/img/new.png) 2017Jul16: ANNOVAR new version is available now! You can use the old link to download, or you can register again to get download email. This release contins some minor fixes and improvements: fixed a bug in calculating upstream distance that print when -separate is specified in annotate_variation.pl, improvements to coding_change.pl to report more stopgain/stoploss and fix use-of-uninitialized-value issue, slight change to convert2annovar.pl to handle mal-formed VCF file.
+![new](img/new.png) 2017Jul16: ANNOVAR new version is available now! You can use the old link to download, or you can register again to get download email. This release contins some minor fixes and improvements: fixed a bug in calculating upstream distance that print when -separate is specified in annotate_variation.pl, improvements to coding_change.pl to report more stopgain/stoploss and fix use-of-uninitialized-value issue, slight change to convert2annovar.pl to handle mal-formed VCF file.
 
-![new](/img/new.png) 2017Jun01: ANNOVAR new version is available now! You can use the old link to download, or you can register again to get download email. Important features include: `gx` operation is added in table_annovar so that xref information for genes (such as gene-disease relationships) can be included (see [quick start-up](user-guide/startup.md) for examples), show complete amino acid change (such as c.35delG:p.G12Vfs\*2) in gene annotaion in table_annovar.pl and coding_change.pl with `-polish` argument, upstream variants now show distance to transcriptional start, splice variants at UTR now shows details, etc. (Update 2017Jun08: some users complained about format change in 2017jun01 version of table_annovar, where semicolon was used instead of comma for gene-based annotation, we have now reverted this change. Additional feature for -xreffile with multiple annotation columns has been implemented. Please re-download the code)
+![new](img/new.png) 2017Jun01: ANNOVAR new version is available now! You can use the old link to download, or you can register again to get download email. Important features include: `gx` operation is added in table_annovar so that xref information for genes (such as gene-disease relationships) can be included (see [quick start-up](user-guide/startup.md) for examples), show complete amino acid change (such as c.35delG:p.G12Vfs\*2) in gene annotaion in table_annovar.pl and coding_change.pl with `-polish` argument, upstream variants now show distance to transcriptional start, splice variants at UTR now shows details, etc. (Update 2017Jun08: some users complained about format change in 2017jun01 version of table_annovar, where semicolon was used instead of comma for gene-based annotation, we have now reverted this change. Additional feature for -xreffile with multiple annotation columns has been implemented. Please re-download the code)
 
-![new](/img/new.png) 2017Jun01: Updated refGene, knownGene, ensGene definition and FASTA file on hg18/hg19/hg38 coordinates are available to download with `-webfrom annovar` argument. However, users can always build the latest version yourself.
+![new](img/new.png) 2017Jun01: Updated refGene, knownGene, ensGene definition and FASTA file on hg18/hg19/hg38 coordinates are available to download with `-webfrom annovar` argument. However, users can always build the latest version yourself.
 
-![new](/img/new.png) 2017May16: Updated instructions on how to handle noncoding variants in COSMIC version 81 [here](user-guide/filter.md#cosmic-annotations).
+![new](img/new.png) 2017May16: Updated instructions on how to handle noncoding variants in COSMIC version 81 [here](user-guide/filter.md#cosmic-annotations).
 
-![new](/img/new.png) 2017Mar11: gnomAD collection is available at ANNOVAR now, for both hg19 and hg38 coordinates. Use keyword gnomad_exome and gnomad_genome to download and use them.
+![new](img/new.png) 2017Mar11: gnomAD collection is available at ANNOVAR now, for both hg19 and hg38 coordinates. Use keyword gnomad_exome and gnomad_genome to download and use them.
 
-![new](/img/new.png) 2017Feb21: dbNSFP3.3a is updated for hg18/hg19/hg38 now. We now added the rankscore for each scoring system, and for variants with multiple prediction scores, only the most deleterious (rather than highest) scores are kept.
+![new](img/new.png) 2017Feb21: dbNSFP3.3a is updated for hg18/hg19/hg38 now. We now added the rankscore for each scoring system, and for variants with multiple prediction scores, only the most deleterious (rather than highest) scores are kept.
 
-![new](/img/new.png) 2017Feb15: Clinvar version 20170130 is available for hg19/hg38 now in ANNOVAR with keyword clinvar_20170130 to download.
+![new](img/new.png) 2017Feb15: Clinvar version 20170130 is available for hg19/hg38 now in ANNOVAR with keyword clinvar_20170130 to download.
 
-![new](/img/new.png) 2017Feb02: InterVar automated prediction is available for clinical interpretation of missense variants, with 18 criteria based on 2015 ACMG-AMP guidelines. Use intervar_20170202 keyword to download and use. Read the [InterVar paper](http://www.sciencedirect.com/science/article/pii/S0002929717300046) for details.
+![new](img/new.png) 2017Feb02: InterVar automated prediction is available for clinical interpretation of missense variants, with 18 criteria based on 2015 ACMG-AMP guidelines. Use intervar_20170202 keyword to download and use. Read the [InterVar paper](http://www.sciencedirect.com/science/article/pii/S0002929717300046) for details.
 
-![new](/img/new.png) 2017Jan24: dbNSFP version 3.3a is available on hg18, hg19 and hg38 in ANNOVAR, with whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, PROVEAN, MetaSVM, MetaLR, VEST, M-CAP, CADD, GERP++, DANN, fathmm-MKL, Eigen, GenoCanyon, fitCons, PhyloP and SiPhy scores.
+![new](img/new.png) 2017Jan24: dbNSFP version 3.3a is available on hg18, hg19 and hg38 in ANNOVAR, with whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, PROVEAN, MetaSVM, MetaLR, VEST, M-CAP, CADD, GERP++, DANN, fathmm-MKL, Eigen, GenoCanyon, fitCons, PhyloP and SiPhy scores.
 
-![new](/img/new.png) 2017Jan23: cadd13 (CADD version 1.3), cadd13gt10, cadd13gt20 are slightly updated to fix a format problem with contigs that are not placed on chromosomes.
+![new](img/new.png) 2017Jan23: cadd13 (CADD version 1.3), cadd13gt10, cadd13gt20 are slightly updated to fix a format problem with contigs that are not placed on chromosomes.
 
-![new](/img/new.png) 2016Dec05: REVEL (Rare Exome Variant Ensemble Learner) scores for hg19 and hg38 are available from ANNOVAR now with revel keyword.
+![new](img/new.png) 2016Dec05: REVEL (Rare Exome Variant Ensemble Learner) scores for hg19 and hg38 are available from ANNOVAR now with revel keyword.
 
-![new](/img/new.png) 2016Nov04: M-CAP (Mendelian Clinically Applicable Pathogenicity) scores for hg19 and hg38 are available from ANNOVAR now with mcap keyword.
+![new](img/new.png) 2016Nov04: M-CAP (Mendelian Clinically Applicable Pathogenicity) scores for hg19 and hg38 are available from ANNOVAR now with mcap keyword.
 
-![new](/img/new.png) 2016Oct24: GME (Greater Middle East Variome) is available to download from ANNOVAR now with keyword gme. It contains allele frequency data on NWA (northwest Africa), NEA (northeast Africa), AP (Arabian peninsula), Israel, SD (Syrian desert), TP (Turkish peninsula) and CA (Central Asia).
+![new](img/new.png) 2016Oct24: GME (Greater Middle East Variome) is available to download from ANNOVAR now with keyword gme. It contains allele frequency data on NWA (northwest Africa), NEA (northeast Africa), AP (Arabian peninsula), Israel, SD (Syrian desert), TP (Turkish peninsula) and CA (Central Asia).
 
-![new](/img/new.png) 2016Jun22: icgc21 (International Cancer Genome Consortium version 21), cadd13, cadd13gt10, cadd13gt20 (CADD version 1.3) is available to download from ANNOVAR now.
+![new](img/new.png) 2016Jun22: icgc21 (International Cancer Genome Consortium version 21), cadd13, cadd13gt10, cadd13gt20 (CADD version 1.3) is available to download from ANNOVAR now.
 
-![new](/img/new.png) 2016Jun06: avsnp147 (hg19 and hg38), which is a modified version of dbSNP with left-normalization and allelic splitting, is available to download from ANNOVAR now.
+![new](img/new.png) 2016Jun06: avsnp147 (hg19 and hg38), which is a modified version of dbSNP with left-normalization and allelic splitting, is available to download from ANNOVAR now.
 
-![new](/img/new.png) 2016Apr23: Slightly updated ExAC03 non-TCGA and non-psych datasets are available with modified headers.
+![new](img/new.png) 2016Apr23: Slightly updated ExAC03 non-TCGA and non-psych datasets are available with modified headers.
 
-![new](/img/new.png) 2016Mar30: Whole-genome Eigen scores are available in ANNOVAR, which uses a spectral approach integrating functional genomic annotations for coding and noncoding variants. See [here](user-guide/filter.md#eigen-score-annotations) for detailed instructions. User contributed SNP database for Indian populations is available in Download page.
+![new](img/new.png) 2016Mar30: Whole-genome Eigen scores are available in ANNOVAR, which uses a spectral approach integrating functional genomic annotations for coding and noncoding variants. See [here](user-guide/filter.md#eigen-score-annotations) for detailed instructions. User contributed SNP database for Indian populations is available in Download page.
 
-![new](/img/new.png) 2016Mar15: Updated whole-genome FATHMM-MKL scores are available, which fixed an error that coding/noncoding scores were reversed.
+![new](img/new.png) 2016Mar15: Updated whole-genome FATHMM-MKL scores are available, which fixed an error that coding/noncoding scores were reversed.
 
-![new](/img/new.png) 2016Feb01: A user pointed out a bug when more than 6 threads are used in multi-threaded gene-based annotation. This bug was fixed and you can now re-download the ANNOVAR package.
+![new](img/new.png) 2016Feb01: A user pointed out a bug when more than 6 threads are used in multi-threaded gene-based annotation. This bug was fixed and you can now re-download the ANNOVAR package.
 
-![new](/img/new.png) 2016Jan23: The mitimpact24 (version 2.4) database is made available in ANNOVAR now. It provides effect prediction of mitochondrial variants.
+![new](img/new.png) 2016Jan23: The mitimpact24 (version 2.4) database is made available in ANNOVAR now. It provides effect prediction of mitochondrial variants.
 
 
 
