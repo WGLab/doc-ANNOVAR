@@ -216,6 +216,9 @@ Several third-party researchers have provided additional annotation datasets tha
 
 * SPIDEX: SPIDEX 1.0 - Deep Genomics : (Xiong et al, Science 2015) Machine-learning prediction on how genetic variants affect RNA splicing. This dataset can be downloaded [here](http://www.openbioinformatics.org/annovar/spidex_download_form.php).
 
+## Third-party software tools
+
+Customprodbj is a Java-based tool for customized protein database construction. It can build the database on a single or multiple VCF files on single or multiple individuals. It can be accessed at [here](https://github.com/wenbostar/customprodbj). Command line example: `java -jar customprodbj.jar -f input_variant_file_list.txt -d annovar_database/humandb/hg19_refGeneMrna.fa -r annovar_database/humandb/hg19_refGene.txt -t -o out/`.
 
 
 
