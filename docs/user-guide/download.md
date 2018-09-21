@@ -45,6 +45,9 @@ Several very commonly used annotation databases for human genomes are additional
 | hg18 | dbnsfp33a | whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, PROVEAN, MetaSVM, MetaLR, VEST, M-CAP, CADD, GERP++, DANN, fathmm-MKL, Eigen, GenoCanyon, fitCons, PhyloP and SiPhy scores from dbNSFP version 3.3a | 20170221 |
 | hg19 | dbnsfp33a | same as above |  20170221 |
 | hg38 | dbnsfp33a | same as above | 20170221 |
+| hg18 | dbnsfp35a | same as above |  20180921 |
+| hg19 | dbnsfp35a | same as above |  20180921 |
+| hg38 | dbnsfp35a | same as above | 20170221 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
