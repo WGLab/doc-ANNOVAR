@@ -80,10 +80,11 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | exac03nontcga | same as above | 20160423 |
 | hg19 | exac03nonpsych | ExAC on non-Psychiatric disease samples (updated header) | 20160423 |
 | hg38 | exac03nonpsych | same as above | 20160423 |
-| hg19 | gnomad_exome | gnomAD exome collection | 20170311 |
-| hg38 | gnomad_exome | gnomAD exome collection | 20170311 |
-| hg19 | gnomad_genome | gnomAD genome collection | 20170311 |
-| hg38 | gnomad_genome | gnomAD genome collection | 20170311 |
+| hg38 | exac10 | No difference as exac03 based on [this](ftp://ftp.broadinstitute.org/pub/ExAC_release/release1/README.new_annotations); use exac03 instead | X |
+| hg19 | gnomad_exome | gnomAD exome collection (v2.0.1) | 20170311 |
+| hg38 | gnomad_exome | gnomAD exome collection (v2.0.1) | 20170311 |
+| hg19 | gnomad_genome | gnomAD genome collection (v2.0.1) | 20170311 |
+| hg38 | gnomad_genome | gnomAD genome collection (v2.0.1) | 20170311 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
