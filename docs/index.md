@@ -10,6 +10,7 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. To recieve program updates, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (or email me directly). Thank you very much for your help and support!
 
 ---
+![new](img/new.png) 2018Sep20: The dbSNFP scores in ANNOVAR is updated to version 3.5a (use dbnsfp35a to download). The regsnpintron database is updated to fix problems in certain lines of the file.
 
 ![new](img/new.png) 2018Jul08: ClinVar version 20180603 is available for use in ANNOVAR, with slight format changes compared to previous versions. Note that users are advised to use prepare_annovar_user.pl to make your own ClinVar databases for use in ANNOVAR (see [details here](user-guide/filter.md#clinvar-annotations), so you do not need to wait for me to update.
 
