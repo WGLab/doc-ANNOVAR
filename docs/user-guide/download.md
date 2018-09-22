@@ -186,7 +186,7 @@ Several very commonly used annotation databases for human genomes are additional
 | hg19 | mitimpact2 | pathogenicity predictions of human mitochondrial missense variants (see [here](http://www.ncbi.nlm.nih.gov/m/pubmed/25516408/)  | 20150520 |
 | hg19 | mitimpact24 | same as above with version 2.4  | 20160123 |
 | hg19 | regsnpintron | prioritize the disease-causing probability of intronic SNVs | 20180920 |
-| hg38 | regsnpintron | lifeOver of above | 20180404 |
+| hg38 | regsnpintron | lifeOver of above | 20180922 |
 | hg18 | gerp++elem | conserved genomic regions by GERP++ | 20140223 |
 | hg19 | gerp++elem | same as above | 20140223 |
 | mm9 | gerp++elem | same as above | 20140223 |
