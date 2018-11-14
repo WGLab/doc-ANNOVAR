@@ -70,11 +70,11 @@ This set is almost identical to the 2014oct version. However, an ANNOVAR user id
 
 ## 1000 Genomes Project (2014 Oct) annotations
 
-See general instructions below, but changing command line argument to 1000g2014oct. Note that ANNOVAR does provide 1000g2014sep and 1000g2014aug, but they are obselete now!
+See general instructions below, but changing command line argument to 1000g2014oct. Note that ANNOVAR does provide 1000g2014sep and 1000g2014aug, but they are obsolete now!
 
 The 2014Oct data set contains alternative allele frequency data in 1000 Genomes Project for autosomes and sex chromosomes (ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian)). The data is based on 201409 collection v5 (based on 201305 alignment). See below for detailed usage instructions on a different version of the dataset.
 
-## 1000 Genomes Project (2012 April) annotations (obselete!)
+## 1000 Genomes Project (2012 April) annotations (obsolete!)
 
 This is based on phase 1 release v3 called from 20101123 alignment. The populations include ALL, AMR, AFR, ASN and EUR. In addition, I also performed liftOver and provide these data sets in hg18 coordinate, to faciliate researchers working on hg18 coordinates.
 
