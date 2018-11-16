@@ -10,6 +10,8 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. To recieve program updates, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (or email me directly). Thank you very much for your help and support!
 
 ---
+2018Nov15: **ANNOVAR** is temporarily down and we are finding replacement servers at the moment. Please check back to the page for updates.
+
 ![new](img/new.png) 2018Oct23: The non-commercial dbSNFP scores in ANNOVAR is updated to version 3.5c (use dbnsfp35c to download).
 
 ![new](img/new.png) 2018Sep20: The dbSNFP scores in ANNOVAR is updated to version 3.5a (use dbnsfp35a to download). The regsnpintron database is updated to fix problems in certain lines of the file.
