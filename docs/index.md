@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. To recieve program
 
 ---
 
+![new](img/new.png) 2018Dec03: The MCAP score v1.3 is available for hg19 coordinate (use mcap13 keyword to download).
+
 2018Nov19: **ANNOVAR** is back online and all databases should be available now. Please report any problem that you encounter.
 
 2018Nov15: **ANNOVAR** (downdb function to download databases) is temporarily down and we are finding replacement servers at the moment. Please check back to the page for updates.
