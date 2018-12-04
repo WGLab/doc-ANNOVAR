@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. To recieve program
 
 ---
 
+![new](img/new.png) 2018Dec04: The ABRAOM score (Brazilian genomic variants) is updated (~1000 lines in previous version do not have abraom_cegh_filter).
+
 ![new](img/new.png) 2018Dec03: The MCAP score v1.3 is available for hg19 coordinate (use mcap13 keyword to download).
 
 2018Nov19: **ANNOVAR** is back online and all databases should be available now. Please report any problem that you encounter.
