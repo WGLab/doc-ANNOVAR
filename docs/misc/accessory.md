@@ -71,7 +71,7 @@ NOTICE: Scanning filter database humandb/hg19_ljb23_all.txt...Done
 NOTICE: Multianno output file is written to myanno.hg19_multianno.txt
 ```
 
-The output file is written to `myanno.hg19_multianno.txt`. This is a tab-delimited file, where each row represents one variant, and each column represents one annotation task. Table_annovar allows user to specify exactly which columns or annotation tasks are required, and allows user to select multiple versions of the same analysis (such as multiple gene-definition systems or multiple dbSNP databases).
+The output file is written to `myanno.hg19_multianno.txt`. This is a tab-delimited file, where each row represents one variant, and each column represents one annotation task. Table_annovar allows users to specify exactly which columns or annotation tasks are required, and allows users to select multiple versions of the same analysis (such as multiple gene-definition systems or multiple dbSNP databases).
 
 Users can open the file in Excel 2007 (select "tab-delimited" when opening the file). Click the "DATA" tab at the menu bar, then click the big "Filter" button. Then click any one of the headings such as 1000G_CEU or SIFT to filter out variants, essentially by clicking the check boxes. For SIFT score, make sure to use "less than 0.05 OR equal to (blank)" so that variants without SIFT score do not get filtered out. It should be straightfoward to do, but it may need a little practice for users not familiar with Excel.
 
@@ -206,7 +206,7 @@ The program is not mature enough and will undergo additional changes in future v
 
 ## Convert2Annovar: Conversion of input file format
 
-The `convert2annovar.pl` program can be uesd to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the [Input](../user-guide/input.md) section.
+The `convert2annovar.pl` program can be used to convert various file formats into ANNOVAR input file format. This topic has been discussed in detail in the [Input](../user-guide/input.md) section.
 
 ## Retrieve_Seq_from_FASTA: Retrieve nucleotide/protein sequences
 
@@ -257,7 +257,7 @@ NOTICE: Finished writting FASTA for 2 genomic regions to example.fa.
 
 - **3. refGene input files**
 
-The file is in UCSC refGene format that contains exon start and end positions. The output will be mRNA/cDNA sequences, rather than genomic seqences.
+The file is in UCSC refGene format that contains exon start and end positions. The output will be mRNA/cDNA sequences, rather than genomic sequences.
 
 ```
 [kai@biocluster ~/]$ head hg19_refGene.txt 
