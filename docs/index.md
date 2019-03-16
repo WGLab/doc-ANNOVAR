@@ -7,7 +7,7 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 - **Filter-based annotation**: identify variants that are documented in specific databases, for example, whether a variant is reported in dbSNP,  what is the allele frequency in the 1000 Genome Project, NHLBI-ESP 6500 exomes or Exome Aggregation Consortium, calculate the SIFT/PolyPhen/LRT/MutationTaster/MutationAssessor/FATHMM/MetaSVM/MetaLR scores, find intergenic variants with GERP++ score < 2, or many other annotations on specific mutations.
 - **Other functionalities**: Retrieve the nucleotide sequence in any user-specific genomic positions in batch, identify a candidate gene list for Mendelian diseases from exome data, and other utilities.
 
-Please click the menu items to navigate through this website. To recieve program updates, please use the [ANNOVAR mailing list](https://groups.google.com/forum/#!forum/annovar). If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (or email me directly). Thank you very much for your help and support!
+Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email) or email me directly kaichop gmail.com. Thank you very much for your help and support!
 
 ---
 
