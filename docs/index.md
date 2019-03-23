@@ -11,7 +11,9 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
-![new](img/new.png) 2019Mar18: gnomAD exome collection (v2.1.1) of 17.2 million variants, with "AF AF_popmax AF_male AF_female AF_raw AF_afr AF_sas AF_amr AF_eas AF_nfe AF_fin AF_asj AF_oth non_topmed_AF_popmax non_neuro_AF_popmax non_cancer_AF_popmax controls_AF_popmax" header is available from ANNOVAR.
+![new](img/new.png) 2019Mar23: gnomAD genome collection (v2.1.1) of 262 million variants, with "AF AF_popmax AF_male AF_female AF_raw AF_afr AF_sas AF_amr AF_eas AF_nfe AF_fin AF_asj AF_oth non_topmed_AF_popmax non_neuro_AF_popmax non_cancer_AF_popmax controls_AF_popmax" header is available from ANNOVAR with keyword gnomad211_genome.
+
+![new](img/new.png) 2019Mar18: gnomAD exome collection (v2.1.1) of 17.2 million variants, with "AF AF_popmax AF_male AF_female AF_raw AF_afr AF_sas AF_amr AF_eas AF_nfe AF_fin AF_asj AF_oth non_topmed_AF_popmax non_neuro_AF_popmax non_cancer_AF_popmax controls_AF_popmax" header is available from ANNOVAR with keyword gnomad211_exome.
 
 ![new](img/new.png) 2019Mar16: The Clinvar scores (hg19/hg38) are updated to 20190305 version.
 
