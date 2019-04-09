@@ -93,6 +93,8 @@ Several very commonly used annotation databases for human genomes are additional
 | hg38 | gnomad_genome | gnomAD genome collection (v2.0.1) | 20170311 |
 | hg19 | gnomad211_exome | gnomAD exome collection (v2.1.1), with "AF AF_popmax AF_male AF_female AF_raw AF_afr AF_sas AF_amr AF_eas AF_nfe AF_fin AF_asj AF_oth non_topmed_AF_popmax non_neuro_AF_popmax non_cancer_AF_popmax controls_AF_popmax" header | 20190318 |
 | hg19 | gnomad211_genome | same as above | 20190323 |
+| hg38 | gnomad211_exome | same as above | 20190409 |
+| hg38 | gnomad211_genome | same as above | 20190409 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
