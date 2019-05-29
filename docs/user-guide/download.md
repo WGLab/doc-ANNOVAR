@@ -1,8 +1,8 @@
 ## ANNOVAR main package
 
-Please join the ANNOVAR mailing list at google groups [here](https://groups.google.com/forum/#!forum/annovar) to receive announcements on software updates. Do NOT post questions there, as they will be rejected. You can post questions through Disqus in this website or just email me directly.
+You can post questions through Disqus in this website or just email me directly.
 
-The latest version of ANNOVAR (2018Apr16) can be downloaded [here](http://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
+The latest version of ANNOVAR (2018Apr16) can be downloaded [here](http://download.openbioinformatics.org/annovar_download_form.php) (registration required).
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
@@ -228,7 +228,7 @@ Several generous ANNOVAR users provide additional annotation datasets that may h
 
 Several third-party researchers have provided additional annotation datasets that can be used by ANNOVAR directly. However, users need to agree to specific license terms set forth by the third parties:
 
-* SPIDEX: SPIDEX 1.0 - Deep Genomics : (Xiong et al, Science 2015) Machine-learning prediction on how genetic variants affect RNA splicing. This dataset can be downloaded [here](http://www.openbioinformatics.org/annovar/spidex_download_form.php).
+* SPIDEX: SPIDEX 1.0 - Deep Genomics : (Xiong et al, Science 2015) Machine-learning prediction on how genetic variants affect RNA splicing. This dataset can be downloaded [here](http://download.openbioinformatics.org/spidex_download_form.php).
 
 ## Third-party software tools
 
