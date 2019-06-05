@@ -12,6 +12,8 @@ Many of the databases that ANNOVAR uses can be directly retrieved from UCSC Geno
 
 Several very commonly used annotation databases for human genomes are additionally provided below. In general, users can use `-downdb -webfrom annovar` in ANNOVAR directly to download these databases. To view of full list of databases (and their size and last changed date) prepared by ANNOVAR developers, use `avdblist` keyword in `-downdb` operation.
 
+NOTE June 2019: Due to lack of storage space, several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++) are currently not available for download. I am trying to find a solution to this problem.
+
 ### - For gene-based annotation
 
 | Build | Table Name | Explanation | Date |
