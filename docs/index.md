@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+June 16 2019: The hosting provider deleted all ANNOVAR files and I am in the process of finding alternative solutions. Hopefully ANNOVAR database will be online again early next week.
+
 May 2019: We are in the process of moving ANNOVAR server to a different hosting vendor. There is no need to email me about the -downdb problem. If you have an urgent need for the software itself, you can email me to get a URL link to download, but the DB will not be available for a few days.
 
 ![new](img/new.png) 2019Apr09: gnomAD exome and genome collection (v2.1.1) on hg38 through liftover is available in ANNOVAR now.
