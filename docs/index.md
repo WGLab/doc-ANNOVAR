@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)2019Sep29: All ANNOVAR databases are transferred to AWS S3, including large files. The refGene, refGeneWithVer, knownGene and ensGene (same as GencodeBasicV31) for hg18/hg19/hg38 are updated to the latest version.
+
 ![new](img/new.png)2019Jun17: All ANNOVAR databases are transferred to AWS S3, except a few large (>100GB) files. Please report any problem that you see.
 
 June 16 2019: The hosting provider deleted all ANNOVAR files and I am in the process of finding alternative solutions. Hopefully ANNOVAR database will be online again early next week.
