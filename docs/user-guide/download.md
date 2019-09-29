@@ -18,15 +18,18 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
-| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20170601 |
-| hg19 | refGene | same as above | 20170601 |
-| hg38 | refGene | same as above | 20170601 |
-| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20170601 |
-| hg19 | knownGene | same as above | 20170601 |
-| hg38 | knownGene | same as above | 20170601 |
-| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20170601 |
-| hg19 | ensGene | same as above | 20170601 |
-| hg38 | ensGene | based on Gencode v26 Basic collection | 20170912 |
+| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20190929 |
+| hg19 | refGene | same as above | 20190929 |
+| hg38 | refGene | same as above | 20190929 |
+| hg18 | refGeneWithVer | FASTA sequences for all annotated transcripts in RefSeq Gene with version number | 20190929 |
+| hg19 | refGeneWithVer | same as above | 20190929 |
+| hg38 | refGeneWithVer | same as above | 20190929 |
+| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20190929 |
+| hg19 | knownGene | same as above | 20190929 |
+| hg38 | knownGene | same as above | 20190929 |
+| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20190929 |
+| hg19 | ensGene | same as above | 20190929 |
+| hg38 | ensGene | based on Gencode v26 Basic collection | 20190929 |
 
 ---
 
