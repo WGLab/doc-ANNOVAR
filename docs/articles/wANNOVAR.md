@@ -1,6 +1,6 @@
 ## Introduction
 
-[wANNOVAR](http://wannovar.usc.edu) is a web server that provides easy and intuitive web-based access to the most popular functionalities of the ANNOVAR software. Users can upload a VCF file and obtain annotated results as tab-delimited or comma-deleted files; in addition, simple variants reduction can be performed to prioritize deleterious variants from the input files. Currently, wANNOVAR supports only human genome annotation.
+[wANNOVAR](http://wannovar.wglab.org) is a web server that provides easy and intuitive web-based access to the most popular functionalities of the ANNOVAR software. Users can upload a VCF file and obtain annotated results as tab-delimited or comma-deleted files; in addition, simple variants reduction can be performed to prioritize deleterious variants from the input files. Currently, wANNOVAR supports only human genome annotation.
 
 Below we describe the input fields and output format in wANNOVAR.
 
