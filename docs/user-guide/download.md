@@ -2,7 +2,7 @@
 
 You can post questions through Disqus in this website or just email me directly.
 
-The latest version of ANNOVAR (2018Apr16) can be downloaded [here](http://download.openbioinformatics.org/annovar_download_form.php) (registration required).
+The latest version of ANNOVAR (2019Oct24) can be downloaded [here](http://download.openbioinformatics.org/annovar_download_form.php) (registration required).
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
@@ -27,9 +27,9 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20190929 |
 | hg19 | knownGene | same as above | 20190929 |
 | hg38 | knownGene | same as above | 20190929 |
-| hg18 | ensGene | FASTA sequences for all annotated transcripts in ENSEMBL Gene | 20190929 |
+| hg18 | ensGene | FASTA sequences for all annotated transcripts in Gencode v31 Basic collection | 20190929 |
 | hg19 | ensGene | same as above | 20190929 |
-| hg38 | ensGene | based on Gencode v26 Basic collection | 20190929 |
+| hg38 | ensGene | same as above | 20190929 |
 
 ---
 
