@@ -92,6 +92,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg19 | exac03nonpsych | ExAC on non-Psychiatric disease samples (updated header) | 20160423 |
 | hg38 | exac03nonpsych | same as above | 20160423 |
 | hg38 | exac10 | No difference as exac03 based on [this](ftp://ftp.broadinstitute.org/pub/ExAC_release/release1/README.new_annotations); use exac03 instead | X |
+| hg19 | gene4denovo201907 | [gene4denovo](https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkz923/5603227) database | 20191101 |
+| hg38 | gene4denovo201907 | gene4denovo database | 20191101 |
 | hg19 | gnomad_exome | gnomAD exome collection (v2.0.1) | 20170311 |
 | hg38 | gnomad_exome | gnomAD exome collection (v2.0.1) | 20170311 |
 | hg19 | gnomad_genome | gnomAD genome collection (v2.0.1) | 20170311 |
