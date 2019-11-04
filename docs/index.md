@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)2019Nov04: gnomAD version 3.0 on hg38 coordinate is available in ANNOVAR (use gnomad30_genome to download). Only variants from whole-genome (but not whole-exome) sequencing are available.
+
 ![new](img/new.png)2019Nov01: gene4denovo annotation database with 580M de novo mutations for hg19/hg38 are available in ANNOVAR (use hg19_gene4denovo201907 and hg38_gene4denovo201907 keywords to download). Read [here](https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkz923/5603227) for more information.
 
 
