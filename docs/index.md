@@ -11,7 +11,7 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
-![new](img/new.png)2019Nov27: A slight change was made to coding_change.pl to fix the 'argument G is not numeric in numeric gt (>)' bug for startloss mutations, and you can download the updated file [here](http://openbioinformatics.org/annovar/download/coding_change.pl).
+![new](img/new.png)2019Nov27: A slight change was made to coding_change.pl to fix the 'argument G is not numeric in numeric gt (>)' bug for startloss mutations, and you can download the updated file [here](http://openbioinformatics.org/annovar/download/coding_change.pl). Please report additioanl bugs on the 2019Oct24 version to me if you find any.
 
 ![new](img/new.png)2019Nov04: gnomAD version 3.0 on hg38 coordinate is available in ANNOVAR (use gnomad30_genome to download). Only variants from whole-genome (but not whole-exome) sequencing are available.
 
