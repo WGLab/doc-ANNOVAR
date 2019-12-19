@@ -13,7 +13,7 @@ Please click the menu items to navigate through this website. If you have questi
 
 ![new](img/new.png)2019Dec03: ANNOVAR download consistently exceeds >10TB/month over the past two months and the cost for hosting it at AWS is absurdly high (unfortunately currently no grant funding is available to support ANNOVAR). During the next a few days, I will migrate ANNOVAR out of AWS to a new CDN provider and test it over the next two months. Expect some connection issues when you do -downdb depending on your geographical locations over the next a few days. (Update 2019Dec06: Migration is completed successfully, please report issues if you encounter any).
 
-![new](img/new.png)2019Nov27: A slight change was made to coding_change.pl to fix the 'argument G is not numeric in numeric gt (>)' bug for startloss mutations, and you can download the updated file [here](http://openbioinformatics.org/annovar/download/coding_change.pl). Please report additioanl bugs on the 2019Oct24 version to me if you find any.
+![new](img/new.png)2019Nov27: A slight change was made to coding_change.pl to fix the 'argument G is not numeric in numeric gt (>)' bug for startloss mutations, and you can download the updated file [here](http://www.openbioinformatics.org/annovar/download/coding_change.pl). Please report additioanl bugs on the 2019Oct24 version to me if you find any.
 
 ![new](img/new.png)2019Nov04: gnomAD version 3.0 on hg38 coordinate is available in ANNOVAR (use gnomad30_genome to download). Only variants from whole-genome (but not whole-exome) sequencing are available.
 
