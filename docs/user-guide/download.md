@@ -199,6 +199,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | clinvar_20180603 |  same as above | 20180708 |
 | hg19 | clinvar_20190305 |  Clinvar version 20190305 with separate columns (CLNALLELEID CLNDN CLNDISDB CLNREVSTAT CLNSIG) | 20190311 |
 | hg38 | clinvar_20190305 |  same as above | 20190316 |
+| hg19 | clinvar_20200316 |  Clinvar version 20200316 with separate columns (CLNALLELEID CLNDN CLNDISDB CLNREVSTAT CLNSIG) | 20200401 |
+| hg38 | clinvar_20200316 |  same as above | 20200401 |
 | hg19 | popfreq_max_20150413 |  A database containing the maximum allele frequency from 1000G, ESP6500, ExAC and CG46 | 20150413 |
 | hg19 | popfreq_all_20150413 |  A database containing all allele frequency from 1000G, ESP6500, ExAC and CG46  | 20150413 |
 | hg19 | mitimpact2 | pathogenicity predictions of human mitochondrial missense variants (see [here](http://www.ncbi.nlm.nih.gov/m/pubmed/25516408/)  | 20150520 |
