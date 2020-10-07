@@ -413,7 +413,7 @@ ljb23_pp2hvar 0.986,D 16 50756540 50756540 G C comments: rs2066845 (G908R), a no
 ljb23_pp2hvar 0.005,B 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
 ```
 
-In the output, the scores and predictions are separated by comma. There are three possible predictions: "D" ("porobably damaging"), "P" ("possibly damaging") and "B" ("benign").
+In the output, the scores and predictions are separated by comma. There are three possible predictions: "D" ("probably damaging"), "P" ("possibly damaging") and "B" ("benign").
 
 > *Technical comments: The original LJB23 database provided by original authors may contain multiple annotations for each mutation. For example, the chr1:67705958G>A mutation has two separate records, one showing E>K amino acid substitution, and the other showing R>Q amino acid substitution. The former does not have any functional scores associated, so in my compilation, only the latter will enter into the database. Next, in the LJB2 database, even for R>Q substution, it can have multiple scores such as "1.0;1.0;1.0;1.0;0.993;1.0;1.0;1.0;0.999" and multiple predictions such as "D;D;D;D;D;D;D;D;D", probably due to multiple transcriptional isoforms. In this case, only the largest score (1 is the largest score among multiple isoforms), as well as its associated D/P/B annotation, will be used in ANNOVAR database.*
 
