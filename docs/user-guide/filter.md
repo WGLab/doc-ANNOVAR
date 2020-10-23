@@ -1146,7 +1146,7 @@ prepare_annovar_user.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariant
 
 ```
 
-If you only want targeted screen data, use `prepare_annovar_user.pl -dbtype cosmic CosmicCompleteTargetedScreensMutantExport.tsv -vcf CosmicCodingMuts.normal.vcf > hg38_cosmic92_targeted_coding.txt`.
+There should be around 12 million coding and 15 million non-coding variants in cosmic92. If you only want targeted screen data, use `prepare_annovar_user.pl -dbtype cosmic CosmicCompleteTargetedScreensMutantExport.tsv -vcf CosmicCodingMuts.normal.vcf > hg38_cosmic92_targeted_coding.txt`.
 
 ## ICGC annotations
 
