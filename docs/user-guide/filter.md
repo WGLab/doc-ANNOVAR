@@ -1138,6 +1138,16 @@ prepare_annovar_user.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariant
 
 There should be 2.58M coding and 14.2M noncoding variants, after you run the commands above. Users cannot index the file, but the file size is not too large, and you do not need to use indexing to use ANNOVAR.
 
+For COSMIC v91, v92 and beyond, the file formats are changed slightly. In Oct 2020 the prepare_annovar_user.pl is slightly modified to handle the new file formats:
+
+```
+prepare_annovar_user.pl -dbtype cosmic CosmicMutantExport.tsv -vcf CosmicCodingMuts.normal.vcf > hg38_cosmic92_coding.txt
+prepare_annovar_user.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariants.normal.vcf > hg38_cosmic92_noncoding.txt
+
+```
+
+If you only want targeted screen data, use `prepare_annovar_user.pl -dbtype cosmic CosmicCompleteTargetedScreensMutantExport.tsv -vcf CosmicCodingMuts.normal.vcf > hg38_cosmic92_targeted_coding.txt`.
+
 ## ICGC annotations
 
 icgc refers to International Cancer Genome Consortium. The instructions to build the database and the inital database were provided by Ferran Nadeu at Institut d'Investigacions Biomediques August Pi i Sunyer. The annotations include a ICGC_ID column and a ICGC_Occurrence column. The ICGC_Occurrence column includes the project in which the mutation was identified, the number of donors affected, the total number of donors studied in the project and the frequency of the mutation, separated by "|".
