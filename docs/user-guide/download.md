@@ -175,6 +175,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg18 | nci60 | same as above | 20150428 |
 | hg38 | nci60 | same as above | 20150428 |
 | hg19 | icgc21 | International Cancer Genome Consortium version 21 | 20160622 | 
+| hg19 | icgc28 | International Cancer Genome Consortium version 28 | 20210122 | 
+| hg38 | icgc28 | International Cancer Genome Consortium version 28 | 20210122 | 
 | hg19 | clinvar_20131105 | CLINVAR database with Variant Clinical Significance (unknown, untested, non-pathogenic, probable-non-pathogenic, probable-pathogenic, pathogenic, drug-response, histocompatibility, other) and Variant disease name | 20140430 |
 | hg19 | clinvar_20140211 | same as above | 20140430 |
 | hg19 | clinvar_20140303 | same as above | 20140430 |
