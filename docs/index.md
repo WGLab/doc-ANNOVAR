@@ -11,7 +11,7 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
-![new](img/new.png)20210127: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed, when they use www2 instead of www in the command.
+![new](img/new.png)20210127: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed; you can explicitly specify www2 (instead of default www) in the -downdb command line.
 
 ![new](img/new.png)20210122: International Cancer Genome Consortium version 28 (for hg19 and hg38) are available in ANNOVAR now. 
 
