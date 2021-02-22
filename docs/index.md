@@ -11,11 +11,11 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
-![new](img/new.png)20210202: The Clinvar 20210123 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210204).
+![new](img/new.png)2021Feb02: The Clinvar 20210123 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210204).
 
-![new](img/new.png)20210127: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed; you can explicitly specify www2 (instead of default www) in the -downdb command line.
+![new](img/new.png)2021Jan27: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed; you can explicitly specify www2 (instead of default www) in the -downdb command line.
 
-![new](img/new.png)20210122: International Cancer Genome Consortium version 28 (for hg19 and hg38) are available in ANNOVAR now. 
+![new](img/new.png)2021Jan22: International Cancer Genome Consortium version 28 (for hg19 and hg38) are available in ANNOVAR now. 
 
 ![new](img/new.png)2020Oct07: The dbNSFP v4.1 is available in ANNOVAR for annotation on hg19 and hg38 coordinate (keyword dbnsfp41a is for academic use, dbnsfp41c is for commercial use).
 
