@@ -318,7 +318,7 @@ rs41534544
 rs4308095
 rs12345678
 
-[kaiwang@biocluster ~/]$ convert2annovar.pl -format rsid example/snplist.txt -dbsnpfile humandb/hg19_snp138.txt > snnplist.avinput 
+[kaiwang@biocluster ~/]$ convert2annovar.pl -format rsid example/snplist.txt -dbsnpfile humandb/hg19_snp138.txt > snplist.avinput 
 NOTICE: Scanning dbSNP file humandb/hg19_snp138.txt...
 NOTICE: input file contains 4 rs identifiers, output file contains information for 4 rs identifiers
 WARNING: 1 rs identifiers have multiple records (due to multiple mapping) and they are all written to output
