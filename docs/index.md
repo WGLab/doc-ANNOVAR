@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)20210202: The Clinvar 20210501 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210507).
+
 ![new](img/new.png)20210202: The Clinvar 20210123 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210204).
 
 ![new](img/new.png)20210127: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed; you can explicitly specify www2 (instead of default www) in the -downdb command line.
