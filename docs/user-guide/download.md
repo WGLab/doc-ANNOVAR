@@ -255,7 +255,7 @@ Several third-party researchers have provided additional annotation datasets tha
 
 Customprodbj is a Java-based tool for customized protein database construction. It can build the database on a single or multiple VCF files on single or multiple individuals. It can be accessed at [here](https://github.com/wenbostar/customprodbj). Command line example: `java -jar customprodbj.jar -f input_variant_file_list.txt -d annovar_database/humandb/hg19_refGeneMrna.fa -r annovar_database/humandb/hg19_refGene.txt -t -o out/`.
 
-
+David Baux created a convenient script to automate the procedure of generating ClinVar databases in ANNOVAR. The scripts are available [here](https://github.com/mobidic/update_annovar_db).
 
 ---
 
