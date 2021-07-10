@@ -60,6 +60,12 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | dbnsfp41a | same as above | 20201007 |
 | hg19 | dbnsfp41c | same as above, suitable for commerical use | 20201007 |
 | hg38 | dbnsfp41c | same as above | 20201007 |
+| hg18 | dbnsfp42a | reformatted to include more columns than dbnsfp41a | 20210710 |
+| hg19 | dbnsfp42a | same as above | 20210710 |
+| hg38 | dbnsfp42a | same as above | 20210710 |
+| hg18 | dbnsfp42c | reformatted to include more columns than dbnsfp41a, commerical use | 20210710 |
+| hg19 | dbnsfp42c | same as above | 20210710 |
+| hg38 | dbnsfp42c | same as above | 20210710 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
