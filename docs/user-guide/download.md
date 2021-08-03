@@ -2,7 +2,7 @@
 
 You can post questions through Disqus in this website or just email me directly.
 
-The latest version of ANNOVAR (2019Oct24) can be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
+The latest version of ANNOVAR can always be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
