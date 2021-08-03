@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)20210710: The dbNSFP 4.2a and 4.2c (hg18, hg19, hg38) are available in ANNOVAR for annotation.
+
 ![new](img/new.png)20210202: The Clinvar 20210501 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210507).
 
 ![new](img/new.png)20210202: The Clinvar 20210123 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210204).
