@@ -10,6 +10,9 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email or I click the notification email but cannot find the question if a page has too many Disqus posts) or you can just email me directly kaichop gmail.com. Thank you very much for your help and support!
 
 ---
+
+![new](img/new.png)20220802: The gene definition annotation in ANNOVAR is updated (main changes are for hg38_ensGene and hg38_knownGene). Note that ensGene is the same as gencodeGeneBasic in ANNOVAR.
+
 ![new](img/new.png)20220330: The Clinvar annotation in ANNOVAR is updated to 20220320 on hg19/hg38 (hg38 has no MT variants though).
 
 ![new](img/new.png)20211019: The Gene Annotations, including refGene, refGeneWithVer, knownGene, ensGene (hg18, hg19, hg38) are updated. Contact me if you need archival version (the last one is December 2019).
