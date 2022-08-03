@@ -11,25 +11,25 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
-![new](img/new.png)20220802: An increasing number of users reported problems to download ANNOVAR databases from institutional computing clusters. This is due to automated re-direction of http traffic to https, and that ANNOVAR server's https (which uses a free service) is not recognized as valid by some institutions. For this reason, the download URL that uses http will no longer be re-directed to https traffic in ANNOVAR server; this is the easiest way to ensure backward compatibility for users. If you absolutely need to use https for any reason, you can edit the source code of ANNOVAR to use https in the URL.
+![new](img/new.png)2022Aug02: An increasing number of users reported problems to download ANNOVAR databases from institutional computing clusters. This is due to automated re-direction of http traffic to https, and that ANNOVAR server's https (which uses a free service) is not recognized as valid by some institutions. For this reason, the download URL that uses http will no longer be re-directed to https traffic in ANNOVAR server; this is the easiest way to ensure backward compatibility for users. If you absolutely need to use https for any reason, you can edit the source code of ANNOVAR to use https in the URL.
 
-![new](img/new.png)20220802: ANNOVAR reached over 10,000 citations in [Google Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=J_veo1sAAAAJ&citation_for_view=J_veo1sAAAAJ:UebtZRa9Y70C) now, which is a milestone achievement!
+![new](img/new.png)2022Aug02: ANNOVAR reached over 10,000 citations in [Google Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=J_veo1sAAAAJ&citation_for_view=J_veo1sAAAAJ:UebtZRa9Y70C) now, which is a milestone achievement!
 
-![new](img/new.png)20220802: The gene definition annotation in ANNOVAR is updated (main changes are for hg19/38_ensGene and hg38_knownGene). Note that ensGene is the same as gencodeGeneBasic in ANNOVAR.
+![new](img/new.png)2022Aug02: The gene definition annotation in ANNOVAR is updated (main changes are for hg19/38_ensGene and hg38_knownGene). Note that ensGene is the same as gencodeGeneBasic in ANNOVAR.
 
-![new](img/new.png)20220330: The Clinvar annotation in ANNOVAR is updated to 20220320 on hg19/hg38 (hg38 has no MT variants though).
+![new](img/new.png)2022Mar30: The Clinvar annotation in ANNOVAR is updated to 20220320 on hg19/hg38 (hg38 has no MT variants though).
 
-![new](img/new.png)20211019: The Gene Annotations, including refGene, refGeneWithVer, knownGene, ensGene (hg18, hg19, hg38) are updated. Contact me if you need archival version (the last one is December 2019).
+![new](img/new.png)2021Oct19: The Gene Annotations, including refGene, refGeneWithVer, knownGene, ensGene (hg18, hg19, hg38) are updated. Contact me if you need archival version (the last one is December 2019).
 
-![new](img/new.png)20210710: The dbNSFP 4.2a and 4.2c (hg18, hg19, hg38) are available in ANNOVAR for annotation.
+![new](img/new.png)2021Jul10: The dbNSFP 4.2a and 4.2c (hg18, hg19, hg38) are available in ANNOVAR for annotation.
 
-![new](img/new.png)20210507: The Clinvar 20210501 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210507).
+![new](img/new.png)2021May07: The Clinvar 20210501 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210507).
 
-![new](img/new.png)20210202: The Clinvar 20210123 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210204).
+![new](img/new.png)2021Feb02: The Clinvar 20210123 version is available in ANNOVAR in hg19/hg38 coordinates (file updated 20210204).
 
-![new](img/new.png)20210127: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed; you can explicitly specify www2 (instead of default www) in the -downdb command line.
+![new](img/new.png)2021Jan27: The ANNOVAR annotation databases are being moved to a new hosting server. We plan to still keep the old S3-based server as a CDN for Asia and Middle East to improve download speed; you can explicitly specify www2 (instead of default www) in the -downdb command line.
 
-![new](img/new.png)20210122: International Cancer Genome Consortium version 28 (for hg19 and hg38) are available in ANNOVAR now. 
+![new](img/new.png)2021Jan22: International Cancer Genome Consortium version 28 (for hg19 and hg38) are available in ANNOVAR now. 
 
 ![new](img/new.png)2020Oct07: The dbNSFP v4.1 is available in ANNOVAR for annotation on hg19 and hg38 coordinate (keyword dbnsfp41a is for academic use, dbnsfp41c is for commercial use).
 
