@@ -18,18 +18,18 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
-| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20211019 |
-| hg19 | refGene | same as above | 20211019 |
-| hg38 | refGene | same as above | 20211019 |
-| hg18 | refGeneWithVer | FASTA sequences for all annotated transcripts in RefSeq Gene with version number | 20211019 |
-| hg19 | refGeneWithVer | same as above | 20211019 |
-| hg38 | refGeneWithVer | same as above | 20211019 |
-| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20211019 |
-| hg19 | knownGene | same as above | 20211019 |
-| hg38 | knownGene | same as above | 20211019 |
-| hg18 | ensGene | FASTA sequences for all annotated transcripts in wgEncodeGencodeManualV3 collection | 20211019 |
-| hg19 | ensGene | FASTA sequences for all annotated transcripts in Gencode v38 Basic collection lifted up to hg19 | 20211019 |
-| hg38 | ensGene | FASTA sequences for all annotated transcripts in Gencode v38 Basic collection | 20211019 |
+| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene (last update was 2020-08-22 at UCSC) | 20211019 |
+| hg19 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg38 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg18 | refGeneWithVer | FASTA sequences for all annotated transcripts in RefSeq Gene with version number (last update was 2020-08-22 at UCSC) | 20211019 |
+| hg19 | refGeneWithVer | same as above (the last update was 2020-08-17 at UCSC) | 20211019 |
+| hg38 | refGeneWithVer | same as above  (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene (last update was 2009-05-10 at UCSC) | 20211019 |
+| hg19 | knownGene | same as above (last update was 2013-06-30 at UCSC) | 20211019 |
+| hg38 | knownGene | same as above (last update was 2022-05-15 at UCSC) | 20211019 |
+| hg18 | ensGene | FASTA sequences for all annotated transcripts in wgEncodeGencodeManualV3 collection (last update was 2010-02-28 at UCSC) | 20211019 |
+| hg19 | ensGene | FASTA sequences for all annotated transcripts in Gencode v40 Basic collection lifted up to hg19 (last update was 2022-04-28 at UCSC) | 20220802 |
+| hg38 | ensGene | FASTA sequences for all annotated transcripts in Gencode v40 Basic collection (last update was 2022-04-21 at UCSC) | 20220802 |
 
 ---
 
