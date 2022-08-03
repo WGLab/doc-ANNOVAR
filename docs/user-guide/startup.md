@@ -43,7 +43,7 @@ The header line starts with `#`. The cross-reference file then contains 15 types
 
 ![table_annovar_fullxref](../img/table_annovar_fullxref.PNG)
 
-
+Since ANNOVAR includes dbNSFP4.2a and dbNSFP4.2c now, you can try change the command above to use the latest version. Similarly, since ANNOVAR supports gnomAD now, you do not need to use exac03, but instead use gnomad211_exome which is the version 2.1.1.
 
 `table_annovar.pl` can directly support input and output of VCF files (the annotation will be written to the INFO field of the output VCF file). Let's try this:
 
