@@ -13,6 +13,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ![new](img/new.png)20220802: An increasing number of users reported problems to download ANNOVAR databases from institutional computing clusters. This is due to automated re-direction of http traffic to https, and that ANNOVAR server's https (which uses a free service) is not recognized as valid by some institutions. For this reason, the download URL that uses http will no longer be re-directed to https traffic in ANNOVAR server; this is the easiest way to ensure backward compatibility for users. If you absolutely need to use https for any reason, you can edit the source code of ANNOVAR to use https in the URL.
 
+![new](img/new.png)20220802: ANNOVAR reached over 10,000 citations in [Google Scholar](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=J_veo1sAAAAJ&citation_for_view=J_veo1sAAAAJ:UebtZRa9Y70C) now, which is a milestone achievement!
+
 ![new](img/new.png)20220802: The gene definition annotation in ANNOVAR is updated (main changes are for hg19/38_ensGene and hg38_knownGene). Note that ensGene is the same as gencodeGeneBasic in ANNOVAR.
 
 ![new](img/new.png)20220330: The Clinvar annotation in ANNOVAR is updated to 20220320 on hg19/hg38 (hg38 has no MT variants though).
