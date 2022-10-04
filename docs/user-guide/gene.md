@@ -404,6 +404,8 @@ So after running the above commands, the gene annotation database for the chimp 
 
 > *Exercise: Try to run the same procedure above for sacCer2 (yeast) and see how this differs.*
 
+> *Exercise: Try to run the same procedure above for sacCer3 (yeast) and see how this differs. Note that UCSC uses ncbiRefSeq instead of RefGene to denote gene annotation, so you have to use this in the -downdb command. Then use `retrieve_seq_from_fasta.pl yeastdb/sacCer3_ncbiRefSeq.txt -seqdir yeastdb/sacCer3_seq/ -format refGene -outfile yeastdb/sacCer3_refGeneMrna.fa` to generate the mRNA FASTQ file.*
+
 > *Exercise: Try to run the same procedure above for bosTau6 (cow). Note that as of April 2012, UCSC has not split the FASTA file for bosTau6 genome sequence into individual chromosomes. Therefore, users need to use "-seqfile bosTau6.fa", rather than "-seqdir cowdb/bosTau6_seq", in the retrieve_seq_from_fasta.pl command. Similarly, try to run the same procedure above for micMur1 (Mouse Lemur) and note the use of -seqfile rather than -seqdir.*
 
 > *Exercise: Try to run the same procedure above for rn5 (rat) or dm6 (Drosophila). Again users need to supply FASTA files rather than FASTA directory.*
