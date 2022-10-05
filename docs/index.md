@@ -10,6 +10,7 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email or I click the notification email but cannot find the question if a page has too many Disqus posts) or you can just email me directly kaichop gmail.com. Thank you very much for your help and support!
 
 ---
+![new](img/new.png)2022Oct05: The gene definition annotation in ANNOVAR is updated (main changes are for hg19/38_ensGene from Gencode v40 to v41). Note that the previous version is now referred to as ensGene40 if users want to use the earlier one.
 
 ![new](img/new.png)2022Aug02: An increasing number of users reported problems to download ANNOVAR databases from institutional computing clusters. This is due to automated re-direction of http traffic to https, and that ANNOVAR server's https (which uses a free service) is not recognized as valid by some institutions. For this reason, the download URL that uses http will no longer be re-directed to https traffic in ANNOVAR server; this is the easiest way to ensure backward compatibility for users. If you absolutely need to use https for any reason, you can edit the source code of ANNOVAR to use https in the URL.
 
