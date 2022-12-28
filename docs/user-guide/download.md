@@ -115,6 +115,7 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | gnomad211_exome | same as above | 20190409 |
 | hg38 | gnomad211_genome | same as above | 20190409 |
 | hg38 | gnomad30_genome | version 3.0 whole-genome data | 20191104 |
+| hg38 | gnomad312_genome | version 3.1.2 whole-genome data | 20221228 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
