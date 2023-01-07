@@ -25,7 +25,7 @@ Assume that we have downloaded ANNOVAR package and used `tar xvfz annovar.latest
 
 Run the above commands one by one. The first a few commands download appropriate databases into the `humandb/` directory. The final command run TABLE_ANNOVAR, using ExAC version 0.3 (referred to as exac03) dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147) databases and remove all temporary files, and generates the output file called `myanno.hg19_multianno.txt`. Fields that does not have any annotation will be filled by "." string. Open the output file in Excel and see what it contains. The expected output file that I generated can be downloaded here: [ex1.hg19_multianno.csv](http://www.openbioinformatics.org/annovar/download/ex1.hg19_multianno.csv). A screen shot of the first a few columns is shown below:
 
-![table_annovar](/img/table_annovar.PNG)
+![table_annovar](../img/table_annovar.PNG)
 
 The output file contains multiple columns. The first a few columns are your input column. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). For the next a few columns, the ExAC\* columns represent allele frequency in all the samples as well as sub-populations in the Exome Aggregation Consortium data sets, while the avsnp147 means the SNP identifier in the dbSNP version 147. The other columns contains prediction scores for non-synonymous variants using several widely used tools, including SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
 
@@ -41,9 +41,9 @@ A1BG    9.0649236354772e-05     0.786086131023045       0.2138232197406 alpha-1-
 
 The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](http://www.openbioinformatics.org/annovar/download/ex1.hg19_multianno.csv). Part of the file is shown below to give users an example:
 
-![table_annovar_fullxref](/img/table_annovar_fullxref.PNG)
+![table_annovar_fullxref](../img/table_annovar_fullxref.PNG)
 
-
+Since ANNOVAR includes dbNSFP4.2a and dbNSFP4.2c now, you can try change the command above to use the latest version. Similarly, since ANNOVAR supports gnomAD now, you do not need to use exac03, but instead use gnomad211_exome which is the version 2.1.1.
 
 `table_annovar.pl` can directly support input and output of VCF files (the annotation will be written to the INFO field of the output VCF file). Let's try this:
 
@@ -53,7 +53,23 @@ The header line starts with `#`. The cross-reference file then contains 15 types
 
 You can download the output file here: [ex2.hg19_multianno.vcf](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [ex2.hg19_multianno.txt](http://www.openbioinformatics.org/annovar/download/ex2.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
 
-![table_vcf](/img/table_vcf.PNG)
+![table_vcf](../img/table_vcf.PNG)
+
+Some people want to have the HGVS formatted strings for not only exonic variant, but also intronic variant that could be say 10bp away from splice site (by default, ANNOVAR only treats variants within 2bp of exon/intron boundary as splice variants, unless a --slicing_threshold parameter is set). So you can specify this using the command below:
+
+```
+[kaiwang@biocluster ~/]$ table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation g,r,f,f,f  -nastring . -vcfinput -polish -intronhgvs
+```
+
+Finally, for each protocol/operation, you can add extra argument, and it has the same comma-delimited format. For example, you can add `-hgvs` argument to the `refGene` annotation so that the output is in HGVS format (c.122C>T rather than c.C122T). There are the same number of arguments in -arg as in -protocol and -operation.
+
+```
+[kaiwang@biocluster ~/]$ table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation g,r,f,f,f -arg '-hgvs',,,, -nastring . -vcfinput -polish
+```
+
+
+
+
 
 Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 

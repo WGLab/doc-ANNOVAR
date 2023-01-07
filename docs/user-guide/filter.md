@@ -1003,6 +1003,10 @@ Although I periodically update ClinVar database in ANNOVAR for help users perfor
           index_annovar.pl hg38_clinvar_20180603_raw.txt -out hg38_clinvar_20180603.txt -comment comment_20180708.txt
 ```
 
+Additionally, please note that David Baux created a convenient script to automate the procedure of generating ClinVar databases in ANNOVAR. The scripts are available [here](https://github.com/mobidic/update_annovar_db).
+
+
+
 
 
 ## CADD annotations

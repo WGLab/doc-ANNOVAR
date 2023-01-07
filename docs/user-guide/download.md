@@ -2,7 +2,7 @@
 
 You can post questions through Disqus in this website or just email me directly.
 
-The latest version of ANNOVAR (2019Oct24) can be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
+The latest version of ANNOVAR can always be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required).
 
 ANNOVAR is written in Perl and can be run as a standalone application on diverse hardware systems where standard Perl modules are installed.
 
@@ -18,18 +18,20 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
-| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene | 20190929 |
-| hg19 | refGene | same as above | 20190929 |
-| hg38 | refGene | same as above | 20190929 |
-| hg18 | refGeneWithVer | FASTA sequences for all annotated transcripts in RefSeq Gene with version number | 20190929 |
-| hg19 | refGeneWithVer | same as above | 20190929 |
-| hg38 | refGeneWithVer | same as above | 20190929 |
-| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene | 20190929 |
-| hg19 | knownGene | same as above | 20190929 |
-| hg38 | knownGene | same as above | 20190929 |
-| hg18 | ensGene | FASTA sequences for all annotated transcripts in Gencode v31 Basic collection | 20190929 |
-| hg19 | ensGene | same as above | 20190929 |
-| hg38 | ensGene | same as above | 20190929 |
+| hg18 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene (last update was 2020-08-22 at UCSC) | 20211019 |
+| hg19 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg38 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg18 | refGeneWithVer | FASTA sequences for all annotated transcripts in RefSeq Gene with version number (last update was 2020-08-22 at UCSC) | 20211019 |
+| hg19 | refGeneWithVer | same as above (the last update was 2020-08-17 at UCSC) | 20211019 |
+| hg38 | refGeneWithVer | same as above  (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg18 | knownGene | FASTA sequences for all annotated transcripts in UCSC Known Gene (last update was 2009-05-10 at UCSC) | 20211019 |
+| hg19 | knownGene | same as above (last update was 2013-06-30 at UCSC) | 20211019 |
+| hg38 | knownGene | same as above (last update was 2022-05-15 at UCSC) | 20211019 |
+| hg18 | ensGene | FASTA sequences for all annotated transcripts in wgEncodeGencodeManualV3 collection (last update was 2010-02-28 at UCSC) | 20211019 |
+| hg19 | ensGene | FASTA sequences for all annotated transcripts in Gencode v41 Basic collection lifted up to hg19 (last update was 2022-07-12 at UCSC) | 20221005 |
+| hg38 | ensGene | FASTA sequences for all annotated transcripts in Gencode v41 Basic collection (last update was 2022-07-12 at UCSC) | 20221005 |
+| hg19 | ensGene40 | FASTA sequences for all annotated transcripts in Gencode v40 Basic collection lifted up to hg19 (last update was 2022-04-28 at UCSC) | 20220802 |
+| hg38 | ensGene40 | FASTA sequences for all annotated transcripts in Gencode v40 Basic collection (last update was 2022-04-21 at UCSC) | 20220802 |
 
 ---
 
@@ -60,6 +62,12 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | dbnsfp41a | same as above | 20201007 |
 | hg19 | dbnsfp41c | same as above, suitable for commerical use | 20201007 |
 | hg38 | dbnsfp41c | same as above | 20201007 |
+| hg18 | dbnsfp42a | reformatted to include more columns than dbnsfp41a | 20210710 |
+| hg19 | dbnsfp42a | same as above | 20210710 |
+| hg38 | dbnsfp42a | same as above | 20210710 |
+| hg18 | dbnsfp42c | reformatted to include more columns than dbnsfp41a, commerical use | 20210710 |
+| hg19 | dbnsfp42c | same as above | 20210710 |
+| hg38 | dbnsfp42c | same as above | 20210710 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
@@ -107,6 +115,7 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | gnomad211_exome | same as above | 20190409 |
 | hg38 | gnomad211_genome | same as above | 20190409 |
 | hg38 | gnomad30_genome | version 3.0 whole-genome data | 20191104 |
+| hg38 | gnomad312_genome | version 3.1.2 whole-genome data | 20221228 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
@@ -209,6 +218,12 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | clinvar_20200316 |  same as above | 20200401 |
 | hg19 | clinvar_20210123 |  Clinvar version 20210123 with separate columns (CLNALLELEID CLNDN CLNDISDB CLNREVSTAT CLNSIG) | 20210202 |
 | hg38 | clinvar_20210123 |  same as above | 20210202 |
+| hg19 | clinvar_20210501 |  Clinvar version 20210501 with separate columns (CLNALLELEID CLNDN CLNDISDB CLNREVSTAT CLNSIG) | 20210507 |
+| hg38 | clinvar_20210501 |  same as above | 20210507 |
+| hg19 | clinvar_20220320 |  Clinvar version 20220320 with separate columns (CLNALLELEID CLNDN CLNDISDB CLNREVSTAT CLNSIG) | 20220330 |
+| hg38 | clinvar_20220320 |  same as above | 20220320 |
+| hg19 | clinvar_20221231 |  Clinvar version 20221231 with separate columns (CLNALLELEID CLNDN CLNDISDB CLNREVSTAT CLNSIG) | 20230105 |
+| hg38 | clinvar_20221231 |  same as above | 20230105 |
 | hg19 | popfreq_max_20150413 |  A database containing the maximum allele frequency from 1000G, ESP6500, ExAC and CG46 | 20150413 |
 | hg19 | popfreq_all_20150413 |  A database containing all allele frequency from 1000G, ESP6500, ExAC and CG46  | 20150413 |
 | hg19 | mitimpact2 | pathogenicity predictions of human mitochondrial missense variants (see [here](http://www.ncbi.nlm.nih.gov/m/pubmed/25516408/)  | 20150520 |
@@ -253,7 +268,7 @@ Several third-party researchers have provided additional annotation datasets tha
 
 Customprodbj is a Java-based tool for customized protein database construction. It can build the database on a single or multiple VCF files on single or multiple individuals. It can be accessed at [here](https://github.com/wenbostar/customprodbj). Command line example: `java -jar customprodbj.jar -f input_variant_file_list.txt -d annovar_database/humandb/hg19_refGeneMrna.fa -r annovar_database/humandb/hg19_refGene.txt -t -o out/`.
 
-
+David Baux created a convenient script to automate the procedure of generating ClinVar databases in ANNOVAR. The scripts are available [here](https://github.com/mobidic/update_annovar_db).
 
 ---
 
