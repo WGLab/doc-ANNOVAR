@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)2023Mar15: The gene definition annotation in ANNOVAR is updated (main changes are for hg19/38_ensGene from Gencode v41 to v43). Note that the previous version is now referred to as ensGene41/ensGene40 if users want to use the earlier one.
+
 ![new](img/new.png)2023Jan05: The Clinvar annotation in ANNOVAR is updated to 20221231 on hg19/hg38.
 
 ![new](img/new.png)2022Dec28: The gnomAD whole-genome version 3.1.2 is available in ANNOVAR with build of hg38 and keyword of gnomad312_genome. This includes gender-specific, ethnicity-specific and popmax allele frequencies from 76,156 whole genomes without exomes.
