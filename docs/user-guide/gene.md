@@ -517,15 +517,15 @@ For some variants, ANNOVAR may generate different annotations with other competi
 
 One interesting example is illustrated below. One other software annotates "3       17028503        17028503        A       G" as synonymous, but ANNOVAR annotates it as "non-synonymous" by refGene annotation. It turns out that refGene provides two transcript annotation at this region, and the same mutation can be both synonymous and non-synonymous. In ANNOVAR annotations, non-synonymous overrides synonymous (again, read the precedence table above to understand this), so the resulting call is non-synonymous. If users use `-separate` argument in the command line, ANNOVAR will print both annotations in the output file.
 
-![gene_shot](/img/gene_annotation_2.gif)
+![gene_shot](../img/gene_annotation_2.gif)
 
 Another interesting example is given below. Using RefSeq annotation, the mutation "chr12   6945846 6945846 A       C" is annotated as stop-lost by ANNOVAR. Checking it in genome browse shows that UCSC Gene annotates multiple transcripts in the region, so the mutation could be stop-lost, or 3-UTR or intronic, based on the actual gene definition that users want to use. This is an extremely rare scenario, but users should keep this in mind when interpreting data, especially after a potential candidate variant is found. ANNOVAR excels in this respect, compared to other annotation systems, because it allows flexible selection of gene definition systems.
 
-![gene_shot](/img/gene_annotation_3.gif)
+![gene_shot](../img/gene_annotation_3.gif)
 
 Another interesting example is shown below. Two genes (DGCR14 and TSSK2) overlap with each other, yet the coding region for one gene is the UTR for another gene. For one of the gene, Ensembl provides three peptide/transcript annotations, but one of them (ENST00000383058) is completely opposite of the other in terms of orientation, with one extra amino acid. So the mutation per se cannot determine the orientation of the transcript (which is determined by both the gene annotation system and the genome build), and that is why ANNOVAR does not give orientation annotation. To know the orientation, users will have to do a `grep ENST00000383058 hg18_ensGene.txt`, which includes information on both gene annotation and build annotation.
 
-![gene_shot](/img/gene_annotation_4.gif)
+![gene_shot](../img/gene_annotation_4.gif)
 
 ---
 
