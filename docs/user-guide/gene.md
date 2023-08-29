@@ -509,7 +509,7 @@ perl retrieve_seq_from_fasta.pl barleydb/HV39_refGene.txt -seqfile barleydb/Hord
 
 Sometimes, the refGene or the knownGene annotations themselves contain errors. One clear example is shown below:
 
-![gene_shot](/img/gene_annotation_1.gif)
+![gene_shot](../img/gene_annotation_1.gif)
 
 As can be seen from the above figure, refGene mis-annotated the stop codon (such that one nucleotide T is missing from the reading frame). UCSC Gene however correctly identified the last stop codon. ANNOVAR recognizes such mistakes and will annotate "UNKNOWN" as exonic function for refGene annotation for a variant located at chr17:3141680 (it is unknown because a codon cannot have only 2 nucleotides).
 
