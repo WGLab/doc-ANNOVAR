@@ -10,6 +10,7 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email or I click the notification email but cannot find the question if a page has too many Disqus posts) or you can just email me directly kaichop gmail.com. Thank you very much for your help and support!
 
 ---
+![new](img/new.png)2023Aug30: gnomAD on CHM13-T2T coordinate is available in ANNOVAR now. Use '-build hs1 -downdb gnomad' to download. Please report issues if you find any.
 
 ![new](img/new.png)2023Aug11: Use '-build hs1' if you want to annotate your variants are called against the T2TCHM13v2.0 human reference genome. Please report issues if you find any.
 
