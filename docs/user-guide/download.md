@@ -34,7 +34,7 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | ensGene40 | FASTA sequences for all annotated transcripts in Gencode v40 Basic collection (last update was 2022-04-21 at UCSC) | 20220802 |
 | hg19 | ensGene41 | FASTA sequences for all annotated transcripts in Gencode v41 Basic collection lifted up to hg19 (last update was 2022-07-12 at UCSC) | 20221005 |
 | hg38 | ensGene41 | FASTA sequences for all annotated transcripts in Gencode v41 Basic collection (last update was 2022-07-12 at UCSC) | 20221005 |
-
+| hs1 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene in CHM13-T2T reference genome (last update was 2023-05-29 at UCSC) | 20230811 |
 ---
 
 ### - For filter-based annotation
@@ -118,6 +118,7 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | gnomad211_genome | same as above | 20190409 |
 | hg38 | gnomad30_genome | version 3.0 whole-genome data | 20191104 |
 | hg38 | gnomad312_genome | version 3.1.2 whole-genome data | 20221228 |
+| hs1 | gnomad_genome | whole-genome data from [here](https://ftp.ensembl.org/pub/rapid-release/species/Homo_sapiens/GCA_009914755.4/ensembl/variation/2022_10/vcf/Homo_sapiens-GCA_009914755.4-2022_10-gnomad.vcf.gz) | 20230830 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |
