@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)2023Nov18: gnomAD v4.0 (hg38 coordinate) is available through ANNOVAR now. Use 'gnomad40' as the keyword to download and annotate your variants. It is compiled from exome sequencing data from 730,947 individuals and genome sequencing data from 76,215 individuals, and includes additional global diversity such as middle easterns.
+
 ![new](img/new.png)2023Oct10: wANNOVAR server is currently down and I am in the process of setting up a new server in a new host. Please be patient.
 
 ![new](img/new.png)2023Aug30: gnomAD on CHM13-T2T coordinate is available in ANNOVAR now. Use '-build hs1 -downdb gnomad' to download. Please report issues if you find any.
