@@ -118,7 +118,7 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | gnomad211_genome | same as above | 20190409 |
 | hg38 | gnomad30_genome | version 3.0 whole-genome data | 20191104 |
 | hg38 | gnomad312_genome | version 3.1.2 whole-genome data | 20221228 |
-| hg38 | gnomad40 | version 4.0 whole-genome and exome data | 20231118 |
+| hg38 | gnomad40_genome | version 4.0 whole-genome data | 20231118 |
 | hs1 | gnomad_genome | whole-genome data from [here](https://ftp.ensembl.org/pub/rapid-release/species/Homo_sapiens/GCA_009914755.4/ensembl/variation/2022_10/vcf/Homo_sapiens-GCA_009914755.4-2022_10-gnomad.vcf.gz) | 20230830 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
