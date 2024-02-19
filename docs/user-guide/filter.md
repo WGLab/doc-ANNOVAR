@@ -1152,6 +1152,15 @@ prepare_annovar_user.pl -dbtype cosmic CosmicNCV.tsv -vcf CosmicNonCodingVariant
 
 There should be around 12 million coding and 15 million non-coding variants in cosmic92. If you only want targeted screen data, use `prepare_annovar_user.pl -dbtype cosmic CosmicCompleteTargetedScreensMutantExport.tsv -vcf CosmicCodingMuts.normal.vcf > hg38_cosmic92_targeted_coding.txt`.
 
+For more recent COSMIC, the old annotation such as "tumor type" no longer exist. The prepare_annovar_user.pl is slightly modified to handle the new file formats with 'COSMIC_PHENOTYPE_ID' and 'COSMIC_SAMPLE_ID' columns instead:
+
+```
+echo -e '#Chr\tStart\tEnd\tRef\tAlt\tCOSMIC99' > hg38_cosmic99.txt
+prepare_annovar_user.pl -dbtype cosmic GenomeScreensMutant_v99_GRCh38.tsv -vcf GenomeScreensMutant_Normal_v99_GRCh38.vcf >> hg38_cosmic99.txt
+prepare_annovar_user.pl -dbtype cosmic Cosmic_NonCodingVariants_v99_GRCh38.tsv -vcf Cosmic_NonCodingVariants_v99_GRCh38.vcf >> hg38_cosmic99.txt
+```
+Note that the first line above adds a header line as a comment line in the final output file. This is useful when you index the output file and when you use table_annovar to annotate the mutations.
+
 ## ICGC annotations
 
 icgc refers to International Cancer Genome Consortium. The instructions to build the database and the inital database were provided by Ferran Nadeu at Institut d'Investigacions Biomediques August Pi i Sunyer. The annotations include a ICGC_ID column and a ICGC_Occurrence column. The ICGC_Occurrence column includes the project in which the mutation was identified, the number of donors affected, the total number of donors studied in the project and the frequency of the mutation, separated by "|".
