@@ -11,6 +11,8 @@ Please click the menu items to navigate through this website. If you have questi
 
 ---
 
+![new](img/new.png)2024Feb19: [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) is updated to handle new COSMIC format.
+
 ![new](img/new.png)2023Nov25: wANNOVAR server is now functional.
 
 ![new](img/new.png)2023Nov18: gnomAD v4.0 (hg38 coordinate) is available through ANNOVAR now. Use 'gnomad40_genome' and 'gnomad40_exome' as the keyword to download and annotate your variants. It is compiled from exome sequencing data from 730,947 individuals and genome sequencing data from 76,215 individuals, and includes additional global diversity such as middle easterns.
