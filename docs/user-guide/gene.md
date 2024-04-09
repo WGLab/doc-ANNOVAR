@@ -124,7 +124,7 @@ If the users want to have all functional consequences printed out (rather than j
 
 To further explain the variant_function annotation, check the figure below:
 
-![](/img/gene_snp_1.png)
+![varfunc](../img/gene_snp_1.png)
 
 In the figure above, SNP1 is an intergenic variant, as it is >1kb away from any gene, SNP2 is a downstream variant, as it is 1kb from the 3'end of the NADK gene; SNP3 is a UTR3 variant; SNP4 is an intronic variant; SNP5 is an exonic variant.
 
