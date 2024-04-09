@@ -1,5 +1,9 @@
 ## Command overview
 
+IMPORTANT: if you are a new user to ANNOVAR, do NOT use annotate_variation.pl for gene annotation. Simply use table_annovar.pl as shown in the quick start-up guide. The table_annovar.pl actually runs a series of commands including annotate_variation and coding_change and performs tasks such as annotation polishing and cDot generation for intronic variants.
+
+<strong>IMPORTANT: Again do not use annotate_variation unless you are an expert and know the intricate differences of the many arguments. Only use table_annovar for your annotation needs. See examples in the quick start-up guide. Many users generate incorrect results by annotate_variation.pl because they do not know how to perform polishing, which is why table_annovar was created to help users get the most reliable set of annotations in an easy manner. </strong>
+
 One of the functionalities of ANNOVAR is to generate gene-based annotation. For example, from a whole-genome sequencing experiment on a human subject, given a list of 4 million SNVs (single nucleotide variants) and 0.5 million indels (insertions or deletions), it is of interest to identify the genes that are disrupted. For intergenic variants, we are interested in knowing what are the two flanking genes, and what are the distances between the variants and the flanking genes. For exonic variants, we are interested in knowing the amino acid changes.
 
 Before working on gene-based annotation, a gene definition file and associated FASTA file must be downloaded into a directory if they are not already downloaded. Let's call this directory as `humandb/`.
