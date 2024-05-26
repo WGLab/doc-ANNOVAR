@@ -70,6 +70,10 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg18 | dbnsfp42c | reformatted to include more columns than dbnsfp41a, commerical use | 20210710 |
 | hg19 | dbnsfp42c | same as above | 20210710 |
 | hg38 | dbnsfp42c | same as above | 20210710 |
+| hg19 | dbnsfp47a | dbNSFP version 4.7a | 20240525 |
+| hg38 | dbnsfp47a | same as above | 20240525 |
+| hg19 | dbnsfp42c | dbNSFP version 4.7c for commercial use | 20240525 |
+| hg38 | dbnsfp42c | same as above | 20240525 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
@@ -174,6 +178,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | avsnp147 | dbSNP147 with allelic splitting and left-normalization | 20160606 |
 | hg19 | avsnp150 | dbSNP150 with allelic splitting and left-normalization | 20170929 |
 | hg38 | avsnp150 | dbSNP150 with allelic splitting and left-normalization | 20170929 |
+| hg19 | avsnp151 | dbSNP151 with allelic splitting | 20240525 |
+| hg38 | avsnp151 | dbSNP151 with allelic splitting | 20240525 |
 | hg18 | snp128NonFlagged | dbSNP with ANNOVAR index files, after removing those flagged SNPs (SNPs < 1% minor allele frequency (MAF) (or unknown), mapping only once to reference assembly, flagged in dbSnp as "clinically associated") | 20120524 |
 | hg18 | snp129NonFlagged | same as above | 20120524 |
 | hg18 | snp130NonFlagged | same as above | 20120524 |
