@@ -10,6 +10,9 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email or I click the notification email but cannot find the question if a page has too many Disqus posts) or you can just email me directly kaichop gmail.com. Thank you very much for your help and support!
 
 ---
+
+![new](img/new.png)2024Jun02: gnomAD versino 4.1 is availabe in ANNOVAR now for both genome and exome. There was a bug in allele frequency calculation in version 4.0 so the gnomAD team released v4.1.
+
 ![new](img/new.png)2024May25: dbSNFP version 4.7a and 4.7c (keyword: dbnsfp47a/dbnsfp47c) are available in ANNOVAR now on hg19 and hg38 coordinate, including new scores such as AlphaMissese and ESM1b. The avsnp151 is available in ANNOVAR now to assign dbSNP identifiers to variants on hg19 and hg38 coordinate.
 
 ![new](img/new.png)2024Feb19: [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) is updated to handle new COSMIC format.
