@@ -51,6 +51,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | dbnsfp30a | same as above | 20151015 |
 | hg19 | dbnsfp31a_interpro | protein domain for variants | 20151219 |
 | hg38 | dbnsfp31a_interpro | same as above | 20151219 |
+| hg19 | dbnsfp47a_interpro | protein domain for variants | 20240617 |
+| hg38 | dbnsfp47a_interpro | same as above | 20240617 |
 | hg18 | dbnsfp33a | whole-exome SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, PROVEAN, MetaSVM, MetaLR, VEST, M-CAP, CADD, GERP++, DANN, fathmm-MKL, Eigen, GenoCanyon, fitCons, PhyloP and SiPhy scores from dbNSFP version 3.3a | 20170221 |
 | hg19 | dbnsfp33a | same as above |  20170221 |
 | hg38 | dbnsfp33a | same as above | 20170221 |
