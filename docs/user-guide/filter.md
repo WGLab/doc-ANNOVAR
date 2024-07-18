@@ -10,17 +10,17 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 
 **For frequency of variants in whole-genome data**:
 
-* 1000g2015aug: latest 1000 Genomes Project dataset with allele frequencies in six populations including ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian). These are whole-genome variants.
-* kaviar_20150923: latest Kaviar database with 170 million variants from 13K genomes and 64K exomes.
-* hrcr1: latest Haplotype Reference Consortium database with 40 million variants from 32K samples in haplotype reference consortium
-* cg69: allele frequency in 69 human subjects sequenced by Complete Genomics. useful to exclude platform specific variants.
-* gnomad_genome: allele frequency in gnomAD database whole-genome sequence data on multiple populations.
+* 1000g2015aug (obselete now): latest 1000 Genomes Project dataset with allele frequencies in six populations including ALL, AFR (African), AMR (Admixed American), EAS (East Asian), EUR (European), SAS (South Asian). These are whole-genome variants.
+* kaviar_20150923 (obselete): latest Kaviar database with 170 million variants from 13K genomes and 64K exomes.
+* hrcr1 (obselete): latest Haplotype Reference Consortium database with 40 million variants from 32K samples in haplotype reference consortium
+* cg69 (obselete): allele frequency in 69 human subjects sequenced by Complete Genomics. useful to exclude platform specific variants.
+* gnomad41_genome: allele frequency in gnomAD v4.1 database whole-genome sequence data on multiple populations.
 
 **For frequency of variants in whole-exome data**:
 
-* exac03: latest Exome Aggregation Consortium dataste with allele frequencies in ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian).
+* exac03 (obselete): latest Exome Aggregation Consortium dataste with allele frequencies in ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian).
 * esp6500siv2: latest NHLBI-ESP project with 6500 exomes. Three separate key words are used for 3 population groupings: esp6500siv2_all, esp6500siv2_ea, esp6500siv2_aa.
-* gnomad_exome: allele frequency in gnomAD database whole-exome sequence data on multiple populations.
+* gnomad41_exome: allele frequency in gnomAD v4. database whole-exome sequence data on multiple populations.
 
 **For frequency of variants in isolated or less represented populations**:
 
@@ -41,7 +41,7 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 
 **For functional prediction of variants in whole-exome data**:
 
-* dbnsfp30a: this dataset already includes SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, MetaSVM, MetaLR, VEST, CADD, GERP++, DANN, fitCons, PhyloP and SiPhy scores, but ONLY on coding variants
+* dbnsfp47a: this dataset already includes SIFT, PolyPhen2 HDIV, PolyPhen2 HVAR, LRT, MutationTaster, MutationAssessor, FATHMM, MetaSVM, MetaLR, VEST, CADD, GERP++, DANN, AlphaMissense, fitCons, PhyloP and SiPhy scores, but ONLY on coding variants.
 
 **For functional prediction of splice variants**:
 
@@ -58,8 +58,8 @@ Due to the increased number of databases that are available at ANNOVAR, some use
 **For variant identifiers**:
 
 * snp142: dbSNP version 142
-* avsnp142: an abbreviated version of dbSNP 142 with left-normalization by ANNOVAR developers. (Please check the download page for the latest version)
-
+* avsnp142 (obselete): an abbreviated version of dbSNP 142 with left-normalization by ANNOVAR developers.
+* avsnp151: an abbreviated version of dbSNP 151 with left-normalization by ANNOVAR developers.
 
 
 ## 1000 Genomes Project (2015 Aug) annotations
