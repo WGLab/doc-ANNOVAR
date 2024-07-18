@@ -1161,6 +1161,26 @@ prepare_annovar_user.pl -dbtype cosmic Cosmic_NonCodingVariants_v99_GRCh38.tsv -
 ```
 Note that the first line above adds a header line as a comment line in the final output file. This is useful when you index the output file and when you use table_annovar to annotate the mutations.
 
+For COSMIC100, similar commands can be used as below (note that I added index_annovar.pl to index the database to improve search speed):
+
+```
+tar xvf Cosmic_GenomeScreensMutant_Vcf_v100_GRCh38.tar
+tar xvf Cosmic_GenomeScreensMutant_Tsv_v100_GRCh38.tar
+gunzip Cosmic_GenomeScreensMutant_v100_GRCh38.vcf.gz
+gunzip Cosmic_GenomeScreensMutant_v100_GRCh38.tsv.gz
+tar xvf Cosmic_NonCodingVariants_Tsv_v100_GRCh38.tar
+tar xvf Cosmic_NonCodingVariants_Vcf_v100_GRCh38.tar
+gunzip Cosmic_NonCodingVariants_v100_GRCh38.vcf.gz
+gunzip Cosmic_NonCodingVariants_v100_GRCh38.tsv.gz
+echo -e '#Chr\tStart\tEnd\tRef\tAlt\tCOSMIC100' > hg38_cosmic100_raw.txt
+prepare_annovar_user.pl -dbtype cosmic Cosmic_GenomeScreensMutant_v100_GRCh38.tsv -vcf Cosmic_GenomeScreensMutant_v100_GRCh38.vcf >> hg38_cosmic100_raw.txt 
+prepare_annovar_user.pl -dbtype cosmic Cosmic_NonCodingVariants_v100_GRCh38.tsv -vcf Cosmic_NonCodingVariants_v100_GRCh38.vcf >> hg38_cosmic100_raw.txt 
+index_annovar.pl hg38_cosmic100_raw.txt -outfile hg38_cosmic100.txt 
+wc -l hg38_cosmic100.txt
+29837298 hg38_cosmic100.txt
+```
+
+
 ## ICGC annotations
 
 icgc refers to International Cancer Genome Consortium. The instructions to build the database and the inital database were provided by Ferran Nadeu at Institut d'Investigacions Biomediques August Pi i Sunyer. The annotations include a ICGC_ID column and a ICGC_Occurrence column. The ICGC_Occurrence column includes the project in which the mutation was identified, the number of donors affected, the total number of donors studied in the project and the frequency of the mutation, separated by "|".
