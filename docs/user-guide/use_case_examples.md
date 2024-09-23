@@ -81,7 +81,25 @@ Since we only interested in a very simple task: what is the gene and amino acid 
 In this command, we used `table_annovar.pl` to perform annotation, the input file is `mywork/final_annovar_input.vcf`, the genome version we used is `hg38`, the output file name and directory `mywork/myanno_out1`. Then the `-protocol` is a key part of running ANNOVAR, it represents what database we will used, here I only used the refGene we downloaded previously, and the `-operation` tag provide instruction of what operation we run for each protocal (i.e., refGene), here we used `g` which means gene-based. Another commonnly used operation is `f` which is filter-based. For details about different type of operation could be found [ANNOVAR startup page](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/).
 
 Now let's check what is the output looks like.
-
+```
+base) [wangp5@reslnvhpc0202 annovar]$ ls mywork/
+final_annovar_input.vcf  myanno_out1.avinput  myanno_out1.hg38_multianno.txt  myanno_out1.hg38_multianno.vcf
+```
+The result is in `myanno_out1.hg38_multianno.txt`, and there will be many columns we are not currently interested, like the Otherinfo columns, let's print all the column out first.
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ head -n 1 mywork/myanno_out1.hg38_multianno.txt 
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	Otherinfo1	Otherinfo2	Otherinfo3	Otherinfo4	Otherinfo5	Otherinfo6	Otherinfo7	Otherinfo8	Otherinfo9	Otherinfo10	Otherinfo11
+```
+The Otherinfo columns are the original columns from input vcf files, and they were concatinate for each variant at the end of our ANNOVAR regGene annotation. Let's just look at the result from refGene annotation (columns 1-10):
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ head -n 5 mywork/myanno_out1.hg38_multianno.txt | cut -f 1-10
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene
+2	162279995	162279995	C	G	splicing	IFIH1	NM_022168:exon8:c.1641+1G>C	.	.
+2	162310909	162310909	T	C	exonic	IFIH1	.	nonsynonymous SNV	IFIH1:NM_022168:exon2:c.A478G:p.N160D
+1	11046609	11046609	T	C	exonic	MASP2	.	nonsynonymous SNV	MASP2:NM_006610:exon3:c.A359G:p.D120G,MASP2:NM_139208:exon3:c.A359G:p.D120G
+19	19193983	19193983	A	T	exonic	RFXANK	.	nonsynonymous SNV	RFXANK:NM_001278728:exon2:c.A37T:p.T13S,RFXANK:NM_001370233:exon2:c.A37T:p.T13S,RFXANK:NM_001370234:exon2:c.A37T:p.T13S,RFXANK:NM_001370236:exon2:c.A37T:p.T13S,RFXANK:NM_001370237:exon2:c.A37T:p.T13S,RFXANK:NM_001370238:exon2:c.A37T:p.T13S,RFXANK:NM_001278727:exon3:c.A37T:p.T13S,RFXANK:NM_001370235:exon3:c.A37T:p.T13S,RFXANK:NM_003721:exon3:c.A37T:p.T13S,RFXANK:NM_134440:exon3:c.A37T:p.T13S
+```
+The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGene`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' are shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGene`, and it will tell us the amino acid change per transcript. Note that the first variant `2	162279995	162279995	C	G` does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant `1	11046609	11046609	T	C`, there are two protein changes 'p.D120G' and 'p.D120G' this si because there are 2 transcripts (isoforms) for this MASP2 gene, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
 ### 2. I want to run ANNOVAR using the new database, or a differnet chromosome, how do I do it?
 
