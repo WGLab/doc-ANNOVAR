@@ -1,5 +1,5 @@
 To easily get started with ANNOVAR, there might be some common cases you will consider to do using ANNOVAR. Here, we provide a start to end example for you to follow.
-### 0. Understand the ANNOVAR package and download the dataset/annotation of your interest
+### 0. Before we get started. Understand the ANNOVAR package and download the dataset/annotation of your interest
 When you have requested the ANNOVAR from the website and downloaded it, you will have a file that look like this:
 ```
 (base) [wangp5@reslnvhpc0202 ANNOVAR_tutorial]$ ls -lh
