@@ -21,7 +21,11 @@ variants_reduction.pl
 In the `annovar` folder, the files end with `.pl` are the perl scripts that we could run. The `example` contains different input file examples and parameter confis examples. The `humandb` is our warehouse, it stores all the database of interest so ANNOVAR know how to annotate the variants based on the annotation we required. Therefore, before we begin, we need to understand what database we neend, and what version of that database we need, as well as the genome version.
 
 For example, if I would like to annotate my variants with ClinVar and gnomAD database, and I know my variants are from genome version hg38. You will then need to check which version you would like to use in [ANNOVAR addional database page](https://annovar.openbioinformatics.org/en/latest/user-guide/download/#additional-databases). 
+And I found the latest database for ClinVar and gnomAD will be:
 
+| hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
+| hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
+| hg38 | clinvar_20240611 |  same as above | 20240616 |
 
 ### 1. I have a list of varaints, how do I get population and clinical information for these variants?
 
