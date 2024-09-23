@@ -50,7 +50,31 @@ hg19_example_db_generic.txt  hg19_refGene.txt          hg38_clinvar_20240611.txt
 As we can see, in the `humandb\` folder, the `hg38_clinvar_20240611.txt`, `hg38_cytoBand.txt`, `hg38_gnomad41_exome.txt` and `hg38_refGene.txt` have been downloaded correctly. 
 
 
-### 1. I have a list of varaints, how do I get population and clinical information for these variants?
+### Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
+Now let's do some annotation on the variants. Make a `mywork` (or any name you like) directory in the `annovar` package folder to store my data and result, then get your vcf file ready.
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ mkdir mywork
+(base) [wangp5@reslnvhpc0202 annovar]$ cd mywork/
+(base) [wangp5@reslnvhpc0202 mywork]$ cp /home/wangp5/Downloads/final_annovar_input.vcf .
+(base) [wangp5@reslnvhpc0202 mywork]$ ls
+final_annovar_input.vcf
+```
+Take a look on your vcf file first:
+```
+(base) [wangp5@reslnvhpc0202 mywork]$ head final_annovar_input.vcf 
+##fileformat=VCFv4.0
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+2	162279995	.	C	G	.	.	.
+2	162310909	.	T	C	.	.	.
+1	11046609	.	T	C	.	.	.
+19	19193983	.	A	T	.	.	.
+7	147903589	.	T	C	.	.	.
+17	82079248	.	G	A	.	.	.
+10	63219963	.	G	C	.	.	.
+13	101103286	.	T	A	.	.	.
+```
+There are 8 columns in a normal vcf file, and in this vcf file there is no quality score, id and other info, it only has the chromosome number, position, reference and alterantive allele, but this will be enough for ANNOVAR to run annotation.
+
 
 ### 2. I want to run ANNOVAR using the new database, or a differnet chromosome, how do I do it?
 
