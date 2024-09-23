@@ -25,9 +25,30 @@ And I found the latest database for ClinVar and gnomAD will be:
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
 | hg38 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg38 | dbnsfp47a | same as above | 20240525 |
 | hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
 | hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
 | hg38 | clinvar_20240611 |  same as above | 20240616 |
+| hg38 | cytoBand |||
+
+To download these databases, you will enter into the `annovar/` package folder and tun the following commands:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene humandb/
+(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb cytoBand humandb/
+(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar gnomad41_exome humandb/
+(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar clinvar_20240611 humandb/
+```
+Now check if the databases have been downloaded correctly:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ ls humandb/
+annovar_downdb.log           hg19_example_db_gff3.txt  hg19_refGeneVersion.txt        hg38_cytoBand.txt            hg38_refGeneVersion.txt
+genometrax-sample-files-gff  hg19_MT_ensGeneMrna.fa    hg19_refGeneWithVerMrna.fa     hg38_gnomad41_exome.txt
+GRCh37_MT_ensGeneMrna.fa     hg19_MT_ensGene.txt       hg19_refGeneWithVer.txt        hg38_gnomad41_exome.txt.idx
+GRCh37_MT_ensGene.txt        hg19_refGeneMrna.fa       hg38_clinvar_20240611.txt      hg38_refGeneMrna.fa
+hg19_example_db_generic.txt  hg19_refGene.txt          hg38_clinvar_20240611.txt.idx  hg38_refGene.txt
+````
+As we can see, in the `humandb\` folder, the `hg38_clinvar_20240611.txt`, `hg38_cytoBand.txt`, `hg38_gnomad41_exome.txt` and `hg38_refGene.txt` have been downloaded correctly. 
+
 
 ### 1. I have a list of varaints, how do I get population and clinical information for these variants?
 
