@@ -24,6 +24,7 @@ For example, if I would like to annotate my variants with ClinVar and gnomAD dat
 And I found the latest database for ClinVar and gnomAD will be:
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
+| hg38 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
 | hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
 | hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
 | hg38 | clinvar_20240611 |  same as above | 20240616 |
