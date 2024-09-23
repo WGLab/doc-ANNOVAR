@@ -74,6 +74,13 @@ Take a look on your vcf file first:
 13	101103286	.	T	A	.	.	.
 ```
 There are 8 columns in a normal vcf file, and in this vcf file there is no quality score, id and other info, it only has the chromosome number, position, reference and alterantive allele, but this will be enough for ANNOVAR to run annotation.
+Since we only interested in a very simple task: what is the gene and amino acid change (if possible) for these variants. We could run the following command:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_out1 -remove -protocol refGene -operation g -nastring . -vcfinput -polish
+```
+In this command, we used `table_annovar.pl` to perform annotation, the input file is `mywork/final_annovar_input.vcf`, the genome version we used is `hg38`, the output file name and directory `mywork/myanno_out1`. Then the `-protocol` is a key part of running ANNOVAR, it represents what database we will used, here I only used the refGene we downloaded previously, and the `-operation` tag provide instruction of what operation we run for each protocal (i.e., refGene), here we used `g` which means gene-based. Another commonnly used operation is `f` which is filter-based. For details about different type of operation could be found [ANNOVAR startup page](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/).
+
+Now let's check what is the output looks like.
 
 
 ### 2. I want to run ANNOVAR using the new database, or a differnet chromosome, how do I do it?
