@@ -24,11 +24,11 @@ For example, if I would like to annotate my variants with ClinVar and gnomAD dat
 And I found the latest database for ClinVar and gnomAD will be:
 | Build | Table Name | Explanation | Date |
 |---|---|---|---|
-| hg38 | refGene | same as above (last update was 2020-08-17 at UCSC) | 20211019 |
-| hg38 | dbnsfp47a | same as above | 20240525 |
+| hg38 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene (last update was 2020-08-17 at UCSC) | 20211019 |
+| hg38 | dbnsfp47a | dbNSFP version 4.7a | 20240525 |
 | hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
 | hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
-| hg38 | clinvar_20240611 |  same as above | 20240616 |
+| hg38 | clinvar_20240611 |  Clinvar version 20240611 with separate columns | 20240616 |
 | hg38 | cytoBand |||
 
 To download these databases, you will enter into the `annovar/` package folder and tun the following commands:
@@ -78,7 +78,7 @@ Since we only interested in a very simple task: what is the gene and amino acid 
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_out1 -remove -protocol refGene -operation g -nastring . -vcfinput -polish
 ```
-In this command, we used `table_annovar.pl` to perform annotation, the input file is `mywork/final_annovar_input.vcf`, the genome version we used is `hg38`, the output file name and directory `mywork/myanno_out1`. Then the `-protocol` is a key part of running ANNOVAR, it represents what database we will used, here I only used the refGene we downloaded previously, and the `-operation` tag provide instruction of what operation we run for each protocal (i.e., refGene), here we used `g` which means gene-based. Another commonnly used operation is `f` which is filter-based. For details about different type of operation could be found [ANNOVAR startup page](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/).
+In this command, we used `table_annovar.pl` to perform annotation, the input file is `mywork/final_annovar_input.vcf`, the genome version we used is `hg38`, the output file name and directory `mywork/myanno_out1`. Then the `-protocol` is a key part of running ANNOVAR, it represents what database we will used, here I only used the refGene we downloaded previously, and the `-operation` tag provide instruction of what operation we run for each protocal (i.e., refGene), here we used `g` which means gene-based. Another commonnly used operation is `f` which is filter-based. For details about different type of operation could be found [ANNOVAR startup page](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/). The N/A string will be represented by `.`, which is adjustable by the tag `-nastring`.
 
 Now let's check what is the output looks like.
 ```
@@ -99,7 +99,7 @@ Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.re
 1	11046609	11046609	T	C	exonic	MASP2	.	nonsynonymous SNV	MASP2:NM_006610:exon3:c.A359G:p.D120G,MASP2:NM_139208:exon3:c.A359G:p.D120G
 19	19193983	19193983	A	T	exonic	RFXANK	.	nonsynonymous SNV	RFXANK:NM_001278728:exon2:c.A37T:p.T13S,RFXANK:NM_001370233:exon2:c.A37T:p.T13S,RFXANK:NM_001370234:exon2:c.A37T:p.T13S,RFXANK:NM_001370236:exon2:c.A37T:p.T13S,RFXANK:NM_001370237:exon2:c.A37T:p.T13S,RFXANK:NM_001370238:exon2:c.A37T:p.T13S,RFXANK:NM_001278727:exon3:c.A37T:p.T13S,RFXANK:NM_001370235:exon3:c.A37T:p.T13S,RFXANK:NM_003721:exon3:c.A37T:p.T13S,RFXANK:NM_134440:exon3:c.A37T:p.T13S
 ```
-The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGene`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' are shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGene`, and it will tell us the amino acid change per transcript. Note that the first variant `2	162279995	162279995	C	G` does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant `1	11046609	11046609	T	C`, there are two protein changes 'p.D120G' and 'p.D120G' this si because there are 2 transcripts (isoforms) for this MASP2 gene, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
+The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGene`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' are shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGene`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
 ### 2. I want to run ANNOVAR using the new database, or a differnet chromosome, how do I do it?
 
