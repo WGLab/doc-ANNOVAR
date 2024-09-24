@@ -39,24 +39,24 @@ And I found the latest database for ClinVar and gnomAD will be:
 | hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
 | hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
 | hg38 | clinvar_20240611 |  Clinvar version 20240611 with separate columns | 20240616 |
-| hg38 | cytoBand |||
 
 To download these databases, you will enter into the `annovar/` package folder and tun the following commands:
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene humandb/
 (base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGeneWithVer humandb/
-(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb cytoBand humandb/
+(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar dbnsfp47a humandb/
 (base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar gnomad41_exome humandb/
 (base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar clinvar_20240611 humandb/
 ```
 Now check if the databases have been downloaded correctly:
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ ls humandb/
-annovar_downdb.log           hg19_example_db_gff3.txt  hg19_refGeneVersion.txt     hg38_clinvar_20240611.txt      hg38_refGeneMrna.fa
-genometrax-sample-files-gff  hg19_MT_ensGeneMrna.fa    hg19_refGeneWithVerMrna.fa  hg38_clinvar_20240611.txt.idx  hg38_refGene.txt
-GRCh37_MT_ensGeneMrna.fa     hg19_MT_ensGene.txt       hg19_refGeneWithVer.txt     hg38_cytoBand.txt              hg38_refGeneVersion.txt
-GRCh37_MT_ensGene.txt        hg19_refGeneMrna.fa       hg38_avsnp147.txt           hg38_gnomad41_exome.txt        hg38_refGeneWithVerMrna.fa
-hg19_example_db_generic.txt  hg19_refGene.txt          hg38_avsnp147.txt.idx       hg38_gnomad41_exome.txt.idx    hg38_refGeneWithVer.txt
+annovar_downdb.log           hg19_MT_ensGeneMrna.fa      hg19_refGeneWithVer.txt        hg38_dbnsfp47a.txt           hg38_refGeneVersion.txt
+genometrax-sample-files-gff  hg19_MT_ensGene.txt         hg38_avsnp147.txt              hg38_dbnsfp47a.txt.idx       hg38_refGeneWithVerMrna.fa
+GRCh37_MT_ensGeneMrna.fa     hg19_refGeneMrna.fa         hg38_avsnp147.txt.idx          hg38_gnomad41_exome.txt      hg38_refGeneWithVer.txt
+GRCh37_MT_ensGene.txt        hg19_refGene.txt            hg38_clinvar_20240611.txt      hg38_gnomad41_exome.txt.idx
+hg19_example_db_generic.txt  hg19_refGeneVersion.txt     hg38_clinvar_20240611.txt.idx  hg38_refGeneMrna.fa
+hg19_example_db_gff3.txt     hg19_refGeneWithVerMrna.fa  hg38_cytoBand.txt              hg38_refGene.txt
 ````
 As we can see, in the `humandb\` folder, the `hg38_clinvar_20240611.txt`, `hg38_cytoBand.txt`, `hg38_gnomad41_exome.txt` and `hg38_refGene.txt` have been downloaded correctly. Note that we will use `hg38_refGeneWithVer.txt` for all future ANNOVAR annotation so it could provide the transcript version for variants.
 
@@ -114,6 +114,26 @@ Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGene
 The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
 ### 2. Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. (including HGVS annotations for intronic variants, then evaluate all variants for the chromosome distribution, variant type distribution, ClinVar distribution)
+Before we run the human exome annotation, we need to download the data we need, we can run this command to download the data into `mywork/`:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ wget http://molecularcasestudies.cshlp.org/content/suppl/2016/10/11/mcs.a001131.DC1/Supp_File_2_KBG_family_Utah_VCF_files.zip -O mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
+```
+To give some background information, this is a zip file as supplementary material of a published paper on exome sequencing of a family with undiagnosed genetic diseases. Through analysis of the exome data, the proband was confirmed to have KBG syndrome, a disease caused by loss of function mutations in ANKRD11 gene. There are several VCF files contained in the zip file, including those for parents, silings and the proband. We will only analyze proband in this exercise, but if you are interested, you may want to check whether this is a de novo mutation by analyzing parental genomes.
+
+Then we can unzip it and take a look what it has:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ unzip mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
+(base) [wangp5@reslnvhpc0202 annovar]$ mv 'File 2_KBG family Utah_VCF files'/ mywork/VCF_files
+(base) [wangp5@reslnvhpc0202 annovar]$ ls mywork/VCF_files/
+proband.vcf  Unaffected_brother.vcf  Unaffected_father.vcf  Unaffected_mother.vcf  Unaffected_sister1.vcf  Unaffected_sister2.vcf
+```
+Now let's run `table_annovar.pl` on the exome sequencing of proband `proband.vcf`. We will want to have gene annotation (`refGeneWithVer` operation), ClinVar annotation (`clinvar_20240611` operation), gnomADv4.1 exome annotation (`gnomad41_exome` operation), and pathogenicity preditions from various tools (`dbnsfp47a` operation). Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation so that the output is in HGVS format (e.g., c.122C>T rather than c.C122T). Moreover, we want to have HGVS formmat for our intronic region as well, so we use `-intronhgvs` tag seperately.
+
+Then we can finnally run our command:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/VCF_files/proband.vcf humandb/ -buildver hg38 -out mywork/proband.annovar -remove -protocol refGeneWithVer,clinvar_20240611,gnomad41_exome,dbnsfp47a -operation g,f,f,f -arg '-hgvs',,, -polish -nastring . -vcfinput -intronhgvs 100
+```
+
 
 ### 3. I have a vcf files, how do I run ANNOVAR using my vcf file directly and get the annotation?
 
