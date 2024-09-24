@@ -994,14 +994,18 @@ In early 2018, the format of ClinVar changed, so the fields above no longer appl
 Although I periodically update ClinVar database in ANNOVAR for help users perform annotation, due to the frequent update schedule of ClinVar, users are advised to create a database yourself using the [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) tool. An example procedure is given below:
 
 ```
-          wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20180603.vcf.gz
-          wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20180603.vcf.gz.tbi
-          vt decompose clinvar_20180603.vcf.gz -o temp.split.vcf
-          prepare_annovar_user.pl   -dbtype clinvar_preprocess2 temp.split.vcf -out temp.split2.vcf
-          vt normalize temp.split2.vcf -r ~/project/seqlib/GRCh38/old/GRCh38.fa -o temp.norm.vcf -w 2000000
-          prepare_annovar_user.pl -dbtype clinvar2 temp.norm.vcf -out hg38_clinvar_20180603_raw.txt
-          index_annovar.pl hg38_clinvar_20180603_raw.txt -out hg38_clinvar_20180603.txt -comment comment_20180708.txt
+          wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz
+          wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz.tbi
+          gunzip clinvar_20180603.vcf.gz
+          prepare_annovar_user.pl -dbtype clinvar2 temp.norm.vcf -out hg38_clinvar_20240917_raw.txt
+          index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_20240917.txt
 ```
+
+The `comment_20240917.txt` file can be downloaded [http://www.openbioinformatics.org/annovar/download/comment_20240917.txt](here). It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
+
+In old version of ClinVar, it was necessary to perform allele splitting and left normalization. An example command is `vt decompose clinvar_20180603.vcf.gz -o temp.split.vcf;           prepare_annovar_user.pl   -dbtype clinvar_preprocess2 temp.split.vcf -out temp.split2.vcf; vt normalize temp.split2.vcf -r ~/project/seqlib/GRCh38/old/GRCh38.fa -o temp.norm.vcf -w 2000000`. It is no longer necessary. But this information is included here for historical reference.
+
+In 20240917 version of ClinVar, there are two significant changes (1) oncogenecity variants (ONC) and somatic variants (SCI) are added as separate columns, resulting in six more columns than the previous version of ClinVar. (2) ClinVar also introduced the "included variants" in the new version. It is a bit confusing, but the explanation seems to be "Included variants: Classifications in ClinVar may be made for a single variant or a set of variants, such as a haplotype. Variants classified only as part of a set of variants (i.e. no direct classification for the variant itself) are considered "included" variants. The VCF files include both variants with a direct classification and included variants. Included variants do not have an associated disease (CLNDN, CLNDISDB) or a classification (CLNSIG). Instead, there are three INFO tags specific to included variants - CLNDNINCL, CLNDISDBINCL, and CLNSIGINCL (see below)." Based on such descriptions, the included variants should not be in the clinvar database in ANNOVAR and they will not be included.
 
 Additionally, please note that David Baux created a convenient script to automate the procedure of generating ClinVar databases in ANNOVAR. The scripts are available [here](https://github.com/mobidic/update_annovar_db).
 
