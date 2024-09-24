@@ -10,6 +10,9 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email or I click the notification email but cannot find the question if a page has too many Disqus posts) or you can just email me directly kaichop gmail.com. Thank you very much for your help and support!
 
 ---
+
+![new](img/new.png)2024Sep24: clinvar_20240917 is availabe in ANNOVAR now for hg19/hg38 coordinate. In addition to germline variants, this version adds interpretation for oncogenecity variants and somatic variants.
+
 ![new](img/new.png)2024Jun17: Interpro domain annotation from dbNSFP v4.7 is availabe in ANNOVAR now for hg19/hg38 coordinate.
 
 ![new](img/new.png)2024Jun02: gnomAD versino 4.1 is availabe in ANNOVAR now for both genome and exome. There was a bug in allele frequency calculation in version 4.0 so the gnomAD team released v4.1.
