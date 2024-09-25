@@ -465,45 +465,57 @@ import matplotlib.pyplot as plt
 # Load the annovar output txt file
 data = pd.read_csv('proband.annovar.hg19_multianno.txt', sep='\t', na_values='.', low_memory=False)
 
-
 # Filter the data to include only Benign variants from CLNSIG
 benign_variants = data[data['CLNSIG'] == 'Benign']
 
-# Set up the figure and axes for two plots side by side
-fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+# Prepare the data for combined plotting
+# Create a new DataFrame for AlphaMissense_pred
+alpha_missense_data = benign_variants[['AlphaMissense_pred', 'AF']].copy()
+alpha_missense_data['Tool'] = 'AlphaMissense'
+alpha_missense_data = alpha_missense_data.rename(columns={'AlphaMissense_pred': 'Prediction'})
 
-# Create the violin plot for MetaRNN_pred for Benign variants
-sns.violinplot(x='MetaRNN_pred', y='AF', data=benign_variants, ax=axes[0], width=0.3)
-axes[0].set_title('MetaRNN_pred for Benign Variants')
+# Create a new DataFrame for MetaRNN_pred
+metarnn_data = benign_variants[['MetaRNN_pred', 'AF']].copy()
+metarnn_data['Tool'] = 'MetaRNN'
+metarnn_data = metarnn_data.rename(columns={'MetaRNN_pred': 'Prediction'})
 
-# Add the number of predictions on top of each MetaRNN_pred violin plot
-meta_rnn_groups = benign_variants.groupby('MetaRNN_pred').size()
-for i, (group, count) in enumerate(meta_rnn_groups.items()):
-    axes[0].text(i, benign_variants['AF'].max(), f'n={count}', ha='center')
+# Combine both DataFrames into one, making sure no duplicate entries are there
+combined_data = pd.concat([alpha_missense_data, metarnn_data], ignore_index=True)
 
-# Create the violin plot for AlphaMissense_pred for Benign variants
-sns.violinplot(x='AlphaMissense_pred', y='AF', data=benign_variants, ax=axes[1], width=0.3)
-axes[1].set_title('AlphaMissense_pred for Benign Variants')
+# Ensure there are no NaNs or invalid entries in the 'Prediction' column
+combined_data = combined_data.dropna(subset=['Prediction'])
 
-# Add the number of predictions on top of each AlphaMissense_pred violin plot
-alpha_missense_groups = benign_variants.groupby('AlphaMissense_pred').size()
-for i, (group, count) in enumerate(alpha_missense_groups.items()):
-    axes[1].text(i, benign_variants['AF'].max(), f'n={count}', ha='center')
+# Set up the plot
+plt.figure(figsize=(10, 6))
 
-# Adjust layout to ensure no overlap
+# Create the boxplot, using color to distinguish between the two tools
+sns.boxplot(x='Prediction', y='AF', hue='Tool', data=combined_data, palette={'AlphaMissense': 'blue', 'MetaRNN': 'orange'}, width=0.4, showfliers=True)
+
+# Add title and adjust layout
+plt.title('Comparison of AlphaMissense and MetaRNN Predictions for Benign Variants')
+
+# Add the number of variants on top of each box
+# For each group and tool, calculate the count and add it to the plot
+for tool in combined_data['Tool'].unique():
+    for prediction in combined_data['Prediction'].unique():
+        count = combined_data[(combined_data['Tool'] == tool) & (combined_data['Prediction'] == prediction)].shape[0]
+        if count > 0:
+            x_pos = combined_data['Prediction'].unique().tolist().index(prediction)  # x-axis position for the prediction
+            y_pos = combined_data[combined_data['Prediction'] == prediction]['AF'].max()  # y-axis position above the box
+            plt.text(x_pos, y_pos, f'n={count}', ha='center')
+
 plt.tight_layout()
 
-
 # Save the plot
-#plt.show()
-plt.savefig('alphamissense_metarnn_clnsig_comparison.png', dpi=300)
+plt.savefig('combined_predictions_with_counts.png', dpi=300)
 
-print("Plot saved as 'alphamissense_metarnn_clnsig_comparison.png'")
+print("Plot saved as 'combined_predictions_with_counts.png'")
 ```
 
-Your plot should look similar to this one. We find MetaRNN's preditions are all T(olerated), which competely align with ClinVar classification, and the AF for these variants are reasonably high. On the contrary, AlphaMissense gave (A)mbiguous preditions for almost all Benign variants.
+Your plot should look similar to this one. We find MetaRNN's preditions are all T(olerated), which competely align with ClinVar classification, and the AF for these variants are reasonably high. And AlphaMissense predicted most of variants as (P)athogenic despite there are a few (A)mbiguous and (B)enign preditions.
 
-![image](https://github.com/user-attachments/assets/5b1efb28-3e89-44b4-806a-7431dd81117e)
+![image](https://github.com/user-attachments/assets/19d1cb4b-0eb9-4295-baf9-69c2c524b1dc)
+
 
 
 ### 3. I have a vcf files, how do I run ANNOVAR using my vcf file directly and get the annotation?
