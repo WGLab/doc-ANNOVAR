@@ -113,7 +113,9 @@ Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGene
 ```
 The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
-### 2. Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. (including HGVS annotations for intronic variants, then evaluate all variants for the chromosome distribution, variant type distribution, ClinVar distribution)
+### 2. Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. 
+Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.(including HGVS annotations for intronic variants, then evaluate all variants for the chromosome distribution, variant type distribution, ClinVar distribution)
+
 Before we run the human exome annotation, we need to download the data we need, we can run this command to download the data into `mywork/`:
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ wget http://molecularcasestudies.cshlp.org/content/suppl/2016/10/11/mcs.a001131.DC1/Supp_File_2_KBG_family_Utah_VCF_files.zip -O mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
@@ -133,7 +135,114 @@ Then we can finnally run our command:
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/VCF_files/proband.vcf humandb/ -buildver hg38 -out mywork/proband.annovar -remove -protocol refGeneWithVer,clinvar_20240611,gnomad41_exome,dbnsfp47a -operation g,f,f,f -arg '-hgvs',,, -polish -nastring . -vcfinput -intronhgvs 100
 ```
+The `proband.annovar.hg38_multianno.txt` file contains annotations for this exome. Compared to previous command, note that here we have 4 protocols, and the operations for these protocols are gene-based, filter-based, filter-based, filter-based respectively. 
 
+We can use `less mywork/proband.annovar.hg38_multianno.txt` to check what the output looks like:
+![image](https://github.com/user-attachments/assets/70551760-a70f-4961-9075-60823c12ee49)
+
+The screenshot showed us the complete columns and the partial of the first variant. We see some familiar columns from **Case 1**, such as variant basic information (first 5 columns), refGeneWithVer annotation, and otherinfo columns at the end. The new columns that start with `CLN` are from ClinVar annotation, the columns that start with `gnomad41` are from gnomADv4.1 annotation. And the rest of the columns are from the `dbnsfp47a` annotations, they are the pathogenic classification (end with `_pred`) or predicted score (end with `_score` or `_rankscore`) from various tools or methods.
+
+#### Downstream Analysis and Visualization
+- Chromosome distribution
+  Start from here, one could have various way to perform the downstream analysis, such as python or R or excel. Here, we use a simple command line to get the chromosome distribution. We used `awk` to count the number of variants per chromosome then pipe (`|`) it into a `sort` to sort the output based on chromosome number (`-V` stands for version numbers). At last, we use `>` to save our result into a file named `variant_counts.txt`.
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ cd mywork/
+(base) [wangp5@reslnvhpc0202 annovar]$ awk 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' proband.annovar.hg38_multianno.txt | sort -V > variant_counts.txt
+(base) [wangp5@reslnvhpc0202 annovar]$ cat variant_counts.txt
+chr1 2274
+chr2 1418
+chr3 1225
+chr4 866
+chr5 1038
+chr6 966
+chr7 947
+chr8 751
+chr9 896
+chr10 894
+chr11 1606
+chr12 1081
+chr13 382
+chr14 770
+chr15 727
+chr16 915
+chr17 1258
+chr18 339
+chr19 1786
+chr20 572
+chr21 338
+chr22 471
+chrX 273
+```
+
+We can see that the number of variants per chromosome is shown in the output, you could change the `sort -V` into `sort -k2,2n` to sort the result based on number of variants. The variants are not distributed evenly: chr1 has the highest number of variants, while chrX has the lowest number of vairants. With this distribution, one could easily visulize it in various way. Here we used python to visualize the result (`matplotlib` required).
+
+Create a python script `plot_variants.py` with the following scripts (make sure you have `matplotlib` install. if not, use `pip install matplotlib` to install first):
+```
+#pip install matplotlib 
+import matplotlib.pyplot as plt
+
+# Initialize lists to store chromosomes and their corresponding variant counts
+chromosomes = []
+variant_counts = []
+
+# Read the data from the file
+with open("variant_counts.txt", "r") as file:
+    for line in file:
+        chr_name, count = line.split()
+        chromosomes.append(chr_name)
+        variant_counts.append(int(count))
+
+# Create a bar plot
+plt.figure(figsize=(10, 6))
+plt.bar(chromosomes, variant_counts, color='skyblue')
+
+# Add labels and title
+plt.xlabel('Chromosomes')
+plt.ylabel('Number of Variants')
+plt.title('Variant Count Distribution Across Chromosomes')
+
+# Rotate the x-axis labels for better visibility
+plt.xticks(rotation=45, ha='right')
+
+# Display the plot
+plt.tight_layout()
+plt.savefig("variant_distribution.png", format='png', dpi=300)
+
+print("Plot saved as 'variant_distribution.png'")
+```
+
+Then run the python script and check the output plot.
+```
+(base) [wangp5@reslnvhpc0202 mywork]$ python plot_variants.py 
+Plot saved as 'variant_distribution.png'
+```
+
+Now we can open the 'variant_distribution.png' to have a good look on the variant distribution across chromosomes.
+![variant_distribution](https://github.com/user-attachments/assets/45270d59-6125-4a67-bcb6-57d48ade2ad8)
+
+- Variant Type Distribution
+  Another useful information for an exome annotation will be the variant type distribution. We could follow the similar procedures like above but we focus on `Func.refGeneWithVer` column this time.
+```
+(base) [wangp5@reslnvhpc0202 mywork]$ awk 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' proband.annovar.hg38_multianno.txt | sort -k2,2nr > variant_type_counts.txt
+(base) [wangp5@reslnvhpc0202 mywork]$ cat variant_type_counts.txt 
+intronic 9252
+intergenic 8375
+exonic 1203
+ncRNA_intronic 1013
+intron 773
+UTR3 474
+downstream 243
+upstream 235
+ncRNA_exonic 124
+splicing 77
+upstream;downstream 18
+ncRNA_exonic;splicing 3
+exonic;splicing 1
+ncRNA_splicing 1
+UTR5 1
+```
+
+- 
 
 ### 3. I have a vcf files, how do I run ANNOVAR using my vcf file directly and get the annotation?
 
