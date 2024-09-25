@@ -512,7 +512,7 @@ plt.savefig('combined_predictions_with_counts.png', dpi=300)
 print("Plot saved as 'combined_predictions_with_counts.png'")
 ```
 
-Your plot should look similar to this one. We find MetaRNN's preditions are all T(olerated), which competely align with ClinVar classification, and the AF for these variants are reasonably high. And AlphaMissense predicted most of variants as (P)athogenic despite there are a few (A)mbiguous and (B)enign preditions.
+Your plot should look similar to this one. We find MetaRNN's preditions are all T(olerated), which competely align with ClinVar classification, and the AF for these variants are reasonably high. Similarly, AlphaMissense predicted most of Benign variants as (B)enign, despite there are a few (A)mbiguous and (P)athogenic preditions.
 
 ![image](https://github.com/user-attachments/assets/19d1cb4b-0eb9-4295-baf9-69c2c524b1dc)
 
