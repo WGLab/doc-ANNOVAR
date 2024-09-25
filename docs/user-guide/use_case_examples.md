@@ -129,16 +129,22 @@ Then we can unzip it and take a look what it has:
 (base) [wangp5@reslnvhpc0202 annovar]$ ls mywork/VCF_files/
 proband.vcf  Unaffected_brother.vcf  Unaffected_father.vcf  Unaffected_mother.vcf  Unaffected_sister1.vcf  Unaffected_sister2.vcf
 ```
-Now let's run `table_annovar.pl` on the exome sequencing of proband `proband.vcf`. We will want to have gene annotation (`refGeneWithVer` operation), ClinVar annotation (`clinvar_20240611` operation), gnomADv4.1 exome annotation (`gnomad41_exome` operation), and pathogenicity preditions from various tools (`dbnsfp47a` operation). Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation so that the output is in HGVS format (e.g., c.122C>T rather than c.C122T). Moreover, we want to have HGVS formmat for our intronic region as well, so we use `-intronhgvs` tag seperately.
+
+Because this vcf file used hg19 as reference, we will need to downloading corresponding hg19 databases for proper results:
+```
+(base) [wangp5@reslnvhpc0202 annovar]$ perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGeneWithVer humandb/; perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp47a humandb/; perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar gnomad211_exome humandb/; perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar clinvar_20240917 humandb/
+```
+
+Now we have prepared all the datasets we need, let's run `table_annovar.pl` on the exome sequencing of proband `proband.vcf`. We will want to have gene annotation (`refGeneWithVer` operation), ClinVar annotation (`clinvar_20240917` operation), gnomADv2.1.1 exome annotation (`gnomad211_exome` operation), and pathogenicity preditions from various tools (`dbnsfp47a` operation). Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation so that the output is in HGVS format (e.g., c.122C>T rather than c.C122T). Moreover, we want to have HGVS formmat for our intronic region as well, so we use `-intronhgvs` tag seperately and give a range of 100 which means anywhere within 100 bp away from the intron/extron boundary will have HGVS format annotation.
 
 Then we can finnally run our command:
 ```
-(base) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/VCF_files/proband.vcf humandb/ -buildver hg38 -out mywork/proband.annovar -remove -protocol refGeneWithVer,clinvar_20240611,gnomad41_exome,dbnsfp47a -operation g,f,f,f -arg '-hgvs',,, -polish -nastring . -vcfinput -intronhgvs 100
+(base) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/VCF_files/proband.vcf humandb/ -buildver hg19 -out mywork/proband.annovar -remove -protocol refGeneWithVer,clinvar_20240917,gnomad211_exome,dbnsfp47a -operation g,f,f,f -arg '-hgvs',,, -polish -nastring . -vcfinput -intronhgvs 100
 ```
-The `proband.annovar.hg38_multianno.txt` file contains annotations for this exome. Compared to previous command, note that here we have 4 protocols, and the operations for these protocols are gene-based, filter-based, filter-based, filter-based respectively. 
+The `proband.annovar.hg19_multianno.txt` file contains annotations for this exome. Compared to previous command, note that here we have 4 protocols, and the operations for these protocols are gene-based, filter-based, filter-based, filter-based respectively. 
 
-We can use `less mywork/proband.annovar.hg38_multianno.txt` to check what the output looks like:
-![image](https://github.com/user-attachments/assets/70551760-a70f-4961-9075-60823c12ee49)
+We can use `less mywork/proband.annovar.hg19_multianno.txt` to check what the output looks like:
+![image](https://github.com/user-attachments/assets/826fddc4-d926-4e9d-9983-634e44664295)
 
 The screenshot showed us the complete columns and the partial of the first variant. We see some familiar columns from **Case 1**, such as variant basic information (first 5 columns), refGeneWithVer annotation, and otherinfo columns at the end. The new columns that start with `CLN` are from ClinVar annotation, the columns that start with `gnomad41` are from gnomADv4.1 annotation. And the rest of the columns are from the `dbnsfp47a` annotations, they are the pathogenic classification (end with `_pred`) or predicted score (end with `_score` or `_rankscore`) from various tools or methods.
 
@@ -147,7 +153,7 @@ The screenshot showed us the complete columns and the partial of the first varia
   Start from here, one could have various way to perform the downstream analysis, such as python or R or excel. Here, we use a simple command line to get the chromosome distribution. We used `awk` to count the number of variants per chromosome then pipe (`|`) it into a `sort` to sort the output based on chromosome number (`-V` stands for version numbers). At last, we use `>` to save our result into a file named `variant_counts.txt`.
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ cd mywork/
-(base) [wangp5@reslnvhpc0202 annovar]$ awk 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' proband.annovar.hg38_multianno.txt | sort -V > variant_counts.txt
+(base) [wangp5@reslnvhpc0202 annovar]$ awk 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' proband.annovar.hg19_multianno.txt | sort -V > variant_counts.txt
 (base) [wangp5@reslnvhpc0202 annovar]$ cat variant_counts.txt
 chr1 2274
 chr2 1418
@@ -217,32 +223,288 @@ Then run the python script and check the output plot.
 Plot saved as 'variant_distribution.png'
 ```
 
-Now we can open the 'variant_distribution.png' to have a good look on the variant distribution across chromosomes.
-![variant_distribution](https://github.com/user-attachments/assets/45270d59-6125-4a67-bcb6-57d48ade2ad8)
+Now we can open the 'variant_distribution.png' to have a good look on the variant distribution across chromosomes:
+
+![variant_distribution](https://github.com/user-attachments/assets/a04cd817-8329-4813-b89f-c8c0ce41e5e3)
+
 
 - Variant Type Distribution
   Another useful information for an exome annotation will be the variant type distribution. We could follow the similar procedures like above but we focus on `Func.refGeneWithVer` column this time.
 ```
-(base) [wangp5@reslnvhpc0202 mywork]$ awk 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' proband.annovar.hg38_multianno.txt | sort -k2,2nr > variant_type_counts.txt
+(base) [wangp5@reslnvhpc0202 mywork]$ awk 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' proband.annovar.hg19_multianno.txt | sort -k2,2nr > variant_type_counts.txt
 (base) [wangp5@reslnvhpc0202 mywork]$ cat variant_type_counts.txt 
-intronic 9252
-intergenic 8375
-exonic 1203
-ncRNA_intronic 1013
-intron 773
-UTR3 474
-downstream 243
-upstream 235
-ncRNA_exonic 124
-splicing 77
-upstream;downstream 18
-ncRNA_exonic;splicing 3
-exonic;splicing 1
-ncRNA_splicing 1
-UTR5 1
+exonic 18598
+intron 2264
+UTR3 396
+splicing 158
+ncRNA_exonic 130
+intronic 71
+exonic;splicing 64
+intergenic 34
+ncRNA_intronic 29
+upstream 20
+UTR5 18
+downstream 7
+ncRNA_splicing 2
+ncRNA_exonic;splicing 1
+upstream;downstream 1
+```
+As we can see, there are 2264 'intron', this is because we set the `-intronhgvs 100` so that most variants in intronic region will have a HGVS annotation in `GeneDetail.refGeneWithVer` column (like NM_015658.4:exon8:c.888+3T>G). Intead, 71 'intronic' varaints will not have information in `GeneDetail.refGeneWithVer` becasue they are out of the 100 bp boundary of slicing site and there is no HGVS annotation for them.
+
+- Allele Frequency (AF) Distribution for different variant types (nonsynanamous variants, synanamous variants, and intronic variants)
+  We could run the following python script to get the AF distribution for different variants types (make sure you have both `pandas` and `matplotlib` installed in python):
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load your data (assuming it's a CSV file with appropriate headers)
+data = pd.read_csv('proband.annovar.hg19_multianno.txt', sep='\t', na_values='.', low_memory=False)
+
+# Filter the allele frequencies for each type
+af_syn = data[data['ExonicFunc.refGeneWithVer'] == 'synonymous SNV']['AF'].dropna().astype(float)
+af_nonsyn = data[data['ExonicFunc.refGeneWithVer'] == 'nonsynonymous SNV']['AF'].dropna().astype(float)
+af_intron = data[(data['Func.refGeneWithVer'] == 'intron') | (data['Func.refGeneWithVer'] == 'intronic')]['AF'].dropna().astype(float)
+
+# Create the plots
+fig, axs = plt.subplots(3, 1, figsize=(8, 6))
+plt.subplots_adjust(hspace=0.5)
+
+# Set a logarithmic y-scale
+#log_base = 10
+
+# Plot Synonymous SNV
+axs[0].hist(af_syn, bins=500, range=(0, 1), color='black')
+axs[0].set_title('Synonymous SNV')
+axs[0].set_xlabel('Allele frequency')
+axs[0].set_ylabel('Frequency (log scale)')
+#axs[0].set_yscale('log', base=log_base)
+
+# Plot Non-synonymous SNV
+axs[1].hist(af_nonsyn, bins=500, range=(0, 1), color='black')
+axs[1].set_title('nonSynonymous SNV')
+axs[1].set_xlabel('Allele frequency')
+axs[1].set_ylabel('Frequency (log scale)')
+#axs[1].set_yscale('log', base=log_base)
+
+# Plot Intronic
+axs[2].hist(af_intron, bins=500, range=(0, 1), color='black')
+axs[2].set_title('Intronic')
+axs[2].set_xlabel('Allele frequency')
+axs[2].set_ylabel('Frequency (log scale)')
+#axs[2].set_yscale('log', base=log_base)
+
+# Save the plot as a PNG file
+plt.tight_layout()
+#plt.show()
+plt.savefig('allele_frequency_distribution_log_scale.png', dpi=300)
+
+print("Plot saved as 'allele_frequency_distribution_log_scale.png'")
 ```
 
-- 
+Run the script using python and you should have a plot similar to this:
+
+![image](https://github.com/user-attachments/assets/539e849a-b2b8-4bd6-9eeb-a88de4fee89b)
+
+- Get the distribution of variant across race
+Here we choose the first varaint from gene `NRXN2` as an example, you could choose your own varaint of interest. 
+
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load your data (assuming it's a CSV file with appropriate headers)
+data = pd.read_csv('proband.annovar.hg19_multianno.txt', sep='\t', na_values='.', low_memory=False)
+
+# Choose the variant for the gene of interest
+res_sub = data[data['Gene.refGeneWithVer'] == 'NRXN2'].iloc[0]
+
+# Extract allele frequencies for different races (the last 8 columns are AF for differnet race)
+race_AF_list=[x for x in data.columns if x[:2]=='AF'][-8:]
+allele_frequencies = res_sub[race_AF_list].astype(float)
+
+# Set the corresponding race labels
+race_labels = [
+    "African/African-American", 
+    "South Asian", 
+    "Latino/Admixed American", 
+    "East Asian", 
+    "Non-Finnish European", 
+    "Finnish", 
+    "Ashkenazi Jewish", 
+    "Other"
+]
+
+# Get the variant name from Otherinfo6 (assuming it's at index 5)
+variantname = res_sub['Gene.refGeneWithVer']+': '+res_sub['Otherinfo6']
+
+# Create a bar plot
+plt.figure(figsize=(8, 6))
+plt.bar(race_labels, allele_frequencies, color='gray')
+
+# Add labels and title
+plt.ylabel('Allele frequency')
+plt.title(variantname)
+plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better visibility
+
+# Adjust the margins
+plt.tight_layout()
+
+# Save the plot as a PNG file
+#plt.show()
+plt.savefig('allele_frequency_by_race.png', dpi=300)
+
+print("Plot saved as 'allele_frequency_by_race.png'")
+
+```
+
+You should have a plot similar to this one:
+
+![image](https://github.com/user-attachments/assets/2faa89ad-2e96-4923-bf6b-005689cda5d6)
+
+- Evalaute the AF distribution stratified by SIFT score
+Next, we can examine the allele frequency distributions stratified by SIFT scores, which predict the impact of amino acid substitutions on protein function based on sequence homology and the physical properties of amino acids. We expect variants associated with more deleterious effects (SIFT score < 0.05) to be rarer. Run the following python script to get the result (make sure you also have `numpy` module this time):
+
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the annovar output txt file
+data = pd.read_csv('proband.annovar.hg19_multianno.txt', sep='\t', na_values='.', low_memory=False)
+
+# Filter the data based on SIFT score
+res_tolerate = data[(data['SIFT_score'] > 0.05) & (data['SIFT_score'].notna())]
+res_deleterious = data[(data['SIFT_score'] < 0.05) & (data['SIFT_score'].notna())]
+
+# Convert allele frequencies to numeric values
+af_tolerate = pd.to_numeric(res_tolerate['AF'], errors='coerce').dropna()
+af_deleterious = pd.to_numeric(res_deleterious['AF'], errors='coerce').dropna()
+
+# Create histograms (without plotting)
+bins = np.arange(0, 1.001, 0.001)  # bin size (0.001)
+hist_tolerate, _ = np.histogram(af_tolerate, bins=bins)
+hist_deleterious, _ = np.histogram(af_deleterious, bins=bins)
+
+# Create the plot
+plt.figure(figsize=(10, 6))
+
+# Plot the "tolerate" SIFT score histogram
+plt.bar(bins[:-1], hist_tolerate, width=0.001, color="green", label="SIFT > 0.05", edgecolor='none')
+
+# Plot the "deleterious" SIFT score histogram
+plt.bar(bins[:-1], hist_deleterious, width=0.001, color="red", label="SIFT < 0.05", edgecolor='none')
+
+# Set labels and title
+plt.xlabel('Allele Frequency')
+plt.ylabel('Frequency')
+plt.title('Allele Frequency Distribution')
+
+# Set x and y limits
+plt.xlim(0, 1)
+plt.ylim(0, max(max(hist_tolerate), max(hist_deleterious)))
+
+# Add a legend
+plt.legend(loc='upper right')
+
+# Save the plot
+plt.tight_layout()
+#plt.show()
+plt.savefig('allele_frequency_distribution_sift.png', dpi=300)
+
+print("Plot saved as 'allele_frequency_distribution_sift.png'")
+
+```
+
+You should have a similar plot like this:
+![image](https://github.com/user-attachments/assets/c41fe51e-92e0-4ee9-9346-a9bdf1790ea9)
+
+- Comparison of Pathogenicity Predition (MetaRNN vs. AlphaMissense)
+We next use `seaborn` package to compare allele frequency distributions stratified by two other predictive scores: MetaRNN and AlphaMissense. We can similarly find lower allele frequencies for predicted pathogenic variants (MetaRNN: T(olerated) and D(amaging), AlphaMissense: likely (B)enign, (A)mbiguous, or likely (P)athogenic ).
+
+```
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the annovar output txt file
+data = pd.read_csv('proband.annovar.hg19_multianno.txt', sep='\t', na_values='.', low_memory=False)
+
+# Filter out rows with missing values for the predictive scores
+data_metarnn = data[data['MetaRNN_pred'].notna()]
+data_alphamissense = data[data['AlphaMissense_pred'].notna()]
+
+# Set up the figure and axes for two plots side by side
+fig, axes = plt.subplots(1, 2, figsize=(10, 6))
+
+# Create the boxplot for MetaRNN_pred
+sns.boxplot(x='MetaRNN_pred', y='AF', data=data_metarnn, ax=axes[0], width=0.3)
+axes[0].set_title('MetaRNN_pred')
+
+# Create the boxplot for AlphaMissense_pred
+sns.boxplot(x='AlphaMissense_pred', y='AF', data=data_alphamissense, ax=axes[1], width=0.3)
+axes[1].set_title('AlphaMissense_pred')
+
+# Adjust layout to ensure no overlap
+plt.tight_layout()
+
+# Save the plot
+#plt.show()
+plt.savefig('AF_boxplots_MetaRNNvsAlphaMissense.png', dpi=300)
+
+print("Plot saved as 'AF_boxplots_MetaRNNvsAlphaMissense.png'")
+```
+
+- Compare model performance based on clinical impact (ClinVar)
+  Moving further, we could compare the model performance by considering ClinVar clinical significance (`CLNSIG` column) as 'gold standard'. Note that we just assume the `CLNSIG` as 'gold standard' for tutorial purpose, in reality this might be complicated and you need to consider many other aspects (like review status on ClinVar) as well. As we only have very few 'Pathonigenic' variants, we will only focus on the 'Benign' variants, and we assume better tool will classify these variants all as 'Benign' variants and they should have relative high AF. Run the folloing python script to get the result:
+
+```
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the annovar output txt file
+data = pd.read_csv('proband.annovar.hg19_multianno.txt', sep='\t', na_values='.', low_memory=False)
+
+
+# Filter the data to include only Benign variants from CLNSIG
+benign_variants = data[data['CLNSIG'] == 'Benign']
+
+# Set up the figure and axes for two plots side by side
+fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+
+# Create the violin plot for MetaRNN_pred for Benign variants
+sns.violinplot(x='MetaRNN_pred', y='AF', data=benign_variants, ax=axes[0], width=0.3)
+axes[0].set_title('MetaRNN_pred for Benign Variants')
+
+# Add the number of predictions on top of each MetaRNN_pred violin plot
+meta_rnn_groups = benign_variants.groupby('MetaRNN_pred').size()
+for i, (group, count) in enumerate(meta_rnn_groups.items()):
+    axes[0].text(i, benign_variants['AF'].max(), f'n={count}', ha='center')
+
+# Create the violin plot for AlphaMissense_pred for Benign variants
+sns.violinplot(x='AlphaMissense_pred', y='AF', data=benign_variants, ax=axes[1], width=0.3)
+axes[1].set_title('AlphaMissense_pred for Benign Variants')
+
+# Add the number of predictions on top of each AlphaMissense_pred violin plot
+alpha_missense_groups = benign_variants.groupby('AlphaMissense_pred').size()
+for i, (group, count) in enumerate(alpha_missense_groups.items()):
+    axes[1].text(i, benign_variants['AF'].max(), f'n={count}', ha='center')
+
+# Adjust layout to ensure no overlap
+plt.tight_layout()
+
+
+# Save the plot
+#plt.show()
+plt.savefig('alphamissense_metarnn_clnsig_comparison.png', dpi=300)
+
+print("Plot saved as 'alphamissense_metarnn_clnsig_comparison.png'")
+```
+
+Your plot should look similar to this one. We find MetaRNN's preditions are all T(olerated), which competely align with ClinVar classification, and the AF for these variants are reasonably high. On the contrary, AlphaMissense gave (A)mbiguous preditions for almost all Benign variants.
+
+![image](https://github.com/user-attachments/assets/5b1efb28-3e89-44b4-806a-7431dd81117e)
+
 
 ### 3. I have a vcf files, how do I run ANNOVAR using my vcf file directly and get the annotation?
 
