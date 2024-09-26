@@ -8,7 +8,11 @@ To easily get started with ANNOVAR, there might be some common use cases you wil
 * **Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.**
 
 
-### 0. (Before we get started) Understand the ANNOVAR package and download the dataset/annotation of your interest
+### 0. (Before we get started) Download and prepare
+
+In this section, we will talk about: Understand the ANNOVAR package and download the dataset/annotation of your interest.
+
+The best way to learn the basic of ANNOVAR will be reading the user guide in the main page. In this tutorial, we only breifly explain some basic of ANNOVAR just to get things started. When you have an issue or question while reading this use case example, it's always recommended to read [Download ANNOVAR](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) for details about downloading ANNOVAR and read [Quick Start-Up Guide](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/) for details about running ANNOVAR. 
 
 When you have requested the ANNOVAR from the website and downloaded it, you will have a file that look like this:
 
@@ -70,7 +74,9 @@ hg19_example_db_gff3.txt     hg19_refGeneWithVerMrna.fa  hg38_cytoBand.txt      
 As we can see, in the `humandb\` folder, the `hg38_clinvar_20240611.txt`, `hg38_cytoBand.txt`, `hg38_gnomad41_exome.txt` and `hg38_refGene.txt` have been downloaded correctly. Note that we will use `hg38_refGeneWithVer.txt` for all future ANNOVAR annotation so it could provide the transcript version for variants.
 
 
-### Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
+### Case 1. Gene annotation using VCF file
+
+In this section, the use case is : With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
 
 Now let's do some annotation on the variants. Make a `mywork` (or any name you like) directory in the `annovar` package folder to store the input data and result.
 
@@ -136,7 +142,10 @@ Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGene
 The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
 
-### Case 2. Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. 
+### Case 2. Whole exome analysis
+
+In this section, the use case is: Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. 
+
 Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.(including HGVS annotations for intronic variants, then evaluate all variants for the chromosome distribution, variant type distribution, ClinVar distribution)
 
 Before we run the human exome annotation, we need to download the data we need, we can run this command to download the data into `mywork/`:
@@ -563,7 +572,9 @@ Your plot should look similar to this one. We find MetaRNN's preditions are all 
 ![image](https://github.com/user-attachments/assets/19d1cb4b-0eb9-4295-baf9-69c2c524b1dc)
 
 
-### Case 3. Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using prepare_annovar_user.pl
+### Case 3. Create your own annotation database
+
+In this section, we have this use case: Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using `prepare_annovar_user.pl`.
 
 Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be down by using `prepare_annovar_user.pl` script.
 
