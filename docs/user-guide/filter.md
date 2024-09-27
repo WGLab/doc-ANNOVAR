@@ -996,12 +996,12 @@ Although I periodically update ClinVar database in ANNOVAR for help users perfor
 ```
           wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz
           wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz.tbi
-          gunzip clinvar_20180603.vcf.gz
-          prepare_annovar_user.pl -dbtype clinvar2 temp.norm.vcf -out hg38_clinvar_20240917_raw.txt
+          gunzip clinvar_20240917.vcf.gz
+          prepare_annovar_user.pl -dbtype clinvar2 clinvar_20240917.vcf.gz -out hg38_clinvar_20240917_raw.txt
           index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_20240917.txt
 ```
 
-The `comment_20240917.txt` file can be downloaded [http://www.openbioinformatics.org/annovar/download/comment_20240917.txt](here). It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
+The `comment_clinvar_20240917.txt` file can be downloaded [http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt](here). It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
 
 In old version of ClinVar, it was necessary to perform allele splitting and left normalization. An example command is `vt decompose clinvar_20180603.vcf.gz -o temp.split.vcf;           prepare_annovar_user.pl   -dbtype clinvar_preprocess2 temp.split.vcf -out temp.split2.vcf; vt normalize temp.split2.vcf -r ~/project/seqlib/GRCh38/old/GRCh38.fa -o temp.norm.vcf -w 2000000`. It is no longer necessary. But this information is included here for historical reference.
 
