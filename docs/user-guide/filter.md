@@ -991,14 +991,14 @@ In early 2018, the format of ClinVar changed, so the fields above no longer appl
 1       1       1       0       0       141597  not_specified   MedGen:CN169374 criteria_provided\x2c_multiple_submitters\x2c_no_conflicts      Benign
 ```
 
-Although I periodically update ClinVar database in ANNOVAR for help users perform annotation, due to the frequent update schedule of ClinVar, users are advised to create a database yourself using the [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) tool. An example procedure is given below:
+Although I periodically update ClinVar database in ANNOVAR for help users perform annotation, due to the frequent update schedule of ClinVar, users are advised to create a database yourself using the [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) tool, and create index using [index_annovar.pl](https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt) (rename the txt file to perl script). An example procedure is given below:
 
 ```
           wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz
           wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz.tbi
           gunzip clinvar_20240917.vcf.gz
           prepare_annovar_user.pl -dbtype clinvar2 clinvar_20240917.vcf.gz -out hg38_clinvar_20240917_raw.txt
-          index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_20240917.txt
+          index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_clinvar_20240917.txt
 ```
 
 If you get an error `Can't exec "convert2annovar.pl"` while running `prepare_annovar_user.pl`, make sure you move `prepare_annovar_user.pl` to the `annovar` folder together with other sciprts. If you still have the issue, try to add the scripts to your PATH directly using `export PATH=$PATH:/path/to/your/annovar/` (change the path accordingly to where you put `annovar` package).
