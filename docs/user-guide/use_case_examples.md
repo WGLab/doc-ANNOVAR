@@ -576,7 +576,10 @@ Your plot should look similar to this one. We find MetaRNN's preditions are all 
 
 In this section, we have this use case: Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using `prepare_annovar_user.pl`.
 
-Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be down by using `prepare_annovar_user.pl` script.
+Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be down by using `prepare_annovar_user.pl` script. Here, we denmonstrate how we annotate the latest ClinVar database as a case study, and if you want to know more details about filter-based annotation, you could refer to [here](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) for details.
+
+To check the lastest version of ClinVar database, you could check [here](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/). In this case#3, we will download and prepare the CinVar version `clinvar_20240917` for hg38. To do the task, we need `prepare_annovar_user.pl`, you could download it [here](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) and move it to your `annovar` package folder.
+
 
 
 ### 4. How do i get the pathogenicity prediction from ANNOVAR, and how do I interpret it?
