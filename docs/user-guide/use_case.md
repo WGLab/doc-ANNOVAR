@@ -1,10 +1,10 @@
 To easily get started with ANNOVAR, there might be some common use cases you will consider to do using ANNOVAR. Here, we provide a start to end example for you to follow. The use cases include:
 
 * **Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.**
-* **Case 2. Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream analysis on all variants.**
+* **Case 2. Runing ANNOVAR annotation on exome VCF file, consider both intronic and exonic regions, with a downstream analysis on all variants.**
   * Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
-* **Case 3. Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using prepare_annovar_user.pl**
-* **Case 4. Annotate the amino acid changes for all exome vairants.**
+* **Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`**
+* **Case 4. Case 4. Annotate the amino acid changes for whole exome vairants**
 * **Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.**
 
 
@@ -142,7 +142,7 @@ Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGene
 The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
 
-### Case 2. Whole exome analysis
+### Case 2. exome VCF annotation and analysis
 
 In this section, the use case is: Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. 
 
@@ -194,7 +194,7 @@ The screenshot showed us the complete columns and the partial of the first varia
 
 ```
 (base) [wangp5@reslnvhpc0202 annovar]$ cd mywork/
-(base) [wangp5@reslnvhpc0202 annovar]$ awk 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' proband.annovar.hg19_multianno.txt | sort -V > variant_counts.txt
+(base) [wangp5@reslnvhpc0202 annovar]$ awk -F '\t' 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' proband.annovar.hg19_multianno.txt | sort -V > variant_counts.txt
 (base) [wangp5@reslnvhpc0202 annovar]$ cat variant_counts.txt
 chr1 2274
 chr2 1418
@@ -275,7 +275,7 @@ Now we can open the 'variant_distribution.png' to have a good look on the varian
   Another useful information for an exome annotation will be the variant type distribution. We could follow the similar procedures like above but we focus on `Func.refGeneWithVer` column this time.
 
 ```
-(base) [wangp5@reslnvhpc0202 mywork]$ awk 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' proband.annovar.hg19_multianno.txt | sort -k2,2nr > variant_type_counts.txt
+(base) [wangp5@reslnvhpc0202 mywork]$ awk -F '\t' 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' proband.annovar.hg19_multianno.txt | sort -k2,2nr > variant_type_counts.txt
 (base) [wangp5@reslnvhpc0202 mywork]$ cat variant_type_counts.txt 
 exonic 18598
 intron 2264
@@ -578,10 +578,53 @@ In this section, we have this use case: Prepared and update the latestes annotat
 
 Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be down by using `prepare_annovar_user.pl` script. Here, we denmonstrate how we annotate the latest ClinVar database as a case study, and if you want to know more details about filter-based annotation, you could refer to [here](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) for details.
 
-To check the lastest version of ClinVar database, you could check [here](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/). In this case#3, we will download and prepare the CinVar version `clinvar_20240917` for hg38. To do the task, we need `prepare_annovar_user.pl`, you could download it [here](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) and move it to your `annovar` package folder.
+To check the lastest version of ClinVar database, you could check [here](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/). In this case#3, we will download and prepare the CinVar version `clinvar_20240917` for hg38. To do the task, we need [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) and [index_annovar.pl](https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt), we will download them using `wget` but make sure your are in the `annovar` folder.
 
+We will also used [comment_clinvar_20240917.txt](http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt) in the last index step. It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
+
+```
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz.tbi
+
+wget http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl
+wget -O index_annovar.pl https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt
+wget http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt
+chmod +x prepare_annovar_user.pl
+chmod +x index_annovar.pl
+
+gunzip clinvar_20240917.vcf.gz
+prepare_annovar_user.pl -dbtype clinvar2 clinvar_20240917.vcf.gz -out hg38_clinvar_20240917_raw.txt
+index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_clinvar_20240917.txt
+
+mv hg38_clinvar_20240917.txt* humandb/
+mkdir prepare_db
+mv *clinvar_20240917* prepare_db/
+```
+
+If you get an error `Can't exec "convert2annovar.pl"` while running `prepare_annovar_user.pl`, make sure you move `prepare_annovar_user.pl` to the `annovar` folder together with other sciprts. If you still have the issue, try to add the scripts to your PATH directly using `export PATH=$PATH:/path/to/your/annovar/` (change the path accordingly to where you put `annovar` package). For more questions regarding to the filter-based annotation, please refer to the [Filter-based Annotation](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) page in ANNOVAR website.
+
+Once we create the clinvar annotation, we could check if it works by using the vcf file from case#1. This time we will have an extra filter-based operation using the hg38_clinvar_20240917 database we just created. Let's run the `table_annovar.pl` and check the result.
+
+```
+(tutorial) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_withVer_clinvar -remove -protocol refGeneWithVer,clinvar_20240917 -operation g,f -nastring . -vcfinput -polish
+
+(tutorial) [wangp5@reslnvhpc0202 annovar]$ head -n 3 mywork/myanno_withVer_clinvar.hg38_multianno.txt
+Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGeneWithVer	ExonicFunc.refGeneWithVer	AAChange.refGeneWithVer	CLNALLELEID	CLNDN	CLNDISDB	CLNREVSTAT	CLNSIG	ONCDN	ONCDISDB	ONCREVSTAT	ONC	SCIDN	SCIDISDB	SCIREVSTAT	SCI	Otherinfo1	Otherinfo2	Otherinfo3	Otherinfo4	Otherinfo5	Otherinfo6Otherinfo7	Otherinfo8	Otherinfo9	Otherinfo10	Otherinfo11
+2	162279995	162279995	C	G	splicing	IFIH1	NM_022168.4:exon8:c.1641+1G>C	.	.	250309	Singleton-Merten_syndrome_1|Aicardi-Goutieres_syndrome_7|Immunodeficiency_95|Susceptibility_to_severe_COVID-19|not_specified|Multisystem_inflammatory_syndrome_in_children|not_provided	MONDO:MONDO:0024535,MedGen:C4225427,OMIM:182250,Orphanet:85191|MONDO:MONDO:0014367,MedGen:C3888244,OMIM:615846,Orphanet:51|MONDO:MONDO:0030692,MedGen:C5676929,OMIM:619773|.|MedGen:CN169374|MedGen:C5391534|MedGen:C3661900	criteria_provided,_conflicting_classifications	Conflicting_classifications_of_pathogenicity	.	.	.	.	.	.	.	.	.	.	.	2	162279995	.	C	G	.	.	.
+2	162310909	162310909	T	C	exonic	IFIH1	.	nonsynonymous SNV	IFIH1:NM_022168.4:exon2:c.A478G:p.N160D	614226	Singleton-Merten_syndrome_1|Aicardi-Goutieres_syndrome_7|Immunodeficiency_95|not_provided	MONDO:MONDO:0024535,MedGen:C4225427,OMIM:182250,Orphanet:85191|MONDO:MONDO:0014367,MedGen:C3888244,OMIM:615846,Orphanet:51|MONDO:MONDO:0030692,MedGen:C5676929,OMIM:619773|MedGen:C3661900	criteria_provided,_conflicting_classifications	Conflicting_classifications_of_pathogenicity	.	.	.	.	.	.	.	.	.	.	.	2	162310909	.	T	C	.	.	.
+
+```
+
+Congratualations! You just created your own ClinVar database and got the annotation.
+
+
+### Case 4. Annotate the amino acid changes for whole exome vairants
+
+We will use hg38 to generate whole exome variants, with the hg38_refGene.txt file, but with 10bp as the intron/exon boundaries
 
 
 ### 4. How do i get the pathogenicity prediction from ANNOVAR, and how do I interpret it?
+
+
 
 ### 5. I have a very big vcf file/very large list of variants, how do i run ANNOVAR to process it?
