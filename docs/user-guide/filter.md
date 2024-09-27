@@ -1001,7 +1001,9 @@ Although I periodically update ClinVar database in ANNOVAR for help users perfor
           index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_20240917.txt
 ```
 
-The `comment_clinvar_20240917.txt` file can be downloaded [http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt](here). It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
+If you have still have issue `Can't exec "convert2annovar.pl"` while running `prepare_annovar_user.pl`, make sure you move `prepare_annovar_user.pl` to the `annovar` folder together with other sciprts. If you still have the issue, try to add the scripts to your PATH directly using `export PATH=$PATH:/path/to/your/annovar/` (change the path accordingly to where you put `annovar` package).
+
+The `comment_clinvar_20240917.txt` file can be downloaded [here](http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt). It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
 
 In old version of ClinVar, it was necessary to perform allele splitting and left normalization. An example command is `vt decompose clinvar_20180603.vcf.gz -o temp.split.vcf;           prepare_annovar_user.pl   -dbtype clinvar_preprocess2 temp.split.vcf -out temp.split2.vcf; vt normalize temp.split2.vcf -r ~/project/seqlib/GRCh38/old/GRCh38.fa -o temp.norm.vcf -w 2000000`. It is no longer necessary. But this information is included here for historical reference.
 
