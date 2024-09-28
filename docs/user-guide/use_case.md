@@ -607,12 +607,7 @@ Once we create the clinvar annotation, we could check if it works by using the v
 
 ```
 (tutorial) [wangp5@reslnvhpc0202 annovar]$ perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_withVer_clinvar -remove -protocol refGeneWithVer,clinvar_20240917 -operation g,f -nastring . -vcfinput -polish
-
-(tutorial) [wangp5@reslnvhpc0202 annovar]$ head -n 3 mywork/myanno_withVer_clinvar.hg38_multianno.txt
-Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGeneWithVer	ExonicFunc.refGeneWithVer	AAChange.refGeneWithVer	CLNALLELEID	CLNDN	CLNDISDB	CLNREVSTAT	CLNSIG	ONCDN	ONCDISDB	ONCREVSTAT	ONC	SCIDN	SCIDISDB	SCIREVSTAT	SCI	Otherinfo1	Otherinfo2	Otherinfo3	Otherinfo4	Otherinfo5	Otherinfo6Otherinfo7	Otherinfo8	Otherinfo9	Otherinfo10	Otherinfo11
-2	162279995	162279995	C	G	splicing	IFIH1	NM_022168.4:exon8:c.1641+1G>C	.	.	250309	Singleton-Merten_syndrome_1|Aicardi-Goutieres_syndrome_7|Immunodeficiency_95|Susceptibility_to_severe_COVID-19|not_specified|Multisystem_inflammatory_syndrome_in_children|not_provided	MONDO:MONDO:0024535,MedGen:C4225427,OMIM:182250,Orphanet:85191|MONDO:MONDO:0014367,MedGen:C3888244,OMIM:615846,Orphanet:51|MONDO:MONDO:0030692,MedGen:C5676929,OMIM:619773|.|MedGen:CN169374|MedGen:C5391534|MedGen:C3661900	criteria_provided,_conflicting_classifications	Conflicting_classifications_of_pathogenicity	.	.	.	.	.	.	.	.	.	.	.	2	162279995	.	C	G	.	.	.
-2	162310909	162310909	T	C	exonic	IFIH1	.	nonsynonymous SNV	IFIH1:NM_022168.4:exon2:c.A478G:p.N160D	614226	Singleton-Merten_syndrome_1|Aicardi-Goutieres_syndrome_7|Immunodeficiency_95|not_provided	MONDO:MONDO:0024535,MedGen:C4225427,OMIM:182250,Orphanet:85191|MONDO:MONDO:0014367,MedGen:C3888244,OMIM:615846,Orphanet:51|MONDO:MONDO:0030692,MedGen:C5676929,OMIM:619773|MedGen:C3661900	criteria_provided,_conflicting_classifications	Conflicting_classifications_of_pathogenicity	.	.	.	.	.	.	.	.	.	.	.	2	162310909	.	T	C	.	.	.
-
+(tutorial) [wangp5@reslnvhpc0202 annovar]$ head mywork/myanno_withVer_clinvar.hg38_multianno.txt
 ```
 
 Congratualations! You just created your own ClinVar database and got the annotation.
@@ -620,7 +615,60 @@ Congratualations! You just created your own ClinVar database and got the annotat
 
 ### Case 4. Annotate the amino acid changes for whole exome vairants
 
-We will use hg38 to generate whole exome variants, with the hg38_refGene.txt file, but with 10bp as the intron/exon boundaries
+We will use hg38 to generate whole exome variants, with the hg38_refGene.txt file, but with 10bp as the intron/exon boundaries. I run the following commands to perform whole exome varaint annotation, note that there are intotal 11 commands and a clean up section (delete temp file). You will need to go to the `annovar` package folder, and change the `/path/to/Ref_Genome/fasta/GRCh38/GRCh38.fa` in 6th command into your path to the GRCh38 fasta file. Also note that in 9th and 11th commands, we speed the process up by running commands in parallel using 28 processors.
+
+```
+#!/bin/bash
+
+# 1st command: extract exome regions and save to hg38_exome.bed
+perl -ne '@a=split(/\t/,$_); @start=split(/,/,$a[9]); @end=split(/,/,$a[10]); @start=map{$_-1
+0}@start; @end=map{$_+10}@end; for $i(0..@start-1){print "$a[2]\t$start[$i]\t$end[$i]\n"}' < 
+humandb/hg38_refGene.txt > hg38_exome.bed
+
+# 2nd command: Sort the exome bed file
+sort -k1,1 -k2,2n hg38_exome.bed > hg38_exome_sorted.bed
+
+# 3rd command: Filter chromosomes and create hg38_exome_sorted1.bed
+perl -ne 'm/^chr(\d+|X|Y)\s/ and print' < hg38_exome_sorted.bed > hg38_exome_sorted1.bed
+
+# 4th command: Count lines and output the result
+wc hg38_exome_sorted.bed hg38_exome_sorted1.bed
+
+# 5th command: Merge exome intervals with bedtools
+bedtools merge -i hg38_exome_sorted1.bed > hg38_exome_merge.bed
+
+# 6th command: Retrieve sequences from fasta
+## result being write to hg38_exome_merge.bed.fa
+retrieve_seq_from_fasta.pl -format tab -seqfile /path/to/Ref_Genome/fasta/GRCh38/GRCh38.fa hg38_exome_merge.bed
+
+# 7th command: Perform variant calls using Perl
+perl -ne 'chomp; if (m/^>chr(\w+):(\d+)\-(\d+)/) {($chr,$start,$end)=($1,$2,$3)} elsif (m/^([ACGTN]+)$/) {$seq=$1; @seq=split(//,$seq); @seq==$end-$start+1 or die "length=".length($seq)." start=$start end=$end"; for $i(0..@seq-1){ for $alt(qw/A C G T/) {$seq[$i] eq $alt and next; $seq[$i] eq 'N' and next; print "$chr\t", $start+$i, "\t", $start+$i, "\t", $seq[$i], "\t$alt\n"}}} elsif (m/^N+$/) {next} else {die "$_"}' < hg38_exome_merge.bed.fa > hg38_exome_merge.avinput
+
+# 8th command: Split large avinput file
+split -l 10000000 -d hg38_exome_merge.avinput
+
+# 9th command: Run batch jobs with repeat_jobs.pl
+ls x* | xargs -P 28 -I {} sh -c 'table_annovar.pl {} humandb/ -build hg38 -out {} -remove -protocol refGeneWithVer -operation g -nastring . -arg "-batch 1m -hgvs" -intronhgvs 20'
+
+# 10th command: Copy the output file
+cp x00.hg38_multianno.txt  hg38_exome.hg38_multianno.txt
+
+# 11th command: Concatenate results from all jobs
+seq -w 01 27 | xargs -P 27 -I {} sh -c 'tail -n +2 x{}.hg38_multianno.txt' >> hg38_exome.hg38_multianno.txt
+
+# Clean up the temp file
+mv hg38_exome.hg38_multianno.txt mywork/
+rm x*
+mkdir whole_exome_files
+mv hg38_exome* whole_exome_files/
+mv whole_exome_files/ mywork/
+```
+After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`.
+
+
+### Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
+
+
 
 
 ### 4. How do i get the pathogenicity prediction from ANNOVAR, and how do I interpret it?
