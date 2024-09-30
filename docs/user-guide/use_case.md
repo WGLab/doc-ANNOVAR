@@ -510,7 +510,9 @@ Your result should be similar to this one.
 
 - Compare model performance based on clinical impact (ClinVar)
 
-  Moving further, we could compare the model performance by considering ClinVar clinical significance (`CLNSIG` column) as 'gold standard'. Note that we just assume the `CLNSIG` as 'gold standard' for tutorial purpose, in reality this might be complicated and you need to consider many other aspects (like review status on ClinVar) as well. As we only have very few 'Pathonigenic' variants, we will only focus on the 'Benign' variants, and we assume better tool will classify these variants all as 'Benign' variants and they should have relative high AF. Run the folloing python script to get the result:
+  Moving further, we could compare the model performance by considering ClinVar clinical significance (`CLNSIG` column) as 'gold standard'. Note that we just assume the `CLNSIG` as 'gold standard' for tutorial purpose, in reality this might be complicated and you need to consider many other aspects (like review status on ClinVar) as well. If you want to further filter the ClinVar annotation with the "review status" (also called Star in ClinVar), you could use the column `CLNREVSTAT`. The `CLNREVSTAT` will a be string and the tranform table could be found on the website here (https://www.ncbi.nlm.nih.gov/clinvar/docs/review_status/).
+
+As we only have very few 'Pathonigenic' variants, we will only focus on the 'Benign' variants, and we assume better tool will classify these variants all as 'Benign' variants and they should have relative high AF. Run the folloing python script to get the result:
 
 ```
 import pandas as pd
@@ -668,7 +670,36 @@ After the annotation, you will have the result in `mywork/hg38_exome.hg38_multia
 
 ### Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
+First we will need a list of RSID to get start with, we will download all Single Nucleotide Polymorphism (SNP) for gene 'MDM4' from the dbSNP database. We could use 'send to'->'file'->'format: Tab' to download a txt file.
 
+![image](https://github.com/user-attachments/assets/d21fbd92-7272-4085-a6b9-2cd4808c5162)
+
+We only need the column called "snp_id", which is the RSID represent a SNP. So we check which columns we need (in our case column No.5) and add a 'rs' before the snpid.
+
+```
+(tutorial) [wangp5@reslnvhpc0202 annovar]$ head -5 mywork/snp_result.txt 
+#chr	pos	variation	variant_type	snp_id	clinical_significance	validation_status	function_class	gene	frequency
+#chr	pos	variation	variant_type	snp_id	clinical_significance	validation_status	function_class	gene	frequency
+1	204526506	C>A,G,T	snv	4252679		by-frequency;by-alfa;by-cluster	intron_variant;genic_upstream_transcript_variant	MDM4	T:0.002967:15:1000Genomes|T:0.018105:81:Estonian|T:0.007403:1029:GnomAD|T:0.012024:12:GoNL|T:0.001672:1:NorthernSweden|C:0.5:1:Siberian|T:0.009643:161:ALFA
+1	204526708	C>G	snv	4252680		by-frequency;by-alfa;by-cluster	intron_variant;genic_upstream_transcript_variant	MDM4	G:0.009213:46:1000Genomes|G:0.01006:1410:GnomAD|C:0.5:2:SGDP_PRJ|G:0.01102:2917:TOPMED|G:0.006796:98:ALFA
+1	204526718	C>A	snv	4252681		by-frequency;by-alfa;by-cluster	intron_variant;genic_upstream_transcript_variant	MDM4	A:0.009213:46:1000Genomes|A:0.010073:1412:GnomAD|C:0.5:2:SGDP_PRJ|A:0.01102:2917:TOPMED|A:0.006796:98:ALFA
+(tutorial) [wangp5@reslnvhpc0202 annovar]$ awk '!/^#/ {print "rs"$5}' mywork/snp_result.txt > mywork/snplist.txt
+(tutorial) [wangp5@reslnvhpc0202 annovar]$ head mywork/snplist.txt 
+rs4252679
+rs4252680
+rs4252681
+rs4252682
+rs4252683
+rs4252684
+rs4252685
+rs4252686
+rs4252687
+rs4252688
+```
+Now we have all the SNPs for MDM4 gene from dbSNP database, we will use ANNOVAR to annotate these RSIDs. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument:
+```
+
+```
 
 
 ### 4. How do i get the pathogenicity prediction from ANNOVAR, and how do I interpret it?
