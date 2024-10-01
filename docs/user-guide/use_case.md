@@ -262,8 +262,6 @@ Then run the python script and check the output plot.
 
 ```
 python plot_variants.py
-
-Plot saved as 'variant_distribution.png'
 ```
 
 Now we can open the 'variant_distribution.png' to have a good look on the variant distribution across chromosomes:
@@ -403,7 +401,6 @@ plt.tight_layout()
 plt.savefig('allele_frequency_by_race.png', dpi=300)
 
 print("Plot saved as 'allele_frequency_by_race.png'")
-
 ```
 
 You should have a plot similar to this one:
@@ -462,7 +459,6 @@ plt.tight_layout()
 plt.savefig('allele_frequency_distribution_sift.png', dpi=300)
 
 print("Plot saved as 'allele_frequency_distribution_sift.png'")
-
 ```
 
 You should have a similar plot like this:
@@ -507,7 +503,6 @@ print("Plot saved as 'AF_boxplots_MetaRNNvsAlphaMissense.png'")
 
 Your result should be similar to this one.
 ![image](https://github.com/user-attachments/assets/71be17e4-e32a-486a-a079-8a574d49c427)
-
 
 #### Compare model performance based on clinical impact (ClinVar)
 
@@ -666,7 +661,12 @@ mkdir whole_exome_files
 mv hg38_exome* whole_exome_files/
 mv whole_exome_files/ mywork/
 ```
-After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`.
+
+After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`. From these whole exome annotation, we could use it as a catelog to search a corespondding AA change based on a DNA change, or on the opposite, search a DNA change based on a AA change.
+
+```
+
+```
 
 
 ## Case 5. Annotate RSID/SNP ID from GWAS
