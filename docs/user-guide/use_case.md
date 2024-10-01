@@ -13,7 +13,7 @@ Case 4. Case 4. Annotate the amino acid changes for whole exome vairants.
 Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
 
-## 0. Download and Install
+## Download and Install
 
 In this section, we will talk about: Understand the ANNOVAR package and download the dataset/annotation of your interest.
 
@@ -575,7 +575,7 @@ Your plot should look similar to this one. We find MetaRNN's preditions are all 
 ![image](https://github.com/user-attachments/assets/19d1cb4b-0eb9-4295-baf9-69c2c524b1dc)
 
 
-### Case 3. Update ClinVar database
+## Case 3. Update ClinVar database
 
 In this section, we have this use case: Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using `prepare_annovar_user.pl`.
 
@@ -669,7 +669,7 @@ mv whole_exome_files/ mywork/
 After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`.
 
 
-### Case 5. Annotate RSID/SNP ID from GWAS
+## Case 5. Annotate RSID/SNP ID from GWAS
 
 The use case for this section will be: Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
