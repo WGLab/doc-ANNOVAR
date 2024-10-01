@@ -673,6 +673,8 @@ After the annotation, you will have the result in `mywork/hg38_exome.hg38_multia
 
 The use case for this section will be: Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
+https://www.nature.com/articles/s41588-020-0609-2
+
 First we will need a list of RSID (or SNP ID) to get start with, we will download all Single Nucleotide Polymorphism (SNP) for gene 'MDM4' from the dbSNP database. We could use 'send to'->'file'->'format: Tab' to download a txt file.
 
 ![image](https://github.com/user-attachments/assets/d21fbd92-7272-4085-a6b9-2cd4808c5162)
