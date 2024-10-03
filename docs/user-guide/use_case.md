@@ -574,7 +574,7 @@ Your plot should look similar to this one. We find MetaRNN's preditions are all 
 
 In this section, we have this use case: Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using `prepare_annovar_user.pl`.
 
-Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be down by using `prepare_annovar_user.pl` script. Here, we denmonstrate how we annotate the latest ClinVar database as a case study, and if you want to know more details about filter-based annotation, you could refer to [here](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) for details.
+Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be done by using `prepare_annovar_user.pl` script. Here, we denmonstrate how we annotate the latest ClinVar database as a case study, and if you want to know more details about filter-based annotation, you could refer to [here](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) for details.
 
 To check the lastest version of ClinVar database, you could check [here](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/). In this case#3, we will download and prepare the CinVar version `clinvar_20240917` for hg38. To do the task, we need [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) and [index_annovar.pl](https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt), we will download them using `wget` but make sure your are in the `annovar` folder.
 
@@ -662,18 +662,22 @@ mv hg38_exome* whole_exome_files/
 mv whole_exome_files/ mywork/
 ```
 
-After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`. From these whole exome annotation, we could use it as a catelog to search a corespondding AA change based on a DNA change, or on the opposite, search a DNA change based on a AA change.
+After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`. From these whole exome annotation, we could use it as a catelog to search a corespondding AA change based on a DNA change, or on the opposite, search a DNA change based on a AA change. **TODO:UPDATE** use index.pl to index this annocation result so we could run a light ANNOVAR just to see AA change from cDNA change, or the opposite.
 
 ```
 
 ```
+
+
+## Case 4-2. Create eQTL and sQTL database in ANNOVAR
+https://www.gtexportal.org/home/downloads/adult-gtex/qtl
 
 
 ## Case 5. Annotate RSID/SNP ID from GWAS
 
 The use case for this section will be: Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
-https://www.nature.com/articles/s41588-020-0609-2
+**TODO:UPDATE** https://www.nature.com/articles/s41588-020-0609-2
 
 First we will need a list of RSID (or SNP ID) to get start with, we will download all Single Nucleotide Polymorphism (SNP) for gene 'MDM4' from the dbSNP database. We could use 'send to'->'file'->'format: Tab' to download a txt file.
 
