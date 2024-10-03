@@ -1,17 +1,16 @@
 # User Case Tutorial
 To easily get started with ANNOVAR, there might be some common use cases you will consider to do using ANNOVAR. Here, we provide a start to end example for you to follow. The use cases include:
 
-Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
+- Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
 
-Case 2. Runing ANNOVAR annotation on exome VCF file, consider both intronic and exonic regions, with a downstream analysis on all variants.
-  * Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
+- Case 2. Runing ANNOVAR annotation on exome VCF file, consider both intronic and exonic regions, with a downstream analysis on all variants.
+  - Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
 
-Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
+- Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
 
-Case 4. Create customized ANNOVAR database for filter-based operation. Including a database for AA changes and DNA change conversion, and the eQTL and sQTL database for tissue-specific
-variant and gene expression/splcing association.
+- Case 4. Create customized ANNOVAR database for filter-based operation. Including a database for AA changes and DNA change conversion, and the eQTL and sQTL database for tissue-specific variant and gene expression/splcing association.
 
-Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
+- Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
 
 ## Download and Install
