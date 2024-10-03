@@ -8,7 +8,8 @@ Case 2. Runing ANNOVAR annotation on exome VCF file, consider both intronic and 
 
 Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
 
-Case 4. Case 4. Annotate the amino acid changes for whole exome vairants.
+Case 4. Create customized ANNOVAR database for filter-based operation. Including a database for AA changes and DNA change conversion, and the eQTL and sQTL database for tissue-specific
+variant and gene expression/splcing association.
 
 Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
