@@ -9,10 +9,12 @@ To easily get started with ANNOVAR, there might be some common use cases you wil
 - Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
 
 - Case 4. Create customized ANNOVAR database for filter-based operation. Including
-  - a database for AA changes and DNA change conversion, and
-  - the eQTL and sQTL database for tissue-specific variant and gene expression/splcing association.
+  - For example, the GTEX_v8_eQTL and sQTL database for tissue-specific variant and gene expression/splcing association.
 
-- Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
+- Case 5. Perform gene anotation for the whole human exome.
+  - Create a gene annotation database for all single nucleotide mutations (SNPs) in whole human exome.
+
+- Case 6. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
 
 ## Download and Install
@@ -613,7 +615,315 @@ head mywork/myanno_withVer_clinvar.hg38_multianno.txt
 Congratualations! You just created your own ClinVar database and got the annotation.
 
 
-## Case 4. Annotate the amino acid changes for whole exome vairants
+## Case 4. Create GTEx_v8_eQTL and GTEx_v8_sQTL database in ANNOVAR
+
+In this case, we will show how to prepare the annotation database for ANNOVAR and use it for easy and quick future ANNOVAR annotation. We will use the `GTEx_Analysis_v8_eQTL.tar` and `GTEx_Analysis_v8_sQTL.tar` files downloaded from the GTEx website. After download, unzip these two in the `annovar/` folder. 
+
+### sQTL
+
+We will denmentrate how to create a database for Expression Quantitative Trait Loci (eQTL) and Splicing Quantitative Trait Loci (sQTL) for different tissues from GTEx portol. 
+For database download and more information about the GTEx eQTL/sQTL, please refer to their [website](https://www.gtexportal.org/home/downloads/adult-gtex/qtl). 
+
+Before we begin, it's better to know the objectives of having this type of variant catalog of tissue-specific gene regulation. We would like to have a database in ANNOVAR, so everytime we have a new list of variants, we could easily know which variant in our list is likely to influence gene regulation and in which tissues these genes are influenced.
+
+The sQTL contains two type of compressed files, first is the file ending with ".v8.egenes.txt.gz" and another ending with ".v8.signif_variant_gene_pairs.txt.gz". The forther one contains information about all deteced genes for a tissue, we will use this to get the gene_name based on gene_id. And the second one is a variant-gene pair that tells what are the variants (locis) that significantly influence a gene expression. We will use this file to get the variant-gene pair, note that the gene here is represented by gene_id (GENCODE/Ensembl gene ID) and that's why we will need to use the first file to convert the gene_id to gene_name (GENCODE gene name). We will use a python script to convert and preprocess all the seperated tissue files into a raw_annovar input file like we did before for clinvar database. There are 49 tissues in total, so it will have 98 files in the `GTEx_Analysis_v8_eQTL` folder afte decompressed.
+
+Python script `process_eQTL.py` for eQTL:
+
+```
+import os
+import pandas as pd
+from multiprocessing import Pool
+import gzip
+
+# set the number of cpu to use
+num_cpu = 64
+
+# set the output foler, gene gz file suffix, varianet_gene_pair gz file suffix
+output_dir = "eQTL_catalog_py_output"
+eQTL_files_path = "GTEx_Analysis_v8_eQTL"
+gene_file_suffix=".v8.egenes.txt.gz"
+var_gene_pair_suffix=".v8.signif_variant_gene_pairs.txt.gz"
+
+os.makedirs(output_dir, exist_ok=True)
+
+# List all egenes (or sgenes) and variant-gene-pairs files
+egenes_files = [eQTL_files_path+'/'+f for f in os.listdir(eQTL_files_path) if f.endswith(gene_file_suffix)]
+variant_files = [f.replace(gene_file_suffix, var_gene_pair_suffix) for f in egenes_files]
+
+def process_tissue(files):
+    """Process one tissue to extract and merge egenes and variant-gene pairs information."""
+    egenes_file, variant_file = files
+    tissue_prefix = egenes_file.split('/')[-1].replace(gene_file_suffix, '')
+
+    # Step 1: Extract gene_id and gene_name from egenes file
+    gene_ref = []
+    with gzip.open(egenes_file, 'rt') as f:
+        next(f)  # Skip the first row
+        for line in f:
+            gene_id, gene_name = line.strip().split()[:2]
+            gene_ref.append((gene_id, gene_name))
+
+    gene_ref_df = pd.DataFrame(gene_ref, columns=['gene_id', 'gene_name'])
+
+    # Step 2: Extract variant_id and gene_id from variant-gene-pairs file
+    variant_gene_pairs = []
+    with gzip.open(variant_file, 'rt') as f:
+        next(f)  # Skip the first row
+        for line in f:
+            variant_id, gene_id = line.strip().split()[:2]
+            variant_gene_pairs.append((variant_id, gene_id))
+
+    variant_gene_df = pd.DataFrame(variant_gene_pairs, columns=['variant_id', 'gene_id'])
+
+    # Step 3: Merge gene name into the variant-gene pairs table
+    merged_df = pd.merge(variant_gene_df, gene_ref_df, on="gene_id", how="left")
+    # Warning if the corresponding gene_name was not found for variants
+    num_unfound_gene_name=merged_df['gene_name'].isna().sum()
+    if num_unfound_gene_name!=0:
+        print(f'WARNING: {num_unfound_gene_name} gene_name unfound in {tissue_prefix}')
+
+    # Step 4: Create the final table with unique variant_id and concatenated gene names
+    final_catalog = merged_df.groupby('variant_id')['gene_name'].agg(lambda x: '|'.join(x.astype(str).str.strip())).reset_index()
+    final_catalog.columns = ['var_id', f'{tissue_prefix}_eQTL_gene']
+
+    final_catalog=final_catalog.sort_values(by='var_id',ascending=True)
+
+    # Save the result
+    final_catalog.to_csv(f"{output_dir}/{tissue_prefix}_final_catalog.txt", sep='\t', index=False)
+
+    print(f"Processed {tissue_prefix}")
+
+    
+def merge_catalogs():
+    """Merge all final catalog files into a single file with unique variants."""
+    final_catalog_files = [f for f in os.listdir(output_dir) if f.endswith('_final_catalog.txt')]
+
+    # Initialize with the first file
+    merged_df = pd.read_csv(os.path.join(output_dir, final_catalog_files[0]), sep="\t")
+
+    # Merge the rest of the files
+    for file in final_catalog_files[1:]:
+        tissue_df = pd.read_csv(os.path.join(output_dir, file), sep="\t")
+        merged_df = pd.merge(merged_df, tissue_df, on="var_id", how="outer")
+        merged_df.fillna('.', inplace=True)  # Fill NaN values with '.'
+        print(f'Finished {file}')    
+    # Save the merged result
+    merged_df.to_csv(f"{output_dir}/final_merged_catalog.txt", sep="\t", index=False)
+
+    
+def split_variant_columns():
+    """Split the var_id column into Chr, Start, End, Ref, and Alt columns."""
+    # Load the final merged catalog
+    df = pd.read_csv(f"{output_dir}/final_merged_catalog.txt", sep="\t")
+    
+    # Split var_id into Chr, Start, Ref, and Alt
+    df[['Chr', 'Start', 'Ref', 'Alt']] = df['var_id'].str.extract(r'chr(\w+)_(\d+)_([A-Z]+)_([A-Z]+)')
+    
+    # Convert Start to int and calculate End
+    df['Start'] = df['Start'].astype(int)
+    df['End'] = df['Start'] + df['Ref'].str.len() - 1
+    
+    # Reorder columns to put the new columns at the front
+    df = df[['Chr', 'Start', 'End', 'Ref', 'Alt'] + [col for col in df.columns if col not in ['Chr', 'Start', 'End', 'Ref', 'Alt', 'var_id']]]
+    
+    # Sort the DataFrame by 'Chr', 'Start', and 'End' in ascending order
+    df = df.sort_values(by=['Chr', 'Start', 'End'], ascending=[True, True, True])
+    
+    # Save the updated file
+    df.to_csv(f"{output_dir}/final_eQTL_annovar_raw.txt", sep="\t", index=False, header=False)
+    print(f"Final merged catalog saved to {output_dir}/final_eQTL_annovar_raw.txt")
+    
+    # Save the columns into comment file
+    header = '#' + '\t'.join(df.columns)
+
+    # Write the header to the file
+    with open(f"{output_dir}/final_eQTL_annovar_comment.txt", 'w') as f:
+        f.write(header + '\n')
+    print(f"Comment (header) of final merged catalog saved to {output_dir}/final_eQTL_annovar_comment.txt")
+
+
+if __name__ == "__main__":
+    # Step 1: Process tissues in parallel using multiprocessing
+    files_to_process = list(zip(egenes_files, variant_files))
+    
+    with Pool(processes=num_cpu) as pool:
+        pool.map(process_tissue, files_to_process)
+
+    # Step 2: Merge all final catalog files
+    merge_catalogs()
+
+    # Step 3: Split var_id into Chr, Start, End, Ref, and Alt columns
+    split_variant_columns()
+```
+
+### sQTL
+
+And then we will take a look at the sQTL, it actually has simillar files like eQTL. However, the suffix of the sQTL file is different from eQTL, in `GTEx_Analysis_v8_sQTL` folder, there will be two types of file, one end with ".v8.sgenes.txt.gz" and another end with ".v8.sqtl_signifpairs.txt.gz". The first type of file contains information about all detected genes in a particular tissue, we will use it to match the "phenotype_id" to the influenced "gene_name". Notice that in sQTL, they use "LeafCutter intron excision phenotypes" to describe the influenced splicing, and they will have unique "phenotype_id". And then in the second type of file, we could know what are the varaints that cause different splicings, which will be the variant-phenotype pair. Therefore, similarly, we will use these two files for 49 tissues, and recover which gene will be influenced by a specific variant for different tissue types.
+
+Python script `process_eQTL.py` for sQTL:
+```
+import os
+import pandas as pd
+from multiprocessing import Pool
+import gzip
+
+# set the number of cpu to use
+num_cpu = 64
+
+# set the output foler, gene gz file suffix, varianet_gene_pair gz file suffix
+output_dir = "sQTL_catalog_py_output"
+sQTL_files_path = "GTEx_Analysis_v8_sQTL"
+gene_file_suffix=".v8.sgenes.txt.gz"
+var_gene_pair_suffix=".v8.sqtl_signifpairs.txt.gz"
+
+os.makedirs(output_dir, exist_ok=True)
+
+# List all egenes (or sgenes) and variant-gene-pairs files
+egenes_files = [sQTL_files_path+'/'+f for f in os.listdir(sQTL_files_path) if f.endswith(gene_file_suffix)]
+variant_files = [f.replace(gene_file_suffix, var_gene_pair_suffix) for f in egenes_files]
+
+def process_tissue(files):
+    """Process one tissue to extract and merge sgenes and variant-gene pairs information. In sQTL, the phenotype_id instead of gene_id is used to link the genes and variants, even though we still name it as gene_id."""
+    egenes_file, variant_file = files
+    tissue_prefix = egenes_file.split('/')[-1].replace(gene_file_suffix, '')
+
+    # Step 1: Extract gene_id and gene_name from egenes file
+    gene_ref = []
+    with gzip.open(egenes_file, 'rt') as f:
+        next(f)  # Skip the first row
+        for line in f:
+            gene_id, gene_name = line.strip().split()[:2]
+            gene_ref.append((gene_id, gene_name))
+
+    gene_ref_df = pd.DataFrame(gene_ref, columns=['gene_id', 'gene_name'])
+
+    # Step 2: Extract variant_id and gene_id from variant-gene-pairs file
+    variant_gene_pairs = []
+    with gzip.open(variant_file, 'rt') as f:
+        next(f)  # Skip the first row
+        for line in f:
+            variant_id, gene_id = line.strip().split()[:2]
+            variant_gene_pairs.append((variant_id, gene_id))
+
+    variant_gene_df = pd.DataFrame(variant_gene_pairs, columns=['variant_id', 'gene_id'])
+
+    # Step 3: Merge gene name into the variant-gene pairs table
+    merged_df = pd.merge(variant_gene_df, gene_ref_df, on="gene_id", how="left")
+    # Warning if the corresponding gene_name was not found for variants
+    num_unfound_gene_name=merged_df['gene_name'].isna().sum()
+    if num_unfound_gene_name!=0:
+        print(f'WARNING: {num_unfound_gene_name} gene_name unfound in {tissue_prefix}')
+
+    # Step 4: Create the final table with unique variant_id and concatenated gene names
+    final_catalog = merged_df.groupby('variant_id')['gene_name'].agg(lambda x: '|'.join(x.astype(str).str.strip())).reset_index()
+    final_catalog.columns = ['var_id', f'{tissue_prefix}_sQTL_gene']
+
+    final_catalog=final_catalog.sort_values(by='var_id',ascending=True)
+
+    # Save the result
+    final_catalog.to_csv(f"{output_dir}/{tissue_prefix}_final_catalog.txt", sep='\t', index=False)
+
+    print(f"Processed {tissue_prefix}")
+
+    
+def merge_catalogs():
+    """Merge all final catalog files into a single file with unique variants."""
+    final_catalog_files = [f for f in os.listdir(output_dir) if f.endswith('_final_catalog.txt')]
+
+    # Initialize with the first file
+    merged_df = pd.read_csv(os.path.join(output_dir, final_catalog_files[0]), sep="\t")
+
+    # Merge the rest of the files
+    for file in final_catalog_files[1:]:
+        tissue_df = pd.read_csv(os.path.join(output_dir, file), sep="\t")
+        merged_df = pd.merge(merged_df, tissue_df, on="var_id", how="outer")
+        merged_df.fillna('.', inplace=True)  # Fill NaN values with '.'
+        print(f'Finished {file}')    
+    # Save the merged result
+    merged_df.to_csv(f"{output_dir}/final_merged_catalog.txt", sep="\t", index=False)
+
+    
+def split_variant_columns():
+    """Split the var_id column into Chr, Start, End, Ref, and Alt columns."""
+    # Load the final merged catalog
+    df = pd.read_csv(f"{output_dir}/final_merged_catalog.txt", sep="\t", low_memory=False)
+    
+    # Split var_id into Chr, Start, Ref, and Alt
+    df[['Chr', 'Start', 'Ref', 'Alt']] = df['var_id'].str.extract(r'chr(\w+)_(\d+)_([A-Z]+)_([A-Z]+)')
+    
+    # Convert Start to int and calculate End
+    df['Start'] = df['Start'].astype(int)
+    df['End'] = df['Start'] + df['Ref'].str.len() - 1
+    
+    # Reorder columns to put the new columns at the front
+    df = df[['Chr', 'Start', 'End', 'Ref', 'Alt'] + [col for col in df.columns if col not in ['Chr', 'Start', 'End', 'Ref', 'Alt', 'var_id']]]
+    
+    # Sort the DataFrame by 'Chr', 'Start', and 'End' in ascending order
+    df = df.sort_values(by=['Chr', 'Start', 'End'], ascending=[True, True, True])
+    
+    # Save the updated file
+    df.to_csv(f"{output_dir}/final_sQTL_annovar_raw.txt", sep="\t", index=False, header=False)
+    print(f"Final merged catalog saved to {output_dir}/final_sQTL_annovar_raw.txt")
+    
+    # Save the columns into comment file
+    header = '#' + '\t'.join(df.columns)
+
+    # Write the header to the file
+    with open(f"{output_dir}/final_sQTL_annovar_comment.txt", 'w') as f:
+        f.write(header + '\n')
+    print(f"Comment (header) of final merged catalog saved to {output_dir}/final_sQTL_annovar_comment.txt")
+
+if __name__ == "__main__":
+    # Step 1: Process tissues in parallel using multiprocessing
+    files_to_process = list(zip(egenes_files, variant_files))
+    
+    with Pool(processes=num_cpu) as pool:
+        pool.map(process_tissue, files_to_process)
+
+    # Step 2: Merge all final catalog files
+    merge_catalogs()
+
+    # Step 3: Split var_id into Chr, Start, End, Ref, and Alt columns
+    split_variant_columns()
+```
+
+### Run the scripts
+
+Now we have both the datasets and scripts ready, let's run these scripts. I am using 64 cpus to parallel the process, you can choose your own specification.
+
+```
+### sQTL
+python process_sQTL.py
+perl index_annovar.pl sQTL_catalog_py_output/final_sQTL_annovar_raw.txt -outfile humandb/hg38_sQTL.txt --commentfile sQTL_catalog_py_output/final_sQTL_annovar_comment.txt
+
+### eQTL
+python process_eQTL.py
+perl index_annovar.pl eQTL_catalog_py_output/final_eQTL_annovar_raw.txt -outfile humandb/hg38_eQTL.txt --commentfile eQTL_catalog_py_output/final_eQTL_annovar_comment.txt
+```
+
+After the index step, we will have these 4 extra files in our `humandb\` folder:
+
+```
+hg38_eQTL.txt
+hg38_eQTL.txt.idx
+hg38_sQTL.txt
+hg38_sQTL.txt.idx
+```
+
+With these extra files, we could easily run table_annovar.pl to do the annotation, simply adding an extra filter-based operation `eQTL` and `sQTL`. For example, you could run annovar using your own list of variants with eQTL and sQTL annotations:
+
+```
+perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_eQTL_sQTL -remove -protocol refGeneWithVer,eQTL,sQTL -operation g,f,f -nastring . -vcfinput -polish
+```
+
+And you should have a result similar to this:
+![image](https://github.com/user-attachments/assets/c542669d-8889-44ad-8a9f-b09104c170ae)
+
+As you can see, the results showed that first two varaints in position `11863` did not influence the gene expression and slicing in any cell type. However, for the varaint `14677` in the non-coding (nc) exnoic region of gene `WASH7P`, it influenced the gene `RP11-34P13.13` and `RP11-206L10.2` in majority of the tissue types. More interestingly, the next variant in position `135203` on the opposite, influences the expression of `WASH7P` in Thyroid. This is just a very small showcase, but you can see how useful this database will be, and how easily you could run ANNOVAR to get a tissue_specific gene interation network for your variants of interest.
+
+
+## Case 5. Annotate the amino acid changes for whole exome vairants
 
 We will use hg38 to generate whole exome variants, with the hg38_refGene.txt file, but with 10bp as the intron/exon boundaries. I run the following commands to perform whole exome varaint annotation, note that there are intotal 11 commands and a clean up section (delete temp file). You will need to go to the `annovar` package folder, and change the `/path/to/Ref_Genome/fasta/GRCh38/GRCh38.fa` in 6th command into your path to the GRCh38 fasta file. Also note that in 9th and 11th commands, we speed the process up by running commands in parallel using 28 processors.
 
@@ -664,62 +974,57 @@ mv hg38_exome* whole_exome_files/
 mv whole_exome_files/ mywork/
 ```
 
-After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`. From these whole exome annotation, we could use it as a catelog to search a corespondding AA change based on a DNA change, or on the opposite, search a DNA change based on a AA change. **TODO:UPDATE** use index.pl to index this annocation result so we could run a light ANNOVAR just to see AA change from cDNA change, or the opposite.
+After the annotation, you will have the result in `mywork/hg38_exome.hg38_multianno.txt`. All bed files and fasta files for this whole exome annotation will be in `mywork/whole_exome_files`. From these whole exome annotation, we could use it as a catelog to search a corespondding AA change based on a DNA change, or on the opposite, search a DNA change based on a AA change.
 
-```
-
-```
+Similarly, you could follow the step in **Case 4** and create a database yourself for this whole exome annotation, which will serve the purpose of provinding you the information about gene annotation for all possible SNPs in human exome.
 
 
-## Case 4-2. Create eQTL and sQTL database in ANNOVAR
-https://www.gtexportal.org/home/downloads/adult-gtex/qtl
-
-
-## Case 5. Annotate RSID/SNP ID from GWAS
+## Case 6. Annotate RSID/SNP ID from GWAS
 
 The use case for this section will be: Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
-**TODO:UPDATE** https://www.nature.com/articles/s41588-020-0609-2
-
-First we will need a list of RSID (or SNP ID) to get start with, we will download all Single Nucleotide Polymorphism (SNP) for gene 'MDM4' from the dbSNP database. We could use 'send to'->'file'->'format: Tab' to download a txt file.
-
-![image](https://github.com/user-attachments/assets/d21fbd92-7272-4085-a6b9-2cd4808c5162)
-
-We only need the column called "snp_id", which is the RSID represent a SNP. So we check which columns we need (in our case column No.5) and add a 'rs' before the snpid.
+First we will need a list of RSID (or SNP ID) to get start with, we will use 32 novel susceptibility loci (P < 5.0 × 10E−8) from a recent Genome-wide association study (GWAS) about breat cancer ([https://www.nature.com/articles/s41588-020-0609-2]). And most of these loci are found to associate with breat tumor. We could run pathogenicity predition for these SNP to see how is their predicted pathogenicity score.
 
 ```
-head -5 mywork/snp_result.txt
+rs5776993
+rs10838267
+rs11065822
+rs1061657
+12:29140260
+rs11652463
+rs12962334
+rs17743054
+rs9712235
+rs4602255
+rs13039563
+rs9808759
+rs34052812
+rs1375631
+rs2886671
+rs7760611
+rs188092014
+rs79518236
+rs13277568
+rs142890050
+rs13256025
+rs4742903
+1:145126177
+rs7924772
+rs78378222
+rs206435
+rs141526427
+rs6065254
+rs495367
+rs138044103
+rs17215231
+rs2464195
 
-#chr	pos	variation	variant_type	snp_id	clinical_significance	validation_status	function_class	gene	frequency
-#chr	pos	variation	variant_type	snp_id	clinical_significance	validation_status	function_class	gene	frequency
-1	204526506	C>A,G,T	snv	4252679		by-frequency;by-alfa;by-cluster	intron_variant;genic_upstream_transcript_variant	MDM4	T:0.002967:15:1000Genomes|T:0.018105:81:Estonian|T:0.007403:1029:GnomAD|T:0.012024:12:GoNL|T:0.001672:1:NorthernSweden|C:0.5:1:Siberian|T:0.009643:161:ALFA
-1	204526708	C>G	snv	4252680		by-frequency;by-alfa;by-cluster	intron_variant;genic_upstream_transcript_variant	MDM4	G:0.009213:46:1000Genomes|G:0.01006:1410:GnomAD|C:0.5:2:SGDP_PRJ|G:0.01102:2917:TOPMED|G:0.006796:98:ALFA
-1	204526718	C>A	snv	4252681		by-frequency;by-alfa;by-cluster	intron_variant;genic_upstream_transcript_variant	MDM4	A:0.009213:46:1000Genomes|A:0.010073:1412:GnomAD|C:0.5:2:SGDP_PRJ|A:0.01102:2917:TOPMED|A:0.006796:98:ALFA
-
-awk '!/^#/ {print "rs"$5}' mywork/snp_result.txt > mywork/snplist.txt
-head mywork/snplist.txt
-
-rs4252679
-rs4252680
-rs4252681
-rs4252682
-rs4252683
-rs4252684
-rs4252685
-rs4252686
-rs4252687
-rs4252688
 ```
 
-Now we have all the SNPs for MDM4 gene from dbSNP database, we will use ANNOVAR to annotate these RSIDs. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument:
+Now we have all the SNPs, we will use ANNOVAR to annotate these RSid. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument. Before we conver the RSid into the annoar input, we need to download the latest dbSNP `avsnp151` first, then we run  `convert2annovar.pl`, at last we run `table_annovar.pl`:
 
 ```
-
+perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar avsnp151 humandb/
+perl convert2annovar.pl -format rsid mywork/snplist.txt -dbsnpfile humandb/hg38_avsnp151.txt > mywork/snplist.avinput
+perl table_annovar.pl mywork/snplist.avinput humandb/ -buildver hg38 -out mywork/snplist.annovar -remove -protocol refGeneWithVer,avsnp151,clinvar_20240917,gnomad211_exome,dbnsfp47a -operation g,f,f,f,f -arg '-hgvs',,,, -polish -nastring . -vcfinput -intronhgvs 20
 ```
-
-
-### 4. How do i get the pathogenicity prediction from ANNOVAR, and how do I interpret it?
-
-
-
-### 5. I have a very big vcf file/very large list of variants, how do i run ANNOVAR to process it?
