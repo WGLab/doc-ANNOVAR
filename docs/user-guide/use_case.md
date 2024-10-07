@@ -3,18 +3,20 @@ To easily get started with ANNOVAR, there might be some common use cases you wil
 
 - Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
 
-- Case 2. Runing ANNOVAR annotation on exome VCF file, consider both intronic and exonic regions, with a downstream analysis on all variants.
+- Case 2. Runing ANNOVAR annotation on exome VCF file, with a downstream analysis on all variants (intronic and exonic).
   - Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
 
 - Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
 
-- Case 4. Create customized ANNOVAR database for filter-based operation. Including
+- Case 4. Create customized ANNOVAR database for filter-based operation. 
   - For example, the GTEX_v8_eQTL and sQTL database for tissue-specific variant and gene expression/splcing association.
 
 - Case 5. Perform gene anotation for the whole human exome.
   - Create a gene annotation database for all single nucleotide mutations (SNPs) in whole human exome.
 
 - Case 6. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
+
+- Case 7. Adding T2T genome annotation.
 
 
 ## Download and Install
@@ -615,7 +617,7 @@ head mywork/myanno_withVer_clinvar.hg38_multianno.txt
 Congratualations! You just created your own ClinVar database and got the annotation.
 
 
-## Case 4. Create GTEx_v8_eQTL and GTEx_v8_sQTL database in ANNOVAR
+## Case 4. Adding GTEx_v8_eQTL and GTEx_v8_sQTL database
 
 In this case, we will show how to prepare the annotation database for ANNOVAR and use it for easy and quick future ANNOVAR annotation. We will use the `GTEx_Analysis_v8_eQTL.tar` and `GTEx_Analysis_v8_sQTL.tar` files downloaded from the GTEx website. After download, unzip these two in the `annovar/` folder. 
 
@@ -983,14 +985,13 @@ Similarly, you could follow the step in **Case 4** and create a database yoursel
 
 The use case for this section will be: Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
-First we will need a list of RSID (or SNP ID) to get start with, we will use 32 novel susceptibility loci (P < 5.0 × 10E−8) from a recent Genome-wide association study (GWAS) about breat cancer ([https://www.nature.com/articles/s41588-020-0609-2]). And most of these loci are found to associate with breat tumor. We could run pathogenicity predition for these SNP to see how is their predicted pathogenicity score.
+First we will need a list of RSID (or SNP ID) to get start with, we will use 32 novel susceptibility loci (P < 5.0 × 10E−8) from a recent Genome-wide association study (GWAS) about breast cancer ([https://www.nature.com/articles/s41588-020-0609-2]). And most of these loci are found to associate with tumor. We could run pathogenicity predition for these SNP to see how is their predicted pathogenicity score.
 
 ```
 rs5776993
 rs10838267
 rs11065822
 rs1061657
-12:29140260
 rs11652463
 rs12962334
 rs17743054
@@ -1008,7 +1009,6 @@ rs13277568
 rs142890050
 rs13256025
 rs4742903
-1:145126177
 rs7924772
 rs78378222
 rs206435
@@ -1018,13 +1018,52 @@ rs495367
 rs138044103
 rs17215231
 rs2464195
-
 ```
 
 Now we have all the SNPs, we will use ANNOVAR to annotate these RSid. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument. Before we conver the RSid into the annoar input, we need to download the latest dbSNP `avsnp151` first, then we run  `convert2annovar.pl`, at last we run `table_annovar.pl`:
 
 ```
-perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar avsnp151 humandb/
-perl convert2annovar.pl -format rsid mywork/snplist.txt -dbsnpfile humandb/hg38_avsnp151.txt > mywork/snplist.avinput
-perl table_annovar.pl mywork/snplist.avinput humandb/ -buildver hg38 -out mywork/snplist.annovar -remove -protocol refGeneWithVer,avsnp151,clinvar_20240917,gnomad211_exome,dbnsfp47a -operation g,f,f,f,f -arg '-hgvs',,,, -polish -nastring . -vcfinput -intronhgvs 20
+perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar snp138 humandb/
+perl convert2annovar.pl -format rsid mywork/snplist.txt -dbsnpfile humandb/hg19_snp138.txt > mywork/snplist_snp138.avinput
+perl table_annovar.pl mywork/snplist_snp138.avinput humandb/ -buildver hg19 -out mywork/snplist_snp138.annovar -remove -protocol refGeneWithVer,snp138,avsnp151,clinvar_20240917,gnomad211_exome,dbnsfp47a -operation g,f,f,f,f,f -arg '-hgvs',,,,, -polish -nastring . -intronhgvs 20
 ```
+
+After we run convert, there is 36 rows for provided 30 RSid, because some RSid has multiple identifiers so they were all written into output. We could quickly check the chromosome distribution and genetic function annotation.
+
+```
+awk -F '\t' 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' mywork/snplist_snp138.annovar.hg19_multianno.txt | sort -k2,2nr
+
+intergenic 18
+intronic 11
+intron 2
+ncRNA_intronic 2
+UTR3 2
+. 1
+
+awk -F '\t' 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' mywork/snplist_snp138.annovar.hg19_multianno.txt
+
+chr21 1
+chr12 3
+chr6_qbl_hap6 1
+chr6_cox_hap2 1
+chr1 1
+chr6_ssto_hap7 1
+chr6_mcf_hap5 1
+chr2 2
+chr17 2
+chr3 3
+chr18 3
+chr4 1
+chr6_dbb_hap3 1
+chr5 2
+chr6 2
+chr7 2
+chr8 3
+chr9 1
+chr20 3
+chr11 2
+```
+
+
+## Case 7. Adding T2T genome annotation database.
+
