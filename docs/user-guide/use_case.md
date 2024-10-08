@@ -686,7 +686,11 @@ def process_tissue(files):
         print(f'WARNING: {num_unfound_gene_name} gene_name unfound in {tissue_prefix}')
 
     # Step 4: Create the final table with unique variant_id and concatenated gene names
-    final_catalog = merged_df.groupby('variant_id')['gene_name'].agg(lambda x: '|'.join(x.astype(str).str.strip())).reset_index()
+    final_catalog = (
+        merged_df.groupby('variant_id')['gene_name']
+        .agg(lambda x: '|'.join(set(x.astype(str).str.strip())))  # Use set to drop duplicates
+        .reset_index()
+    )
     final_catalog.columns = ['var_id', f'{tissue_prefix}_eQTL_gene']
 
     final_catalog=final_catalog.sort_values(by='var_id',ascending=True)
@@ -818,7 +822,11 @@ def process_tissue(files):
         print(f'WARNING: {num_unfound_gene_name} gene_name unfound in {tissue_prefix}')
 
     # Step 4: Create the final table with unique variant_id and concatenated gene names
-    final_catalog = merged_df.groupby('variant_id')['gene_name'].agg(lambda x: '|'.join(x.astype(str).str.strip())).reset_index()
+    final_catalog = (
+        merged_df.groupby('variant_id')['gene_name']
+        .agg(lambda x: '|'.join(set(x.astype(str).str.strip())))  # Use set to drop duplicates
+        .reset_index()
+    )
     final_catalog.columns = ['var_id', f'{tissue_prefix}_sQTL_gene']
 
     final_catalog=final_catalog.sort_values(by='var_id',ascending=True)
