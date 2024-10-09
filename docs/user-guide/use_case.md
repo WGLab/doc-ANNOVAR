@@ -1,4 +1,4 @@
-# User Case Tutorial
+# Use Case Tutorial
 To easily get started with ANNOVAR, there might be some common use cases you will consider to do using ANNOVAR. Here, we provide a start to end example for you to follow. The use cases include:
 
 - Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
