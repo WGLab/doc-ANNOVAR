@@ -3,45 +3,108 @@
 In summer 2020, I taught an online training course that provides some materials for absolute beginners, including those who use personal Windows and Mac laptop computers, rather than Linux servers. The tutorial requires that you install conda in your personal computer, and it can be access [here](https://github.com/WGLab/Workshop_Annotation). Some users may find it useful. However, if you are already using a computing cluster and are already familiar with Linux, you do not need to follow this tutorial and can instead just read below.
 
 
-## table_annovar.pl
+## Download and Install
 
-For beginners, the easiest way to use ANNOVAR is to use the `table_annovar.pl` program. This program takes an input variant file (such as a VCF file) and generate a tab-delimited output file with many columns, each representing one set of annotations. Additionally, if the input is a VCF file, the program also generates a new output VCF file with the INFO field filled with annotation information.
+The latest version of ANNOVAR can always be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required). If you have any issue or question about downloading ANNOVAR, plase refer to [Download ANNOVAR](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) for details.
 
-Assume that we have downloaded ANNOVAR package and used `tar xvfz annovar.latest.tar.gz` to unpack the package. You will see that the `bin/` directory contains several Perl programs with .pl suffix. (Note that if you already added ANNOVAR path into your system executable path, then typing `annotate_variation.pl` would be okay instead of typing `perl annotate_variation.pl`). First, we need to download appropriate database files using `annotate_variation.pl`, and next we will run the `table_annovar.pl` program to annotate the variants in the `example/ex1.avinput` file.
+When you have requested the ANNOVAR from the website and downloaded it, you will receive a compressed file `annovar.latest.tar.gz`, you will need to unzip it.
 
 ```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGene humandb/
-
-[kaiwang@biocluster ~/]$ annotate_variation.pl -buildver hg19 -downdb cytoBand humandb/
-
-[kaiwang@biocluster ~/]$ annotate_variation.pl -buildver hg19 -downdb -webfrom annovar exac03 humandb/ 
-
-[kaiwang@biocluster ~/]$ annotate_variation.pl -buildver hg19 -downdb -webfrom annovar avsnp147 humandb/ 
-
-[kaiwang@biocluster ~/]$ annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp30a humandb/
-
-[kaiwang@biocluster ~/]$ table_annovar.pl example/ex1.avinput humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation gx,r,f,f,f -nastring . -csvout -polish -xref example/gene_xref.txt
+tar -xvzf annovar.latest.tar.gz
 ```
 
-Run the above commands one by one. The first a few commands download appropriate databases into the `humandb/` directory. The final command run TABLE_ANNOVAR, using ExAC version 0.3 (referred to as exac03) dbNFSP version 3.0a (referred to as dbnsfp30a), dbSNP version 147 with left-normalization (referred to as avsnp147) databases and remove all temporary files, and generates the output file called `myanno.hg19_multianno.txt`. Fields that does not have any annotation will be filled by "." string. Open the output file in Excel and see what it contains. The expected output file that I generated can be downloaded here: [ex1.hg19_multianno.csv](http://www.openbioinformatics.org/annovar/download/ex1.hg19_multianno.csv). A screen shot of the first a few columns is shown below:
+Once you unzip it, the annovar package will show up as a folder `annovar` and it will contains at least these files and folders:
+```
+annotate_variation.pl
+coding_change.pl
+convert2annovar.pl
+example
+humandb
+retrieve_seq_from_fasta.pl
+table_annovar.pl
+variants_reduction.pl
+``` 
 
-![table_annovar](../img/table_annovar.PNG)
+In the `annovar` folder, the files end with `.pl` are the perl scripts that we could run. The `example` contains different input file examples and parameter confis examples. The `humandb` is our warehouse, it stores all the database of interest so ANNOVAR know how to annotate the variants based on the annotation we required.
 
-The output file contains multiple columns. The first a few columns are your input column. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). For the next a few columns, the ExAC\* columns represent allele frequency in all the samples as well as sub-populations in the Exome Aggregation Consortium data sets, while the avsnp147 means the SNP identifier in the dbSNP version 147. The other columns contains prediction scores for non-synonymous variants using several widely used tools, including SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
+
+### run ANNOVAR
+
+By default, the ANNOVAR provide you with a very small example vcf file and basic annotation for you to run. We will use `ex2.vcf` in `example` as input, and run gene annotation using `table_annovar.pl`. `table_annovar.pl` takes an input variant file (such as a VCF file) and generate a tab-delimited output file with many columns, each representing one set of annotations. Additionally, if the input is a VCF file, the program also generates a new output VCF file with the INFO field filled with annotation information. 
+
+Let's run our first ANNOVAR.
+
+```
+perl table_annovar.pl example/ex2.vcf \
+  humandb/ \
+  -buildver hg19 \
+  -out my_first_anno \
+  -protocol refGeneWithVer \
+  -operation g \
+  -remove -polish -vcfinput -nastring .
+```
+
+Result will be in `my_first_anno.hg19_multianno.txt` and `my_first_anno.hg19_multianno.vcf`. To print the help message, simply run `./table_annovar.pl`, or run `./table_annovar.pl --help` to get detailed help message.
+
+
+### download additional database
+
+The `humandb` is our warehouse, it stores all the preprocessed databases of interest so ANNOVAR know how to annotate the variants based on the annotation we required. We need to download appropriate database files using `annotate_variation.pl`. Before download, we need to decide what database we want to use:
+- genome build (e.g., `hg19` or `hg38`) 
+- annotation (e.g., `gnomad` or `clinvar`)
+- version (e.g. `clinvar_20240917` or `clinvar_20240611`)
+
+Please check all available database for ANNOVAR in [ANNOVAR addional database page](https://annovar.openbioinformatics.org/en/latest/user-guide/download/#additional-databases). 
+
+Example of downloading additional database, and run ANNOVAR using these database (Note that if you already added ANNOVAR path into your system executable path, then typing `annotate_variation.pl` would be okay instead of typing `perl annotate_variation.pl`).
+
+```
+annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGeneWithVer humandb/
+annotate_variation.pl -buildver hg19 -downdb cytoBand humandb/
+annotate_variation.pl -buildver hg19 -downdb -webfrom annovar gnomad211_exome humandb/ 
+annotate_variation.pl -buildver hg19 -downdb -webfrom annovar avsnp151 humandb/ 
+annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp47a humandb/
+```
+
+```
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out myanno \
+  -protocol refGeneWithVer,cytoBand,gnomad211_exome,avsnp151,dbnsfp47a \
+  -operation gx,r,f,f,f \
+  -xref example/gene_xref.txt \
+  -remove -nastring . -csvout -polish
+```
+
+Run the above commands one by one. The first a few commands download appropriate databases into the `humandb/` directory using `annotate_variation.pl`. The final command run TABLE_ANNOVAR, using following databases:
+- gnomAD exome collection version 2.1.1 (referred to as gnomad211_exome)
+- dbNFSP version 4.7a (referred to as dbnsfp47a)
+- dbSNP version 151  (referred to as avsnp151) 
+
+We also remove all temporary files (`-remove`), and generate the output file called `myanno.hg19_multianno.csv` (becausse we use `-csvout`). Fields that do not have any annotation will be filled by "." string (`-nastring .`). 
 
 We can examine the command line in greater detail. The `-operation` argument tells ANNOVAR which operations to use for each of the protocols: `g` means gene-based, `gx` means gene-based with cross-reference annotation (from `-xref` argument), `r` means region-based and `f` means filter-based. If you do not provide a xref file, then the operation can be `g` only. You will find details on what are gene/region/filter-based annotations in the other web pages. Sometimes, users want tab-delimited files rather than comma-delimited files. This can be easily done by removing `-csvout` argument to the above command.
+
+Open the output file in Excel and see what it contains. The expected output file that I generated can be downloaded here: [ex1_new.hg19_multianno.csv](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex1_new.hg19_multianno.csv). A screen shot of the first a few columns is shown below:
+
+![table_annovar](../img/ex1_new.png)
+
+The output file contains multiple columns. The first a few columns are your input column. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). For the next a few columns, the ExAC\* columns represent allele frequency in all the samples as well as sub-populations in the Exome Aggregation Consortium data sets, while the avsnp147 means the SNP identifier in the dbSNP version 147. The other columns contains prediction scores for non-synonymous variants using several widely used tools, including SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
 
 In the command above, we used `-xreffile` argument to provide annotation to genes. If the file contains header line, it is possible to provide mulitple pieces of annotations to genes (rather than just one single column). To illustrate this, we can check the first two lines (including the header line) of the `example/gene_fullxref.txt` file:
 
 ```
-[kaiwang@biocluster ~/project/annotate_variation]$ head -n 2 example/gene_fullxref.txt
+head -n 2 example/gene_fullxref.txt
+```
+```
 #Gene_name      pLi     pRec    pNull   Gene_full_name  Function_description    Disease_description     Tissue_specificity(Uniprot)     Expression(egenetics)  Expression(GNF/Atlas)    P(HI)   P(rec)  RVIS    RVIS_percentile GDI     GDI-Phred
 A1BG    9.0649236354772e-05     0.786086131023045       0.2138232197406 alpha-1-B glycoprotein  .       .       TISSUE SPECIFICITY: Plasma.;    unclassifiable (Anatomical System);amygdala;prostate;lung;islets of Langerhans;liver;spleen;germinal center;brain;thymus;       fetal liver;liver;fetal lung;trigeminal ganglion;       0.07384 0.31615 -0.466531444    23.51380042     79.3774 1.88274
 ```
 
-The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](http://www.openbioinformatics.org/annovar/download/ex1.hg19_multianno.csv). Part of the file is shown below to give users an example:
+The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xreffile` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex1_new_xreffile.hg19_multianno.csv). Part of the file is shown below to give users an example:
 
-![table_annovar_fullxref](../img/table_annovar_fullxref.PNG)
+![table_annovar_fullxref](../img/ex1_new_xreffile.png)
 
 Since ANNOVAR includes dbNSFP4.2a and dbNSFP4.2c now, you can try change the command above to use the latest version. Similarly, since ANNOVAR supports gnomAD now, you do not need to use exac03, but instead use gnomad211_exome which is the version 2.1.1.
 
