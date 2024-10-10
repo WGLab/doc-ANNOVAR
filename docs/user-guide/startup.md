@@ -5,7 +5,7 @@ In summer 2020, I taught an online training course that provides some materials 
 
 ## Download and Install
 
-The latest version of ANNOVAR can always be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required). If you have any issue or question about downloading ANNOVAR, plase refer to [Download ANNOVAR](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) for details.
+The latest version of ANNOVAR can be downloaded [here](https://www.openbioinformatics.org/annovar/annovar_download_form.php) (registration required). If you have any issue or question about downloading ANNOVAR, plase refer to [Download ANNOVAR](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) for more details.
 
 When you have requested the ANNOVAR from the website and downloaded it, you will receive a compressed file `annovar.latest.tar.gz`, you will need to unzip it.
 
@@ -30,9 +30,9 @@ In the `annovar` folder, the files end with `.pl` are the perl scripts that we c
 
 ### run ANNOVAR
 
-By default, the ANNOVAR provide you with a very small example vcf file and basic annotation for you to run. We will use `ex2.vcf` in `example` as input, and run gene annotation using `table_annovar.pl`. `table_annovar.pl` takes an input variant file (such as a VCF file) and generate a tab-delimited output file with many columns, each representing one set of annotations. Additionally, if the input is a VCF file, the program also generates a new output VCF file with the INFO field filled with annotation information. 
+By default, the ANNOVAR provide you with a very small example vcf file and basic annotation for you to run. We will use `ex2.vcf` in `example` as input, and run gene annotation using `table_annovar.pl`. `table_annovar.pl` takes an input variant file (such as a VCF file directly) and generate a tab-delimited output file with many columns, each representing one set of annotations. Additionally, if the input is a VCF file, the program also generates a new output VCF file with the INFO field filled with annotation information. To print the help message for all perl scripts, simply run the script using either `./table_annovar.pl` or `perl table_annovar.pl`.
 
-Let's run our first ANNOVAR.
+Let's run our first ANNOVAR. 
 
 ```
 perl table_annovar.pl example/ex2.vcf \
@@ -44,7 +44,7 @@ perl table_annovar.pl example/ex2.vcf \
   -remove -polish -vcfinput -nastring .
 ```
 
-Result will be in `my_first_anno.hg19_multianno.txt` and `my_first_anno.hg19_multianno.vcf`. To print the help message, simply run `./table_annovar.pl`, or run `./table_annovar.pl --help` to get detailed help message.
+Result will be in `my_first_anno.hg19_multianno.txt` and `my_first_anno.hg19_multianno.vcf`. 
 
 
 ### download additional database
@@ -106,14 +106,21 @@ The header line starts with `#`. The cross-reference file then contains 15 types
 
 ![table_annovar_fullxref](../img/ex1_new_xreffile.png)
 
-Since ANNOVAR includes dbNSFP4.2a and dbNSFP4.2c now, you can try change the command above to use the latest version. Similarly, since ANNOVAR supports gnomAD now, you do not need to use exac03, but instead use gnomad211_exome which is the version 2.1.1.
-
-`table_annovar.pl` can directly support input and output of VCF files (the annotation will be written to the INFO field of the output VCF file). Let's try this:
+Similarly, you could run `table_annovar.pl` with all these annotations directly using VCF file as input. Let's try this:
 
 ```
-[kaiwang@biocluster ~/]$ table_annovar.pl example/ex2.vcf humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation g,r,f,f,f -nastring . -vcfinput -polish
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out myanno \
+  -protocol refGeneWithVer,cytoBand,gnomad211_exome,avsnp151,dbnsfp47a \
+  -operation gx,r,f,f,f \
+  -xref example/gene_xref.txt \
+  -remove -nastring . -csvout -polish \
+  -vcfinput
 ```
 
+**TODO: continue updating from here**
 You can download the output file here: [ex2.hg19_multianno.vcf](http://www.openbioinformatics.org/annovar/download/myanno.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [ex2.hg19_multianno.txt](http://www.openbioinformatics.org/annovar/download/ex2.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations in the INFO field. A screen shot is shown below:
 
 ![table_vcf](../img/table_vcf.PNG)
