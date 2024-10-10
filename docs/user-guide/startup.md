@@ -90,17 +90,7 @@ Open the output file in Excel and see what it contains. The expected output file
 
 ![table_annovar](../img/ex1_new.png)
 
-The output file contains multiple columns. The first a few columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. 
-
-The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. 
-
-The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). 
-
-For the next a few columns, the AF\* columns represent different allele frequency (AF) in gnomAD v2.1.1 database.
-
-The column avsnp151 means the SNP identifier in the dbSNP version 151. 
-
-The rest of the columns (from `dbnsfp47a` annotation) contains prediction scores for non-synonymous variants using several widely used tools, including AlphaMissense, MetaRNN, SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
+The output file contains multiple columns. The first a few columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). For the next serverals columns, the AF\* columns represent different allele frequency (AF) in gnomAD v2.1.1 database. The column avsnp151 means the SNP identifier in the dbSNP version 151. The rest of the columns (from `dbnsfp47a` annotation) contains prediction scores for non-synonymous variants using several widely used tools, including AlphaMissense, MetaRNN, SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
 
 In the command above, we used `-xref` argument to provide annotation to genes. If the file contains header line, it is possible to provide mulitple pieces of annotations to genes (rather than just one single column). To illustrate this, we can check the first two lines (including the header line) of the `example/gene_fullxref.txt` file:
 
@@ -116,7 +106,7 @@ The header line starts with `#`. The cross-reference file then contains 15 types
 
 ![table_annovar_fullxref](../img/ex1_new_xreffile.png)
 
-Similarly, you could run `table_annovar.pl` with all these annotations directly using VCF file as input. For example:
+Similarly, you could run `table_annovar.pl` with the same annotations directly using VCF file as input. For example:
 
 ```
 table_annovar.pl example/ex1.avinput \
@@ -161,27 +151,13 @@ Finally, for each protocol/operation, you can add extra argument, and it has the
 ## Gene Annotation Example
 
 
-Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
+Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants. If you are interesting in more advanced use of ANNOVAR, please refer to our [Advanced Use Case](https://github.com/WGLab/doc-ANNOVAR/blob/peng-add_tutorial/docs/user-guide/use_case.md). The advanced use case includes:
 
-## annotate_variation.pl
+- Case 1:
+- Case 2:
+- Case 3:
+- Case 4:
 
-The `annotate_variation.pl` program is the core program in ANNOVAR. We can go to the ANNOVAR directory, then run the following three commands one by one. 
-
-```
-annotate_variation.pl -geneanno -dbtype refGene -buildver hg19 example/ex1.avinput humandb/
-
-annotate_variation.pl -regionanno -dbtype cytoBand -buildver hg19 example/ex1.avinput humandb/ 
-
-annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput humandb/
-```
-
-Note that these three commands correspond to gene-based, region-based and filter-based annotations.
-
-The first command annotates the 12 variants in `ex1.avinput` file and classify them as intergenic, intronic, non-synonymous SNP, frameshift deletion, large-scale duplication, etc. Examine the `ex1.avinput` file to see the simple text format, one variant per line. The annotation procedure should take a few seconds in a typical modern computer. Two output files are generated as `ex1.avinput.variant_function` and `ex1.avinput.exonic_variant_function`. Examine the two output files in `example/` directory to see what they contain: In the `variant_function` file, the first and second column annotate variant effects on gene structure and the genes that are affected, yet the other columns are reproduced from input file. In the `exonic_variant_function` file, the first, second and third column annotate variant line number in input file, the variant effects on coding sequences and the gene/transcript being affected, yet the other columns are reproduced from input file.
-
-Next, the program annotates variants in `ex1.avinput` file and idenifies the cytogenetic band for these variants. The annotation procedure should take a few seconds. Examine the output file `ex1.avinput.hg19_cytoBand` to see what it contains. The first column shows `cytoBand`, the second column shows the annotation results, and the other columns are reproduced from input file.
-
-Next, the program identifies a subset of variants in `ex1.avinput` that are not observed in exac03 database (saved in `ex1.avinput.hg19_exac03_filtered`) and those that are observed with allele frequencies (saved in `ex1.avinput.hg19_exac03_dropped` file).
 
 >*Technical Notes: By default, ANNOVAR annotates variant on hg18 (human genome NCBI build 36) coordinate. Since the input file is in hg19 coordinate, we added `-buildver hg19` in every command above. Similarly, if you generated variant calls from human GRCh38 coordinate, add `-buildver hg38` in every command, if your variant file is from fly, add `-buildver dm3` in every command that you use; if your variant file is from mouse, add `-buildver mm9` in every command that you use ......*
 
