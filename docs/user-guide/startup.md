@@ -201,10 +201,10 @@ table_annovar.pl mywork/VCF_files/proband.vcf\
   -arg '-hgvs',,, \
   -polish -nastring . \
   -vcfinput \
-  -intronhgvs 20
+  -intronhgvs 100
 ```
 
-Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation. Moreover, we use `-intronhgvs 20` tag seperately and give a range of 20 which means anywhere within 20 bp away from the intron/extron boundary will have HGVS format annotation.
+Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation. Moreover, we use `-intronhgvs 100` tag seperately and give a range of 100 which means anywhere within 100 bp away from the intron/extron boundary will have HGVS format annotation.
 
 The results will be in `proband.annovar.hg19_multianno.txt` and `proband.annovar.hg19_multianno.vcf` files, which contain annotations for this exome. 
 
