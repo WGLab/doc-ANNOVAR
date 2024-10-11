@@ -885,18 +885,71 @@ rs17215231
 rs2464195
 ```
 
-Now we have all the SNPs, we will need to transfer these RSID into ANNOVAR input. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument. Before we conver the RSid into the annoar input, we need to download the dbSNP database `avsnp151` first, then we run  `convert2annovar.pl`, at last we run `table_annovar.pl`:
+Now we have all the SNPs, we will need to transfer these RSID into ANNOVAR input. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument. Before we conver the RSID into the annoar input, we need to download the dbSNP database `avsnp151` first, then we run  `convert2annovar.pl`, at last we run `table_annovar.pl`:
 
 ```
 annotate_variation.pl -buildver hg38 -downdb -webfrom annovar avsnp151 humandb/
 convert2annovar.pl -format rsid mywork/snplist.txt -avsnpfile humandb/hg38_avsnp151.txt > mywork/snplist_avsnp151_convert.avinput
 ```
 
-After we run convert, there is 44 rows for provided 30 RSid, because some RSid has multiple identifiers so they were all written into output. You conversion result should look like this:
+After we run convert, we will have our ANNOVAR input file `mywork/snplist_avsnp151_convert.avinput`. There are 44 rows for provided 30 RSID, because some RSID has multiple identifiers and they were all written into output. To check which RSID has multiple records, we could run this simple command:
 
-![image](https://github.com/user-attachments/assets/142c0126-cfd6-4180-9c36-704132447ebf)
+```
+cat mywork/snplist_avsnp151_convert.avinput |cut -f 6|uniq -c|cut -d ' ' -f 7-|grep -v '^1'
+```
+```
+2 rs5776993
+2 rs34052812
+2 rs495367
+2 rs138044103
+2 rs17215231
+2 rs79518236
+2 rs4742903
+2 rs12962334
+6 rs141526427
+2 rs6065254
+3 rs9808759
+```
 
-Then we could run ANNOVAR for the convert ANNOVAR input, we want to get the pathogenicity prediction so we used `dbnsfp47a`, and we want to know the ClinVar status from `clinvar_20240917` and Allele Frequency (AF) information from `gnomad41_genome`. We use gnomAD genome becuase many of the variants are in the intronic and intergenic region. 
+The number in the first column represents the frequency of the RSID. We could pass this output to the grep command again and show the variant pos, ref, alt information.
+
+```
+cat mywork/snplist_avsnp151_convert.avinput |cut -f 6|uniq -c|cut -d ' ' -f 7-|grep -v '^1'| \
+  cut -d ' ' -f 2 |grep -f /dev/stdin mywork/snplist_avsnp151_convert.avinput
+```
+```
+1	109680279	109680280	CA	C	rs5776993
+1	109680280	109680280	A	-	rs5776993
+3	156818169	156818170	AT	A	rs34052812
+3	156818170	156818170	T	-	rs34052812
+4	1985245	1985245	A	G	rs495367
+4	1985245	1985245	A	T	rs495367
+5	68128293	68128293	C	CTG	rs138044103
+5	68128293	68128293	-	TG	rs138044103
+6	33272092	33272092	C	A	rs17215231
+6	33272092	33272092	C	T	rs17215231
+7	98397242	98397244	ACT	A	rs79518236
+7	98397243	98397244	CT	-	rs79518236
+9	104094512	104094512	G	A	rs4742903
+9	104094512	104094512	G	C	rs4742903
+18	22897971	22897971	G	A	rs12962334
+18	22897971	22897971	G	C	rs12962334
+20	11521970	11521970	A	AACACAC	rs141526427
+20	11521970	11521970	A	AACAC	rs141526427
+20	11521970	11521970	A	AAC	rs141526427
+20	11521970	11521970	-	ACACAC	rs141526427
+20	11521970	11521970	-	ACAC	rs141526427
+20	11521970	11521970	-	AC	rs141526427
+20	40619625	40619625	G	A	rs6065254
+20	40619625	40619625	G	C	rs6065254
+21	46360308	46360308	T	A	rs9808759
+21	46360308	46360308	T	C	rs9808759
+21	46360308	46360308	T	G	rs9808759
+```
+
+Note that rs138044103 has two records in avsnp151, one is `5	68128293	68128293	C	CTG` and another is `5	68128293	68128293	-	TG`. They represents the same variant, you could choose to remove one of them now or remove it after ANNOVAR (ANNOVAR will have same annotation for these two variants). In here we choose to remove it before ANNOVAR.
+
+After remove the duplicate variant for rs138044103, we could run ANNOVAR using the `mywork/snplist_avsnp151_convert.avinput` as input (43 variants). We want to get the pathogenicity prediction so we used `dbnsfp47a`, and we want to know the ClinVar status from `clinvar_20240917` and Allele Frequency (AF) information from `gnomad41_genome`. We use gnomAD genome becuase many of the variants are in the intronic and intergenic region. 
 
 ```
 table_annovar.pl mywork/snplist_avsnp151_convert.avinput \
@@ -906,46 +959,24 @@ table_annovar.pl mywork/snplist_avsnp151_convert.avinput \
   -remove \
   -protocol refGeneWithVer,avsnp151,clinvar_20240917,gnomad41_genome,dbnsfp47a \
   -operation g,f,f,f,f \
-  -arg '-hgvs',,,,, \
-  -polish -nastring . \
-  -intronhgvs 20
+  -polish -nastring . 
 ```
 
-We could quickly check the chromosome distribution and genetic function annotation. 
+The result will be written to `mywork/snplist_avsnp151_convert.annovar.hg38_multianno.txt`. Please recall the downstream analysis in Case#1, we could quickly check the chromosome distribution and genetic function annotation. 
 
 ```
-awk -F '\t' 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' mywork/snplist_snp138.annovar.hg19_multianno.txt | sort -k2,2nr
-
-intergenic 18
-intronic 11
-intron 2
+awk -F '\t' 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' mywork/snplist_avsnp151_convert.annovar.hg38_multianno.txt | sort -k2,2nr
+```
+```
+intergenic 19
+intronic 18
 ncRNA_intronic 2
 UTR3 2
-. 1
-
-awk -F '\t' 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' mywork/snplist_snp138.annovar.hg19_multianno.txt
-
-chr21 1
-chr12 3
-chr6_qbl_hap6 1
-chr6_cox_hap2 1
-chr1 1
-chr6_ssto_hap7 1
-chr6_mcf_hap5 1
-chr2 2
-chr17 2
-chr3 3
-chr18 3
-chr4 1
-chr6_dbb_hap3 1
-chr5 2
-chr6 2
-chr7 2
-chr8 3
-chr9 1
-chr20 3
-chr11 2
+UTR5 2
 ```
+
+Most of the variants are in intergenic region or intronic region, and 2 in non-coding RNA intronic region, 2 in 3' UTR and 2 in 5' UTR. Non of these variants are from exonic regions.
+Simillarly, we can run the 
 
 
 ## Case 7. Adding T2T genome annotation database.
