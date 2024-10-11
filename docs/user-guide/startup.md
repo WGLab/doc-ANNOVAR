@@ -219,7 +219,7 @@ At this point, we have our results, and you could choose your own way of downstr
 
 ## Gene Annotation Example
 
-The purpose of this gene annotation example is to showcase how to perform a correct gene annotation using ANNOVAR, as a respond to this [paper (PMID 36268089)](https://www.sciencedirect.com/science/article/pii/S2153353922007246) which evaluated the ANNOVAR using 298 variants with ground truth of variant annotation. However, the authors might run ANNOVAR in inappropriate way so they had a wrong conclusion about ANNOVAR. Here we used the (exact vcf file they provided)(https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/PMID_36268089.vcf) as a demo to show how to get the proper gene annotation (DNA change, amino acid change), with transcript version provided. Take a look at our vcf file first:
+The purpose of this gene annotation example is to showcase how to perform a correct gene annotation using ANNOVAR, as a respond to this [paper (PMID 36268089)](https://www.sciencedirect.com/science/article/pii/S2153353922007246) which evaluated the ANNOVAR using 298 variants with ground truth of variant annotation. However, the authors might run ANNOVAR in inappropriate way so they had a wrong conclusion about ANNOVAR. Here we used the [exact vcf file they provided](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/PMID_36268089.vcf) as a demo to show how to get the proper gene annotation (DNA change, amino acid change), with transcript version provided. Take a look at our vcf file first:
 
 ```
 ##fileformat=VCFv4.0
@@ -252,18 +252,17 @@ perl table_annovar.pl mywork/PMID_36268089.vcf \
 
 The output file of this command is provided [here](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/myanno_PMID_36268089.hg38_multianno.txt). The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
 
-After the annotation, we rechecked our result with the previous paper. The 20 variants provided in the screenshot below are the variants that the paper claimed ANNOVAR had incorrect annotations. The columns in red text are the new columns that we added for rechecking purpose, and the rest columns in black text were the same from the paper. At the bottom, we summarize the consistency of ANNOVAR results that we got (recheck), the ANNOVAR results from the paper (paper), and the groud truth annotation from the paper (Groud Truth). Given that one cDNA change could have various ways of dictation, amino acid change is more reliable to compare. At the last columns (highlighted in yellow), we checked our ANNOVAR annotation of amino change (pNomen) with the Groud Truth, as ANNOVAR showed 100% accuracy in terms of amino acid change. 
+After the annotation, we rechecked our result with the previous paper. The 20 variants provided in the screenshot below are the variants that the paper claimed ANNOVAR had incorrect annotations. The columns in red text are the new columns that we added for rechecking purpose, and the rest of the columns in black text were kept the same from the paper. The cDNA change is called "cNomen" and the amino acid change is called "pNomen" in the paper, so we will keep the same name. At the bottom, we summarize the consistency of ANNOVAR results that we got (cNomen/pNomen recheck), the ANNOVAR results from the paper (cNomen/pNomen paper), and the groud truth annotations based on the paper (Groud Truth). Given that one cDNA change could have various ways of interpretations, amino acid change is more resonable for comparison. At the last columns (highlighted in yellow), we checked our ANNOVAR annotation of amino acid change (pNomen) with the Groud Truth, and ANNOVAR showed 100% accuracy in terms of amino acid change. The version of transcript is provided in our ANNOVAR result as well because we used `refGeneWithVer` database.
 
 ![PMID_36268089_check](../img/PMID_36268089_check.png)
 
 
 Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 
-
-## Futher reading
-
 If you are interesting in more advanced use of ANNOVAR, please refer to our [Advanced Use Case](./use_case.md). 
 
+
+## Other information
 
 >*Technical Notes: By default, ANNOVAR annotates variant on hg18 (human genome NCBI build 36) coordinate. Since the input file is in hg19 coordinate, we added `-buildver hg19` in every command above. Similarly, if you generated variant calls from human GRCh38 coordinate, add `-buildver hg38` in every command, if your variant file is from fly, add `-buildver dm3` in every command that you use; if your variant file is from mouse, add `-buildver mm9` in every command that you use ......*
 
