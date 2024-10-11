@@ -979,5 +979,6 @@ Most of the variants are in intergenic region or intronic region, and 2 in non-c
 Simillarly, we can run the 
 
 
-## Case 7. Adding T2T genome annotation database.
+## Case 6. Adding T2T genome annotation database.
 
+Use example/ex1.avinput, liftover to T2T and run annovar.
