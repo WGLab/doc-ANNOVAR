@@ -885,15 +885,33 @@ rs17215231
 rs2464195
 ```
 
-Now we have all the SNPs, we will use ANNOVAR to annotate these RSid. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument. Before we conver the RSid into the annoar input, we need to download the latest dbSNP `avsnp151` first, then we run  `convert2annovar.pl`, at last we run `table_annovar.pl`:
+Now we have all the SNPs, we will need to transfer these RSID into ANNOVAR input. This can be achieved by `convert2annovar.pl` with the `-format rsid` argument. Before we conver the RSid into the annoar input, we need to download the dbSNP database `avsnp151` first, then we run  `convert2annovar.pl`, at last we run `table_annovar.pl`:
 
 ```
-perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar snp138 humandb/
-perl convert2annovar.pl -format rsid mywork/snplist.txt -dbsnpfile humandb/hg19_snp138.txt > mywork/snplist_snp138.avinput
-perl table_annovar.pl mywork/snplist_snp138.avinput humandb/ -buildver hg19 -out mywork/snplist_snp138.annovar -remove -protocol refGeneWithVer,snp138,avsnp151,clinvar_20240917,gnomad211_exome,dbnsfp47a -operation g,f,f,f,f,f -arg '-hgvs',,,,, -polish -nastring . -intronhgvs 20
+annotate_variation.pl -buildver hg38 -downdb -webfrom annovar avsnp151 humandb/
+convert2annovar.pl -format rsid mywork/snplist.txt -avsnpfile humandb/hg38_avsnp151.txt > mywork/snplist_avsnp151_convert.avinput
 ```
 
-After we run convert, there is 36 rows for provided 30 RSid, because some RSid has multiple identifiers so they were all written into output. We could quickly check the chromosome distribution and genetic function annotation.
+After we run convert, there is 44 rows for provided 30 RSid, because some RSid has multiple identifiers so they were all written into output. You conversion result should look like this:
+
+![image](https://github.com/user-attachments/assets/142c0126-cfd6-4180-9c36-704132447ebf)
+
+Then we could run ANNOVAR for the convert ANNOVAR input, we want to get the pathogenicity prediction so we used `dbnsfp47a`, and we want to know the ClinVar status from `clinvar_20240917` and Allele Frequency (AF) information from `gnomad41_genome`. We use gnomAD genome becuase many of the variants are in the intronic and intergenic region. 
+
+```
+table_annovar.pl mywork/snplist_avsnp151_convert.avinput \
+  humandb/ \
+  -buildver hg38 \
+  -out mywork/snplist_avsnp151_convert.annovar \
+  -remove \
+  -protocol refGeneWithVer,avsnp151,clinvar_20240917,gnomad41_genome,dbnsfp47a \
+  -operation g,f,f,f,f \
+  -arg '-hgvs',,,,, \
+  -polish -nastring . \
+  -intronhgvs 20
+```
+
+We could quickly check the chromosome distribution and genetic function annotation. 
 
 ```
 awk -F '\t' 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' mywork/snplist_snp138.annovar.hg19_multianno.txt | sort -k2,2nr
