@@ -1,206 +1,37 @@
-# Use Case Tutorial
-To easily get started with ANNOVAR, there might be some common use cases you will consider to do using ANNOVAR. Here, we provide a start to end example for you to follow. The use cases include:
+## Advanced Use Case Tutorial
 
-- Case 1. With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
+This tutorial is for advanced use of ANNOVAR, for start up of using ANNOVAR please refer to the [Start-Up Guide](../startup.md). The advanced use cases include:
 
-- Case 2. Runing ANNOVAR annotation on exome VCF file, with a downstream analysis on all variants (intronic and exonic).
+- Case 1. Downstream analysis of exome VCF annotation
   - Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
 
-- Case 3. Prepared and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
+- Case 2. Prepare and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
 
-- Case 4. Create customized ANNOVAR database for filter-based operation. 
-  - For example, the GTEX_v8_eQTL and sQTL database for tissue-specific variant and gene expression/splcing association.
+- Case 3. Create customized ANNOVAR database for filter-based operation
+  - For example, the GTEX_v8_eQTL and GTEX_v8_sQTL database for tissue-specific gene-regulation of variants.
 
-- Case 5. Perform gene anotation for the whole human exome.
+- Case 4. Perform gene anotation for the whole human exome
   - Create a gene annotation database for all single nucleotide mutations (SNPs) in whole human exome.
 
-- Case 6. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
+- Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies
+  - Make hypothesis for causal variants vs. variants that regulate genome function.
 
-- Case 7. Adding T2T genome annotation.
-
-
-## Download and Install
-
-In this section, we will talk about: Understand the ANNOVAR package and download the dataset/annotation of your interest.
-
-The best way to learn the basic of ANNOVAR will be reading the user guide in the main page. In this tutorial, we only breifly explain some basic of ANNOVAR just to get things started. When you have an issue or question while reading this use case example, it's always recommended to read [Download ANNOVAR](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) for details about downloading ANNOVAR and read [Quick Start-Up Guide](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/) for details about running ANNOVAR. 
-
-When you have requested the ANNOVAR from the website and downloaded it, you will receive a compressed file `annovar.latest.tar.gz`, you could use `tar -xvzf annovar.latest.tar.gz` unzip it.
-
-Once you unzip it, the annovar package will show up as a folder `annovar` and it will contains these files and folders:
-```
-annotate_variation.pl
-coding_change.pl
-convert2annovar.pl
-example
-humandb
-retrieve_seq_from_fasta.pl
-table_annovar.pl
-variants_reduction.pl
-``` 
-
-In the `annovar` folder, the files end with `.pl` are the perl scripts that we could run. The `example` contains different input file examples and parameter confis examples. The `humandb` is our warehouse, it stores all the database of interest so ANNOVAR know how to annotate the variants based on the annotation we required. Therefore, before we begin, we need to understand what database we neend, and what version of that database we need, as well as the genome version.
-
-For example, if I would like to annotate my variants with ClinVar and gnomAD database, and I know my variants are from genome version hg38. You will then need to check which version you would like to use in [ANNOVAR addional database page](https://annovar.openbioinformatics.org/en/latest/user-guide/download/#additional-databases). 
-
-For example, here are some of the databases we will use later:
-
-| Build | Table Name | Explanation | Date |
-|---|---|---|---|
-| hg38 | refGene | FASTA sequences for all annotated transcripts in RefSeq Gene (last update was 2020-08-17 at UCSC) | 20211019 |
-| hg38 | refGeneWithVer | same as above  (last update was 2020-08-17 at UCSC) | 20211019 |
-| hg38 | dbnsfp47a | dbNSFP version 4.7a | 20240525 |
-| hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
-| hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
-| hg38 | clinvar_20240611 |  Clinvar version 20240611 with separate columns | 20240616 |
-
-To download these databases, you will enter the `annovar/` package folder and run the following commands using `annotate_variation.pl`:
-
-```
-perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene humandb/
-perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGeneWithVer humandb/
-perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar dbnsfp47a humandb/
-perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar gnomad41_exome humandb/
-perl annotate_variation.pl -buildver hg38 -downdb -webfrom annovar clinvar_20240611 humandb/
-```
-
-Now check the `humandb` folder if the databases have been downloaded correctly using `ls humandb/`:
-
-```
-annovar_downdb.log           hg19_MT_ensGeneMrna.fa      hg19_refGeneWithVer.txt        hg38_dbnsfp47a.txt           hg38_refGeneVersion.txt
-genometrax-sample-files-gff  hg19_MT_ensGene.txt         hg38_avsnp147.txt              hg38_dbnsfp47a.txt.idx       hg38_refGeneWithVerMrna.fa
-GRCh37_MT_ensGeneMrna.fa     hg19_refGeneMrna.fa         hg38_avsnp147.txt.idx          hg38_gnomad41_exome.txt      hg38_refGeneWithVer.txt
-GRCh37_MT_ensGene.txt        hg19_refGene.txt            hg38_clinvar_20240611.txt      hg38_gnomad41_exome.txt.idx
-hg19_example_db_generic.txt  hg19_refGeneVersion.txt     hg38_clinvar_20240611.txt.idx  hg38_refGeneMrna.fa
-hg19_example_db_gff3.txt     hg19_refGeneWithVerMrna.fa  hg38_cytoBand.txt              hg38_refGene.txt
-````
-
-As we can see, in the `humandb\` folder, the `hg38_clinvar_20240611.txt`, `hg38_cytoBand.txt`, `hg38_gnomad41_exome.txt` and `hg38_refGene.txt` have been downloaded correctly. Note that we will use `hg38_refGeneWithVer.txt` for all future ANNOVAR annotation in this tutorial so it could provide the transcript version for gene annotation.
+- Case 6. Using T2T genome build for annotation.
 
 
-## Case 1. Gene annotation
+## Case 1. Downstream analysis of exome VCF annotation
 
-In this section, the use case is : With a list of variant in vcf format, find gene name and amino acid changes, then interpret and check the results.
+This is the downstream analysis of the exome VCF annotation, we will require the ANNOVAR output `proband.annovar.hg19_multianno.txt` for downstream analysis. If you do not have this file already, please follow the **Annotate exome VCF file** section in [Start-Up Guide](../startup.md) to generate the ANNOVAR output.
 
-Now let's do some annotation on the variants. Make a `mywork` (or any name you like) directory in the `annovar` package folder to store the input data and result.
-
-TODO: upload the final_annovar_.vcf
-```
-mkdir mywork
-wget http://home/wangp5/Downloads/final_annovar_input.vcf mywork/final_annovar_input.vcf
-```
-
-In here the vcf file we used is from this [paper](https://www.sciencedirect.com/science/article/pii/S2153353922007246) which evaluated the ANNOVAR using 298 variants with ground truth of variant annotation, however they might run ANNOVAR in inappropriate way so they had a wrong conclusion about ANNOVAR. Here we used the exact vcf file they provided to do a demo and show how to get the proper variant annotation (DNA change, amino acid change) , with transcript version provided. Take a look on our vcf file first:
-
-```
-##fileformat=VCFv4.0
-#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
-2	162279995	.	C	G	.	.	.
-2	162310909	.	T	C	.	.	.
-1	11046609	.	T	C	.	.	.
-19	19193983	.	A	T	.	.	.
-7	147903589	.	T	C	.	.	.
-17	82079248	.	G	A	.	.	.
-10	63219963	.	G	C	.	.	.
-13	101103286	.	T	A	.	.	.
-```
-
-There are 8 columns in a normal vcf file, and in this vcf file there is no quality score, id and other info, it only has the chromosome number, position, reference and alterantive allele, but this will be enough for ANNOVAR to run annotation.
-Since we only interested in a very simple task: what is the gene and amino acid change (if possible) for these variants. We could run the following command:
-
-```
-perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_withVer -remove -protocol refGeneWithVer -operation g -nastring . -vcfinput -polish
-```
-
-In this command, we used `table_annovar.pl` to perform annotation, the input file is `mywork/final_annovar_input.vcf`, the genome version we used is `hg38`, the output file name and directory `mywork/myanno_out1`. Then the `-protocol` is a key part of running ANNOVAR, it represents what database we will used, here I only used the refGene we downloaded previously, and the `-operation` tag provide instruction of what operation we run for each protocal (i.e., refGeneWithVer), here we used `g` which means gene-based. Another commonnly used operation is `f` which is filter-based, which we will use later. For details about different type of operation could be found [ANNOVAR startup page](https://annovar.openbioinformatics.org/en/latest/user-guide/startup/). The N/A string will be represented by `.`, which is adjustable by the tag `-nastring`. Also the `-polish` command shows complete amino acid change (such as c.35delG:p.G12Vfs*2) in gene annotation, and this has long been turned on by defalt since 2019.
-
-Now let's check what is the output looks like.
-
-```
-ls mywork/
-
-final_annovar_input.vcf  myanno_withVer.avinput  myanno_withVer.hg38_multianno.txt  myanno_withVer.hg38_multianno.vcf
-```
-
-The result is in `myanno_out1.hg38_multianno.txt`, and there will be many columns we are not currently interested, like the Otherinfo columns, let's print all the column out first.
-
-```
-head -n 1 mywork/myanno_withVer.hg38_multianno.txt
-
-Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGeneWithVer	ExonicFunc.refGeneWithVer	AAChange.refGeneWithVer	Otherinfo1	Otherinfo2	Otherinfo3	Otherinfo4	Otherinfo5	Otherinfo6	Otherinfo7	Otherinfo8Otherinfo9	Otherinfo10	Otherinfo11
-```
-
-The Otherinfo columns are the original columns from input vcf files, and they were concatinate for each variant at the end of our ANNOVAR regGene annotation. Let's just look at the result from refGene annotation (columns 1-10):
-
-```
-head -n 5 mywork/myanno_withVer.hg38_multianno.txt | cut -f 1-10
-
-Chr	Start	End	Ref	Alt	Func.refGeneWithVer	Gene.refGeneWithVer	GeneDetail.refGeneWithVer	ExonicFunc.refGeneWithVer	AAChange.refGeneWithVer
-2	162279995	162279995	C	G	splicing	IFIH1	NM_022168.4:exon8:c.1641+1G>C	.	.
-2	162310909	162310909	T	C	exonic	IFIH1	.	nonsynonymous SNV	IFIH1:NM_022168.4:exon2:c.A478G:p.N160D
-1	11046609	11046609	T	C	exonic	MASP2	.	nonsynonymous SNV	MASP2:NM_006610.4:exon3:c.A359G:p.D120G,MASP2:NM_139208.3:exon3:c.A359G:p.D120G
-19	19193983	19193983	A	T	exonic	RFXANK	.	nonsynonymous SNV	RFXANK:NM_001278728.1:exon2:c.A37T:p.T13S,RFXANK:NM_001370233.1:exon2:c.A37T:p.T13S,RFXANK:NM_001370234.1:exon2:c.A37T:p.T13S,RFXANK:NM_001370236.1:exon2:c.A37T:p.T13S,RFXANK:NM_001370237.1:exon2:c.A37T:p.T13S,RFXANK:NM_001370238.1:exon2:c.A37T:p.T13S,RFXANK:NM_001278727.1:exon3:c.A37T:p.T13S,RFXANK:NM_001370235.1:exon3:c.A37T:p.T13S,RFXANK:NM_003721.4:exon3:c.A37T:p.T13S,RFXANK:NM_134440.2:exon3:c.A37T:p.T13S
-```
-
-The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
-
-
-## Case 2. exome VCF annotation
-
-In this section, the use case is: Runing ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions, with a downstream distribution analysis on all variants. 
-
-Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.(including HGVS annotations for intronic variants, then evaluate all variants for the chromosome distribution, variant type distribution, ClinVar distribution)
-
-Before we run the human exome annotation, we need to download the data we need, we can run this command to download the data into `mywork/`:
-
-```
-wget http://molecularcasestudies.cshlp.org/content/suppl/2016/10/11/mcs.a001131.DC1/Supp_File_2_KBG_family_Utah_VCF_files.zip -O mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
-```
-
-To give some background information, this is a zip file as supplementary material of a published paper on exome sequencing of a family with undiagnosed genetic diseases. Through analysis of the exome data, the proband was confirmed to have KBG syndrome, a disease caused by loss of function mutations in ANKRD11 gene. There are several VCF files contained in the zip file, including those for parents, silings and the proband. We will only analyze proband in this exercise, but if you are interested, you may want to check whether this is a de novo mutation by analyzing parental genomes.
-
-Then we can unzip it and take a look what it has:
-
-```
-unzip mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
-mv 'File 2_KBG family Utah_VCF files'/ mywork/VCF_files
-ls mywork/VCF_files/
-
-proband.vcf  Unaffected_brother.vcf  Unaffected_father.vcf  Unaffected_mother.vcf  Unaffected_sister1.vcf  Unaffected_sister2.vcf
-```
-
-Because this vcf file used hg19 as reference, we will need to downloading corresponding hg19 databases for proper results:
-
-```
-perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGeneWithVer humandb/; perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp47a humandb/; perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar gnomad211_exome humandb/; perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar clinvar_20240917 humandb/
-```
-
-Now we have prepared all the datasets we need, let's run `table_annovar.pl` on the exome sequencing of proband `proband.vcf`. We will want to have gene annotation (`refGeneWithVer` operation), ClinVar annotation (`clinvar_20240917` operation), gnomADv2.1.1 exome annotation (`gnomad211_exome` operation), and pathogenicity preditions from various tools (`dbnsfp47a` operation). Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation so that the output is in HGVS format (e.g., c.122C>T rather than c.C122T). Moreover, we want to have HGVS formmat for our intronic region as well, so we use `-intronhgvs` tag seperately and give a range of 100 which means anywhere within 100 bp away from the intron/extron boundary will have HGVS format annotation.
-
-Then we can finnally run our command:
-
-```
-perl table_annovar.pl mywork/VCF_files/proband.vcf humandb/ -buildver hg19 -out mywork/proband.annovar -remove -protocol refGeneWithVer,clinvar_20240917,gnomad211_exome,dbnsfp47a -operation g,f,f,f -arg '-hgvs',,, -polish -nastring . -vcfinput -intronhgvs 100
-```
-
-The `proband.annovar.hg19_multianno.txt` file contains annotations for this exome. Compared to previous command, note that here we have 4 protocols, and the operations for these protocols are gene-based, filter-based, filter-based, filter-based respectively. 
-
-We can use `less mywork/proband.annovar.hg19_multianno.txt` to check what the output looks like:
-![image](https://github.com/user-attachments/assets/826fddc4-d926-4e9d-9983-634e44664295)
-
-The screenshot showed us the complete columns and the partial of the first variant. We see some familiar columns from **Case 1**, such as variant basic information (first 5 columns), refGeneWithVer annotation, and otherinfo columns at the end. The new columns that start with `CLN` are from ClinVar annotation, the columns that start with `gnomad41` are from gnomADv4.1 annotation. And the rest of the columns are from the `dbnsfp47a` annotations, they are the pathogenic classification (end with `_pred`) or predicted score (end with `_score` or `_rankscore`) from various tools or methods.
-
-### Downstream Analysis and Visualization
-
-#### Chromosome distribution
+### Chromosome distribution
   
-  Start from here, one could have various way to perform the downstream analysis, such as python or R or excel. Here, we use a simple command line to get the chromosome distribution. We used `awk` to count the number of variants per chromosome then pipe (`|`) it into a `sort` to sort the output based on chromosome number (`-V` stands for version numbers). At last, we use `>` to save our result into a file named `variant_counts.txt`.
+Start from here, one could have various way to perform the downstream analysis, such as python or R or excel. Here, we use a simple command line to get the chromosome distribution. We used `awk` to count the number of variants per chromosome then pipe (`|`) it into a `sort` to sort the output based on chromosome number (`-V` stands for version numbers). At last, we use `>` to save our result into a file named `variant_counts.txt`.
 
 ```
-cd mywork/
 awk -F '\t' 'NR>1 {chromosome_count[$1]++} END {for (chr in chromosome_count) {print chr, chromosome_count[chr]}}' proband.annovar.hg19_multianno.txt | sort -V > variant_counts.txt
 cat variant_counts.txt
-
+```
+```
 chr1 2274
 chr2 1418
 chr3 1225
@@ -274,14 +105,16 @@ Now we can open the 'variant_distribution.png' to have a good look on the varian
 
 ![variant_distribution](https://github.com/user-attachments/assets/a04cd817-8329-4813-b89f-c8c0ce41e5e3)
 
-#### Variant Type Distribution
+
+### Variant Type Distribution
   
-  Another useful information for an exome annotation will be the variant type distribution. We could follow the similar procedures like above but we focus on `Func.refGeneWithVer` column this time.
+Another useful information for an exome annotation will be the variant type distribution. We could follow the similar procedures like above but we focus on `Func.refGeneWithVer` column this time.
 
 ```
 awk -F '\t' 'NR>1 {variant_type_count[$6]++} END {for (type in variant_type_count) {print type, variant_type_count[type]}}' proband.annovar.hg19_multianno.txt | sort -k2,2nr > variant_type_counts.txt
 cat variant_type_counts.txt
-
+```
+```
 exonic 18598
 intron 2264
 UTR3 396
@@ -299,11 +132,12 @@ ncRNA_exonic;splicing 1
 upstream;downstream 1
 ```
 
-As we can see, there are 2264 'intron', this is because we set the `-intronhgvs 100` so that most variants in intronic region will have a HGVS annotation in `GeneDetail.refGeneWithVer` column (like NM_015658.4:exon8:c.888+3T>G). Intead, 71 'intronic' varaints will not have information in `GeneDetail.refGeneWithVer` becasue they are out of the 100 bp boundary of slicing site and there is no HGVS annotation for them.
+As we can see, there are 2264 'intron' variants, this is because we set the `-intronhgvs 100` so that most variants in intronic region will have a HGVS annotation in `GeneDetail.refGeneWithVer` column (like NM_015658.4:exon8:c.888+3T>G). On the contrary, 71 'intronic' varaints will not have information in `GeneDetail.refGeneWithVer` becasue they are out of the 100 bp boundary of slicing site and there is no HGVS annotation for them.
 
-#### Allele Frequency (AF) Distribution for different variant types (nonsynanamous variants, synanamous variants, and intronic variants)
+
+### Allele Frequency (AF) Distribution for different variant types (nonsynanamous variants, synanamous variants, and intronic variants)
   
-  We could run the following python script to get the AF distribution for different variants types (make sure you have both `pandas` and `matplotlib` installed in python):
+We could run the following python script to get the AF distribution for different variants types (make sure you have both `pandas` and `matplotlib` installed in python):
 
 ```
 import pandas as pd
@@ -357,7 +191,8 @@ Run the script using python and you should have a plot similar to this:
 
 ![image](https://github.com/user-attachments/assets/539e849a-b2b8-4bd6-9eeb-a88de4fee89b)
 
-#### Get the distribution of variant across race
+
+### Get the distribution of variant across race
   
 Here we choose the first varaint from gene `NRXN2` as an example, you could choose your own varaint of interest. 
 
@@ -413,7 +248,8 @@ You should have a plot similar to this one:
 
 ![image](https://github.com/user-attachments/assets/2faa89ad-2e96-4923-bf6b-005689cda5d6)
 
-#### Evalaute the AF distribution stratified by SIFT score
+
+### Evalaute the AF distribution stratified by SIFT score
   
 Next, we can examine the allele frequency distributions stratified by SIFT scores, which predict the impact of amino acid substitutions on protein function based on sequence homology and the physical properties of amino acids. We expect variants associated with more deleterious effects (SIFT score < 0.05) to be rarer. Run the following python script to get the result (make sure you also have `numpy` module this time):
 
@@ -470,7 +306,8 @@ print("Plot saved as 'allele_frequency_distribution_sift.png'")
 You should have a similar plot like this:
 ![image](https://github.com/user-attachments/assets/c41fe51e-92e0-4ee9-9346-a9bdf1790ea9)
 
-#### Comparison of Pathogenicity Predition (MetaRNN vs. AlphaMissense)
+
+### Comparison of Pathogenicity Predition (MetaRNN vs. AlphaMissense)
   
 We next use `seaborn` package to compare allele frequency distributions stratified by two other predictive scores: MetaRNN and AlphaMissense. We can similarly find lower allele frequencies for predicted pathogenic variants (MetaRNN: T(olerated) and D(amaging), AlphaMissense: likely (B)enign, (A)mbiguous, or likely (P)athogenic ).
 
@@ -510,7 +347,8 @@ print("Plot saved as 'AF_boxplots_MetaRNNvsAlphaMissense.png'")
 Your result should be similar to this one.
 ![image](https://github.com/user-attachments/assets/71be17e4-e32a-486a-a079-8a574d49c427)
 
-#### Compare model performance based on clinical impact (ClinVar)
+
+### Compare model performance based on clinical impact (ClinVar)
 
   Moving further, we could compare the model performance by considering ClinVar clinical significance (`CLNSIG` column) as 'gold standard'. Note that we just assume the `CLNSIG` as 'gold standard' for tutorial purpose, in reality this might be complicated and you need to consider many other aspects (like review status on ClinVar) as well. If you want to further filter the ClinVar annotation with the "review status" (also called Star in ClinVar), you could use the column `CLNREVSTAT`. The `CLNREVSTAT` will a be string and the tranform table could be found on the website here (https://www.ncbi.nlm.nih.gov/clinvar/docs/review_status/).
 
@@ -576,23 +414,23 @@ Your plot should look similar to this one. We find MetaRNN's preditions are all 
 ![image](https://github.com/user-attachments/assets/19d1cb4b-0eb9-4295-baf9-69c2c524b1dc)
 
 
-## Case 3. Update ClinVar database
+## Case 2. Update ClinVar database
 
 In this section, we have this use case: Prepared and update the latestes annotation database (such as ClinVar) to use in ANNOVAR using `prepare_annovar_user.pl`.
 
-Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be done by using `prepare_annovar_user.pl` script. Here, we denmonstrate how we annotate the latest ClinVar database as a case study, and if you want to know more details about filter-based annotation, you could refer to [here](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) for details.
+Sometimes, we might need to have our own dataset intergrated into the ANNOVAR or you might need the latest version of a database that ANNOVAR is not yet updated, this could be done by using `prepare_annovar_user.pl` script. Here, we denmonstrate how we annotate the latest ClinVar database as a case study, and if you want to know more details about filter-based annotation, you could refer to [Filter-based Annotation](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) for details.
 
-To check the lastest version of ClinVar database, you could check [here](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/). In this case#3, we will download and prepare the CinVar version `clinvar_20240917` for hg38. To do the task, we need [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) and [index_annovar.pl](https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt), we will download them using `wget` but make sure your are in the `annovar` folder.
+To check the lastest version of ClinVar database, you could check [here](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/). In this case, we will download and prepare the CinVar version `clinvar_20240917` for hg38. To do the task, we need [prepare_annovar_user.pl](http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl) and [index_annovar.pl](https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt), we will download them using `wget` but make sure your are in the `annovar` folder.
 
-We will also used [comment_clinvar_20240917.txt](http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt) in the last index step. It is different from previous versions due to the addition of six columns for oncogenecity variants and for somatic variants.
+We will also use [comment_clinvar_20240917.txt](http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt) in the last index step. It is different from previous versions of ClinVar due to the addition of six columns for oncogenecity variants and for somatic variants.
 
 ```
 wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz
 wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz.tbi
+wget http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt
 
 wget http://www.openbioinformatics.org/annovar/download/prepare_annovar_user.pl
 wget -O index_annovar.pl https://github.com/WGLab/doc-ANNOVAR/files/6670482/index_annovar.txt
-wget http://www.openbioinformatics.org/annovar/download/comment_clinvar_20240917.txt
 chmod +x prepare_annovar_user.pl
 chmod +x index_annovar.pl
 
@@ -607,28 +445,35 @@ mv *clinvar_20240917* prepare_db/
 
 If you get an error `Can't exec "convert2annovar.pl"` while running `prepare_annovar_user.pl`, make sure you move `prepare_annovar_user.pl` to the `annovar` folder together with other sciprts. If you still have the issue, try to add the scripts to your PATH directly using `export PATH=$PATH:/path/to/your/annovar/` (change the path accordingly to where you put `annovar` package). For more questions regarding to the filter-based annotation, please refer to the [Filter-based Annotation](https://annovar.openbioinformatics.org/en/latest/user-guide/filter/) page in ANNOVAR website.
 
-Once we create the clinvar annotation, we could check if it works by using the vcf file from case#1. This time we will have an extra filter-based operation using the hg38_clinvar_20240917 database we just created. Let's run the `table_annovar.pl` and check the result.
+Once we create the clinvar annotation, we could check if it works by using the example vcf file we have. 
 
 ```
-perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_withVer_clinvar -remove -protocol refGeneWithVer,clinvar_20240917 -operation g,f -nastring . -vcfinput -polish
+table_annovar.pl mywork/PMID_36268089.vcf \
+  humandb/ \
+  -buildver hg38 \
+  -out mywork/myanno_withVer_clinvar \
+  -remove \
+  -protocol refGeneWithVer,clinvar_20240917 \
+  -operation g,f \
+  -nastring . -vcfinput -polish
+```
+```
 head mywork/myanno_withVer_clinvar.hg38_multianno.txt
 ```
 
 Congratualations! You just created your own ClinVar database and got the annotation.
 
 
-## Case 4. Adding GTEx_v8_eQTL and GTEx_v8_sQTL database
+## Case 3. Adding GTEx_v8_eQTL and GTEx_v8_sQTL database
 
-In this case, we will show how to prepare the annotation database for ANNOVAR and use it for easy and quick future ANNOVAR annotation. We will use the `GTEx_Analysis_v8_eQTL.tar` and `GTEx_Analysis_v8_sQTL.tar` files downloaded from the GTEx website. After download, unzip these two in the `annovar/` folder. 
-
-### sQTL
-
-We will denmentrate how to create a database for Expression Quantitative Trait Loci (eQTL) and Splicing Quantitative Trait Loci (sQTL) for different tissues from GTEx portol. 
-For database download and more information about the GTEx eQTL/sQTL, please refer to their [website](https://www.gtexportal.org/home/downloads/adult-gtex/qtl). 
+In this case, we will show how to prepare the annotation database for ANNOVAR and save it for easy and quick future ANNOVAR annotation. We will denmentrate how to create a database for Expression Quantitative Trait Loci (eQTL) and Splicing Quantitative Trait Loci (sQTL) for different tissues from GTEx portol. We will need the `GTEx_Analysis_v8_eQTL.tar` and `GTEx_Analysis_v8_sQTL.tar` files downloaded from the [GTEx website](https://www.gtexportal.org/home/downloads/adult-gtex/qtl). After download, unzip these two in the `annovar/` folder. For database download and more information about the GTEx eQTL/sQTL, please refer to their website. 
 
 Before we begin, it's better to know the objectives of having this type of variant catalog of tissue-specific gene regulation. We would like to have a database in ANNOVAR, so everytime we have a new list of variants, we could easily know which variant in our list is likely to influence gene regulation and in which tissues these genes are influenced.
 
-The sQTL contains two type of compressed files, first is the file ending with ".v8.egenes.txt.gz" and another ending with ".v8.signif_variant_gene_pairs.txt.gz". The forther one contains information about all deteced genes for a tissue, we will use this to get the gene_name based on gene_id. And the second one is a variant-gene pair that tells what are the variants (locis) that significantly influence a gene expression. We will use this file to get the variant-gene pair, note that the gene here is represented by gene_id (GENCODE/Ensembl gene ID) and that's why we will need to use the first file to convert the gene_id to gene_name (GENCODE gene name). We will use a python script to convert and preprocess all the seperated tissue files into a raw_annovar input file like we did before for clinvar database. There are 49 tissues in total, so it will have 98 files in the `GTEx_Analysis_v8_eQTL` folder afte decompressed.
+
+### eQTL
+
+The eQTL contains two type of compressed files, first is the file ending with ".v8.egenes.txt.gz" and another ending with ".v8.signif_variant_gene_pairs.txt.gz". The forther one contains information about all deteced genes for a tissue, we will use this to get the gene_name based on gene_id. And the second one is a variant-gene pair that tells what are the variants (locis) that significantly influence a gene expression. We will use this file to get the variant-gene pair, note that the gene here is represented by gene_id (GENCODE/Ensembl gene ID) and that's why we will need to use the first file to convert the gene_id to gene_name (GENCODE gene name). We will use a python script to convert and preprocess all the seperated tissue files into a raw_annovar input file like we did before for clinvar database. There are 49 tissues in total, so it will have 98 files in the `GTEx_Analysis_v8_eQTL` folder afte decompressed.
 
 Python script `process_eQTL.py` for eQTL:
 
@@ -763,11 +608,15 @@ if __name__ == "__main__":
     split_variant_columns()
 ```
 
+Save this script for now, we will run it later.
+
+
 ### sQTL
 
 And then we will take a look at the sQTL, it actually has simillar files like eQTL. However, the suffix of the sQTL file is different from eQTL, in `GTEx_Analysis_v8_sQTL` folder, there will be two types of file, one end with ".v8.sgenes.txt.gz" and another end with ".v8.sqtl_signifpairs.txt.gz". The first type of file contains information about all detected genes in a particular tissue, we will use it to match the "phenotype_id" to the influenced "gene_name". Notice that in sQTL, they use "LeafCutter intron excision phenotypes" to describe the influenced splicing, and they will have unique "phenotype_id". And then in the second type of file, we could know what are the varaints that cause different splicings, which will be the variant-phenotype pair. Therefore, similarly, we will use these two files for 49 tissues, and recover which gene will be influenced by a specific variant for different tissue types.
 
-Python script `process_eQTL.py` for sQTL:
+Python script `process_sQTL.py` for sQTL:
+
 ```
 import os
 import pandas as pd
@@ -898,14 +747,15 @@ if __name__ == "__main__":
     split_variant_columns()
 ```
 
+
 ### Run the scripts
 
-Now we have both the datasets and scripts ready, let's run these scripts. I am using 64 cpus to parallel the process, you can choose your own specification.
+Now we have both the datasets and scripts ready, let's run these scripts. I am using 64 cpus to parallel the process, you can choose your own specification. Note that we are in `annovar/` folder.
 
 ```
 ### sQTL
 python process_sQTL.py
-perl index_annovar.pl sQTL_catalog_py_output/final_sQTL_annovar_raw.txt -outfile humandb/hg38_sQTL.txt --commentfile sQTL_catalog_py_output/final_sQTL_annovar_comment.txt
+index_annovar.pl sQTL_catalog_py_output/final_sQTL_annovar_raw.txt -outfile humandb/hg38_sQTL.txt --commentfile sQTL_catalog_py_output/final_sQTL_annovar_comment.txt
 
 ### eQTL
 python process_eQTL.py
@@ -921,10 +771,17 @@ hg38_sQTL.txt
 hg38_sQTL.txt.idx
 ```
 
-With these extra files, we could easily run table_annovar.pl to do the annotation, simply adding an extra filter-based operation `eQTL` and `sQTL`. For example, you could run annovar using your own list of variants with eQTL and sQTL annotations:
+With these extra files, we could easily run table_annovar.pl to do the annotation, simply adding an extra filter-based operation `eQTL` and `sQTL`. For example, you could run annovar with eQTL and sQTL annotations like this:
 
 ```
-perl table_annovar.pl mywork/final_annovar_input.vcf humandb/ -buildver hg38 -out mywork/myanno_eQTL_sQTL -remove -protocol refGeneWithVer,eQTL,sQTL -operation g,f,f -nastring . -vcfinput -polish
+table_annovar.pl mywork/PMID_36268089.vcf \
+  humandb/ \
+  -buildver hg38 \
+  -out mywork/myanno_eQTL_sQTL \
+  -remove \
+  -protocol refGeneWithVer,eQTL,sQTL \
+  -operation g,f,f \
+  -nastring . -vcfinput -polish
 ```
 
 And you should have a result similar to this:
@@ -933,9 +790,9 @@ And you should have a result similar to this:
 As you can see, the results showed that first two varaints in position `11863` did not influence the gene expression and slicing in any cell type. However, for the varaint `14677` in the non-coding (nc) exnoic region of gene `WASH7P`, it influenced the gene `RP11-34P13.13` and `RP11-206L10.2` in majority of the tissue types. More interestingly, the next variant in position `135203` on the opposite, influences the expression of `WASH7P` in Thyroid. This is just a very small showcase, but you can see how useful this database will be, and how easily you could run ANNOVAR to get a tissue_specific gene interation network for your variants of interest.
 
 
-## Case 5. Annotate the amino acid changes for whole exome vairants
+## Case 4. Annotate the amino acid changes for whole exome vairants
 
-We will use hg38 to generate whole exome variants, with the hg38_refGene.txt file, but with 10bp as the intron/exon boundaries. I run the following commands to perform whole exome varaint annotation, note that there are intotal 11 commands and a clean up section (delete temp file). You will need to go to the `annovar` package folder, and change the `/path/to/Ref_Genome/fasta/GRCh38/GRCh38.fa` in 6th command into your path to the GRCh38 fasta file. Also note that in 9th and 11th commands, we speed the process up by running commands in parallel using 28 processors.
+We will use hg38 to generate whole exome variants, with the `hg38_refGene.txt` file, but with 10bp as the intron/exon boundaries. I run the following commands to perform whole exome varaint annotation, note that there are in total 11 commands and a clean up section (delete temp file). You will need to go to the `annovar/` package folder, and change the `/path/to/Ref_Genome/fasta/GRCh38/GRCh38.fa` in 6th command into your path to the GRCh38 fasta file. Also note that in 9th and 11th commands, we speed the process up by running commands in parallel using 28 processors.
 
 ```
 #!/bin/bash
@@ -989,11 +846,11 @@ After the annotation, you will have the result in `mywork/hg38_exome.hg38_multia
 Similarly, you could follow the step in **Case 4** and create a database yourself for this whole exome annotation, which will serve the purpose of provinding you the information about gene annotation for all possible SNPs in human exome.
 
 
-## Case 6. Annotate RSID/SNP ID from GWAS
+## Case 5. Annotate RSID/SNP ID from GWAS
 
 The use case for this section will be: Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies, and make hypothesis for causal variants vs. variants that regulate genome function.
 
-First we will need a list of RSID (or SNP ID) to get start with, we will use 32 novel susceptibility loci (P < 5.0 × 10E−8) from a recent Genome-wide association study (GWAS) about breast cancer ([https://www.nature.com/articles/s41588-020-0609-2]). And most of these loci are found to associate with tumor. We could run pathogenicity predition for these SNP to see how is their predicted pathogenicity score.
+First we will need a list of RSID (or SNP ID) to get start with, we will use 30 novel susceptibility loci (P < 5.0 × 10E−8) from a recent Genome-wide association study (GWAS) about breast cancer ([https://www.nature.com/articles/s41588-020-0609-2]), note that 2 loci were removed because they did not have RSID. And most of these loci are found to associate with tumor. We could run pathogenicity predition for these SNP to see how is their predicted pathogenicity score.
 
 ```
 rs5776993
