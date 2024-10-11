@@ -89,7 +89,7 @@ Open the output file in Excel and see what it contains. The expected output file
 
 ![table_annovar](../img/ex1_new.png)
 
-The output file contains multiple columns. The first a few columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene columns contain various annotation on how the mutations affect gene structure. The Xref.refGene column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). For the next serverals columns, the AF\* columns represent different allele frequency (AF) in gnomAD v2.1.1 database. The column avsnp151 means the SNP identifier in the dbSNP version 151. The rest of the columns are from `dbnsfp47a` annotation, which contain pathogenic classification (end with `_pred`) or predicted score (end with `_score` or `_rankscore`) from several widely used tools, including AlphaMissense, MetaRNN, SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
+The output file contains multiple columns. The first a few columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. The *Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene* columns contain various annotation on how the mutations affect gene structure. The *Xref.refGene* column contains cross-reference for the gene; in this case, whether a known genetic disease is caused by defects in this gene (this information was supplied in the `example/gene_xref.txt` file in the command line). For the next serverals columns, the *AF*\* columns represent different allele frequency (AF) in gnomAD v2.1.1 database. The column *avsnp151* means the SNP identifier in the dbSNP version 151. The rest of the columns are from `dbnsfp47a` annotation, which contain pathogenic classification (end with `_pred`) or predicted score (end with `_score` or `_rankscore`) from several widely used tools, including AlphaMissense, MetaRNN, SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores and so on. 
 
 In the command above, we used `-xref` argument to provide annotation to genes. If the file contains header line, it is possible to provide mulitple pieces of annotations to genes (rather than just one single column). To illustrate this, we can check the first two lines (including the header line) of the `example/gene_fullxref.txt` file:
 
@@ -101,11 +101,13 @@ head -n 2 example/gene_fullxref.txt
 A1BG    9.0649236354772e-05     0.786086131023045       0.2138232197406 alpha-1-B glycoprotein  .       .       TISSUE SPECIFICITY: Plasma.;    unclassifiable (Anatomical System);amygdala;prostate;lung;islets of Langerhans;liver;spleen;germinal center;brain;thymus;       fetal liver;liver;fetal lung;trigeminal ganglion;       0.07384 0.31615 -0.466531444    23.51380042     79.3774 1.88274
 ```
 
-The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. You can run the same command above but change `-xref` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex1_new_xreffile.hg19_multianno.csv). Part of the file is shown below to give users an example:
+The header line starts with `#`. The cross-reference file then contains 15 types of annotations for genes. 
+
+You can run the same command above but change `-xref` from `gene_xref.txt` to `gene_fullxref.txt`, and the result file can be downloaded from [here](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex1_new_xreffile.hg19_multianno.csv). Part of the file is shown below to give users an example:
 
 ![table_annovar_fullxref](../img/ex1_new_xreffile.png)
 
-Similarly, you could run `table_annovar.pl` with the same annotations directly using VCF file as input. For example:
+Similarly, you could run `table_annovar.pl` with the same annotations directly using **VCF file** as input. For example:
 
 ```
 table_annovar.pl example/ex2.vcf \
@@ -126,7 +128,7 @@ You can download the output file here: [ex2.hg19_multianno.vcf](https://github.c
 ![table_vcf](../img/table_vcf_new.png)
 
 
-### additional parameters options
+### Additional parameters options
 
 Some people want to have the HGVS formatted strings for not only exonic variant, but also intronic variant that could be say 10bp away from splice site (by default, ANNOVAR only treats variants within 2bp of exon/intron boundary as splice variants, unless a `--slicing_threshold` parameter is set). For `-intronhgvs`, you will need to provide an integer which will then print HGVS notations for intron within this threshold away from exon. In here, we use `-intronhgvs 20`, it means anything within 20bp of intron/exon boundary will have the HGVS notation. for So you can specify this using the command below:
 
@@ -160,23 +162,17 @@ table_annovar.pl example/ex2.vcf \
 
 ## Annotate exome VCF file
 
-In this section, we will show how to run ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions. To make our files more organized, let's create a folder to store our file and result by `mkdir mywork`.
-
-Before we run the human exome annotation, we need to download the data we need, we can run this command to download the data into `mywork/`:
+In this section, we will show how to run ANNOVAR annotation on human exome VCF file, consider both intronic and exonic regions. To make our files more organized, let's create a folder to store our file and result by `mkdir mywork`. We need to download the data we need, we can run this command to download the data into `mywork/`:
 
 ```
-wget http://molecularcasestudies.cshlp.org/content/suppl/2016/10/11/mcs.a001131.DC1/Supp_File_2_KBG_family_Utah_VCF_files.zip -O mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
+wget http://molecularcasestudies.cshlp.org/content/suppl/2016/10/11/mcs.a001131.DC1/Supp_File_2_KBG_family_Utah_VCF_files.zip \
+  -O mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
 ```
 
 To give some background information, this is a zip file as supplementary material of a published paper on exome sequencing of a family with undiagnosed genetic diseases. Through analysis of the exome data, the proband was confirmed to have KBG syndrome, a disease caused by loss of function mutations in ANKRD11 gene. There are several VCF files contained in the zip file, including those for parents, silings and the proband. We will only analyze proband in this exercise, but if you are interested, you may want to check whether this is a de novo mutation by analyzing parental genomes.
 
-Then we can unzip it and take a look what it has:
+Then we can unzip it and take a look what it contains:
 
-```
-unzip mywork/Supp_File_2_KBG_family_Utah_VCF_files.zip
-mv 'File 2_KBG family Utah_VCF files'/ mywork/VCF_files
-ls mywork/VCF_files/
-```
 ```
 proband.vcf  Unaffected_brother.vcf  Unaffected_father.vcf  Unaffected_mother.vcf  Unaffected_sister1.vcf  Unaffected_sister2.vcf
 ```
@@ -205,33 +201,68 @@ table_annovar.pl mywork/VCF_files/proband.vcf\
   -arg '-hgvs',,, \
   -polish -nastring . \
   -vcfinput \
-  -intronhgvs 100
+  -intronhgvs 20
 ```
 
-Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation. Moreover, we use `-intronhgvs 100` tag seperately and give a range of 100 which means anywhere within 100 bp away from the intron/extron boundary will have HGVS format annotation.
+Note that we could give arguement for a specific operation, in here we use `-arg '-hgvs',,,` to the `refGeneWithVer` operation. Moreover, we use `-intronhgvs 20` tag seperately and give a range of 20 which means anywhere within 20 bp away from the intron/extron boundary will have HGVS format annotation.
 
-The `proband.annovar.hg19_multianno.txt` and `proband.annovar.hg19_multianno.vcf` file contain annotations for this exome. 
+The results will be in `proband.annovar.hg19_multianno.txt` and `proband.annovar.hg19_multianno.vcf` files, which contain annotations for this exome. 
 
-We can use `less mywork/proband.annovar.hg19_multianno.txt` to check what the output looks like:
+We can use `less mywork/proband.annovar.hg19_multianno.txt` to check what the output looks like, you should have a result similar to this:
+
 ![image](../img/exome_VCF.png)
 
 The screenshot showed us the complete columns and the first two variants. We see some familiar columns from our previous exmaple, such as variant basic information (first 5 columns), refGeneWithVer annotation, and gnomad AF columns, and some tool predictions columns from dbnsfp47a. The columns that start with `CLN` are from ClinVar annotation.
 
-At this point, we have our results, and you could choose your own way of downstream analysis. But for demonstration purpose, we have provided a downstream analysis example in [advanced use case](./use_case.md) for exome VCF annotation. 
-
-Downstream analysis includes chromosome distribution, variant type ditritbution, ClinVar pathogenicity distribution, CADD score, MetaRNN/AlphaMissense pathogenic predictions, etc.
+At this point, we have our results, and you could choose your own way of downstream analysis of these exome variants. But for demonstration purpose, we have provided a downstream analysis example in [advanced use case](./use_case.md) for exome VCF annotation. Downstream analysis includes chromosome distribution, variant type ditritbution, ClinVar pathogenicity distribution, CADD score, MetaRNN/AlphaMissense pathogenic predictions, etc.
 
 
 ## Gene Annotation Example
 
+The purpose of this gene annotation example is to showcase how to perform a correct gene annotation using ANNOVAR, as a respond to this [paper (PMID 36268089)](https://www.sciencedirect.com/science/article/pii/S2153353922007246) which evaluated the ANNOVAR using 298 variants with ground truth of variant annotation. However, the authors might run ANNOVAR in inappropriate way so they had a wrong conclusion about ANNOVAR. Here we used the (exact vcf file they provided)(https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/PMID_36268089.vcf) as a demo to show how to get the proper gene annotation (DNA change, amino acid change), with transcript version provided. Take a look at our vcf file first:
+
+```
+##fileformat=VCFv4.0
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+2	162279995	.	C	G	.	.	.
+2	162310909	.	T	C	.	.	.
+1	11046609	.	T	C	.	.	.
+19	19193983	.	A	T	.	.	.
+7	147903589	.	T	C	.	.	.
+17	82079248	.	G	A	.	.	.
+10	63219963	.	G	C	.	.	.
+13	101103286	.	T	A	.	.	.
+```
+
+There are 8 columns in a normal vcf file, and in this vcf file there is no quality score, id and other info, it only has the chromosome number, position, reference and alterantive allele, but this will be enough for ANNOVAR to run annotation.
+Since we only interested in a very simple task: what is the cDNA and amino acid change (if possible) for these variants. We could run the following command:
+
+```
+perl table_annovar.pl mywork/PMID_36268089.vcf \
+  humandb/ \
+  -buildver hg38 \
+  -out mywork/myanno_PMID_36268089 \
+  -remove \
+  -protocol refGeneWithVer \
+  -operation g \
+  -nastring . \
+  -vcfinput \
+  -polish
+```
+
+The output file of this command is provided [here](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/myanno_PMID_36268089.hg38_multianno.txt). The first 5 columns describe the chromosome, position, reference allele and alterantive allele for each vairant. The gene name is the 7th column `Gene.refGeneWithVer`, as we can see 'IFIH1', 'MASP2' and 'RFXANK' were shown. For amino acid change of this variant, we could check the 10th column `AAChange.refGeneWithVer`, and it will tell us the amino acid change per transcript. Note that the first variant '2	162279995	162279995	C	G' does not have amino acid change becuase it is not in the protein coding region, instead it is in the 'splicing' region. And for the variant '1	11046609	11046609	T	C', there are two protein changes 'p.D120G' and 'p.D120G' and this is because there are 2 transcripts (isoforms) for this MASP2 variant, and in this case they are the same amino acid change in the same position, but sometimes you will see different position for amino acid change in different isoforms. 
+
+After the annotation, we rechecked our result with the previous paper. The 20 variants provided in the screenshot below are the variants that the paper claimed ANNOVAR had incorrect annotations. The columns in red text are the new columns that we added for rechecking purpose, and the rest columns in black text were the same from the paper. At the bottom, we summarize the consistency of ANNOVAR results that we got (recheck), the ANNOVAR results from the paper (paper), and the groud truth annotation from the paper (Groud Truth). Given that one cDNA change could have various ways of dictation, amino acid change is more reliable to compare. At the last columns (highlighted in yellow), we checked our ANNOVAR annotation of amino change (pNomen) with the Groud Truth, as ANNOVAR showed 100% accuracy in terms of amino acid change. 
+
+![PMID_36268089_check](../img/PMID_36268089_check.png)
 
 
-Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants. If you are interesting in more advanced use of ANNOVAR, please refer to our [Advanced Use Case](https://github.com/WGLab/doc-ANNOVAR/blob/peng-add_tutorial/docs/user-guide/use_case.md). The advanced use case includes:
+Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 
-- Case 1:
-- Case 2:
-- Case 3:
-- Case 4:
+
+## Futher reading
+
+If you are interesting in more advanced use of ANNOVAR, please refer to our [Advanced Use Case](./use_case.md). 
 
 
 >*Technical Notes: By default, ANNOVAR annotates variant on hg18 (human genome NCBI build 36) coordinate. Since the input file is in hg19 coordinate, we added `-buildver hg19` in every command above. Similarly, if you generated variant calls from human GRCh38 coordinate, add `-buildver hg38` in every command, if your variant file is from fly, add `-buildver dm3` in every command that you use; if your variant file is from mouse, add `-buildver mm9` in every command that you use ......*
