@@ -976,9 +976,52 @@ UTR5 2
 ```
 
 Most of the variants are in intergenic region or intronic region, and 2 in non-coding RNA intronic region, 2 in 3' UTR and 2 in 5' UTR. Non of these variants are from exonic regions.
-Simillarly, we can run the 
+
+Simillarly, we can run the chromosome distribution analysis in **Case#1**, and visulize it:
+
+![snp_variant_distribution](https://github.com/user-attachments/assets/4572be8b-c43b-46ce-b606-b71865613fe9)
+
+We could also check the allel frequency (AF) of intergenic region, intronic region and others.
+
+![snp_allele_frequency_distribution](https://github.com/user-attachments/assets/38ffaa75-989b-4aa0-a155-4becbdcb4b0f)
+
+We could see the the AF of these variants are not very low, surprisingly they are quite high. One challange of these variants are because they are motly intergenic region, and may ot them are not single nucleotide mutations, so almost all of them did not have pathogenicity prediction, except `rs2464195`.
 
 
 ## Case 6. Adding T2T genome annotation database.
 
-Use example/ex1.avinput, liftover to T2T and run annovar.
+ANNOVAR supports annotation using T2T genome (hs1), if you want to analysis the variants using hs1 genome build, your variants should also use T2T genome coordinates. You could convert the genome coordinate using [UCSC liftover tools](https://genome.ucsc.edu/cgi-bin/hgLiftOver). For demontration purpose, we use th first 3 variants from our `example/ex1.avinput` (hg19) and convert it to T2T genome build (hs1). You should prepare the vairants in BED format ("0-base") or format of the position box ("1-base"). Here we use the latter one. This is our variants in hg19 genome:
+
+```
+chr1:948921-948921
+chr1:1404001-1404001
+chr1:5935162-5935162
+```
+
+After liftover, we have these coordinates in hs1 genome:
+
+```
+chr1:443672-443672
+chr1:902994-902994
+chr1:5399587-5399587
+```
+
+For ANNOVAR input, please use this:
+
+```
+1       443672  443672  T       C
+1       902994 902994 G       T
+1       5399587 5399587 A       T
+```
+
+To run ANNOVAR using hs1 genome, you will need to download the database in this format first. And then run ANNOVAR using the hs1 as genome. Please follow the command to download `hs1_refGene` and `hs1_gnomad_genome` and run ANNOVAR using hs1 genome:
+
+```
+annotate_variation.pl --buildver hs1 --downdb seq humandb/hs1_seq
+retrieve_seq_from_fasta.pl humandb/hs1_refGene.txt -seqdir humandb/hs1_seq -format refGene -outfile humandb/hs1_refGeneMrna.fa
+```
+```
+
+```
+
+
