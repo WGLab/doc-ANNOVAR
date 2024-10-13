@@ -1017,8 +1017,16 @@ For ANNOVAR input, please use this:
 To run ANNOVAR using hs1 genome, you will need to download the database in this format first. And then run ANNOVAR using the hs1 as genome. Please follow the command to download `hs1_refGene` and `hs1_gnomad_genome` and run ANNOVAR using hs1 genome:
 
 ```
+#download hs1_gnomad
+annotate_variation.pl --buildver hs1 --downdb -webfrom annovar gnomad humandb/
+
+#download hs1_refGene
 annotate_variation.pl --buildver hs1 --downdb seq humandb/hs1_seq
-retrieve_seq_from_fasta.pl humandb/hs1_refGene.txt -seqdir humandb/hs1_seq -format refGene -outfile humandb/hs1_refGeneMrna.fa
+wget http://www.openbioinformatics.org/annovar/download/hs1_refGene.txt.gz
+gzip -d hs1_refGene.txt.gz
+mv hs1_refGene.txt humandb/
+
+retrieve_seq_from_fasta.pl humandb/hs1_refGene.txt -seqfile humandb/hs1_seq/hs1.fa -format refGene -outfile humandb/hs1_refGeneMrna.fa
 ```
 ```
 
