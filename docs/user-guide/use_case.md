@@ -13,10 +13,10 @@ This tutorial is for advanced use of ANNOVAR, for start up of using ANNOVAR plea
 - Case 4. Perform gene anotation for the whole human exome
   - Create a gene annotation database for all single nucleotide mutations (SNPs) in whole human exome.
 
-- Case 5. Annotate the coding and noncoding variants from a list of RSID from genome-wide association studies
-  - Make hypothesis for causal variants vs. variants that regulate genome function.
+- Case 5. Annotate RSIDs/SNP IDs from genome-wide association studies (GWAS)
+  - Conver RSIDs to variants, and perform functional analysis on these variants using ANNOVAR
 
-- Case 6. Using T2T genome build for annotation.
+- Case 6. Using T2T genome build (hs1) for annotation
 
 
 ## Case 1. Downstream analysis of exome VCF annotation
@@ -1045,4 +1045,6 @@ You should have the result in `mywork/hs1_example_anno.hs1_multianno.txt`, and i
 <img width="1435" alt="image" src="https://github.com/user-attachments/assets/54d365df-e76f-437d-8295-41e84092b03a">
 
 
-That's it! You just finished your ANNOVAR advanced use case, I hope this tutorial will give you more insights about how to use ANNOVAR in your own analysis pipeline. And I hope this tutorial is helpful. If you have any questino, feel free to leave a comment or post an issue in ANNOVAR github page.
+---
+
+Congratulation! You just finished your ANNOVAR advanced use case tutorial, and I hope you got more insights about how to use ANNOVAR to facilitate your own analysis pipeline. If you have any question, feel free to leave a comment or post an issue in ANNOVAR github page.
