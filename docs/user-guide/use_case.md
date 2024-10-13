@@ -1006,7 +1006,7 @@ chr1:902994-902994
 chr1:5399587-5399587
 ```
 
-For ANNOVAR input, please use this:
+For ANNOVAR input, please use this ``:
 
 ```
 1       443672  443672  T       C
@@ -1020,16 +1020,29 @@ To run ANNOVAR using hs1 genome, you will need to download the database in this 
 #download hs1_gnomad
 annotate_variation.pl --buildver hs1 --downdb -webfrom annovar gnomad humandb/
 
-#download hs1_refGene
-annotate_variation.pl --buildver hs1 --downdb seq humandb/hs1_seq
+#download hs1_refGene (currently we will use wget to download)
 wget http://www.openbioinformatics.org/annovar/download/hs1_refGene.txt.gz
-gzip -d hs1_refGene.txt.gz
-mv hs1_refGene.txt humandb/
-
-retrieve_seq_from_fasta.pl humandb/hs1_refGene.txt -seqfile humandb/hs1_seq/hs1.fa -format refGene -outfile humandb/hs1_refGeneMrna.fa
-```
+wget www.openbioinformatics.org/annovar/download/hs1_refGeneMrna.fa.gz
+gzip -d hs1_refGene*gz
+mv hs1_refGene* humandb/
 ```
 
+Let's run ANNOVAR using hs1 (T2T) genome build using the liftover variants we prepared.
+
+```
+table_annovar.pl mywork/hs1_example.avinput \
+  humandb/ \
+  -buildver hs1 \
+  -out mywork/hs1_example_anno \
+  -remove \
+  -protocol refGene,gnomad \
+  -operation g,f \
+  -nastring . -polish
 ```
 
+You should have the result in `mywork/hs1_example_anno.hs1_multianno.txt`, and it should look similar to this:
 
+<img width="1435" alt="image" src="https://github.com/user-attachments/assets/54d365df-e76f-437d-8295-41e84092b03a">
+
+
+That's it! You just finished your ANNOVAR advanced use case, I hope this tutorial will give you more insights about how to use ANNOVAR in your own analysis pipeline. And I hope this tutorial is helpful. If you have any questino, feel free to leave a comment or post an issue in ANNOVAR github page.
