@@ -84,6 +84,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | dbnsfp42c | same as above | 20240525 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
+| hg38 | GTEx_eQTL | Expression Quantitative Trait Loci (eQTL) across tissues based on GTEx v8 | 20241014 |
+| hg38 | GTEx_sQTL | Splicing Quantitative Trait Loci (sQTL) across tissues based on GTEx v8 | 20241014 |
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
 | hg19 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported) | 20180325 |
 | hg38 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported)| 20180325 |
