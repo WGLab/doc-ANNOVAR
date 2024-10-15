@@ -1,6 +1,6 @@
 ## Advanced Use Case Tutorial
 
-This tutorial is for advanced use of ANNOVAR, for start up of using ANNOVAR please refer to the [Start-Up Guide](../startup.md). The advanced use cases include:
+This tutorial is for advanced use of ANNOVAR, for start up of using ANNOVAR please refer to the [Start-Up Guide](startup.md). The advanced use cases include:
 
 - Case 1. Downstream analysis of exome VCF annotation
   - Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
@@ -21,7 +21,7 @@ This tutorial is for advanced use of ANNOVAR, for start up of using ANNOVAR plea
 
 ## Case 1. Downstream analysis of exome VCF annotation
 
-This is the downstream analysis of the exome VCF annotation, we will require the ANNOVAR output `proband.annovar.hg19_multianno.txt` for downstream analysis. If you do not have this file already, please follow the **Annotate exome VCF file** section in [Start-Up Guide](../startup.md) to generate the ANNOVAR output.
+This is the downstream analysis of the exome VCF annotation, we will require the ANNOVAR output `proband.annovar.hg19_multianno.txt` for downstream analysis. If you do not have this file already, please follow the **Annotate exome VCF file** section in [Start-Up Guide](startup.md) to generate the ANNOVAR output.
 
 ### Chromosome distribution
   
