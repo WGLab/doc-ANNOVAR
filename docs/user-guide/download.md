@@ -84,6 +84,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | dbnsfp42c | same as above | 20240525 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
+| hg38 | GTEx_eQTL | Expression Quantitative Trait Loci (eQTL) across tissues based on GTEx v8 | 20241014 |
+| hg38 | GTEx_sQTL | Splicing Quantitative Trait Loci (sQTL) across tissues based on GTEx v8 | 20241014 |
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
 | hg19 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported) | 20180325 |
 | hg38 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported)| 20180325 |
@@ -134,7 +136,7 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | gnomad40_genome | version 4.0 whole-genome data | 20231127 |
 | hg38 | gnomad41_exome | version 4.1 whole-exome data | 20240602 |
 | hg38 | gnomad41_genome | version 4.1 whole-genome data | 20240602 |
-| hs1 | gnomad_genome | whole-genome data from [here](https://ftp.ensembl.org/pub/rapid-release/species/Homo_sapiens/GCA_009914755.4/ensembl/variation/2022_10/vcf/Homo_sapiens-GCA_009914755.4-2022_10-gnomad.vcf.gz) | 20230830 |
+| hs1 | gnomad | whole-genome data from [here](https://ftp.ensembl.org/pub/rapid-release/species/Homo_sapiens/GCA_009914755.4/ensembl/variation/2022_10/vcf/Homo_sapiens-GCA_009914755.4-2022_10-gnomad.vcf.gz) | 20230830 |
 | hg19 | kaviar_20150923 | 170 million Known VARiants from 13K genomes and 64K exomes in 34 projects | 20151203 |
 | hg38 | kaviar_20150923 | same as above | 20151203 |
 | hg19 | hrcr1 | 40 million variants from 32K samples in haplotype reference consortium | 20151203 |

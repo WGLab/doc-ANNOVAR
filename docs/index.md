@@ -9,6 +9,10 @@ ANNOVAR is an efficient software tool to utilize update-to-date information to f
 
 Please click the menu items to navigate through this website. If you have questions, comments and bug reports, please post them in the Disqus comment form in this website (if you do not receive a reply within 7 days, post it again, since sometimes I miss the Disqus notification email or I click the notification email but cannot find the question if a page has too many Disqus posts) or you can just email me directly kaichop gmail.com. Thank you very much for your help and support!
 
+If you are a new user of ANNOVAR, make sure to read the [quick startup guide](user-guide/startup.md) first!
+
+If you want to learn advanced functions in ANNOVAR, such as preparing custom ANNOVAR annotation database, performing whole exome annotation, annotating noncoding variants from GWAS, or annotating a file in T2T-CHM13 coordinates, read the [Use Cases](user-guide/use_case.md).
+
 ---
 
 ![new](img/new.png)2024Sep24: clinvar_20240917 is availabe in ANNOVAR now for hg19/hg38 coordinate. In addition to germline variants, this version adds interpretation for oncogenecity variants and somatic variants.
