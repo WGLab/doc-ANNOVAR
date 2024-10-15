@@ -123,14 +123,14 @@ table_annovar.pl example/ex2.vcf \
 
 Result will be written to `myanno.hg19_multianno.txt` (not a csv file because we did not put `-csvout` tag) and `myanno.hg19_multianno.vcf`.
 
-You can download the output file here: [ex2.hg19_multianno.vcf](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex2_new.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [ex2.hg19_multianno.txt](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex2_new.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations (muleiple "ANNOVAR_DATE ... ALLELE_END" sections) in the INFO field. A screen shot is shown below:
+You can download the output file here: [ex2.hg19_multianno.vcf](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex2_new.hg19_multianno.vcf). Additionally, a tab-delimited output file is also available as [ex2.hg19_multianno.txt](https://github.com/WGLab/doc-ANNOVAR/releases/download/new_files_update/ex2_new.hg19_multianno.txt), which contains similar information in a different format. You can open the new VCF file in a text editor and check what has been changed in the file: the INFO field in the VCF file now contains annotations that you need, starting with the string ANNOVAR_DATE and ending with the notation ALLELE_END. If multiple alleles are in the same locus, you will see multiple such notations (multiple "ANNOVAR_DATE ... ALLELE_END" sections) in the INFO field. A screen shot is shown below:
 
 ![table_vcf](../img/table_vcf_new.png)
 
 
 ### Additional parameters options
 
-Some people want to have the HGVS formatted strings for not only exonic variant, but also intronic variant that could be say 10bp away from splice site (by default, ANNOVAR only treats variants within 2bp of exon/intron boundary as splice variants, unless a `--slicing_threshold` parameter is set). For `-intronhgvs`, you will need to provide an integer which will then print HGVS notations for intron within this threshold away from exon. In here, we use `-intronhgvs 20`, it means anything within 20bp of intron/exon boundary will have the HGVS notation. for So you can specify this using the command below:
+Some people want to have the HGVS formatted strings for not only exonic variant, but also intronic variant that could be say 10bp away from splice site (by default, ANNOVAR only treats variants within 2bp of exon/intron boundary as splice variants, unless a `--slicing_threshold` parameter is set). For `-intronhgvs`, you will need to provide an integer which will then print HGVS notations for intron within this threshold away from exon. In here, we use `-intronhgvs 20`, it means anything within 20bp of intron/exon boundary will have the HGVS notation. So you can specify this using the command below:
 
 ```
 table_annovar.pl example/ex2.vcf \
@@ -174,13 +174,14 @@ To give some background information, this is a zip file as supplementary materia
 Then we can unzip it and take a look what it contains:
 
 ```
-proband.vcf  Unaffected_brother.vcf  Unaffected_father.vcf  Unaffected_mother.vcf  Unaffected_sister1.vcf  Unaffected_sister2.vcf
+proband.vcf  Unaffected_brother.vcf  Unaffected_father.vcf
+Unaffected_mother.vcf  Unaffected_sister1.vcf  Unaffected_sister2.vcf
 ```
 
 Because this vcf file used hg19 as reference, we will need to use the databases corresponding to hg19 genome build for proper results. If you have followed our tutorial, you should already have most of the databases already, expect `clinvar_20240611`. Please run command below to download the databases you don't have:
 
 ```
-annotate_variation.pl -buildver hg38 -downdb -webfrom annovar clinvar_20240611 humandb/
+annotate_variation.pl -buildver hg19 -downdb -webfrom annovar clinvar_20240917 humandb/
 annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGeneWithVer humandb/
 annotate_variation.pl -buildver hg19 -downdb -webfrom annovar gnomad211_exome humandb/ 
 annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp47a humandb/
