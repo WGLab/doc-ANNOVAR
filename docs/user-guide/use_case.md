@@ -3,18 +3,18 @@
 This tutorial is for advanced use of ANNOVAR, for start up of using ANNOVAR please refer to the [Start-Up Guide](startup.md). The advanced use cases include:
 
 - Case 1. Downstream analysis of exome VCF annotation
-  - Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
+    - Downstream analysis includes chromosome distribution, variant type ditritbution, clinvar pathogenicity, CADD score, MetaRNN/AlphaMissense score, etc.
 
 - Case 2. Prepare and update the latestes annotation database (such as ClinVar) using `prepare_annovar_user.pl`
 
 - Case 3. Create customized ANNOVAR database for filter-based operation
-  - For example, the GTEX_v8_eQTL and GTEX_v8_sQTL database for tissue-specific gene-regulation of variants.
+    - For example, the GTEX_v8_eQTL and GTEX_v8_sQTL database for tissue-specific gene-regulation of variants.
 
 - Case 4. Perform gene anotation for the whole human exome
-  - Create a gene annotation database for all single nucleotide mutations (SNPs) in whole human exome.
+    - Create a gene annotation database for all single nucleotide mutations (SNPs) in whole human exome.
 
 - Case 5. Annotate RSIDs/SNP IDs from genome-wide association studies (GWAS)
-  - Conver RSIDs to variants, and perform functional analysis on these variants using ANNOVAR
+    - Conver RSIDs to variants, and perform functional analysis on these variants using ANNOVAR
 
 - Case 6. Using T2T genome build (hs1) for annotation
 
@@ -1006,7 +1006,7 @@ chr1:902994-902994
 chr1:5399587-5399587
 ```
 
-For ANNOVAR input, please use this ``:
+For ANNOVAR input, please use this format:
 
 ```
 1       443672  443672  T       C
@@ -1017,10 +1017,10 @@ For ANNOVAR input, please use this ``:
 To run ANNOVAR using hs1 genome, you will need to download the database in this format first. And then run ANNOVAR using the hs1 as genome. Please follow the command to download `hs1_refGene` and `hs1_gnomad_genome` and run ANNOVAR using hs1 genome:
 
 ```
-#download hs1_gnomad
+###download hs1_gnomad
 annotate_variation.pl --buildver hs1 --downdb -webfrom annovar gnomad humandb/
 
-#download hs1_refGene (currently we will use wget to download)
+###download hs1_refGene (currently we will use wget to download)
 wget http://www.openbioinformatics.org/annovar/download/hs1_refGene.txt.gz
 wget www.openbioinformatics.org/annovar/download/hs1_refGeneMrna.fa.gz
 gzip -d hs1_refGene*gz
