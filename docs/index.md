@@ -15,6 +15,8 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
+![new](img/new.png)2024Oct14: GTEx_v8_eQTL and GTEx_v8_sQTL are availabe in ANNOVAR now for hg38 coordinate. It provides filter-based annotation for eQTL and sQTL based on GTEx v8.
+
 ![new](img/new.png)2024Sep24: clinvar_20240917 is availabe in ANNOVAR now for hg19/hg38 coordinate. In addition to germline variants, this version adds interpretation for oncogenecity variants and somatic variants.
 
 ![new](img/new.png)2024Jun17: Interpro domain annotation from dbNSFP v4.7 is availabe in ANNOVAR now for hg19/hg38 coordinate.
