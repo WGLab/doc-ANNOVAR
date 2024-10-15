@@ -49,6 +49,7 @@ Results will be in `my_first_anno.hg19_multianno.txt` and `my_first_anno.hg19_mu
 ## Download additional database
 
 The `humandb` is our warehouse, it stores all the preprocessed databases of interest so ANNOVAR know how to annotate the variants based on the annotation we required. We need to download appropriate database files using `annotate_variation.pl`. Before download, we need to decide what database we want to use:
+
 - genome build (e.g., `hg19` or `hg38`) 
 - annotation (e.g., `gnomad` or `clinvar`)
 - version (e.g. `clinvar_20240917` or `clinvar_20240611`)
@@ -77,6 +78,7 @@ table_annovar.pl example/ex1.avinput \
 ```
 
 Run the above commands one by one. The first a few commands download appropriate databases into the `humandb/` directory using `annotate_variation.pl`. The final command run TABLE_ANNOVAR, using following databases:
+
 - gnomAD exome collection version 2.1.1 (referred to as gnomad211_exome)
 - dbSNP version 151  (referred to as avsnp151)
 - dbNFSP version 4.7a (referred to as dbnsfp47a)
