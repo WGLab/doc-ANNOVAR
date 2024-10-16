@@ -331,7 +331,7 @@ chr9 3901666 3901666 T C rs12345678
 chr22 24325095 24325095 A G rs74487784
 ```
 
-As you can see above, the new file has the first five columns as chr, start, end, ref, alt, and the sixth column as dbSNP identifier. The LOG message tells us that 1 SNP (rs41534544) has multiple mappings to genome, and as a result, it has two entries in the output file.
+As you can see above, the new file has the first five columns as chr, start, end, ref, alt, and the sixth column as dbSNP identifier. The LOG message tells us that 1 SNP (rs41534544) has multiple mappings to genome, and as a result, it has two entries in the output file. Note that if you are using avsnp database, please use `-avsnpfile` instead of `-dbsnpfile` during conversion.
 
 ### - All variants in a genomic region
 
