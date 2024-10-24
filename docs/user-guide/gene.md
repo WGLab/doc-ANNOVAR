@@ -325,8 +325,6 @@ The transcript name (in the `AAChange.knownGene` column of the output file) look
 To annotate variants using Ensembl gene, use the commands below. The output format is similar to that described above. The "ENSG" and "ENST" are Ensembl identifiers for annotated genes and transcripts. 
 
 ```
-
-```
 #download Ensembl Gene annotation
 annotate_variation.pl -downdb -webfrom annovar -buildver hg19 ensGene humandb/
 
