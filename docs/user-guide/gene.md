@@ -488,7 +488,7 @@ Procedures to make a database for using ANNOVAR from sequence assembly and annot
 mkdir barleydb
 ```
 
-2. go to barleydb and download two files (one assembled sequence and one annotation) from ensembl plants website
+2. go to barleydb and download two files (one assembled sequence and one annotation) from ensembl plants website (**please change the download path and file name according based on the Ensembl website latest update https://plants.ensembl.org/Hordeum_vulgare/Info/Index**)
 
 ```
 cd barleydb
