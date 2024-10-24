@@ -83,7 +83,7 @@ Run the above commands one by one. The first a few commands download appropriate
 - dbSNP version 151  (referred to as avsnp151)
 - dbNFSP version 4.7a (referred to as dbnsfp47a)
 
-We also remove all temporary files (`-remove`), and generate the output file called `myanno.hg19_multianno.csv` (becausse we use `-csvout`). Fields that do not have any annotation will be filled by "." string (`-nastring .`). 
+We also remove all temporary files (`-remove`), and generate the output file called `myanno.hg19_multianno.csv` (becausse we use `-csvout`). Fields that do not have any annotation will be filled by "." string (`-nastring .`). Note that our input file "example/ex1.avinput" has additional comment in the 6th column, if you want to keep the extra columns from ANNOVAR input file, you could use the argument `--otherinfo`.
 
 We can examine the command line in greater detail. The `-operation` argument tells ANNOVAR which operations to use for each of the protocols: `g` means gene-based, `gx` means gene-based with cross-reference annotation (from `-xref` argument), `r` means region-based and `f` means filter-based. If you do not provide a xref file, then the operation can be `g` only. You will find details on what are gene/region/filter-based annotations in the other web pages. Sometimes, users want tab-delimited files rather than comma-delimited files. This can be easily done by removing `-csvout` argument to the above command.
 
@@ -241,7 +241,7 @@ There are 8 columns in a normal vcf file, and in this vcf file there is no quali
 Since we only interested in a very simple task: what is the cDNA and amino acid change (if possible) for these variants. We could run the following command:
 
 ```
-perl table_annovar.pl mywork/PMID_36268089.vcf \
+table_annovar.pl mywork/PMID_36268089.vcf \
   humandb/ \
   -buildver hg38 \
   -out mywork/myanno_PMID_36268089 \
@@ -259,6 +259,7 @@ After the annotation, we rechecked our result with the previous paper. The 20 va
 
 ![PMID_36268089_check](../img/PMID_36268089_check.png)
 
+For additional details and operations about the gene annotation, please refer to [Gene-based Annotation](./gene.md).
 
 Hopefully, after you finish this set of exercises above, you now have a better idea what ANNOVAR is, and can start enjoy the journey of annotating your variants.
 
