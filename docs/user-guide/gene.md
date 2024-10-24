@@ -9,13 +9,7 @@ One of the functionalities of ANNOVAR is to generate gene-based annotation. For 
 Before working on gene-based annotation, a gene definition file and associated FASTA file must be downloaded into a directory if they are not already downloaded. Let's call this directory as `humandb/`.
 
 ```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -downdb -buildver hg19 -webfrom annovar refGene humandb/
-NOTICE: Web-based checking to see whether ANNOVAR new version is available ... Done
-NOTICE: Downloading annotation database http://www.openbioinformatics.org/annovar/download/hg19_refGene.txt.gz ... OK
-NOTICE: Downloading annotation database http://www.openbioinformatics.org/annovar/download/hg19_refLink.txt.gz ... OK
-NOTICE: Downloading annotation database http://www.openbioinformatics.org/annovar/download/hg19_refGeneMrna.fa.gz ... OK
-NOTICE: Uncompressing downloaded files
-NOTICE: Finished downloading annotation files for hg19 build version, with files saved at the 'humandb' directory
+annotate_variation.pl -downdb -buildver hg19 -webfrom annovar refGene humandb/
 ```
 
 This command downloads a few files and save them in the `humandb/` directory for later use.
@@ -25,7 +19,9 @@ This command downloads a few files and save them in the `humandb/` directory for
 Suppose we use the input file `ex1.avinput` which is included as an example in the ANNOVAR package. This is a simple text file, and its content is displayed below:
 
 ```
-[kaiwang@biocluster ~/]$ cat example/ex1.avinput
+cat example/ex1.avinput
+```
+```
 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
 1 1404001 1404001 G T comments: rs149123833, a SNP in 3' UTR of ATAD3C
 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
@@ -45,46 +41,47 @@ Suppose we use the input file `ex1.avinput` which is included as an example in t
 
 Read the "[Prepare Input Files](input.md)" section to understand the file format. Basically, only the first five columns are used by ANNOVAR, and the following fields are optional and can be anything, like quality scores, confidence score, comments, identifiers, etc.
 
-The gene-based annotation can be issued by the following command (by default, `--geneanno -dbtype refGene` is assumed):
+The gene-based annotation can be issued with the `-operation g` using `table_annovar.pl` as we showed in the following command:
 
 ```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -out ex1 -build hg19 example/ex1.avinput humandb/
-NOTICE: The --geneanno operation is set to ON by default
-NOTICE: Reading gene annotation from humandb/hg19_refGene.txt ... Done with 48660 transcripts (including 10375 without coding sequence annotation) for 25588 unique genes
-NOTICE: Reading FASTA sequences from humandb/hg19_refGeneMrna.fa ... Done with 14 sequences
-WARNING: A total of 333 sequences will be ignored due to lack of correct ORF annotation
-NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avinput
-NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out ex1 \
+  -protocol refGene \
+  -operation g \
+  -remove -polish -nastring .
 ```
 
-Two output files will be generated: `ex1.variant_function` and `ex1.exonic_variant_function` (to change the output file names, use the `--outfile` argument).
+In this command, the `table_annovar.pl` requires an input as annovar format (or a vcf file as input with `-vcfinput` argument) and a path to the database, which is the `humandb/`. The `-protocol` tells what annotation we want to apply, and the `-operation` tells how to apply. In here, we want to do gene-based annotation using refGene, so we used `g` as the operation. For more informatino about the arguments, you could refer to our start up tutorial or print the help message using `table_annovar.pl --help`.
 
-### Output file 1 (refSeq gene annotation)
+One output file will be generated: `ex1.hg19_multianno.txt` (to change the output file names, use the `--outfile` or `-out` argument).
 
-The first file contains annotation for all variants, by adding two columns to the beginning of each input line (for example, "intronic DDR2" below in the first line):
+### Output file (refSeq gene annotation)
+
+Let's take a look at the first few rows of the output as an example:
 
 ```
-[kaiwang@biocluster ~/]$ cat ex1.variant_function 
-UTR5 ISG15(NM_005101:c.-33T>C) 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
-UTR3 ATAD3C(NM_001039211:c.*91G>T) 1 1404001 1404001 G T comments: rs149123833, a SNP in 3' UTR of ATAD3C
-splicing NPHP4(NM_001291593:exon19:c.1279-2T>A,NM_001291594:exon18:c.1282-2T>A,NM_015102:exon22:c.2818-2T>A) 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
-intronic DDR2 1 162736463 162736463 C T comments: rs1000050, a SNP in Illumina SNP arrays
-intronic DNASE2B 1 84875173 84875173 C T comments: rs6576700 or SNP_A-1780419, a SNP in Affymetrix SNP arrays
-intergenic LOC645354(dist=11566),LOC391003(dist=116902) 1 13211293 13211294 TC - comments: rs59770105, a 2-bp deletion
-intergenic UBIAD1(dist=55105),PTCHD2(dist=135699) 1 11403596 11403596 - AT comments: rs35561142, a 2-bp insertion
-intergenic LOC100129138(dist=872538),NONE(dist=NONE) 1 105492231 105492231 A ATAAA comments: rs10552169, a block substitution
-exonic IL23R 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-exonic ATG16L1 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-exonic NOD2 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-exonic NOD2 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-exonic NOD2 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-exonic GJB2 13 20763686 20763686 G - comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-exonic CRYL1,GJB6 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
+head ex1.hg19_multianno.txt
+```
+```
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene
+1	948921	948921	T	C	UTR5	ISG15	NM_005101:c.-33T>C	.	.
+1	1404001	1404001	G	T	UTR3	ATAD3C	NM_001039211:c.*91G>T	.	.
+1	5935162	5935162	A	T	splicing	NPHP4	NM_015102:exon21:c.2818-2T>A;NM_001291593:exon18:c.1279-2T>A;NM_001291594:exon17:c.1282-2T>A	.	.
+1	162736463	162736463	C	T	intronic	DDR2	.	.	.
+1	84875173	84875173	C	T	intronic	DNASE2B	.	.	.
+1	13211293	13211294	TC	-	intergenic	PRAMEF36P;PRAMEF18	dist=11566;dist=116902	.	.
+1	11403596	11403596	-	AT	intergenic	UBIAD1;DISP3	dist=43968;dist=135616	.	.
+1	105492231	105492231	A	ATAAA	intergenic	LOC100129138;LINC01676	dist=872538;dist=640085	.	.
+1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.G1142A:p.R381Q
 ```
 
-The first column tells whether the variant hit exons or hit intergenic regions, or hit introns, or hit a non-coding RNA genes. If the variant is exonic/intronic/ncRNA, the second column gives the gene name (if multiple genes are hit, comma will be added between gene names); if not, the second column will give the two neighboring genes and the distance to these neighboring genes.
+The output file contains multiple columns. The first 5 columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. In here, we only used "gene annotation" operation for refGene. The *Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene* columns contain various annotation on how the mutations affect gene structure. The `Func.refGene` column indicates the influenced region of this mutation to a specific gene corresponding to the `Gene.refGene` column. The `GeneDetail.refGene` provides cDNA change per transcript in detail for the mutation that does not affect amino acid change (AAchange). The `ExonicFunc.refGene` columns provides further gene funtional annotation for exonic maution, and `AAChange.refGene` provides details for the cDNA change and AAchange for the exnoic mutation.
 
-The possible values of the first column is summarized below:
+#### Gene-based annotation output explanation
+
+The possible values of the `Func.refGene` column is summarized below:
 
 | Value	|	Default precedence	|	Explanation	| Sequence Ontology |
 |---|---|---|---|
@@ -101,17 +98,24 @@ The possible values of the first column is summarized below:
 
 The value of the first column takes the following precedence (as of December 2010 and later version of ANNOVAR): exonic = splicing > ncRNA> > UTR5/UTR3 > intron > upstream/downstream > intergenic. The precedence defined above is used to decide what function to print out when a variant fit multiple functional categories. Note that:
 
-1. the "exonic" here refers only to coding exonic portion , but not UTR portion, as there are two keywords (UTR5, UTR3) that are specifically reserved for UTR annotations.
-2. "splicing" in ANNOVAR is defined as variant that is within 2-bp away from an exon/intron boundary by default, but the threshold can be changed by the --splicing_threshold argument. Before Feb 2013, if "exonic,splicing" is shown, it means that this is a variant within exon but close to exon/intron boundary; this behavior is due to historical reason, when a user requested that exonic variants near splicing sites be annotated with splicing as well. However, I continue to get user emails complaining about this behavior despite my best efforts to put explanation in the ANNOVAR website with details. Therefore, starting from Feb 2013 , "splicing" only refers to the 2bp in the intron that is close to an exon, and if you want to have the same behavior as before, add -exonicsplicing argument.
+1. the "exonic" here refers only to coding exonic portion, but not UTR portion, as there are two keywords (UTR5, UTR3) that are specifically reserved for UTR annotations.
+2. "splicing" in ANNOVAR is defined as variant that is within 2-bp away from an exon/intron boundary by default, but the threshold can be changed by the `--splicing_threshold` argument. Before Feb 2013, if "exonic,splicing" is shown, it means that this is a variant within exon but close to exon/intron boundary; this behavior is due to historical reason, when a user requested that exonic variants near splicing sites be annotated with splicing as well. However, I continue to get user emails complaining about this behavior despite my best efforts to put explanation in the ANNOVAR website with details. Therefore, starting from Feb 2013 , "splicing" only refers to the 2bp in the intron that is close to an exon, and if you want to have the same behavior as before, add `-exonicsplicing` argument.
 3. If a variant is located in both 5' UTR and 3' UTR region (possibly for two different genes), then the "UTR5,UTR3" will be printed as the output.
-4. The term "upstream" and "downstream" is defined as 1-kb away from transcription start site or transcription end site, respectively, taking in account of the strand of the mRNA; the --neargene threshold can be used to adjust this threshold.
+4. The term "upstream" and "downstream" is defined as 1-kb away from transcription start site or transcription end site, respectively, taking in account of the strand of the mRNA; the `--neargene` threshold can be used to adjust this threshold.
 5. If a variant is located in both downstream and upstream region (possibly for 2 different genes), then the "upstream,downstream" will be printed as the output.
-In 2011 June version of ANNOVAR, the splicing annotation is improved. If the splicing site is in intron, then all isoforms and the corresponding base change will be printed. For example,
+In 2011 June version of ANNOVAR, the splicing annotation is improved. If the splicing site is in intron, then all isoforms and the corresponding base change will be printed.
+
+As an example of adding argument to the gene-based annotation, we could change the splicing threashold to 5 in this way:
 
 ```
-splicing SMS(NM_004595:c.447+2T>G) X 21895357 21895357 T G hetero 8 15
-splicing DMD(NM_004011:c.48+1A>C) X 31803228 31803228 T G homo 117 30
-splicing BAGE(NM_001187:c.14+1A>G),BAGE4(NM_181704:c.14+1A>G),BAGE5(NM_182484:c.14+1A>G) 21 10120594 10120594 T C hetero 66 53
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out ex1_arg \
+  -protocol refGene \
+  -operation g \
+  -arg "--splicing_threshold 5"\
+  -remove -polish -nastring .
 ```
 
 Several technical notes are discussed below.
@@ -126,15 +130,15 @@ To further explain the variant_function annotation, check the figure below:
 
 ![varfunc](../img/gene_snp_1.png)
 
-In the figure above, SNP1 is an intergenic variant, as it is >1kb away from any gene, SNP2 is a downstream variant, as it is 1kb from the 3'end of the NADK gene; SNP3 is a UTR3 variant; SNP4 is an intronic variant; SNP5 is an exonic variant.
+In the figure above, SNP1 is an intergenic variant, as it is >1kb away from any gene, SNP2 is a downstream variant, as it is within 1kb from the 3'end of the NADK gene; SNP3 is a UTR3 variant; SNP4 is an intronic variant; SNP5 is an exonic variant.
 
 Similarly, Deletion 1 is an intergenic variant; deletion 2 is a downstream variant; deletion3 is a UTR3 variant; deletion 4 overlaps both with UTR3 and intron, and based on the precedence rule, it is a UTR3 variant; deletion 5 is an intronic variant; deletion6 overlaps with both an exon and an intron, and based on the precedence rule, it is an exonic variant.
 
-> *Technical Notes: Sometimes users may want to change the default precedence rule. The "-precedence" argument can be used to fine-tune the priority of variant function. The different variant functions should be separated by comma in the command line based on their desired priority levels. The allowable keywords for variant functions are exonic, intronic, splicing, utr5, utr3, upstream, downstream, splicing, ncrna.*
+> *Technical Notes: Sometimes users may want to change the default precedence rule. The `-precedence` argument can be used to fine-tune the priority of variant function. The different variant functions should be separated by comma in the command line based on their desired priority levels. The allowable keywords for variant functions are exonic, intronic, splicing, utr5, utr3, upstream, downstream, splicing, ncrna.*
 
 For example, when `-precedence intronic,utr5,utr3` is specified, the intronic variant will take precedence over UTR variants, and the deletion 4 will become an intronic variant above. This is the only change, and all other default precedence rule still applies here.
 
-> *Technical Notes: By default, the gene name is printed in the second column in the variant_function file. Sometimes, a user may want to see transcript name instead. The --transcript_function argument can be used to specify this behavior. Note that it is very likely that multiple transcript names will be printed in the output separated by comma, as each gene name typically corresponds to several transcript names.*
+> *Technical Notes: By default, the gene name is printed in the 7th column in the output file (e.g., ex1.hg19_multianno.txt). Sometimes, a user may want to see transcript name instead. The `--transcript_function` argument can be used to specify this behavior. Note that it is very likely that multiple transcript names will be printed in the output separated by comma, as each gene name typically corresponds to several transcript names.*
 
 > *Technical Notes: Current logic in gene definition: Genomes are complex and therefore gene definitions are also complex. ANNOVAR completely relies on user-supplied gene definitions (such as RefSeq, UCSC Gene and Ensembl Gene) to map a transcript to genomes and relate transcripts to genes, and uses the following logic to handle complex scenarios:
 1. If a gene is annotated as both coding and non-coding (multiple transcripts, some coding, some non-coding), the gene will be regarded as coding (the non-coding transcript definition will be ignored).
@@ -145,22 +149,25 @@ For example, when `-precedence intronic,utr5,utr3` is specified, the intronic va
 
 The above rules do make sense. The rule 3 and 4 were made in Nov 2011 version of ANNOVAR (so that users no longer send me emails complaining errors in exonic annotation which is not really a fault of ANNOVAR per se). But as a result, you may see more "UNKNOWN" exonic annotations in the output file.
 
-### Output file 2 (refSeq gene annotation)
+#### Exnoic functional annotation explanation
 
-The second output file, `ex1.exonic_variant_function`, contains the amino acid changes as a result of the exonic variant. The exact format of the output below may change slightly between different versions of ANNOVAR.
+The last two columns `ExonicFunc.refGene` and `AAChange.refGene`, contain the amino acid changes as a result of the exonic variant. The exact format of the output below may change slightly between different versions of ANNOVAR.
+
+Let's take a look at the first 5 exonic mutations in the output:
 
 ```
-[kaiwang@biocluster ~/]$ cat ex1.exonic_variant_function 
-line9 nonsynonymous SNV IL23R:NM_144701:exon9:c.G1142A:p.R381Q, 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-line10 nonsynonymous SNV ATG16L1:NM_001190267:exon9:c.A550G:p.T184A,ATG16L1:NM_017974:exon8:c.A841G:p.T281A,ATG16L1:NM_001190266:exon9:c.A646G:p.T216A,ATG16L1:NM_030803:exon9:c.A898G:p.T300A,ATG16L1:NM_198890:exon5:c.A409G:p.T137A, 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-line11 nonsynonymous SNV NOD2:NM_022162:exon4:c.C2104T:p.R702W,NOD2:NM_001293557:exon3:c.C2023T:p.R675W, 16 50745926 50745926 C comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-line12 nonsynonymous SNV NOD2:NM_022162:exon8:c.G2722C:p.G908R,NOD2:NM_001293557:exon7:c.G2641C:p.G881R, 16 50756540 50756540 G comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-line13 frameshift insertion NOD2:NM_022162:exon11:c.3017dupC:p.A1006fs,NOD2:NM_001293557:exon10:c.2936dupC:p.A979fs, 16 50763778 5076377comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-line14 frameshift deletion GJB2:NM_004004:exon2:c.35delG:p.G12fs, 13 20763686 20763686 G - comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-line15 frameshift deletion GJB6:NM_001110221:wholegene,GJB6:NM_001110220:wholegene,GJB6:NM_001110219:wholegene,CRYL1:NM_015974:wholegene,GJB6:NM_006783:wholegene, 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
+head -n 1 ex1.hg19_multianno.txt;grep exonic ex1.hg19_multianno.txt | head -n 5
+```
+```
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene
+1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.G1142A:p.R381Q
+2	234183368	234183368	A	G	exonic	ATG16L1	.	nonsynonymous SNV	ATG16L1:NM_198890:exon5:c.A409G:p.T137A,ATG16L1:NM_017974:exon8:c.A841G:p.T281A,ATG16L1:NM_001190266:exon9:c.A646G:p.T216A,ATG16L1:NM_001190267:exon9:c.A550G:p.T184A,ATG16L1:NM_030803:exon9:c.A898G:p.T300A,ATG16L1:NM_001363742:exon10:c.A949G:p.T317A
+16	50745926	50745926	C	T	exonic	NOD2	.	nonsynonymous SNV	NOD2:NM_001293557:exon3:c.C2023T:p.R675W,NOD2:NM_001370466:exon4:c.C2023T:p.R675W,NOD2:NM_022162:exon4:c.C2104T:p.R702W
+16	50756540	50756540	G	C	exonic	NOD2	.	nonsynonymous SNV	NOD2:NM_001293557:exon7:c.G2641C:p.G881R,NOD2:NM_001370466:exon8:c.G2641C:p.G881R,NOD2:NM_022162:exon8:c.G2722C:p.G908R
+16	50763778	50763778	-	C	exonic	NOD2	.	frameshift insertion	NOD2:NM_001293557:exon10:c.2936dupC:p.L980Pfs*2,NOD2:NM_001370466:exon11:c.2936dupC:p.L980Pfs*2,NOD2:NM_022162:exon11:c.3017dupC:p.L1007Pfs*2
 ```
 
-Note that only exonic variants are annotated in this file, so the first column gives the line # in the original input file. The second field tells the functional consequences of the variant (possible values in this fields include: nonsynonymous SNV, synonymous SNV, frameshift insertion, frameshift deletion, nonframeshift insertion, nonframeshift deletion, frameshift block substitution, nonframshift block substitution). The third column contains the gene name, the transcript identifier and the sequence change in the corresponding transcript. A standard nomenclature is used in specifying the sequence changes (you may want to add -hgvs argument so that the cDNA level annotation is compatible with HGVS nomenclature).
+Note that only exonic variants will have the information in `ExonicFunc.refGene` and `AAChange.refGene` columns. The `ExonicFunc.refGene` tells the functional consequences of the variant (possible values in this fields include: nonsynonymous SNV, synonymous SNV, frameshift insertion, frameshift deletion, nonframeshift insertion, nonframeshift deletion, frameshift block substitution, nonframshift block substitution). The `AAChange.refGene` column contains the gene name, the transcript identifier and the sequence change in the corresponding transcript. A standard nomenclature is used in specifying the sequence changes (you may want to add `-hgvs` argument so that the cDNA level annotation is compatible with HGVS nomenclature).
 
 More detailed explanation of these exonic_variant_functoin annotations are given below. Note that stopgain and stoploss take precedence over other annotations; for example, whenever a nonsynonymous mutation change the wild type amino acid to a stop codon, it will be annotated as stopgain rather than nonsynonymous SNV.
 
