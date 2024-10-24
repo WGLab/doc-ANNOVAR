@@ -77,7 +77,7 @@ Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.re
 1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.G1142A:p.R381Q
 ```
 
-The output file contains multiple columns. The first 5 columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. In here, we only used "gene annotation" operation for refGene. The *Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene* columns contain various annotation on how the mutations affect gene structure. The `Func.refGene` column indicates the influenced region of this mutation to a specific gene corresponding to the `Gene.refGene` column. The `GeneDetail.refGene` provides cDNA change per transcript in detail for the mutation that does not affect amino acid change (AAchange). The `ExonicFunc.refGene` columns provides further gene funtional annotation for exonic maution, and `AAChange.refGene` provides details for the cDNA change and AAchange for the exnoic mutation.
+The output file contains multiple columns. The first 5 columns are your input columns, you could check `example/ex1.avinput` to see what it looks like. Each of the following columns corresponds on one of the "protocol" that user specified in the command line. In here, we only used "gene annotation" operation for refGene. The *Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene* columns contain various annotation on how the mutations affect gene structure. The `Func.refGene` column indicates the influenced region of this mutation to a specific gene corresponding to the `Gene.refGene` column. The `GeneDetail.refGene` provides cDNA change per transcript in detail for the mutation that does not affect amino acid change (AAchange). The `ExonicFunc.refGene` columns provides further gene funtional annotation for exonic maution, and `AAChange.refGene` provides details for the cDNA change and AAchange for the exnoic mutation. If you want to keep the extra columns from our input file (such as the comment in the 6th column), you could use the argument `--otherinfo`.
 
 #### Gene-based annotation output explanation
 
@@ -176,8 +176,8 @@ More detailed explanation of these exonic_variant_functoin annotations are given
 | frameshift insertion	| 1	| an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence  | frameshift_elongation (SO:0001909) |
 | frameshift deletion	| 2	| a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence    | frameshift_truncation (SO:0001910) |
 | frameshift block substitution	| 3	| a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence  | frameshift_variant (SO:0001589) |
-| stopgain	| 4	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"!   | stop_gained (SO:0001587) |
-| stoploss	| 5	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site   | stop_lost (SO:0001578) |
+| stopgain	| 4	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the **immediate** creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as "stopgain"!   | stop_gained (SO:0001587) |
+| stoploss	| 5	|  a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the **immediate** elimination of stop codon at the variant site   | stop_lost (SO:0001578) |
 | nonframeshift insertion	| 6	 |  an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence  | inframe_insertion (SO:0001821) |
 | nonframeshift deletion	| 7	 |  a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence   | inframe_deletion (SO:0001822) |
 | nonframeshift block substitution	| 8	 |  a block substitution of one or more nucleotides that do not cause frameshift changes in protein coding sequence  | inframe_variant (SO:0001650) |
@@ -186,13 +186,36 @@ More detailed explanation of these exonic_variant_functoin annotations are given
 | unknown  |  11  |  unknown function (due to various errors in the gene structure definition in the database file)  | sequence_variant (SO:0001060) |
 
 
-In 2012 Oct version of ANNOVAR, the `--aamatrixfile` argument is added so that users can print out GRANTHAM scores (or any other amino acid substitution matrix) for nonsynonymous variantsin gene-based annotation. See below, the `AAMatrix=43` notation is added to the output, indicating that the R->Q change has a grantham score of 43.
+In 2012 Oct version of ANNOVAR, the `--aamatrixfile` argument is added so that users can print out GRANTHAM scores (or any other amino acid substitution matrix) for nonsynonymous variantsin gene-based annotation. Here, we used the "grantham.matrix" in our `example/` folder as an example. Run the command below:
 
 ```
-[kaiwang@biocluster ]$ annotate_variation.pl example/ex1.avinput humandb/ -aamatrixfile grantham.matrix -out ex1 -buildver hg19 
-[kaiwang@biocluster ]$ head -n 1 ex1.exonic_variant_function
-line9 nonsynonymous SNV IL23R:NM_144701:exon9:c.G1142A:p.R381Q:AAMatrix=43, 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out ex1_arg_aamatrix \
+  -protocol refGene \
+  -operation gx \
+  -arg "-aamatrixfile example/grantham.matrix"\
+  -xref example/gene_xref.txt\
+  --otherinfo\
+  -remove -polish -nastring .
 ```
+
+Note that in this command, we used a `gx` operation instead of `g`. It means gene-based with cross-reference annotation (from `-xref` argument). And the output will have a extra column `Xref.refGene` for specific gene. We also used `--otherinfo` to keep the extra columns from our input "ex1.avinput". Let's take a look at the first 3 exonic variants output.
+
+```
+head -n 1 ex1_arg_aamatrix.hg19_multianno.txt;grep exonic ex1_arg_aamatrix.hg19_multianno.txt|head -n 3
+```
+```
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	Xref.refGene	Otherinfo1
+1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.G1142A:p.R381Q:AAMatrix=43	.	comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
+2	234183368	234183368	A	G	exonic	ATG16L1	.	nonsynonymous SNV	ATG16L1:NM_198890:exon5:c.A409G:p.T137A:AAMatrix=58,ATG16L1:NM_017974:exon8:c.A841G:p.T281A:AAMatrix=58,ATG16L1:NM_001190266:exon9:c.A646G:p.T216A:AAMatrix=58,ATG16L1:NM_001190267:exon9:c.A550G:p.T184A:AAMatrix=58,ATG16L1:NM_030803:exon9:c.A898G:p.T300A:AAMatrix=58,ATG16L1:NM_001363742:exon10:c.A949G:p.T317A:AAMatrix=58	.	comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
+16	50745926	50745926	C	T	exonic	NOD2	.	nonsynonymous SNV	NOD2:NM_001293557:exon3:c.C2023T:p.R675W:AAMatrix=101,NOD2:NM_001370466:exon4:c.C2023T:p.R675W:AAMatrix=101,NOD2:NM_022162:exon4:c.C2104T:p.R702W:AAMatrix=101	Blau syndrome, Autosomal dominant	comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
+```
+
+As shown above, for the '1	67705958	67705958	G	A' mutation, the `AAMatrix=43` notation is added to the output, indicating that the R->Q change has a grantham score of 43. And for the '16	50745926	50745926	C	T', it was annotated as *NOD2* gene and the `Xref.refGene` provided "Blau syndrome, Autosomal dominant" as cross-reference annotation for this gene.
+
+
 
 When specifying amino acid changes, the specification always relates to a position for a transcript (not a "gene"). For example, the R702W mutation refers to an amino acid change at position 702 in exon 4 in a transcript called NM_022162 (which corresponds to the NOD2 gene). Since there is only one transcript annotated with the NOD2 gene, there is no ambiguity here. However, due to alternative splicing, if there are two or more transcripts that are all annotated for a gene, then the position of the amino acid change will differ, and it is important to always list the transcripts, in addition to gene names.
 
