@@ -156,7 +156,8 @@ The last two columns `ExonicFunc.refGene` and `AAChange.refGene`, contain the am
 Let's take a look at the first 5 exonic mutations in the output:
 
 ```
-head -n 1 ex1.hg19_multianno.txt;grep exonic ex1.hg19_multianno.txt | head -n 5
+head -n 1 ex1.hg19_multianno.txt;\
+grep exonic ex1.hg19_multianno.txt | head -n 5
 ```
 ```
 Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene
@@ -194,59 +195,65 @@ table_annovar.pl example/ex1.avinput \
   -buildver hg19 \
   -out ex1_arg_aamatrix \
   -protocol refGene \
-  -operation gx \
+  -operation g \
   -arg "-aamatrixfile example/grantham.matrix"\
-  -xref example/gene_xref.txt\
-  --otherinfo\
+  --otherinfo \
   -remove -polish -nastring .
 ```
 
-Note that in this command, we used a `gx` operation instead of `g`. It means gene-based with cross-reference annotation (from `-xref` argument). And the output will have a extra column `Xref.refGene` for specific gene. We also used `--otherinfo` to keep the extra columns from our input "ex1.avinput". Let's take a look at the first 3 exonic variants output.
+We used `--otherinfo` to keep the extra columns from our input "ex1.avinput". Let's take a look at the first exonic variants output.
 
 ```
-head -n 1 ex1_arg_aamatrix.hg19_multianno.txt;grep exonic ex1_arg_aamatrix.hg19_multianno.txt|head -n 3
+head -n 1 ex1_arg_aamatrix.hg19_multianno.txt;grep exonic ex1_arg_aamatrix.hg19_multianno.txt|head -n 1
 ```
 ```
-Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	Xref.refGene	Otherinfo1
-1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.G1142A:p.R381Q:AAMatrix=43	.	comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-2	234183368	234183368	A	G	exonic	ATG16L1	.	nonsynonymous SNV	ATG16L1:NM_198890:exon5:c.A409G:p.T137A:AAMatrix=58,ATG16L1:NM_017974:exon8:c.A841G:p.T281A:AAMatrix=58,ATG16L1:NM_001190266:exon9:c.A646G:p.T216A:AAMatrix=58,ATG16L1:NM_001190267:exon9:c.A550G:p.T184A:AAMatrix=58,ATG16L1:NM_030803:exon9:c.A898G:p.T300A:AAMatrix=58,ATG16L1:NM_001363742:exon10:c.A949G:p.T317A:AAMatrix=58	.	comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-16	50745926	50745926	C	T	exonic	NOD2	.	nonsynonymous SNV	NOD2:NM_001293557:exon3:c.C2023T:p.R675W:AAMatrix=101,NOD2:NM_001370466:exon4:c.C2023T:p.R675W:AAMatrix=101,NOD2:NM_022162:exon4:c.C2104T:p.R702W:AAMatrix=101	Blau syndrome, Autosomal dominant	comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	Otherinfo1
+1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.G1142A:p.R381Q:AAMatrix=43	comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
 ```
 
-As shown above, for the '1	67705958	67705958	G	A' mutation, the `AAMatrix=43` notation is added to the output, indicating that the R->Q change has a grantham score of 43. And for the '16	50745926	50745926	C	T', it was annotated as *NOD2* gene and the `Xref.refGene` provided "Blau syndrome, Autosomal dominant" as cross-reference annotation for this gene.
-
-
+As shown above, for the '1	67705958	67705958	G	A' mutation, the `AAMatrix=43` notation is added to the output, indicating that the R->Q change has a grantham score of 43. And the comment for this variant is kept in the last column `Otherinfo1`.
 
 When specifying amino acid changes, the specification always relates to a position for a transcript (not a "gene"). For example, the R702W mutation refers to an amino acid change at position 702 in exon 4 in a transcript called NM_022162 (which corresponds to the NOD2 gene). Since there is only one transcript annotated with the NOD2 gene, there is no ambiguity here. However, due to alternative splicing, if there are two or more transcripts that are all annotated for a gene, then the position of the amino acid change will differ, and it is important to always list the transcripts, in addition to gene names.
 
 If the user is interested in using HGVS nomenclature for cDNA, add the `-hgvs` argument in gene annotation:
 
 ```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -out ex1 -build hg19 -hgvs example/ex1.avinput humandb/ 
-
-[kaiwang@biocluster ~/]$ cat ex1.exonic_variant_function
-line9 nonsynonymous SNV IL23R:NM_144701:exon9:c.1142G>A:p.R381Q, 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-line10 nonsynonymous SNV ATG16L1:NM_030803:exon9:c.898A>G:p.T300A,ATG16L1:NM_017974:exon8:c.841A>G:p.T281A,ATG16L1:NM_001190267:exon9:c.550A>G:p.T184A,ATG16L1:NM_001190266:exon9:c.646A>G:p.T216A,ATG16L1:NM_198890:exon5:c.409A>G:p.T137A, 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-line11 nonsynonymous SNV NOD2:NM_001293557:exon3:c.2023C>T:p.R675W,NOD2:NM_022162:exon4:c.2104C>T:p.R702W, 16 50745926 50745926 comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-line12 nonsynonymous SNV NOD2:NM_001293557:exon7:c.2641G>C:p.G881R,NOD2:NM_022162:exon8:c.2722G>C:p.G908R, 16 50756540 50756540 comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-line13 frameshift insertion NOD2:NM_001293557:exon10:c.2936dupC:p.A979fs,NOD2:NM_022162:exon11:c.3017dupC:p.A1006fs, 16 50763778 5076377comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-line14 frameshift deletion GJB2:NM_004004:exon2:c.35delG:p.G12fs, 13 20763686 20763686 G - comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-line15 frameshift deletion GJB6:NM_001110220:wholegene,GJB6:NM_001110221:wholegene,GJB6:NM_001110219:wholegene,CRYL1:NM_015974:wholegene,GJB6:NM_006783:wholegene, 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out ex1_arg_aamatrix \
+  -protocol refGene \
+  -operation g \
+  -arg "-hgvs" \
+  -remove -polish -nastring .
 ```
 
-> *Technical Note: Similar to the `variant_function` file, the `exonic_variant_function` file also follows the precedence rule, but users cannot change this rule (there is no much biological reason to change this rule anyway). For example, the mutation "chr7 140453136 140453136 A T" will be annotated as stoploss mutation X208R by ANNOVAR using ENSEMBL definition, because the stop loss takes precedence over the nonsynonymous mutation (V600E for ENST00000288602, V28E for ENST00000479537). If users want to have the comprehensive set of exonic_variant_function output, use the `-separate` argument!*
+The first 3 exnoic variants output will look like this:
+
+```
+head -n 1 ex1_arg_hgvs.hg19_multianno.txt;grep exonic ex1_arg_hgvs.hg19_multianno.txt|head -n 3
+```
+```
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene
+1	67705958	67705958	G	A	exonic	IL23R	.	nonsynonymous SNV	IL23R:NM_144701:exon9:c.1142G>A:p.R381Q
+2	234183368	234183368	A	G	exonic	ATG16L1	.	nonsynonymous SNV	ATG16L1:NM_198890:exon5:c.409A>G:p.T137A,ATG16L1:NM_017974:exon8:c.841A>G:p.T281A,ATG16L1:NM_001190266:exon9:c.646A>G:p.T216A,ATG16L1:NM_001190267:exon9:c.550A>G:p.T184A,ATG16L1:NM_030803:exon9:c.898A>G:p.T300A,ATG16L1:NM_001363742:exon10:c.949A>G:p.T317A
+16	50745926	50745926	C	T	exonic	NOD2	.	nonsynonymous SNV	NOD2:NM_001293557:exon3:c.2023C>T:p.R675W,NOD2:NM_001370466:exon4:c.2023C>T:p.R675W,NOD2:NM_022162:exon4:c.2104C>T:p.R702W
+```
+
+> *Technical Note: Similar to the `Func.refGene` functional annotation, the `ExonicFunc.refGene` functional annotation also follows the precedence rule, but users cannot change this rule (there is no much biological reason to change this rule anyway). For example, the mutation "chr7 140453136 140453136 A T" will be annotated as stoploss mutation X208R by ANNOVAR using ENSEMBL definition, because the stop loss takes precedence over the nonsynonymous mutation (V600E for ENST00000288602, V28E for ENST00000479537). If users want to have the comprehensive set of exonic_variant_function output, use the `-separate` argument!*
 
 > *Technical Notes: Some genes have multiple transcripts and ANNOVAR may randomly sort the order of transcripts in the output file. For example, the same mutation may be annotated as "BRAF:ENST00000288602:exon15:c.T1799A:p.V600E,BRAF:ENST00000479537:exon2:c.T83A:p.V28E" from one input file, but as "BRAF:ENST00000479537:exon2:c.T83A:p.V28E,BRAF:ENST00000288602:exon15:c.T1799A:p.V600E" from another input file. Some users want absolute consistency in the annotation. In this case, you can add `-exonsort` argument to the command line, so that the exon2 always precede exon15 in the output file.*
 
-> *Technical Notes: Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. The script is `coding_change.pl` within ANNOVAR package. Try it and see how it works!*
+> *Technical Notes: Many users requested to know the exact "new protein sequence" after observing an indel, as opposed to a simple "frameshift mutation" annotation. I cannot address this within ANNOVAR directly. To handle this situation, I implemented a new script that takes the output from the gene-annotation, and then re-calculate the wildtype and the mutated protein sequence, and infer if the indels or block substitutions cause stopgain, stoploss or nonsynonymous changes in the protein sequence. (To generate the exonic-variant-function-file, simply do not include the `-remove` argument while running `table_annovar.pl`.) The script is `coding_change.pl` within ANNOVAR package. Try it and see how it works!*
 
 > *Technical Notes: In previous versions of ANNOVAR, all the exonic annotations are based on user-specified gene definitions and user-specified FASTA sequences. However, this may create some problem: some gene definitions may lead to incorrect/imcomplete ORF with premature stop codon, and some times FASTA sequences are outdated compared to gene definitions. Although in principle users can easily identiy these problems by coding_change.pl script, some users do not want to go through the extra trouble. Therefore, in Nov 2011 version of ANNOVAR, I decided to identify transcripts with premature stop codon, and no longer annotate any exonic mutations to these transcripts (in other words, the exonic annotations will be marked as "UNKNOWN").*
 
+
 ## Including RefSeq gene version number
 
-Since 2017 June, ANNOVAR package now includes `hg19_refGeneWithVer.txt` file to give an example how to annotate varians with refGene with versions. Instead of using `-dbtype refGene`, the users can use `-dbtype refGeneWithVer`, so that results will contain transcript identifiers with versions. For all other genome build, the user need to generate these files yourself.
+Since 2017 June, ANNOVAR package now includes `hg19_refGeneWithVer.txt` file to give an example how to annotate variants with refGene with versions. Instead of using `-protocol refGene`, the users can use `-protocol refGeneWithVer`, so that results will contain transcript identifiers with versions. For all other genome build, the user need to generate these files yourself.
 
-## Annotating mitochrondria variants
+## Annotating mitochondria variants
 
 ANNOVAR can annotate mitochondria variants as of Feb 2013 (as long as your chromosome identifier is M or MT or chrM or chrMT, the mitochondria-specific codon table will be used for inferring amino acid changes). However, there are several important caveats:
 
@@ -256,51 +263,95 @@ ANNOVAR can annotate mitochondria variants as of Feb 2013 (as long as your chrom
 
     One complication that many users are not aware is that Ensemble has annotation errors (typically a few base pairs off) for mitochondria genes, so the gene annotation from Ensembl should not be used. Take a simple example, you can search ENST00000389680 in UCSC genome browser: while Gencode list the location as chrM:650-1603, Ensembl annotation comes out as chrM:646-1599, with 4bp off. For these reasons, you should use the file provided by ANNOVAR for any mitochondria annotation when you call variants on hg19 coordiante. 
 
-    To make this easier to users, I now provide the two files here: `hg19_MT_ensGene.txt` and `hg19_MT_ensGeneMrna.fa` in ANNOVAR package `humandb/` directory. The `-buildver` is hg19_MT and `-dbtype` is ensGene. 
+    To make this easier to users, I now provide the two files here: `hg19_MT_ensGene.txt` and `hg19_MT_ensGeneMrna.fa` in ANNOVAR package `humandb/` directory. The `-buildver` is hg19_MT and `-protocol` is ensGene. An exmaple of running ANNOVAR for mitochrondria variants is provided below.
 
-3. However, if you align your raw FASTQ files to reference genome that has NC_012920 (such as those provided by the 1000 Genomes Project, usually the file name is something like `human_g1k_v37.fasta`), then you need to use a custom gene definition file that has the correct mitochondria gene definition for NC_012920. Dr. Jun Ding from National Institute of Aging has graciously provided such files based on Ensemble definition. Note that the chromosome name should usually be MT (before June 2013, I used chrM in the file which caused confusion to some ANNOVAR users so I decided to change to MT and stick with the standard for GRCh37). In this case, you should use the following command for annotating mitochondria variants: `annotate_variation.pl -buildver GRCh37_MT -dbtype ensGene mt.avinput humandb/`. 
+3. However, if you align your raw FASTQ files to reference genome that has NC_012920 (such as those provided by the 1000 Genomes Project, usually the file name is something like `human_g1k_v37.fasta`), then you need to use a custom gene definition file that has the correct mitochondria gene definition for NC_012920. Dr. Jun Ding from National Institute of Aging has graciously provided such files based on Ensemble definition. Note that the chromosome name should usually be MT (before June 2013, I used chrM in the file which caused confusion to some ANNOVAR users so I decided to change to MT and stick with the standard for GRCh37). In this case, you should follow the following example for annotating mitochondria variants. 
 
-    To make this easier to users, I now provide the two files `GRCh37_MT_ensGene.txt.gz` and `GRCh37_MT_ensGeneMrna.fa.g`z in ANNOVAR package humandb/ directory. The `-buildver` is GRCh37_MT and `-dbtype` is ensGene.
+    To make this easier to users, I now provide the two files `GRCh37_MT_ensGene.txt` and `GRCh37_MT_ensGeneMrna.fa` in ANNOVAR package humandb/ directory by default. The `-buildver` is GRCh37_MT and `-protocol` is ensGene.
  
+### Example of annotating mitochondria variants
+
+This is an example ANNOVAR input for the mitochondria annotation.
+
+```
+chrMT  6981  6981  A  C  comment: MT-CO1 exon
+chrMT  8268  8268  A  T  comment: MT-CO2 TAG stop codon
+chrMT  8277  8277  C  T  comment: MT-CO2 downstream
+```
+
+Run ANNOVAR using GRCh37_MT genome and Ensembl Gene:
+
+```
+table_annovar.pl MT_example.avinput \
+  humandb/ \
+  -buildver GRCh37_MT \
+  -out MT_example \
+  -protocol ensGene \
+  -operation g \
+  -otherinfo \
+  -remove -polish -nastring .
+```
+
+Check the output:
+
+```
+cat MT_example.GRCh37_MT_multianno.txt
+```
+```
+Chr	Start	End	Ref	Alt	Func.ensGene	Gene.ensGene	GeneDetail.ensGene	ExonicFunc.ensGene	AAChange.ensGene	Otherinfo1
+chrMT	6981	6981	A	C	exonic	COX1	.	nonsynonymous SNV	COX1:ENST00000361624:exon1:c.A1078C:p.N360H	comment: MT-CO1 exon
+chrMT	8268	8268	A	T	exonic	COX2	.	stoploss	COX2:ENST00000361739:exon1:c.A683T:p.X228L	comment: MT-CO2 TAG stop codon
+chrMT	8277	8277	C	T	upstream;downstream	ATP6;ATP8;COX3;tRNA-Lys;tRNA-Ser1;COX1;COX2;tRNA-Asp	dist=18;dist=8	.	.	comment: MT-CO2 downstream
+```
+
+Note the ANNOVAR correctly annotate the position and the mutation consequence for each variant.
+
 
 ## Switching to UCSC/Ensembl Gene annotation
 
 ANNOVAR can optionally process UCSC Known Gene annotation or Ensembl Gene annotation, both of which are more comprehensive than RefSeq by including many poorly annotated or computationally predicted genes. An example is shown below to annotate variants using UCSC Known Gene:
 
 ```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -out ex1 -build hg19 example/ex1.avinput humandb/ -dbtype knownGene
-NOTICE: The --geneanno operation is set to ON by default
-NOTICE: Reading gene annotation from humandb/hg19_knownGene.txt ... Done with 78963 transcripts (including 18502 without coding sequence annotation) for 28495 unique genes
-NOTICE: Reading FASTA sequences from humandb/hg19_knownGeneMrna.fa ... Done with 45 sequences
-WARNING: A total of 43 sequences will be ignored due to lack of correct ORF annotation
-NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avinput
-NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
+#download knownGene annotation
+annotate_variation.pl -downdb -webfrom annovar -buildver hg19 knownGene humandb/
+
+#run ANNOVAR
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out ex1_kG \
+  -protocol knownGene \
+  -operation g \
+  -remove -polish -nastring .
 ```
 
-The transcript name (in the `ex1.exonic_variant_function` file) look like uc002eg1.1, etc, which are UCSC Gene identifiers.
+The transcript name (in the `AAChange.knownGene` column of the output file) look like uc002eg1.1, etc, which are UCSC Gene identifiers.
 
 To annotate variants using Ensembl gene, use the commands below. The output format is similar to that described above. The "ENSG" and "ENST" are Ensembl identifiers for annotated genes and transcripts. 
 
-
-```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -out ex1 -build hg19 ex1.hg19.avinput humandb/ -dbtype ensGene
-NOTICE: The --geneanno operation is set to ON by default
-NOTICE: Reading gene annotation from humandb/hg19_ensGene.txt ... Done with 196501 transcripts (including 101155 without coding sequence annotation) for 57905 unique genes
-NOTICE: Reading FASTA sequences from humandb/hg19_ensGeneMrna.fa ... Done with 20 sequences
-WARNING: A total of 6780 sequences will be ignored due to lack of correct ORF annotation
-NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avinput
-NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
 ```
 
-Since the output contains only Ensembl identifiers, if you want to translate that to gene synonym, you can download [this file for hg19](http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/ensemblToGeneName.txt.gz) and use the two-column file for the translation yourself. 
+```
+#download Ensembl Gene annotation
+annotate_variation.pl -downdb -webfrom annovar -buildver hg19 ensGene humandb/
 
-Comparing the program message ("Done with xxx transcripts for yyy unique genes") from three different gene-definition systems, we can see that Ensembl annotates the greatest number of genes in human genome, yet RefSeq annotates the fewest number of genes.
+#run ANNOVAR
+table_annovar.pl example/ex1.avinput \
+  humandb/ \
+  -buildver hg19 \
+  -out ex1_eG \
+  -protocol ensGene \
+  -operation g \
+  -remove -polish -nastring .
+```
+
+If we compare the program NOTICE message ("Done with xxx transcripts for yyy unique genes") from three different gene-definition systems, we can see that Ensembl annotates the greatest number of genes in human genome, yet RefSeq annotates the fewest number of genes.
 
 > *Technical Notes: Technically, the RefSeq Gene and UCSC Gene are transcript-based gene definitions. They built gene model based on transcript data, and then map the gene model back to human genomes. In comparison, Ensemble Gene and Gencode Gene are assembly-based gene definitions that attempt to build gene model directly from reference human genome. They came from different angles, trying to do the same thing: define genes in human genome.*
 
 > *However, this has its own consequences. For example, RefSeq builds a gene model from assembling transcript data from a population, but the reference human genome may have an allele as minor allele in a population. In this case, the transcript may not align 100% to genome, resulting in discrepancies between the FASTA file for the transcript and the FASTA file generated from the whole-genome sequence (by concatenating exons together).*
 
-> *For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (retrieve_seq_from_fasta.pl) to build FASTA sequences for any other genomes for which I do not provide pre-built files.*
+> *For these reasons, accurate annotation of exonic variants cannot rely on cDNA sequences in the public databases, and can only be based on the actual chr:start-end site in the genome itself. For this reason, I built FASTA sequences for a few specific genomes, and users can download the sequences directly from ANNOVAR website; I also provide programs (`retrieve_seq_from_fasta.pl`) to build FASTA sequences for any other genomes for which I do not provide pre-built files.*
 
 > *For these reasons, the FASTA seuqence in the file provided by me may differ from the FASTA sequence that you get from RefSeq. The sequence used by ANNOVAR are "theoretical" seuqence based on a particular genome build and assembly, but the FASTA sequence compiled by RefSeq are "observed" sequence from large databases without any relationship to a particular assembly version. They may have the same identifier but they are different things.*
 
@@ -318,80 +369,10 @@ mv hg38_wgEncodeGencodeBasicV26.txt hg38_ensGene.txt
 mv hg38_wgEncodeGencodeBasicV26Mrna.fa hg38_ensGeneMrna.fa
 ```
 
-Now I just upload these files to ANNOVAR database respository so that users can directly do a `-build hg38 -downdb ensGene dir/` to download hg38 version of ensGene and perform gene-based annotation using Ensemble keywords.
+Note that all these files have been uploaded to ANNOVAR database respository already so that users can directly run `annotate_variation.pl -downdb -buildver hg38 -webfrom annovar ensGene humandb/` to download hg38 version of ensGene and perform gene-based annotation similar to what we did before.
 
+For more information about what databases are vailable in ANNOVAR website, please refer to [Download ANNOVAR](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) for more details.
 
-## Switching to GENCODE/CCDS Gene annotation
-
-Current version of ANNOVAR does not provide a specific keyword for GENCODE, but ANNOVAR is versatile enough to handle GENCODE or whatever other gene definitions just fine. The GENCODE system has changed a lot in the past a few years, with the latest version being V19 as of February 2014. In V19, the BASIC track is available now which contains high-quality gene definitions based on the description: "The GENCODE Basic Set is intended to provide a simplified subset of the GENCODE transcript annotations that will be useful to the majority of users. The goal was to have a high-quality basic set that also covered all loci. Selection of GENCODE annotations for inclusion in the basic set was determined independently for the coding and non-coding transcripts at each gene locus."
-
-Below is the command that I can use for GENCODE gene definitions for variant annotation (note that if whole-genome FASTA files are not available in `humandb/hg19_seq`, you should first do a `annotate_variation.pl -downdb -build hg19 seq humandb/hg19_seq/`).
-
-```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -downdb wgEncodeGencodeBasicV19 humandb/ -build hg19
-NOTICE: Web-based checking to see whether ANNOVAR new version is available ... Done
-NOTICE: Downloading annotation database http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/wgEncodeGencodeBasicV19.txt.gz ... OK
-NOTICE: Uncompressing downloaded files
-NOTICE: Finished downloading annotation files for hg19 build version, with files saved at the 'humandb' directory
-
-[kaiwang@biocluster ~/]$ retrieve_seq_from_fasta.pl -format genericGene -seqdir humandb/hg19_seq/ -outfile humandb/hg19_wgEncodeGencodeBasicV19Mrna.fa humandb/hg19_wgEncodeGencodeBasicV19.txt 
-
-[kaiwang@biocluster ~/]$ annotate_variation.pl -build hg19 -out ex1 -dbtype wgEncodeGencodeBasicV19 example/ex1.avinput humandb/ 
-NOTICE: The --geneanno operation is set to ON by default
-NOTICE: Reading gene annotation from humandb/hg19_wgEncodeGencodeBasicV19.txt ... Done with 95929 transcripts (including 38291 without coding sequence annotation) for 42594 unique genes
-NOTICE: Reading FASTA sequences from humandb/hg19_wgEncodeGencodeBasicV19Mrna.fa ... Done with 16 sequences
-WARNING: A total of 303 sequences will be ignored due to lack of correct ORF annotation
-NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avinput
-NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
-Then check the results below:
-
-[kaiwang@biocluster ~/]$ cat ex1.variant_function
-UTR5 ISG15(ENST00000379389.4:c.-33T>C) 1 948921 948921 T C comments: rs15842, a SNP in 5' UTR of ISG15
-UTR3 ATAD3C(ENST00000378785.2:c.*91G>T) 1 1404001 1404001 G T comments: rs149123833, a SNP in 3' UTR of ATAD3C
-splicing NPHP4(ENST00000378156.4:exon22:c.2818-2T>A) 1 5935162 5935162 A T comments: rs1287637, a splice site variant in NPHP4
-intronic DDR2 1 162736463 162736463 C T comments: rs1000050, a SNP in Illumina SNP arrays
-intronic DNASE2B 1 84875173 84875173 C T comments: rs6576700 or SNP_A-1780419, a SNP in Affymetrix SNP arrays
-intergenic RP13-221M14.3(dist=46825),PRAMEF26(dist=5062) 1 13211293 13211294 TC - comments: rs59770105, a 2-bp deletion
-intergenic UBIAD1(dist=48375),PTCHD2(dist=135699) 1 11403596 11403596 - AT comments: rs35561142, a 2-bp insertion
-intergenic RP11-364B6.1(dist=872522),RP11-251P6.1(dist=652543) 1 105492231 105492231 A ATAAA comments: rs10552169, a block substitution
-exonic IL23R 1 67705958 67705958 G A comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-exonic ATG16L1 2 234183368 234183368 A G comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-exonic NOD2 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-exonic NOD2 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-exonic NOD2 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-exonic GJB2 13 20763686 20763686 G - comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-exonic CRYL1,GJB6 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
-
-[kaiwang@biocluster ~/]$ cat ex1.exonic_variant_function
-line9 nonsynonymous SNV IL23R:ENST00000395227.1:exon4:c.G377A:p.R126Q,IL23R:ENST00000347310.5:exon9:c.G1142A:p.R381Q, 1 67705958 6770595comments: rs11209026 (R381Q), a SNP in IL23R associated with Crohn's disease
-line10 nonsynonymous SNV ATG16L1:ENST00000373525.5:exon6:c.A466G:p.T156A,ATG16L1:ENST00000347464.5:exon5:c.A409G:p.T137A,ATG16L1:ENST00000392018.1:exon10:c.A949G:p.T317A,ATG16L1:ENST00000392017.4:exon9:c.A898G:p.T300A,ATG16L1:ENST00000392020.4:exon8:c.A841G:p.T281A, 2 234183368 234183368 comments: rs2241880 (T300A), a SNP in the ATG16L1 associated with Crohn's disease
-line11 nonsynonymous SNV NOD2:ENST00000300589.2:exon4:c.C2104T:p.R702W, 16 50745926 50745926 C T comments: rs2066844 (R702W), a non-synonymous SNP in NOD2
-line12 nonsynonymous SNV NOD2:ENST00000300589.2:exon8:c.G2722C:p.G908R, 16 50756540 50756540 G C comments: rs2066845 (G908R), a non-synonymous SNP in NOD2
-line13 frameshift insertion NOD2:ENST00000300589.2:exon11:c.3017dupC:p.A1006fs, 16 50763778 50763778 - C comments: rs2066847 (c.3016_3017insC), a frameshift SNP in NOD2
-line14 frameshift deletion GJB2:ENST00000382848.4:exon2:c.35delG:p.G12fs,GJB2:ENST00000382844.1:exon1:c.35delG:p.G12fs, 13 20763686 2076368comments: rs1801002 (del35G), a frameshift mutation in GJB2, associated with hearing loss
-line15 frameshift deletion GJB6:ENST00000241124.6:wholegene,CRYL1:ENST00000298248.7:wholegene,GJB6:ENST00000400065.3:wholegene,CRYL1:ENST00000382812.1:wholegene,GJB6:ENST00000356192.6:wholegene,GJB6:ENST00000400066.3:wholegene, 13 20797176 21105944 0 - comments: a 342kb deletion encompassing GJB6, associated with hearing loss
-Similarly, you can switch to Comprehensive annotations and PolyA annotations of GENCODE, by using a different -dbtype argument (wgEncodeGencodeCompV19 and wgEncodeGencodePolyaV19).
-```
-
-When using these annotations, it is important to always note the correct file name to use (use Table Browser in UCSC Genome Browser if you are not sure about table names).
-
-Many other gene definition systems are also supported. For example, users can pick CCDS gene definition. (Note that if whole-genome FASTA files are not available in `humandb/hg19_seq`, you should first do a `annotate_variation.pl -downdb -build hg19 seq humandb/hg19_seq/`).
-
-```
-[kaiwang@biocluster ~/]$ annotate_variation.pl -downdb -build hg19 ccdsGene humandb
-
-[kaiwang@biocluster ~/]$ retrieve_seq_from_fasta.pl humandb/hg19_ccdsGene.txt -seqdir humandb/hg19_seq -format refGene -outfile humandb/hg19_ccdsGeneMrna.fa
-
-[kaiwang@biocluster ~/]$ annotate_variation.pl -buildver hg19 -out ex1 -dbtype ccdsGene example/ex1.avinput humandb/
-NOTICE: The --geneanno operation is set to ON by default
-NOTICE: Reading gene annotation from humandb/hg19_ccdsGene.txt ... Done with 29045 transcripts (including 0 without coding sequence annotation) for 29014 unique genes
-NOTICE: Reading FASTA sequences from humandb/hg19_ccdsGeneMrna.fa ... Done with 8 sequences
-WARNING: A total of 38 sequences will be ignored due to lack of correct ORF annotation
-NOTICE: Finished gene-based annotation on 15 genetic variants in example/ex1.avinput
-NOTICE: Output files were written to ex1.variant_function, ex1.exonic_variant_function
-```
-
-> *Technical Notes: for CCDS gene, the output will not contain gene name, but the CCDS identifiers only. To get the gene name, users have to write your own program to process ANNOVAR output files. There are two tables that can be used to convert CCDS ID to other ID: ccdsNotes convert CCDS to UCSC Known Genes transcript ID, and then you can convert this to Gene name. The ccdsInfo table converts CCDS ID to ENSEMBL transcript or RefSeq transcript, and then you can further convert them to Gene name.*
 
 ## Create your own gene definition databases for non-human species
 
@@ -400,36 +381,54 @@ Besides human genome, other species can be handled. However, ANNOVAR does not pr
 To understand this more, try to handle the chimp genome:
 
 ```
-[kai@beta ~/]$ annotate_variation.pl -downdb -buildver panTro2 gene chimpdb
-NOTICE: Downloading annotation database ftp://hgdownload.cse.ucsc.edu/goldenPath/panTro2/database/refGene.txt.gz ... OK 
-NOTICE: Downloading annotation database ftp://hgdownload.cse.ucsc.edu/goldenPath/panTro2/database/refLink.txt.gz ... OK 
-NOTICE: Downloading annotation database http://www.openbioinformatics.org/annovar/download/panTro2_refGeneMrna.fa.gz ... Failed
+annotate_variation.pl -downdb -buildver panTro2 gene chimpdb
+```
+```
+NOTICE: Web-based checking to see whether ANNOVAR new version is available ... Done
+NOTICE: Downloading annotation database http://hgdownload.cse.ucsc.edu/goldenPath/panTro2/database/refGene.txt.gz ... OK
 NOTICE: Uncompressing downloaded files
 NOTICE: Finished downloading annotation files for panTro2 build version, with files saved at the 'chimpdb' directory
-WARNING: Some files cannot be downloaded, including http://www.openbioinformatics.org/annovar/download/panTro2_refGeneMrna.fa.gz
---------------------------------IMPORTANT---------------------------------
+---------------------------ADDITIONAL PROCEDURE---------------------------
 --------------------------------------------------------------------------
-NOTICE: the FASTA file http://www.openbioinformatics.org/annovar/download/panTro2_refGeneMrna.fa.gz is not available to download but can be generated by the ANNOVAR software. PLEASE RUN THE FOLLOWING TWO COMMANDS CONSECUTIVELY TO GENERATE THE FASTA FILES:
-annotate_variation.pl --buildver panTro2 --downdb seq chimpdb/panTro2_seq
-retrieve_seq_from_fasta.pl chimpdb/panTro2_refGene.txt -seqdir chimpdb/panTro2_seq -format refGene -outfile chimpdb/panTro2_refGeneMrna.fa
+NOTICE: the FASTA file for the genome is not available to download but can be generated by the ANNOVAR software.
+PLEASE RUN THE FOLLOWING TWO COMMANDS CONSECUTIVELY TO GENERATE THE FASTA FILES (you may need to change -seqdir to -seqfile for some genomes):
+
+	annotate_variation.pl --buildver panTro2 --downdb seq chimpdb/panTro2_seq
+	retrieve_seq_from_fasta.pl chimpdb/panTro2_refGene.txt -seqdir chimpdb/panTro2_seq -format refGene -outfile chimpdb/panTro2_refGeneMrna.fa
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
+```
 
 The above command will run, but will print out some warning message: the FASTA sequences are not provided in ANNOVAR website so users need to build them. Just follow the exact intructions and run the two commands:
 
-[kai@beta ~/]$ annotate_variation.pl --buildver panTro2 --downdb seq chimpdb/panTro2_seq
-NOTICE: Downloading annotation database ftp://hgdownload.cse.ucsc.edu/goldenPath/panTro2/bigZips/chromFa.zip ... Failed
-NOTICE: Downloading annotation database ftp://hgdownload.cse.ucsc.edu/goldenPath/panTro2/bigZips/chromFa.tar.gz ... OK 
+First command:
+
+```
+annotate_variation.pl --buildver panTro2 --downdb seq chimpdb/panTro2_seq
+```
+```
+NOTICE: Web-based checking to see whether ANNOVAR new version is available ... Done
+NOTICE: Downloading annotation database http://hgdownload.cse.ucsc.edu/goldenPath/panTro2/bigZips/chromFa.zip ... Failed
+NOTICE: Downloading annotation database http://hgdownload.cse.ucsc.edu/goldenPath/panTro2/bigZips/chromFa.tar.gz ... OK
+NOTICE: Downloading annotation database http://hgdownload.cse.ucsc.edu/goldenPath/panTro2/bigZips/panTro2.chromFa.tar.gz ... Failed
+NOTICE: Downloading annotation database http://hgdownload.cse.ucsc.edu/goldenPath/panTro2/bigZips/panTro2.fa.gz ... OK
 NOTICE: Uncompressing downloaded files
 NOTICE: Finished downloading annotation files for panTro2 build version, with files saved at the 'chimpdb/panTro2_seq' directory
+```
 
-[kai@beta ~/]$ retrieve_seq_from_fasta.pl chimpdb/panTro2_refGene.txt -seqdir chimpdb/panTro2_seq -format refGene -outfile chimpdb/panTro2_refGeneMrna.fa
-NOTICE: Finished reading 1 sequences from chimpdb/panTro2_seq/12/chr12_random.fa
-NOTICE: Finished reading 1 sequences from chimpdb/panTro2_seq/22/chr22.fa
-NOTICE: Finished reading 1 sequences from chimpdb/panTro2_seq/14/chr14.fa
+Second command:
+
+```
+retrieve_seq_from_fasta.pl chimpdb/panTro2_refGene.txt -seqdir chimpdb/panTro2_seq -format refGene -outfile chimpdb/panTro2_refGeneMrna.fa
+```
+```
+NOTICE: Reading region file chimpdb/panTro2_refGene.txt ... Done with 2852 regions from 46 chromosomes
+NOTICE: Finished reading 1 sequences from chimpdb/panTro2_seq/1/chr1.fa
+NOTICE: Finished reading 1 sequences from chimpdb/panTro2_seq/10/chr10.fa
+NOTICE: Finished reading 1 sequences from chimpdb/panTro2_seq/10/chr10_random.fa
 ......
 ......
-NOTICE: Finished writting FASTA for 1337 genomic regions to chimpdb/panTro2_refGeneMrna.fa.
+NOTICE: Finished writting FASTA for 2852 genomic regions to chimpdb/panTro2_refGeneMrna.fa
 ```
 
 So after running the above commands, the gene annotation database for the chimp genome would be complete, accurate and most up-to-date.
@@ -444,7 +443,8 @@ So after running the above commands, the gene annotation database for the chimp 
 
 > *Exercise: Try to run the same procedure above for rn5 (rat) or dm6 (Drosophila). Again users need to supply FASTA files rather than FASTA directory.*
 
-The above procedure will only work if the gene-based annotations exist in UCSC for the particular species or the particular build. For example, if you want to use ANNOVAR on pigs, since RefSeq gene and UCSC Gene are not available for pigs, you have to use `annotate_variation.pl --downdb -buildver susScr2 ensgene pigdb` instead and use `-dbtype ensgene` for the gene-based annotation.
+The above procedure will only work if the gene-based annotations exist in UCSC for the particular species or the particular build. For example, if you want to use ANNOVAR on pigs, since RefSeq gene and UCSC Gene are not available for pigs, you have to use `annotate_variation.pl --downdb -buildver susScr2 ensgene pigdb` instead and use `-protocol ensgene` for the gene-based annotation.
+
 
 ## What about GFF3 file for new species?
 
@@ -452,35 +452,38 @@ Occasionally, the user will sequence a new species yourself, so the genome build
 
 We gave an example to annotate Arabidopsis in [this paper](http://www.nature.com/nprot/journal/v10/n10/full/nprot.2015.105.html), and the procedure is reproduced below:
 
-1. Please go to http://plants.ensembl.org/info/website/ftp/index.html to download the GTF file and the genome FASTA file for this plant into a folder called `atdb`.
+1. Please go to https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index to download the GTF file and the genome FASTA file for this plant into a folder called `atdb`.
 
 ```
 mkdir atdb
 cd atdb
-wget ftp://ftp.ensemblgenomes.org/pub/release-27/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz
-wget ftp://ftp.ensemblgenomes.org/pub/release-27/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.27.gtf.gz
+wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-60/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-60/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.60.gtf.gz
 ```
 
 2. Please decompress both files:
 
 ```
-gunzip Arabidopsis_thaliana.TAIR10.27.dna.genome.fa.gz 
-gunzip Arabidopsis_thaliana.TAIR10.27.gtf.gz
+gunzip -q Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+gunzip -q Arabidopsis_thaliana.TAIR10.60.gtf.gz 
 ```
 
 3. Please use the gtfToGenePred tool to convert the GTF file to GenePred file:
 
 ```
-gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.27.gtf AT_refGene.txt`
+wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred
+chmod +x gtfToGenePred
+
+./gtfToGenePred -genePredExt Arabidopsis_thaliana.TAIR10.60.gtf AT_refGene.txt`
 ```
 
 4. Please generate a transcript FASTA file with our provided script:
 
 ```
-perl retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.27.dna.genome.fa AT_refGene.txt --out AT_refGeneMrna.fa
+retrieve_seq_from_fasta.pl --format refGene --seqfile Arabidopsis_thaliana.TAIR10.dna.toplevel.fa AT_refGene.txt --out AT_refGeneMrna.fa
 ```
 
-After this step, the annotation database files needed for gene-based annotation are ready. Now you can annotate a given VCF file. Please note that the `--buildver` argument should be set to `AT`.
+After this step, the annotation database files needed for gene-based annotation are ready. Now you can annotate a given VCF file. Please note that the `--buildver` argument should be set to `AT` and the reference database should be set to `atdb`.
 
 Recently, a user shared his experience to annotate barley genome. These procedures were reproduced below. Big thanks to Yong-Bi Fu at Plant Gene Resources of Canada, Agriculture and Agri-Food Canada / Government of Canada.
 
