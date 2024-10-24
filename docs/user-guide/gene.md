@@ -152,8 +152,7 @@ The last two columns `ExonicFunc.refGene` and `AAChange.refGene`, contain the am
 Let's take a look at the first 5 exonic mutations in the output:
 
 ```
-head -n 1 ex1.hg19_multianno.txt;\
-grep exonic ex1.hg19_multianno.txt | head -n 5
+head -n 1 ex1.hg19_multianno.txt;grep exonic ex1.hg19_multianno.txt | head -n 5
 ```
 ```
 Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene
