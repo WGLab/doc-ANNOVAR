@@ -15,6 +15,8 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
+![new](img/new.png)2025Mar02: Now ANNOVAR version is available. Compared to 2020Jun08 version, it has minor changes in handling URL in annotate_variation.pl and addressed a problem in calculating protein sequences for variants in multi-mapping transcripts in coding_change.pl. Additionally it also packaged hg38_refGeneWithVer by default so that users do not need to download it yourself.
+
 ![new](img/new.png)2024Oct14: GTEx_v8_eQTL and GTEx_v8_sQTL are availabe in ANNOVAR now for hg38 coordinate. It provides filter-based annotation for eQTL and sQTL based on GTEx v8.
 
 ![new](img/new.png)2024Sep24: clinvar_20240917 is availabe in ANNOVAR now for hg19/hg38 coordinate. In addition to germline variants, this version adds interpretation for oncogenecity variants and somatic variants.
