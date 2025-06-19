@@ -997,7 +997,7 @@ Although I periodically update ClinVar database in ANNOVAR for help users perfor
           wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz
           wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240917.vcf.gz.tbi
           gunzip clinvar_20240917.vcf.gz
-          prepare_annovar_user.pl -dbtype clinvar2 clinvar_20240917.vcf.gz -out hg38_clinvar_20240917_raw.txt
+          prepare_annovar_user.pl -dbtype clinvar2 clinvar_20240917.vcf -out hg38_clinvar_20240917_raw.txt
           index_annovar.pl hg38_clinvar_20240917_raw.txt -out hg38_clinvar_20240917.txt -comment comment_clinvar_20240917.txt
 ```
 
