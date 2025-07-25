@@ -89,6 +89,8 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg19 | intervar_20170202 | InterVar: clinical interpretation of missense variants (indels not supported)| 20170202 |
 | hg19 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported) | 20180325 |
 | hg38 | intervar_20180118 | InterVar: clinical interpretation of missense variants (indels not supported)| 20180325 |
+| hg38 | intervar_20250721 | InterVar: clinical interpretation of missense variants (indels not supported)| 20250721 |
+| hg38 | logofunc | genome-wide GOF/LOF predictions reported in [this paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01261-9)| 20250721 |
 | hg18 | cg46 | alternative allele frequency in 46 unrelated human subjects sequenced by Complete Genomics | 20120222 |
 | hg19 | cg46 | same as above | index updated 2012Feb22 |
 | hg18 | cg69 | allele frequency in 69 human subjects sequenced by Complete Genomics | 20120222 |
