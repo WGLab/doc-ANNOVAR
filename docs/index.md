@@ -15,6 +15,10 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
+![new](img/new.png)2025Jul25: Genome-wide LOF and GOF predictions reported in [this paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01261-9) is available in ANNOVAR now, with hg38 coordinate and 'logofunc' keyword.
+
+![new](img/new.png)2025Jul21: Pre-computed Intervar scores for whole exome is availabe in ANNOVAR now, with hg38 coordinate and 'intervar_20250721' keyword.
+
 ![new](img/new.png)2025Mar21: Allele frequency data with population breakdown from the first ~250k srWGS in All of Us is available at ANNOVAR now. There are ~1.1 billion unique variants. Use dbtype keyword `allofus` and genome build `hg38` to use it in ANNOVAR. Additionally, Regeneron allele frequency data is also available at ANNOVAR now. Use dbtype keyword `regeneron` and genome build `hg38` to download and use in ANNOVAR.
 
 ![new](img/new.png)2025Mar02: new ANNOVAR version is available. Compared to 2020Jun08 version, it has minor changes in handling URL in annotate_variation.pl and addressed a problem in calculating protein sequences for variants in multi-mapping transcripts in coding_change.pl. Additionally it also packaged hg38_refGeneWithVer by default so that users do not need to download it yourself.
