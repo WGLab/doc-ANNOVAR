@@ -15,7 +15,7 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
-![new](img/new.png)2025Jul29: Clinvar 20250715 is available in ANNOVAR now, with hg38 coordinate and 'clinvar_20250715' keyword.
+![new](img/new.png)2025Jul29: Clinvar 20250721 are available in ANNOVAR now, with hg38 coordinate and 'clinvar_20250721' keyword.
 
 ![new](img/new.png)2025Jul25: Genome-wide LOF and GOF predictions reported in [this paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-023-01261-9) is available in ANNOVAR now, with hg38 coordinate and 'logofunc' keyword.
 
