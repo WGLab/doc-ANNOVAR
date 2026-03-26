@@ -194,3 +194,4 @@ May 2019: We are in the process of moving ANNOVAR server to a different hosting 
   ga('create', 'UA-48623707-1', 'openbioinformatics.org');
   ga('send', 'pageview');
 </script>
+table_annovar.pl chr1_het.vcf humandb/ -buildver hg38 -out output -remove -protocol refGene -operation g -vcfinput
