@@ -14,7 +14,7 @@ If you are a new user of ANNOVAR, make sure to read the [quick startup guide](us
 If you want to learn advanced functions in ANNOVAR, such as preparing custom ANNOVAR annotation database, performing whole exome annotation, annotating noncoding variants from GWAS, or annotating a file in T2T-CHM13 coordinates, read the [Use Cases](user-guide/use_case.md).
 
 ---
-![new](img/new.png)2026Aug24: PubMind-DB with ~1 million variants and literature-derived pathogenicity annotations is available in ANNOVAR now in hg38 coordinate. Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4).
+![new](img/new.png)2026Aug24: PubMind-DB with ~1 million variants (only ~10% of them are in ClinVar) and literature-derived pathogenicity annotations is available in ANNOVAR now in hg38 coordinate (use 'pubmind_db' as keyword to download). Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4).
 
 ![new](img/new.png)2025Jul29: Clinvar 20250721 are available in ANNOVAR now, with hg19/hg38 coordinate and 'clinvar_20250721' keyword.
 
