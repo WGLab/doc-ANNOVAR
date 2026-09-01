@@ -22,6 +22,7 @@ nav:
   - Gene-based Annotation: user-guide/gene.md
   - Region-based Annotation: user-guide/region.md
   - Filter-based Annotation: user-guide/filter.md
+  - Advanced use case tutorial: user-guide/use_case.md
 - Misc:
   - Accessory Programs: misc/accessory.md
   - FAQ: misc/faq.md
