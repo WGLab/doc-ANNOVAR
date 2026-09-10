@@ -15,6 +15,8 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
+![new](img/new.png)2026Sep10: dbNSFP 5.4a is available in ANNOVAR now, with hg38 coordinate and 'dbnsfp54a' keyword. The hg19/hs1 data is available upon request due to disk storage limit.
+
 ![new](img/new.png)2026Sep01: Clinvar 20260829 are available in ANNOVAR now, with hg19/hg38 coordinate and 'clinvar_20260829' keyword.
 
 ![new](img/new.png)2026Aug24: PubMind-DB with ~1 million variants (only ~10% of them are in ClinVar) and literature-derived pathogenicity annotations is available in ANNOVAR now in hg38 coordinate (use 'pubmind_db' as keyword to download). Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4).
