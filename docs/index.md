@@ -15,6 +15,8 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
+![new](img/new.png)2026Sep10: dbNSFP 5.4a in ANNOVAR is updated to include Interpro_domain. The hg19/hs1 data is available upon request due to disk storage limit.
+
 ![new](img/new.png)2026Sep10: dbNSFP 5.4a is available in ANNOVAR now, with hg38 coordinate and 'dbnsfp54a' keyword. The hg19/hs1 data is available upon request due to disk storage limit.
 
 ![new](img/new.png)2026Sep01: Clinvar 20260829 are available in ANNOVAR now, with hg19/hg38 coordinate and 'clinvar_20260829' keyword.
