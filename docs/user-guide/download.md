@@ -80,9 +80,9 @@ NOTE: several whole-genome databases (cadd, cadd13, fathmm, dann, eigen, gerp++,
 | hg38 | dbnsfp42c | same as above | 20210710 |
 | hg19 | dbnsfp47a | dbNSFP version 4.7a | 20240525 |
 | hg38 | dbnsfp47a | same as above | 20240525 |
-| hg38 | dbnsfp54a | dbNSFP version 5.4a | 20260910 |
 | hg19 | dbnsfp42c | dbNSFP version 4.7c for commercial use | 20240525 |
 | hg38 | dbnsfp42c | same as above | 20240525 |
+| hg38 | dbnsfp54a | dbNSFP version 5.4a (updated to include interpro) | 20260925 |
 | hg19 | dbscsnv11 | dbscSNV version 1.1 for splice site prediction by AdaBoost and Random Forest | 20151218 |
 | hg38 | dbscsnv11 | same as above | 20151218 |
 | hg38 | pubmind_db | pathogenicity_sum, paper_level_pathogenicity_score, confidence | 20260824 |
