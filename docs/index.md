@@ -15,6 +15,8 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
+![new](img/new.png)2026Oct10: PubMind-DB is updated to v1.1.0. The database includes literature-derived pathogenicity scores from PubMind up to September 2026 (use 'pubmind_db_v110' as keyword to download). Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4).
+
 ![new](img/new.png)2026Sep25: dbNSFP 5.4a in ANNOVAR is updated to include Interpro_domain. The hg19/hs1 data is available upon request due to disk storage limit.
 
 ![new](img/new.png)2026Sep10: dbNSFP 5.4a is available in ANNOVAR now, with hg38 coordinate and 'dbnsfp54a' keyword. The hg19/hs1 data is available upon request due to disk storage limit.
