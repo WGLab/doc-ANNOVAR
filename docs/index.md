@@ -15,7 +15,9 @@ If you want to learn advanced functions in ANNOVAR, such as preparing custom ANN
 
 ---
 
-![new](img/new.png)2026Oct10: PubMind-DB is updated to v1.1.0. The database includes literature-derived pathogenicity scores from PubMind up to September 2026 (use 'pubmind_db_v110' as keyword to download). Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4).
+![new](img/new.png)2026Oct28: PubMind-DB is updated to v1.1.1. The database includes literature-derived pathogenicity scores from PubMind up to September 2026 (use 'pubmind_db_v111' as keyword to download). Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4). In PubMind genomic table, an unique variant (based on chr-start-end-ref-alt) could have multiple records in the table because they points to different PVIDs. This release fixed an issue where v1.1.0 may miss some variants that only has protein change (no DNA change).
+
+![new](img/new.png)2026Oct10: PubMind-DB is updated to v1.1.0. The database includes literature-derived pathogenicity scores from PubMind up to September 2026. Read the paper [here](https://www.nature.com/articles/s41467-026-76834-4).
 
 ![new](img/new.png)2026Sep25: dbNSFP 5.4a in ANNOVAR is updated to include Interpro_domain. The hg19/hs1 data is available upon request due to disk storage limit.
 
